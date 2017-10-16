@@ -32,6 +32,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 jMenuEdit = new javax.swing.JMenu();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+                setTitle("Clustr");
 
                 jMenuFile.setText("File");
                 jMenuBarMain.add(jMenuFile);
