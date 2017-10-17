@@ -20,15 +20,34 @@ public class System implements Serializable {
 	
 	// MEMEBR DATA.
 	
-	// The user account active for this session.
+	// The user account active for this system.
 	private transient Account activeAccount;
 	
-	// All user accounts on the system.
+	// All user accounts on this system.
 	private ArrayList<Account> accounts;
 	
-	// All groups on the system.
+	// All groups on this system.
 	private ArrayList<Group> groups;
 	
 	// MEMBER METHODS.
 	
+	/**
+	 * Construct a System.
+	 */
+	public System() {
+		
+		// Initialize fields.
+		activeAccount = null;
+		accounts = new ArrayList<Account>(16);
+		groups = new ArrayList<Group>(16);
+	}
+	
+	/**
+	 * Get this system's active account.
+	 * @return active user account
+	 */
+	public Account getActiveAccount() {
+		
+		return activeAccount;
+	}
 }
