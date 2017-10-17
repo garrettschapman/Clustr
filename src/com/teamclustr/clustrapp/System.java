@@ -17,7 +17,6 @@ import java.util.ArrayList;
  *  N/A
  */
 public class System implements Serializable {
-	// hello 
 	
 	// MEMEBR DATA.
 	
