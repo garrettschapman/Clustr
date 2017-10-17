@@ -84,7 +84,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
                 jTabbedPaneAcount.addTab("Messages", jPanelDirectMessage);
 
-                jTabbedPaneMain.addTab("Blank", jTabbedPaneAcount);
+                jTabbedPaneMain.addTab("Account", jTabbedPaneAcount);
 
                 javax.swing.GroupLayout jPanelBrowseGroupsLayout = new javax.swing.GroupLayout(jPanelBrowseGroups);
                 jPanelBrowseGroups.setLayout(jPanelBrowseGroupsLayout);
