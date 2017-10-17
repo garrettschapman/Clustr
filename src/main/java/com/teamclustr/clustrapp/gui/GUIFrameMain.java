@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.teamclustr.clustrapp;
+package com.teamclustr.clustrapp.gui;
 
 /**
  *
@@ -32,6 +32,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 jMenuEdit = new javax.swing.JMenu();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+                setTitle("Clustr");
 
                 jMenuFile.setText("File");
                 jMenuBarMain.add(jMenuFile);
