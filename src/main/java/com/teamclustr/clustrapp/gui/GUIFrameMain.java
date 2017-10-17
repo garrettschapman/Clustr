@@ -32,7 +32,10 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 jTabbedPaneAcount = new javax.swing.JTabbedPane();
                 jPanelAccountDetails = new javax.swing.JPanel();
                 jPanelAccountActivity = new javax.swing.JPanel();
+                jPanelDirectMessage = new javax.swing.JPanel();
                 jTabbedPaneGroups = new javax.swing.JTabbedPane();
+                jPanelBrowseGroups = new javax.swing.JPanel();
+                jPanelFocusGroup = new javax.swing.JPanel();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 setTitle("Clustr");
@@ -68,7 +71,47 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
                 jTabbedPaneAcount.addTab("Activity", jPanelAccountActivity);
 
+                javax.swing.GroupLayout jPanelDirectMessageLayout = new javax.swing.GroupLayout(jPanelDirectMessage);
+                jPanelDirectMessage.setLayout(jPanelDirectMessageLayout);
+                jPanelDirectMessageLayout.setHorizontalGroup(
+                        jPanelDirectMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 639, Short.MAX_VALUE)
+                );
+                jPanelDirectMessageLayout.setVerticalGroup(
+                        jPanelDirectMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 266, Short.MAX_VALUE)
+                );
+
+                jTabbedPaneAcount.addTab("Messages", jPanelDirectMessage);
+
                 jTabbedPaneMain.addTab("Account", jTabbedPaneAcount);
+
+                javax.swing.GroupLayout jPanelBrowseGroupsLayout = new javax.swing.GroupLayout(jPanelBrowseGroups);
+                jPanelBrowseGroups.setLayout(jPanelBrowseGroupsLayout);
+                jPanelBrowseGroupsLayout.setHorizontalGroup(
+                        jPanelBrowseGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 639, Short.MAX_VALUE)
+                );
+                jPanelBrowseGroupsLayout.setVerticalGroup(
+                        jPanelBrowseGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 266, Short.MAX_VALUE)
+                );
+
+                jTabbedPaneGroups.addTab("Browse", jPanelBrowseGroups);
+
+                javax.swing.GroupLayout jPanelFocusGroupLayout = new javax.swing.GroupLayout(jPanelFocusGroup);
+                jPanelFocusGroup.setLayout(jPanelFocusGroupLayout);
+                jPanelFocusGroupLayout.setHorizontalGroup(
+                        jPanelFocusGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 639, Short.MAX_VALUE)
+                );
+                jPanelFocusGroupLayout.setVerticalGroup(
+                        jPanelFocusGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 266, Short.MAX_VALUE)
+                );
+
+                jTabbedPaneGroups.addTab("Focused", jPanelFocusGroup);
+
                 jTabbedPaneMain.addTab("Groups", jTabbedPaneGroups);
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -134,6 +177,9 @@ public class GUIFrameMain extends javax.swing.JFrame {
         private javax.swing.JLabel jLabelMainAccountStatus;
         private javax.swing.JPanel jPanelAccountActivity;
         private javax.swing.JPanel jPanelAccountDetails;
+        private javax.swing.JPanel jPanelBrowseGroups;
+        private javax.swing.JPanel jPanelDirectMessage;
+        private javax.swing.JPanel jPanelFocusGroup;
         private javax.swing.JTabbedPane jTabbedPaneAcount;
         private javax.swing.JTabbedPane jTabbedPaneGroups;
         private javax.swing.JTabbedPane jTabbedPaneMain;
