@@ -27,30 +27,69 @@ public class GUIFrameMain extends javax.swing.JFrame {
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
-                jMenuBarMain = new javax.swing.JMenuBar();
-                jMenuFile = new javax.swing.JMenu();
-                jMenuEdit = new javax.swing.JMenu();
+                jLabelMainAccountStatus = new javax.swing.JLabel();
+                jTabbedPaneMain = new javax.swing.JTabbedPane();
+                jTabbedPaneAcount = new javax.swing.JTabbedPane();
+                jPanelAccountDetails = new javax.swing.JPanel();
+                jPanelAccountActivity = new javax.swing.JPanel();
+                jTabbedPaneGroups = new javax.swing.JTabbedPane();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 setTitle("Clustr");
 
-                jMenuFile.setText("File");
-                jMenuBarMain.add(jMenuFile);
+                jLabelMainAccountStatus.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+                jLabelMainAccountStatus.setText("Not Signed In");
+                jLabelMainAccountStatus.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+                jLabelMainAccountStatus.setPreferredSize(new java.awt.Dimension(200, 15));
 
-                jMenuEdit.setText("Edit");
-                jMenuBarMain.add(jMenuEdit);
+                javax.swing.GroupLayout jPanelAccountDetailsLayout = new javax.swing.GroupLayout(jPanelAccountDetails);
+                jPanelAccountDetails.setLayout(jPanelAccountDetailsLayout);
+                jPanelAccountDetailsLayout.setHorizontalGroup(
+                        jPanelAccountDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 639, Short.MAX_VALUE)
+                );
+                jPanelAccountDetailsLayout.setVerticalGroup(
+                        jPanelAccountDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 266, Short.MAX_VALUE)
+                );
 
-                setJMenuBar(jMenuBarMain);
+                jTabbedPaneAcount.addTab("Details", jPanelAccountDetails);
+
+                javax.swing.GroupLayout jPanelAccountActivityLayout = new javax.swing.GroupLayout(jPanelAccountActivity);
+                jPanelAccountActivity.setLayout(jPanelAccountActivityLayout);
+                jPanelAccountActivityLayout.setHorizontalGroup(
+                        jPanelAccountActivityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 639, Short.MAX_VALUE)
+                );
+                jPanelAccountActivityLayout.setVerticalGroup(
+                        jPanelAccountActivityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 266, Short.MAX_VALUE)
+                );
+
+                jTabbedPaneAcount.addTab("Activity", jPanelAccountActivity);
+
+                jTabbedPaneMain.addTab("Account", jTabbedPaneAcount);
+                jTabbedPaneMain.addTab("Groups", jTabbedPaneGroups);
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 400, Short.MAX_VALUE)
+                        .addComponent(jTabbedPaneMain, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jLabelMainAccountStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(5, 5, 5)))
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 279, Short.MAX_VALUE)
+                        .addComponent(jTabbedPaneMain, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                        .addGap(5, 5, 5)
+                                        .addComponent(jLabelMainAccountStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
                 );
 
                 pack();
@@ -92,8 +131,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
 	}
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JMenuBar jMenuBarMain;
-        private javax.swing.JMenu jMenuEdit;
-        private javax.swing.JMenu jMenuFile;
+        private javax.swing.JLabel jLabelMainAccountStatus;
+        private javax.swing.JPanel jPanelAccountActivity;
+        private javax.swing.JPanel jPanelAccountDetails;
+        private javax.swing.JTabbedPane jTabbedPaneAcount;
+        private javax.swing.JTabbedPane jTabbedPaneGroups;
+        private javax.swing.JTabbedPane jTabbedPaneMain;
         // End of variables declaration//GEN-END:variables
 }
