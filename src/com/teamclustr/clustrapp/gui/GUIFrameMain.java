@@ -2,7 +2,9 @@ package com.teamclustr.clustrapp.gui;
 
 import com.teamclustr.clustrapp.System;
 import com.teamclustr.clustrapp.representation.User;
+import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.LayoutManager;
 import javax.swing.JOptionPane;
 
 /**
@@ -441,11 +443,23 @@ public class GUIFrameMain extends javax.swing.JFrame {
         }//GEN-LAST:event_jLabelMainSessionUserStatusMouseExited
 
         private void jButtonSwitchSignupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSwitchSignupMouseClicked
-                // TODO add your handling code here:
+                
+		// Switch to login panel.
+		LayoutManager dialogLayout = jDialogLoginSignup.getLayout();
+		if (dialogLayout instanceof CardLayout) {
+		
+			((CardLayout)dialogLayout).show(jDialogLoginSignup, jPanelLogin.getName());
+		}
         }//GEN-LAST:event_jButtonSwitchSignupMouseClicked
 
         private void jButtonSwitchLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSwitchLoginMouseClicked
-                // TODO add your handling code here:
+                
+		// Switch to signup panel.
+		LayoutManager dialogLayout = jDialogLoginSignup.getLayout();
+		if (dialogLayout instanceof CardLayout) {
+		
+			((CardLayout)dialogLayout).show(jDialogLoginSignup, jPanelSignup.getName());
+		}
         }//GEN-LAST:event_jButtonSwitchLoginMouseClicked
 
         // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class System implements Serializable {
 	
 	// MEMEBR DATA.
-//	private User user;
 	
 	// The user active on this current session.
 	private transient User sessionUser;
