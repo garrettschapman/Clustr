@@ -284,11 +284,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 jDialogLoginSignup.getContentPane().setLayout(jDialogLoginSignupLayout);
                 jDialogLoginSignupLayout.setHorizontalGroup(
                         jDialogLoginSignupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanelLoginSignup, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanelLoginSignup, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                 );
                 jDialogLoginSignupLayout.setVerticalGroup(
                         jDialogLoginSignupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanelLoginSignup, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanelLoginSignup, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                 );
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
