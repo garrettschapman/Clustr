@@ -1,6 +1,6 @@
 package com.teamclustr.clustrapp;
 
-import com.teamclustr.clustrapp.representation.Account;
+import com.teamclustr.clustrapp.representation.User;
 import com.teamclustr.clustrapp.representation.Group;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,16 +19,49 @@ import java.util.ArrayList;
 public class System implements Serializable {
 	
 	// MEMEBR DATA.
+//	private User user;
 	
-	// The user account active for this session.
-	private transient Account activeAccount;
+	// The user active on this current session.
+	private transient User sessionUser;
 	
-	// All user accounts on the system.
-	private ArrayList<Account> accounts;
+	// All users.
+	private ArrayList<User> users;
 	
-	// All groups on the system.
+	// All groups.
 	private ArrayList<Group> groups;
 	
 	// MEMBER METHODS.
 	
+	/**
+	 * Construct a System.
+	 */
+	public System() {
+		
+		// Initialize fields.
+		sessionUser = null;
+		users = new ArrayList<User>(16);
+		groups = new ArrayList<Group>(16);
+	}
+	
+	/**
+	 * Get the active session user.
+	 * @return session user
+	 */
+	public User getSessionUser() {
+		
+		return sessionUser;
+	}
+	
+	/**
+	 * Set the active session user.
+	 * @param newSessionUser new session user
+	 * @return this for convenience
+	 */
+	public System setSessionUser(User newSessionUser) {
+	
+		sessionUser = newSessionUser;
+		
+		// Return this for convenience.
+		return this;
+	}
 }
