@@ -243,14 +243,22 @@ public class GUIFrameMain extends javax.swing.JFrame {
 				"Login", 
 				JOptionPane.PLAIN_MESSAGE);
 			
-			// Log user in.
-			if (username != null && username.length() > 0) {
+			// User wants to log in.
+			if (username != null) {
+				
+				// Trim whitespace.
+				username = username.trim();
+				
+				// Ensure username was not all whitespace.
+				if (username.length() > 0) {
+				
+					// Log user in.
+					sessionSystem.setSessionUser(new User());
 			
-				sessionSystem.setSessionUser(new User());
-			
-				// Update session user status.
-				jLabelMainSessionUserStatus.setText(username);
-				jLabelMainSessionUserStatus.setForeground(USER_STATUS_IN_COLOR);
+					// Update session user status.
+					jLabelMainSessionUserStatus.setText(username);
+					jLabelMainSessionUserStatus.setForeground(USER_STATUS_IN_COLOR);
+				}
 			}
 		}
 		// User is logged in.
