@@ -19,15 +19,15 @@ import java.util.ArrayList;
 public class System implements Serializable {
 	
 	// MEMEBR DATA.
-	private User user;
+//	private User user;
 	
-	// The user account active for this system.
-	private transient User activeAccount;
+	// The user active on this current session.
+	private transient User activeUser;
 	
-	// All user accounts on this system.
-	private ArrayList<User> accounts;
+	// All users.
+	private ArrayList<User> users;
 	
-	// All groups on this system.
+	// All groups.
 	private ArrayList<Group> groups;
 	
 	// MEMBER METHODS.
@@ -38,17 +38,17 @@ public class System implements Serializable {
 	public System() {
 		
 		// Initialize fields.
-		activeAccount = null;
-		accounts = new ArrayList<User>(16);
+		activeUser = null;
+		users = new ArrayList<User>(16);
 		groups = new ArrayList<Group>(16);
 	}
 	
 	/**
-	 * Get this system's active account.
-	 * @return active user account
+	 * Get the active session user.
+	 * @return active user
 	 */
-	public User getActiveAccount() {
+	public User getSessionUser() {
 		
-		return activeAccount;
+		return activeUser;
 	}
 }

@@ -220,7 +220,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         private void jLabelMainAccountStatusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMainAccountStatusMouseClicked
                 
 		// Check if the user is not signed in.
-		if (GUIFrameMain.sessionSystem.getActiveAccount() == null) {
+		if (GUIFrameMain.sessionSystem.getSessionUser() == null) {
 		
 			// Prompt the user for login information.
 			JOptionPane.showMessageDialog(
