@@ -95,6 +95,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 java.awt.GridBagConstraints gridBagConstraints;
 
                 jDialogLoginSignup = new javax.swing.JDialog();
+                jPanelLoginSignup = new javax.swing.JPanel();
                 jPanelLogin = new javax.swing.JPanel();
                 jLabelLogin = new javax.swing.JLabel();
                 jLabelLoginUsername = new javax.swing.JLabel();
@@ -126,11 +127,12 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 jLabelMainSessionUserStatus = new javax.swing.JLabel();
 
                 jDialogLoginSignup.setTitle("Login/Signup");
-                jDialogLoginSignup.setMinimumSize(new java.awt.Dimension(276, 262));
+                jDialogLoginSignup.setMinimumSize(new java.awt.Dimension(300, 300));
                 jDialogLoginSignup.setModal(true);
-                jDialogLoginSignup.setPreferredSize(new java.awt.Dimension(276, 262));
+                jDialogLoginSignup.setPreferredSize(new java.awt.Dimension(300, 300));
                 jDialogLoginSignup.setResizable(false);
-                jDialogLoginSignup.getContentPane().setLayout(new java.awt.CardLayout());
+
+                jPanelLoginSignup.setLayout(new java.awt.CardLayout());
 
                 java.awt.GridBagLayout jPanelLoginLayout = new java.awt.GridBagLayout();
                 jPanelLoginLayout.columnWidths = new int[] {0};
@@ -196,7 +198,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
                 jPanelLogin.add(jButtonLoginCancel, gridBagConstraints);
 
-                jDialogLoginSignup.getContentPane().add(jPanelLogin, "card2");
+                jPanelLoginSignup.add(jPanelLogin, "card1");
 
                 java.awt.GridBagLayout jPanelSignupLayout = new java.awt.GridBagLayout();
                 jPanelSignupLayout.columnWidths = new int[] {0};
@@ -276,7 +278,18 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
                 jPanelSignup.add(jButtonSignupCancel, gridBagConstraints);
 
-                jDialogLoginSignup.getContentPane().add(jPanelSignup, "card3");
+                jPanelLoginSignup.add(jPanelSignup, "card2");
+
+                javax.swing.GroupLayout jDialogLoginSignupLayout = new javax.swing.GroupLayout(jDialogLoginSignup.getContentPane());
+                jDialogLoginSignup.getContentPane().setLayout(jDialogLoginSignupLayout);
+                jDialogLoginSignupLayout.setHorizontalGroup(
+                        jDialogLoginSignupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanelLoginSignup, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                );
+                jDialogLoginSignupLayout.setVerticalGroup(
+                        jDialogLoginSignupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanelLoginSignup, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                );
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 setTitle("Clustr");
@@ -444,20 +457,20 @@ public class GUIFrameMain extends javax.swing.JFrame {
         private void jButtonSwitchSignupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSwitchSignupMouseClicked
                 
 		// Switch to login panel.
-		LayoutManager dialogLayout = jDialogLoginSignup.getLayout();
+		LayoutManager dialogLayout = jPanelLoginSignup.getLayout();
 		if (dialogLayout instanceof CardLayout) {
 		
-			((CardLayout)dialogLayout).next(jDialogLoginSignup);
+			((CardLayout)dialogLayout).next(jPanelLoginSignup);
 		}
         }//GEN-LAST:event_jButtonSwitchSignupMouseClicked
 
         private void jButtonSwitchLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSwitchLoginMouseClicked
                 
 		// Switch to signup panel.
-		LayoutManager dialogLayout = jDialogLoginSignup.getLayout();
+		LayoutManager dialogLayout = jPanelLoginSignup.getLayout();
 		if (dialogLayout instanceof CardLayout) {
 		
-			((CardLayout)dialogLayout).show(jDialogLoginSignup, jPanelSignup.getName());
+			((CardLayout)dialogLayout).next(jPanelLoginSignup);
 		}
         }//GEN-LAST:event_jButtonSwitchLoginMouseClicked
 
@@ -483,6 +496,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         private javax.swing.JPanel jPanelDirectMessage;
         private javax.swing.JPanel jPanelFocusGroup;
         private javax.swing.JPanel jPanelLogin;
+        private javax.swing.JPanel jPanelLoginSignup;
         private javax.swing.JPanel jPanelSignup;
         private javax.swing.JPasswordField jPasswordFieldLoginPassword;
         private javax.swing.JPasswordField jPasswordFieldSignupPassword;
