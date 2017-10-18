@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class System implements Serializable {
 	
 	// MEMEBR DATA.
+	private User user;
 	
 	// The user account active for this system.
 	private transient User activeAccount;
