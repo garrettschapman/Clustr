@@ -22,7 +22,7 @@ public class System implements Serializable {
 //	private User user;
 	
 	// The user active on this current session.
-	private transient User activeUser;
+	private transient User sessionUser;
 	
 	// All users.
 	private ArrayList<User> users;
@@ -38,17 +38,30 @@ public class System implements Serializable {
 	public System() {
 		
 		// Initialize fields.
-		activeUser = null;
+		sessionUser = null;
 		users = new ArrayList<User>(16);
 		groups = new ArrayList<Group>(16);
 	}
 	
 	/**
 	 * Get the active session user.
-	 * @return active user
+	 * @return session user
 	 */
 	public User getSessionUser() {
 		
-		return activeUser;
+		return sessionUser;
+	}
+	
+	/**
+	 * Set the active session user.
+	 * @param newSessionUser new session user
+	 * @return this for convenience
+	 */
+	public System setSessionUser(User newSessionUser) {
+	
+		sessionUser = newSessionUser;
+		
+		// Return this for convenience.
+		return this;
 	}
 }

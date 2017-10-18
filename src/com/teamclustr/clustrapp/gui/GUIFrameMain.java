@@ -1,6 +1,7 @@
 package com.teamclustr.clustrapp.gui;
 
 import com.teamclustr.clustrapp.System;
+import com.teamclustr.clustrapp.representation.User;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -22,6 +23,12 @@ public class GUIFrameMain extends javax.swing.JFrame {
 	// The system of this session.
 	public static System sessionSystem;
 	
+	// Active session user status constants.
+	public static String USER_STATUS_OUT_STRING = "Not Logged In";
+	public static Color USER_STATUS_IN_COLOR = Color.BLUE;
+	public static Color USER_STATUS_OUT_COLOR = Color.RED;
+	public static Color USER_STATUS_HOVER_COLOR = Color.YELLOW;
+	
 	// MEMBER METHODS.
 	
 	/**
@@ -29,7 +36,12 @@ public class GUIFrameMain extends javax.swing.JFrame {
 	 */
 	public GUIFrameMain() {
 		
+		// Initialize GUI components.
 		initComponents();
+		
+		// Initialize session user status.
+		jLabelMainSessionUserStatus.setText(USER_STATUS_OUT_STRING);
+		jLabelMainSessionUserStatus.setForeground(USER_STATUS_OUT_COLOR);
 	}
 
 	/**
@@ -88,7 +100,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 jTabbedPaneGroups = new javax.swing.JTabbedPane();
                 jPanelBrowseGroups = new javax.swing.JPanel();
                 jPanelFocusGroup = new javax.swing.JPanel();
-                jLabelMainAccountStatus = new javax.swing.JLabel();
+                jLabelMainSessionUserStatus = new javax.swing.JLabel();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 setTitle("Clustr");
@@ -106,7 +118,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 );
                 jPanelAccountDetailsLayout.setVerticalGroup(
                         jPanelAccountDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 245, Short.MAX_VALUE)
+                        .addGap(0, 235, Short.MAX_VALUE)
                 );
 
                 jTabbedPaneAcount.addTab("Details", jPanelAccountDetails);
@@ -119,7 +131,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 );
                 jPanelAccountActivityLayout.setVerticalGroup(
                         jPanelAccountActivityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 245, Short.MAX_VALUE)
+                        .addGap(0, 235, Short.MAX_VALUE)
                 );
 
                 jTabbedPaneAcount.addTab("Activity", jPanelAccountActivity);
@@ -132,7 +144,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 );
                 jPanelDirectMessageLayout.setVerticalGroup(
                         jPanelDirectMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 245, Short.MAX_VALUE)
+                        .addGap(0, 235, Short.MAX_VALUE)
                 );
 
                 jTabbedPaneAcount.addTab("Messages", jPanelDirectMessage);
@@ -147,7 +159,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 );
                 jPanelBrowseGroupsLayout.setVerticalGroup(
                         jPanelBrowseGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 245, Short.MAX_VALUE)
+                        .addGap(0, 235, Short.MAX_VALUE)
                 );
 
                 jTabbedPaneGroups.addTab("Browse", jPanelBrowseGroups);
@@ -160,27 +172,27 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 );
                 jPanelFocusGroupLayout.setVerticalGroup(
                         jPanelFocusGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 245, Short.MAX_VALUE)
+                        .addGap(0, 235, Short.MAX_VALUE)
                 );
 
                 jTabbedPaneGroups.addTab("Focused", jPanelFocusGroup);
 
                 jTabbedPaneMain.addTab("Groups", jTabbedPaneGroups);
 
-                jLabelMainAccountStatus.setForeground(new java.awt.Color(255, 0, 0));
-                jLabelMainAccountStatus.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-                jLabelMainAccountStatus.setText("Not Signed In");
-                jLabelMainAccountStatus.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-                jLabelMainAccountStatus.setPreferredSize(new java.awt.Dimension(0, 15));
-                jLabelMainAccountStatus.addMouseListener(new java.awt.event.MouseAdapter() {
+                jLabelMainSessionUserStatus.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+                jLabelMainSessionUserStatus.setText("USER LOGIN STATUS");
+                jLabelMainSessionUserStatus.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+                jLabelMainSessionUserStatus.setMaximumSize(new java.awt.Dimension(200, 15));
+                jLabelMainSessionUserStatus.setMinimumSize(new java.awt.Dimension(0, 15));
+                jLabelMainSessionUserStatus.addMouseListener(new java.awt.event.MouseAdapter() {
                         public void mouseClicked(java.awt.event.MouseEvent evt) {
-                                jLabelMainAccountStatusMouseClicked(evt);
+                                jLabelMainSessionUserStatusMouseClicked(evt);
                         }
                         public void mouseEntered(java.awt.event.MouseEvent evt) {
-                                jLabelMainAccountStatusMouseEntered(evt);
+                                jLabelMainSessionUserStatusMouseEntered(evt);
                         }
                         public void mouseExited(java.awt.event.MouseEvent evt) {
-                                jLabelMainAccountStatusMouseExited(evt);
+                                jLabelMainSessionUserStatusMouseExited(evt);
                         }
                 });
 
@@ -190,13 +202,15 @@ public class GUIFrameMain extends javax.swing.JFrame {
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jTabbedPaneMain)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabelMainAccountStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelMainSessionUserStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabelMainAccountStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap()
+                                .addComponent(jLabelMainSessionUserStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTabbedPaneMain))
                 );
@@ -209,47 +223,79 @@ public class GUIFrameMain extends javax.swing.JFrame {
 		// Prompt the user for a system to load.
 		JOptionPane.showMessageDialog(
 			this, 
-			"In the future, this pop-up will allow the user to selected a system to load.", 
-			"Load System", 
+			"<TODO: ALLOW USER TO LOAD SYSTEM INFORMATION HERE>", 
+			"Load System Information", 
 			JOptionPane.PLAIN_MESSAGE);
 		
 		// Initialize the session system.
-		GUIFrameMain.sessionSystem = new System();
+		sessionSystem = new System();
         }//GEN-LAST:event_formWindowOpened
 
-        private void jLabelMainAccountStatusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMainAccountStatusMouseClicked
+        private void jLabelMainSessionUserStatusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMainSessionUserStatusMouseClicked
                 
-		// Check if the user is not signed in.
-		if (GUIFrameMain.sessionSystem.getSessionUser() == null) {
+		// Check if the user is not logged in.
+		if (sessionSystem.getSessionUser() == null) {
 		
 			// Prompt the user for login information.
-			JOptionPane.showMessageDialog(
+			String username = JOptionPane.showInputDialog(
 				this, 
-				"In the future, this pop-up will allow the user to login to an account.", 
+				"Please enter your user name.", 
 				"Login", 
 				JOptionPane.PLAIN_MESSAGE);
+			
+			// Log user in.
+			if (username != null && username.length() > 0) {
+			
+				sessionSystem.setSessionUser(new User());
+			
+				// Update session user status.
+				jLabelMainSessionUserStatus.setText(username);
+				jLabelMainSessionUserStatus.setForeground(USER_STATUS_IN_COLOR);
+			}
 		}
-		// User is signed in.
+		// User is logged in.
 		else {
 			
+			// Prompt the user for logout.
+			int userChoice = JOptionPane.showConfirmDialog(this, 
+				"Are you sure you want to log out?", 
+				"Logout", 
+				JOptionPane.YES_NO_OPTION);
 			
+			// User wants to logout.
+			if (userChoice == JOptionPane.YES_OPTION) {
+			
+				// Log user out.
+				sessionSystem.setSessionUser(null);
+
+				// Update session user status.
+				jLabelMainSessionUserStatus.setText(USER_STATUS_OUT_STRING);
+				jLabelMainSessionUserStatus.setForeground(USER_STATUS_OUT_COLOR);
+			}
 		}
-        }//GEN-LAST:event_jLabelMainAccountStatusMouseClicked
+        }//GEN-LAST:event_jLabelMainSessionUserStatusMouseClicked
 
-        private void jLabelMainAccountStatusMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMainAccountStatusMouseEntered
+        private void jLabelMainSessionUserStatusMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMainSessionUserStatusMouseEntered
                 
 		// Change label color.
-		jLabelMainAccountStatus.setForeground(Color.YELLOW);
-        }//GEN-LAST:event_jLabelMainAccountStatusMouseEntered
+		jLabelMainSessionUserStatus.setForeground(USER_STATUS_HOVER_COLOR);
+        }//GEN-LAST:event_jLabelMainSessionUserStatusMouseEntered
 
-        private void jLabelMainAccountStatusMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMainAccountStatusMouseExited
+        private void jLabelMainSessionUserStatusMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMainSessionUserStatusMouseExited
                 
 		// Change label color.
-		jLabelMainAccountStatus.setForeground(Color.RED);
-        }//GEN-LAST:event_jLabelMainAccountStatusMouseExited
+		if (sessionSystem.getSessionUser() == null) {
+		
+			jLabelMainSessionUserStatus.setForeground(USER_STATUS_OUT_COLOR);
+		}
+		else {
+		
+			jLabelMainSessionUserStatus.setForeground(USER_STATUS_IN_COLOR);
+		}
+        }//GEN-LAST:event_jLabelMainSessionUserStatusMouseExited
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JLabel jLabelMainAccountStatus;
+        private javax.swing.JLabel jLabelMainSessionUserStatus;
         private javax.swing.JPanel jPanelAccountActivity;
         private javax.swing.JPanel jPanelAccountDetails;
         private javax.swing.JPanel jPanelBrowseGroups;
