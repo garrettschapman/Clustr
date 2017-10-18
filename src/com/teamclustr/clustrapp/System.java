@@ -51,17 +51,4 @@ public class System implements Serializable {
 		
 		return sessionUser;
 	}
-	
-	/**
-	 * Set the active session user.
-	 * @param newSessionUser new session user
-	 * @return this for convenience
-	 */
-	public System setSessionUser(User newSessionUser) {
-	
-		sessionUser = newSessionUser;
-		
-		// Return this for convenience.
-		return this;
-	}
 }

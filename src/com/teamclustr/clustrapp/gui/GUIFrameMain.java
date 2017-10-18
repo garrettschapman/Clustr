@@ -91,7 +91,29 @@ public class GUIFrameMain extends javax.swing.JFrame {
 	@SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
+                java.awt.GridBagConstraints gridBagConstraints;
 
+                jDialogLoginSignup = new javax.swing.JDialog();
+                jPanelLogin = new javax.swing.JPanel();
+                jLabelLogin = new javax.swing.JLabel();
+                jLabelLoginUsername = new javax.swing.JLabel();
+                jTextFieldLoginUsername = new javax.swing.JTextField();
+                jLabelLoginPassword = new javax.swing.JLabel();
+                jPasswordFieldLoginPassword = new javax.swing.JPasswordField();
+                jButtonLogin = new javax.swing.JButton();
+                jButtonSwitchSignup = new javax.swing.JButton();
+                jButtonLoginCancel = new javax.swing.JButton();
+                jPanelSignup = new javax.swing.JPanel();
+                jLabelSignup = new javax.swing.JLabel();
+                jLabelSignupUsername = new javax.swing.JLabel();
+                jTextFieldSignupUsername = new javax.swing.JTextField();
+                jLabelSignupPassword = new javax.swing.JLabel();
+                jPasswordFieldSignupPassword = new javax.swing.JPasswordField();
+                jLabelSignupPasswordConfirm = new javax.swing.JLabel();
+                jPasswordFieldSignupPasswordConfirm = new javax.swing.JPasswordField();
+                jButtonSIgnup = new javax.swing.JButton();
+                jButtonSwitchLogin = new javax.swing.JButton();
+                jButtonSignupCancel = new javax.swing.JButton();
                 jTabbedPaneMain = new javax.swing.JTabbedPane();
                 jTabbedPaneAcount = new javax.swing.JTabbedPane();
                 jPanelAccountDetails = new javax.swing.JPanel();
@@ -101,6 +123,159 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 jPanelBrowseGroups = new javax.swing.JPanel();
                 jPanelFocusGroup = new javax.swing.JPanel();
                 jLabelMainSessionUserStatus = new javax.swing.JLabel();
+
+                jDialogLoginSignup.setTitle("Login/Signup");
+                jDialogLoginSignup.setMinimumSize(new java.awt.Dimension(276, 262));
+                jDialogLoginSignup.setModal(true);
+                jDialogLoginSignup.setPreferredSize(new java.awt.Dimension(276, 262));
+                jDialogLoginSignup.setResizable(false);
+                jDialogLoginSignup.getContentPane().setLayout(new java.awt.CardLayout());
+
+                java.awt.GridBagLayout jPanelLoginLayout = new java.awt.GridBagLayout();
+                jPanelLoginLayout.columnWidths = new int[] {0};
+                jPanelLoginLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+                jPanelLogin.setLayout(jPanelLoginLayout);
+
+                jLabelLogin.setText("Login");
+                gridBagConstraints = new java.awt.GridBagConstraints();
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 0;
+                jPanelLogin.add(jLabelLogin, gridBagConstraints);
+
+                jLabelLoginUsername.setText("Username:");
+                gridBagConstraints = new java.awt.GridBagConstraints();
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 2;
+                gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
+                jPanelLogin.add(jLabelLoginUsername, gridBagConstraints);
+
+                jTextFieldLoginUsername.setPreferredSize(new java.awt.Dimension(250, 19));
+                gridBagConstraints = new java.awt.GridBagConstraints();
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 4;
+                jPanelLogin.add(jTextFieldLoginUsername, gridBagConstraints);
+
+                jLabelLoginPassword.setText("Password:");
+                gridBagConstraints = new java.awt.GridBagConstraints();
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 6;
+                gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
+                jPanelLogin.add(jLabelLoginPassword, gridBagConstraints);
+
+                jPasswordFieldLoginPassword.setText("password");
+                jPasswordFieldLoginPassword.setPreferredSize(new java.awt.Dimension(250, 19));
+                gridBagConstraints = new java.awt.GridBagConstraints();
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 8;
+                jPanelLogin.add(jPasswordFieldLoginPassword, gridBagConstraints);
+
+                jButtonLogin.setText("Login");
+                gridBagConstraints = new java.awt.GridBagConstraints();
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 10;
+                gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+                jPanelLogin.add(jButtonLogin, gridBagConstraints);
+
+                jButtonSwitchSignup.setText("Signup");
+                jButtonSwitchSignup.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                jButtonSwitchSignupMouseClicked(evt);
+                        }
+                });
+                gridBagConstraints = new java.awt.GridBagConstraints();
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 12;
+                gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+                jPanelLogin.add(jButtonSwitchSignup, gridBagConstraints);
+
+                jButtonLoginCancel.setText("Cancel");
+                gridBagConstraints = new java.awt.GridBagConstraints();
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 14;
+                gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+                jPanelLogin.add(jButtonLoginCancel, gridBagConstraints);
+
+                jDialogLoginSignup.getContentPane().add(jPanelLogin, "card2");
+
+                java.awt.GridBagLayout jPanelSignupLayout = new java.awt.GridBagLayout();
+                jPanelSignupLayout.columnWidths = new int[] {0};
+                jPanelSignupLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+                jPanelSignup.setLayout(jPanelSignupLayout);
+
+                jLabelSignup.setText("Signup");
+                gridBagConstraints = new java.awt.GridBagConstraints();
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 0;
+                jPanelSignup.add(jLabelSignup, gridBagConstraints);
+
+                jLabelSignupUsername.setText("Username:");
+                gridBagConstraints = new java.awt.GridBagConstraints();
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 2;
+                gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
+                jPanelSignup.add(jLabelSignupUsername, gridBagConstraints);
+
+                jTextFieldSignupUsername.setPreferredSize(new java.awt.Dimension(250, 19));
+                gridBagConstraints = new java.awt.GridBagConstraints();
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 4;
+                jPanelSignup.add(jTextFieldSignupUsername, gridBagConstraints);
+
+                jLabelSignupPassword.setText("Password:");
+                gridBagConstraints = new java.awt.GridBagConstraints();
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 6;
+                gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
+                jPanelSignup.add(jLabelSignupPassword, gridBagConstraints);
+
+                jPasswordFieldSignupPassword.setText("password");
+                jPasswordFieldSignupPassword.setPreferredSize(new java.awt.Dimension(250, 19));
+                gridBagConstraints = new java.awt.GridBagConstraints();
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 8;
+                jPanelSignup.add(jPasswordFieldSignupPassword, gridBagConstraints);
+
+                jLabelSignupPasswordConfirm.setText("Confirm Password:");
+                gridBagConstraints = new java.awt.GridBagConstraints();
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 10;
+                gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
+                jPanelSignup.add(jLabelSignupPasswordConfirm, gridBagConstraints);
+
+                jPasswordFieldSignupPasswordConfirm.setText("password");
+                jPasswordFieldSignupPasswordConfirm.setPreferredSize(new java.awt.Dimension(250, 19));
+                gridBagConstraints = new java.awt.GridBagConstraints();
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 12;
+                jPanelSignup.add(jPasswordFieldSignupPasswordConfirm, gridBagConstraints);
+
+                jButtonSIgnup.setText("Signup");
+                gridBagConstraints = new java.awt.GridBagConstraints();
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 14;
+                gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+                jPanelSignup.add(jButtonSIgnup, gridBagConstraints);
+
+                jButtonSwitchLogin.setText("Login");
+                jButtonSwitchLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                jButtonSwitchLoginMouseClicked(evt);
+                        }
+                });
+                gridBagConstraints = new java.awt.GridBagConstraints();
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 16;
+                gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+                jPanelSignup.add(jButtonSwitchLogin, gridBagConstraints);
+
+                jButtonSignupCancel.setText("Cancel");
+                gridBagConstraints = new java.awt.GridBagConstraints();
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 18;
+                gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+                jPanelSignup.add(jButtonSignupCancel, gridBagConstraints);
+
+                jDialogLoginSignup.getContentPane().add(jPanelSignup, "card3");
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 setTitle("Clustr");
@@ -233,53 +408,16 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         private void jLabelMainSessionUserStatusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMainSessionUserStatusMouseClicked
                 
-		// Check if the user is not logged in.
+		// User is not logged in.
 		if (sessionSystem.getSessionUser() == null) {
 		
 			// Prompt the user for login information.
-			String username = JOptionPane.showInputDialog(
-				this, 
-				"Please enter your user name.", 
-				"Login", 
-				JOptionPane.PLAIN_MESSAGE);
-			
-			// User wants to log in.
-			if (username != null) {
-				
-				// Trim whitespace.
-				username = username.trim();
-				
-				// Ensure username was not all whitespace.
-				if (username.length() > 0) {
-				
-					// Log user in.
-					sessionSystem.setSessionUser(new User());
-			
-					// Update session user status.
-					jLabelMainSessionUserStatus.setText(username);
-					jLabelMainSessionUserStatus.setForeground(USER_STATUS_IN_COLOR);
-				}
-			}
+			jDialogLoginSignup.setVisible(true);
 		}
 		// User is logged in.
 		else {
 			
-			// Prompt the user for logout.
-			int userChoice = JOptionPane.showConfirmDialog(this, 
-				"Are you sure you want to log out?", 
-				"Logout", 
-				JOptionPane.YES_NO_OPTION);
 			
-			// User wants to logout.
-			if (userChoice == JOptionPane.YES_OPTION) {
-			
-				// Log user out.
-				sessionSystem.setSessionUser(null);
-
-				// Update session user status.
-				jLabelMainSessionUserStatus.setText(USER_STATUS_OUT_STRING);
-				jLabelMainSessionUserStatus.setForeground(USER_STATUS_OUT_COLOR);
-			}
 		}
         }//GEN-LAST:event_jLabelMainSessionUserStatusMouseClicked
 
@@ -302,15 +440,44 @@ public class GUIFrameMain extends javax.swing.JFrame {
 		}
         }//GEN-LAST:event_jLabelMainSessionUserStatusMouseExited
 
+        private void jButtonSwitchSignupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSwitchSignupMouseClicked
+                // TODO add your handling code here:
+        }//GEN-LAST:event_jButtonSwitchSignupMouseClicked
+
+        private void jButtonSwitchLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSwitchLoginMouseClicked
+                // TODO add your handling code here:
+        }//GEN-LAST:event_jButtonSwitchLoginMouseClicked
+
         // Variables declaration - do not modify//GEN-BEGIN:variables
+        private javax.swing.JButton jButtonLogin;
+        private javax.swing.JButton jButtonLoginCancel;
+        private javax.swing.JButton jButtonSIgnup;
+        private javax.swing.JButton jButtonSignupCancel;
+        private javax.swing.JButton jButtonSwitchLogin;
+        private javax.swing.JButton jButtonSwitchSignup;
+        private javax.swing.JDialog jDialogLoginSignup;
+        private javax.swing.JLabel jLabelLogin;
+        private javax.swing.JLabel jLabelLoginPassword;
+        private javax.swing.JLabel jLabelLoginUsername;
         private javax.swing.JLabel jLabelMainSessionUserStatus;
+        private javax.swing.JLabel jLabelSignup;
+        private javax.swing.JLabel jLabelSignupPassword;
+        private javax.swing.JLabel jLabelSignupPasswordConfirm;
+        private javax.swing.JLabel jLabelSignupUsername;
         private javax.swing.JPanel jPanelAccountActivity;
         private javax.swing.JPanel jPanelAccountDetails;
         private javax.swing.JPanel jPanelBrowseGroups;
         private javax.swing.JPanel jPanelDirectMessage;
         private javax.swing.JPanel jPanelFocusGroup;
+        private javax.swing.JPanel jPanelLogin;
+        private javax.swing.JPanel jPanelSignup;
+        private javax.swing.JPasswordField jPasswordFieldLoginPassword;
+        private javax.swing.JPasswordField jPasswordFieldSignupPassword;
+        private javax.swing.JPasswordField jPasswordFieldSignupPasswordConfirm;
         private javax.swing.JTabbedPane jTabbedPaneAcount;
         private javax.swing.JTabbedPane jTabbedPaneGroups;
         private javax.swing.JTabbedPane jTabbedPaneMain;
+        private javax.swing.JTextField jTextFieldLoginUsername;
+        private javax.swing.JTextField jTextFieldSignupUsername;
         // End of variables declaration//GEN-END:variables
 }
