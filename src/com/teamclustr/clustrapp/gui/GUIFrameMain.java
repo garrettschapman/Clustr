@@ -51,6 +51,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
 	 */
 	public static void main(String args[]) {
 		
+		// Call logic debug methods.
+		garrettDebug(false);
+		jiraDebug(false);
+		tjDebug(false);
+		
 		/* Set the Nimbus look and feel */
 		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
 		/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -83,6 +88,30 @@ public class GUIFrameMain extends javax.swing.JFrame {
 	}
 	
 	// HELPER METHODS.
+	
+	private static void garrettDebug(boolean execute) {
+	
+		if (execute) {
+		
+			// Garrett's debug code.
+		}
+	}
+	
+	private static void jiraDebug(boolean execute) {
+	
+		if (execute) {
+		
+			// Jira's debug code.
+		}
+	}
+	
+	private static void tjDebug(boolean execute) {
+	
+		if (execute) {
+		
+			// TJ's debug code.
+		}
+	}
 	
 	/**
 	 * This method is called from within the constructor to initialize the
