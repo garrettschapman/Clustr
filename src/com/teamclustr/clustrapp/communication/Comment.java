@@ -13,7 +13,7 @@ import java.io.Serializable;
  * Summary of Modifications:
  *  N/A
  */
-public class Comment extends Post {
+public class Comment extends Post implements Serializable {
 	
 	// MEMEBR DATA.
 	
