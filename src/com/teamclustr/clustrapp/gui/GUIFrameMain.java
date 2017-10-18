@@ -1,7 +1,6 @@
 package com.teamclustr.clustrapp.gui;
 
 import com.teamclustr.clustrapp.System;
-import com.teamclustr.clustrapp.representation.User;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.LayoutManager;
@@ -448,7 +447,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 		LayoutManager dialogLayout = jDialogLoginSignup.getLayout();
 		if (dialogLayout instanceof CardLayout) {
 		
-			((CardLayout)dialogLayout).show(jDialogLoginSignup, jPanelLogin.getName());
+			((CardLayout)dialogLayout).next(jDialogLoginSignup);
 		}
         }//GEN-LAST:event_jButtonSwitchSignupMouseClicked
 
