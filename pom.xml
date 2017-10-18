@@ -32,11 +32,4 @@
             <url>file:${project.basedir}/lib</url>
         </repository>
     </repositories>
-    <dependencies>
-        <dependency>
-            <groupId>unknown.binary</groupId>
-            <artifactId>AbsoluteLayout</artifactId>
-            <version>SNAPSHOT</version>
-        </dependency>
-    </dependencies>
 </project>
