@@ -1,7 +1,5 @@
 package com.teamclustr.clustrapp.communication;
 
-import java.io.Serializable;
-
 /**
  * BRIEF CLASS DESCRIPTION.
  * 
@@ -13,7 +11,7 @@ import java.io.Serializable;
  * Summary of Modifications:
  *  N/A
  */
-public class Comment extends Post implements Serializable {
+public class Comment extends Post {
 	
 	// MEMEBR DATA.
 	
