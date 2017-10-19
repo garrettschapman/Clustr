@@ -397,6 +397,14 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         jButton1.setText("Search");
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanelAllGroupsLayout = new javax.swing.GroupLayout(jPanelAllGroups);
