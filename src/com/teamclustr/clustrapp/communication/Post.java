@@ -49,16 +49,16 @@ public class Post implements Serializable {
 	} //end of getter
 	
 	/*
+	 * Getter for the owner of the Post
+	 */
+	public User getOwner() {
+		return this.owner;
+	} //end of getter
+	
+	/*
 	 * Method to edit the body of the Post
 	 */
 	public void editBody() {
-		
-	} //end of method
-	
-	/*
-	 * Method to delete the Post
-	 */
-	public void deletePost() {
 		
 	} //end of method
 
@@ -94,15 +94,10 @@ public class Post implements Serializable {
 	/*
 	 * Method to edit a comment
 	 * Uses the index of the comment to find it
-	 * Uses a temporary comment to edit
+	 * Uses Post editor to edit comment
 	 */
 	public void editComment(int index) {
-		Post thisComment; //temporary comment
-		thisComment = this.comments.get(index); //sets temporary comment
-		
-		thisComment.editBody(); //edits temporary comment
-		
-		this.comments.set(index, thisComment); //sets comment to edited comment
+		this.comments.get(index).editBody(); //edits comment
 	} //end of method
 	
 	/*
@@ -111,8 +106,8 @@ public class Post implements Serializable {
 	 * Comment owner removed and body set to say that it was deleted
 	 */
 	public void deleteComment(int index) {
-		Post deleted = new Post(null, "[Deleted]");
-		this.comments.set(index, deleted);
+		Post deleted = new Post(null, "[Deleted]"); //creates new deleted Post
+		this.comments.set(index, deleted); //sets comment to deleted Post
 	} //end of method
 
 
