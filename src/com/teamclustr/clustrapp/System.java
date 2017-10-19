@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class System implements Serializable {
 	
 	// MEMEBR DATA.
-//	private User user;
 	
 	// The user active on this current session.
 	private transient User sessionUser;
@@ -50,18 +49,5 @@ public class System implements Serializable {
 	public User getSessionUser() {
 		
 		return sessionUser;
-	}
-	
-	/**
-	 * Set the active session user.
-	 * @param newSessionUser new session user
-	 * @return this for convenience
-	 */
-	public System setSessionUser(User newSessionUser) {
-	
-		sessionUser = newSessionUser;
-		
-		// Return this for convenience.
-		return this;
 	}
 }
