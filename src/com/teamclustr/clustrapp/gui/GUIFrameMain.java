@@ -156,6 +156,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
         groupSearchField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabelMainSessionUserStatus = new javax.swing.JLabel();
 
@@ -395,6 +397,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         jButton1.setText("Search");
 
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout jPanelAllGroupsLayout = new javax.swing.GroupLayout(jPanelAllGroups);
         jPanelAllGroups.setLayout(jPanelAllGroupsLayout);
         jPanelAllGroupsLayout.setHorizontalGroup(
@@ -406,7 +410,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 .addComponent(groupSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanelAllGroupsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanelAllGroupsLayout.setVerticalGroup(
             jPanelAllGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -416,7 +424,9 @@ public class GUIFrameMain extends javax.swing.JFrame {
                     .addComponent(groupSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jButton1))
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPaneGroups.addTab("Browse All Groups", jPanelAllGroups);
@@ -577,9 +587,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordFieldLoginPassword;
     private javax.swing.JPasswordField jPasswordFieldSignupPassword;
     private javax.swing.JPasswordField jPasswordFieldSignupPasswordConfirm;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPaneAcount;
     private javax.swing.JTabbedPane jTabbedPaneGroups;
     private javax.swing.JTabbedPane jTabbedPaneMain;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextFieldLoginUsername;
     private javax.swing.JTextField jTextFieldSignupUsername;
     // End of variables declaration//GEN-END:variables
