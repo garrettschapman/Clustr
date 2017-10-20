@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.LayoutManager;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -653,7 +654,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
             obj[1] = group.getMembers().size();
             obj[2] = group.getTags();
             obj[3] = group.getCategories();
-            obj[4] = ;
+            obj[4] = new JButton("Join");
         }
     }//GEN-LAST:event_jTabbedPaneGroupsMouseClicked
 

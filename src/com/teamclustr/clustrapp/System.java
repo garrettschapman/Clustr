@@ -4,6 +4,7 @@ import com.teamclustr.clustrapp.representation.User;
 import com.teamclustr.clustrapp.representation.Group;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * BRIEF CLASS DESCRIPTION.
@@ -40,6 +41,9 @@ public class System implements Serializable {
 		sessionUser = null;
 		users = new ArrayList<User>(16);
 		groups = new ArrayList<Group>(16);
+                
+                // DEBUG FOR GROUPS IN GUI
+                groups.add(new Group(new User(), "Test Group"));
 	}
 	
 	/**
@@ -50,4 +54,8 @@ public class System implements Serializable {
 		
 		return sessionUser;
 	}
+        
+        public ArrayList getGroupList(){
+            return this.groups;
+        }
 }

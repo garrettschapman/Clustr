@@ -18,7 +18,7 @@ public class Group implements Serializable {
 	
 //variables for group
 //test for push
-	private ArrayList<User> member = new ArrayList<User>();
+	private ArrayList<User> members = new ArrayList<User>();
 	private ArrayList<User> moderators = new ArrayList<User>();
 	private ArrayList<User> bannedUsers = new ArrayList<User>();
 	private ArrayList<Post> posts = new ArrayList<Post>();
@@ -29,7 +29,7 @@ public class Group implements Serializable {
 	
 	public Group(User owner, String name /*icon*/){
 		groupName = name;
-		member.add(owner);
+		members.add(owner);
 		moderators.add(owner);
 		
 	}
@@ -39,17 +39,17 @@ public class Group implements Serializable {
 			return false;
 		}
 		else{
-			member.add(user);
+			members.add(user);
 			return true;
 		}
 	}
 	
 	public void leaveGroup(User user){
-		member.remove(user);
+		members.remove(user);
 	}
 	
 	public void banUser(User user){
-		member.remove(user);
+		members.remove(user);
 		bannedUsers.add(user);
 	}
 	
@@ -60,5 +60,21 @@ public class Group implements Serializable {
 			//gui should insert a 
 		}
 	}
+        
+        public ArrayList getMembers(){
+            return this.members;
+        }
+        
+        public ArrayList getTags(){
+            return this.tags;
+        }
+        
+        public String getName(){
+            return this.groupName;
+        }
+
+    public Object getCategories() {
+        return this.categories;
+    }
 	
 }
