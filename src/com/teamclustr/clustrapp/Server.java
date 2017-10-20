@@ -55,4 +55,8 @@ public class Server implements Serializable {
         public ArrayList getGroupList(){
             return this.groups;
         }
+        
+        public ArrayList getUserList(){
+            return this.users;
+        }
 }
