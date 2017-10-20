@@ -19,7 +19,7 @@ public class Group implements Serializable {
 //variables for group
 //test for push
 	private ArrayList<User> members = new ArrayList<User>();
-	private ArrayList<User> moderators = new ArrayList<User>();
+	private ArrayList<String> moderators = new ArrayList<String>();
 	private ArrayList<User> bannedUsers = new ArrayList<User>();
 	private ArrayList<Post> posts = new ArrayList<Post>();
 	private ArrayList<String> categories = new ArrayList<String>();
@@ -27,9 +27,9 @@ public class Group implements Serializable {
 	private String groupName = "";
 //end variables
 	
-	public Group(User owner, String name /*icon*/){
+	public Group(String owner, String name /*icon*/){
 		groupName = name;
-		members.add(owner);
+		//members.add(owner);
 		moderators.add(owner);
 		
 	}

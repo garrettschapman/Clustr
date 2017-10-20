@@ -1,6 +1,6 @@
 package com.teamclustr.clustrapp.gui;
 
-import com.teamclustr.clustrapp.System;
+import com.teamclustr.clustrapp.Server;
 import com.teamclustr.clustrapp.representation.Group;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -27,7 +27,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 	// MEMBER DATA.
 	
 	// The system of this session.
-	public static System sessionSystem;
+	public static Server sessionSystem;
 	
 	// Active session user status constants.
 	public static String USER_STATUS_OUT_STRING = "Not Logged In";
@@ -574,7 +574,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 			JOptionPane.PLAIN_MESSAGE);
 		
 		// Initialize the session system.
-		sessionSystem = new System();
+		sessionSystem = new Server();
         }//GEN-LAST:event_formWindowOpened
 
         private void jLabelMainSessionUserStatusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMainSessionUserStatusMouseClicked
@@ -648,6 +648,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jTable1.setModel(tabelModel);
         // for each group in groupList, add it as a row in the table
         for(Group group : groupList){
+            System.out.println(group.getName());
             Object obj[] = new Object[5];
             
             obj[0] = group.getName();
