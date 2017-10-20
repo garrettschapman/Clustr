@@ -3,6 +3,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.teamclustr.clustrapp.communication.Post;
+
 /**
  * BRIEF CLASS DESCRIPTION.
  * 
@@ -15,20 +17,31 @@ import java.util.List;
  *  N/A
  */
 public class User implements Serializable {
-	//Its jirawat sfdgdfadfa dsafsdfsd
+	//Its jirawat 
 	// MEMEBR DATA.
 	private String Username;
 	private String Password;
 	private String Email;
 	private String PhoneNum; 
-	private String Bio; // bio of user
-	private ArrayList<String> Friends = new ArrayList<String>();
-	private ArrayList<String> Enemies = new ArrayList<String>();
-	private ArrayList<String> Group = new ArrayList<String>(); //group list
+	private String Bio; 
+	private ArrayList<String> Friends;
+	private ArrayList<String> Enemies;
+	private ArrayList<String> GroupList; 
+	private ArrayList<String> Posts; 
+	private ArrayList<String> Comments;
+	
 	//Constructor 
 	public User() {
 		
 		createAccount(Username, Password, Email, PhoneNum, Bio);
+		addFriend(Username);
+		addEnemies(Username); 
+		removeFriend(Username);
+		Friends = new ArrayList<String>();
+		Enemies = new ArrayList<String>();
+		GroupList = new ArrayList<String>();
+		Posts = new ArrayList<String>();
+		Comments = new ArrayList<String>();
 	
 	}
 	
@@ -41,10 +54,10 @@ public class User implements Serializable {
 		this.setEmail(Email);
 		this.setPhoneNum(PhoneNum);
 		this.setBio(Bio);
+		
 	}
 	
 	public void addFriend(String Username) {  //add friend to friend list
-		//this.Friends.add(Username);
 		this.Friends.add(Username);	
 	}
 	
@@ -52,7 +65,10 @@ public class User implements Serializable {
 		this.Enemies.add(Username);
 	}
 
-
+	public void removeFriend(String Username) {
+		this.Friends.remove(Username);
+	}
+	
 	public String getUsername() {
 		return Username;
 	}
