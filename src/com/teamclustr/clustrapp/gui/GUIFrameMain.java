@@ -46,7 +46,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
 		jLabelMainSessionUserStatus.setForeground(USER_STATUS_OUT_COLOR);
 	}
         
-
+        
+        
 	/**
 	 * Main program method.
 	 * @param args command line arguments
