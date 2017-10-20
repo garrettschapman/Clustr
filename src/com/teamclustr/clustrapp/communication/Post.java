@@ -71,17 +71,9 @@ public class Post implements Serializable {
 	/*
 	 * Getter for the body of a comment
 	 * Uses the index of the comment to find it
-	 * Once it has the comment, it gets the body normally
 	 */
-	public String getComment(int index) {
-		//temporary variables
-		Post comment;
-		String cbody;
-		
-		comment = this.comments.get(index); //sets temporary comment
-		cbody = comment.getBody(); //gets body from temporary comment
-		
-		return cbody;
+	public String getComment(int index) {	
+		return this.comments.get(index).getBody();
 	} //end of getter
 	
 	/*
