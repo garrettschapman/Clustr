@@ -650,7 +650,10 @@ public class GUIFrameMain extends javax.swing.JFrame {
             Object obj[] = new Object[5];
             
             obj[0] = group.getName();
-            obj[1] = group.getMembers().length;
+            obj[1] = group.getMembers().size();
+            obj[2] = group.getTags();
+            obj[3] = group.getCategories();
+            obj[4] = ;
         }
     }//GEN-LAST:event_jTabbedPaneGroupsMouseClicked
 
