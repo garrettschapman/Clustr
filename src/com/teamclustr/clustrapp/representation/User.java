@@ -46,7 +46,7 @@ public class User implements Serializable {
 	
 	public void addFriend(String Username) {  //add friend to friend list
 		//this.Friends.add(Username);
-		this.Friends.add(Username));	
+		this.Friends.add(Username);	
 	}
 	
 	public void addEnemies(String Username) { //add blocked user to enemy list
