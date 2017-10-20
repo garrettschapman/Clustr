@@ -24,7 +24,8 @@ public class Post implements Serializable {
 	private ArrayList<Post> comments; //all comments on the post
 	private int points; //points for the post
 	private LocalDateTime date; //time the post was created
-//End of variables	
+	
+	
 	
 	/*
 	 * Constructor for Post
@@ -49,17 +50,19 @@ public class Post implements Serializable {
 	} //end of getter
 	
 	/*
-	 * Method to edit the body of the Post
+	 * Getter for the owner of the Post
 	 */
-	public void editBody() {
-		
-	} //end of method
+	public User getOwner() {
+		return this.owner;
+	} //end of getter
 	
 	/*
-	 * Method to delete the Post
+	 * Method to edit the body of the Post
+	 * System will have to use the getter to allow user to change body
+	 * Call this method with the edited body in order to create changes
 	 */
-	public void deletePost() {
-		
+	public void setBody(String newBody) {
+		this.body = newBody; //sets the body to the new body
 	} //end of method
 
 	
@@ -68,17 +71,9 @@ public class Post implements Serializable {
 	/*
 	 * Getter for the body of a comment
 	 * Uses the index of the comment to find it
-	 * Once it has the comment, it gets the body normally
 	 */
-	public String getComment(int index) {
-		//temporary variables
-		Post comment;
-		String cbody;
-		
-		comment = this.comments.get(index); //sets temporary comment
-		cbody = comment.getBody(); //gets body from temporary comment
-		
-		return cbody;
+	public String getComment(int index) {	
+		return this.comments.get(index).getBody();
 	} //end of getter
 	
 	/*
@@ -94,15 +89,10 @@ public class Post implements Serializable {
 	/*
 	 * Method to edit a comment
 	 * Uses the index of the comment to find it
-	 * Uses a temporary comment to edit
+	 * Uses Post editor to edit comment
 	 */
-	public void editComment(int index) {
-		Post thisComment; //temporary comment
-		thisComment = this.comments.get(index); //sets temporary comment
-		
-		thisComment.editBody(); //edits temporary comment
-		
-		this.comments.set(index, thisComment); //sets comment to edited comment
+	public void setComment(int index, String newBody) {
+		this.comments.get(index).setBody(newBody); //edits comment
 	} //end of method
 	
 	/*
@@ -111,8 +101,8 @@ public class Post implements Serializable {
 	 * Comment owner removed and body set to say that it was deleted
 	 */
 	public void deleteComment(int index) {
-		Post deleted = new Post(null, "[Deleted]");
-		this.comments.set(index, deleted);
+		Post deleted = new Post(null, "[Deleted]"); //creates new deleted Post
+		this.comments.set(index, deleted); //sets comment to deleted Post
 	} //end of method
 
 

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Group implements Serializable {
 	
 //variables for group
-	
+//test for push
 	private ArrayList<User> member = new ArrayList<User>();
 	private ArrayList<User> moderators = new ArrayList<User>();
 	private ArrayList<User> bannedUsers = new ArrayList<User>();
