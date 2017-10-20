@@ -24,7 +24,8 @@ public class Post implements Serializable {
 	private ArrayList<Post> comments; //all comments on the post
 	private int points; //points for the post
 	private LocalDateTime date; //time the post was created
-//End of variables	
+	
+	
 	
 	/*
 	 * Constructor for Post
@@ -57,9 +58,11 @@ public class Post implements Serializable {
 	
 	/*
 	 * Method to edit the body of the Post
+	 * System will have to use the getter to allow user to change body
+	 * Call this method with the edited body in order to create changes
 	 */
-	public void editBody() {
-		
+	public void setBody(String newBody) {
+		this.body = newBody; //sets the body to the new body
 	} //end of method
 
 	
@@ -96,8 +99,8 @@ public class Post implements Serializable {
 	 * Uses the index of the comment to find it
 	 * Uses Post editor to edit comment
 	 */
-	public void editComment(int index) {
-		this.comments.get(index).editBody(); //edits comment
+	public void setComment(int index, String newBody) {
+		this.comments.get(index).setBody(newBody); //edits comment
 	} //end of method
 	
 	/*
