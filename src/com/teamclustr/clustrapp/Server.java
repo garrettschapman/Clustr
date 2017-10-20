@@ -49,7 +49,6 @@ public class Server implements Serializable {
 	 * @return session user
 	 */
 	public User getSessionUser() {
-		
 		return sessionUser;
 	}
         

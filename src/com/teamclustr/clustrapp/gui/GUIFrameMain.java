@@ -8,8 +8,12 @@ import java.awt.LayoutManager;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  * BRIEF CLASS DESCRIPTION.
@@ -171,7 +175,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelAllGroups = new javax.swing.JPanel();
         groupSearchField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        groupSearchButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabelMainSessionUserStatus = new javax.swing.JLabel();
@@ -479,8 +483,14 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         jLabel1.setText("Search Groups");
 
-        jButton1.setText("Search");
+        groupSearchButton.setText("Search");
+        groupSearchButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                groupSearchButtonMouseClicked(evt);
+            }
+        });
 
+        jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -501,7 +511,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(groupSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(groupSearchButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanelAllGroupsLayout.createSequentialGroup()
                 .addContainerGap()
@@ -515,7 +525,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 .addGroup(jPanelAllGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(groupSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton1))
+                    .addComponent(groupSearchButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                 .addContainerGap())
@@ -655,18 +665,29 @@ public class GUIFrameMain extends javax.swing.JFrame {
             obj[1] = group.getMembers().size();
             obj[2] = group.getTags();
             obj[3] = group.getCategories();
-            obj[4] = new JButton("Join");
+            obj[4] = "Join";
             
             tabelModel.addRow(obj);
         }
     }//GEN-LAST:event_jTabbedPaneGroupsMouseClicked
 
+    private void groupSearchButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_groupSearchButtonMouseClicked
+        // Grab the text in the search field
+        String searchText = groupSearchField.getText();
+
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(); 
+        sorter.setRowFilter(RowFilter.regexFilter(searchText));
+        jTable1.setRowSorter(sorter);
+
+        // TODO: search group functionality
+    }//GEN-LAST:event_groupSearchButtonMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField groupCategoriesField;
     private javax.swing.JTextField groupNameField;
+    private javax.swing.JButton groupSearchButton;
     private javax.swing.JTextField groupSearchField;
     private javax.swing.JTextField groupTagsField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonLogin;
