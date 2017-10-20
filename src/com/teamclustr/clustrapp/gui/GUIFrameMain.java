@@ -656,6 +656,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
             obj[2] = group.getTags();
             obj[3] = group.getCategories();
             obj[4] = new JButton("Join");
+            
+            tabelModel.addRow(obj);
         }
     }//GEN-LAST:event_jTabbedPaneGroupsMouseClicked
 

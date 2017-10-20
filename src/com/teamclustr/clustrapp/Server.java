@@ -42,8 +42,6 @@ public class Server implements Serializable {
 		users = new ArrayList<User>(16);
 		groups = new ArrayList<Group>(16);
                 
-                // DEBUG FOR GROUPS IN GUI
-                groups.add(new Group("Test User", "Test Group"));
 	}
 	
 	/**
