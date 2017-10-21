@@ -4,6 +4,8 @@
 
 /.settings/
 
+/nb-configuration.xml
+
 /.idea
 
 /.classpath
