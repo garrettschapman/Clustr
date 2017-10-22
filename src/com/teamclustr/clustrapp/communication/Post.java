@@ -36,7 +36,7 @@ public class Post implements Serializable {
 	public Post(User owner, String body) {
 		this.owner = owner;
 		this.body = body;
-		comments = new ArrayList<Post>(0); //no current comments
+		this.comments = new ArrayList<Post>(0); //no current comments
 		this.points = 1; //owner automatically likes their post
 		this.date = LocalDateTime.now(); //sets date to date of posting
 	} //end of constructor
@@ -91,8 +91,8 @@ public class Post implements Serializable {
 	 * Uses the index of the comment to find it
 	 * Uses Post editor to edit comment
 	 */
-	public void setComment(int index, String newBody) {
-		this.comments.get(index).setBody(newBody); //edits comment
+	public void setComment(int index, String newComment) {
+		this.comments.get(index).setBody(newComment); //edits comment
 	} //end of method
 	
 	/*
