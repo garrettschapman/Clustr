@@ -16,6 +16,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -626,12 +628,17 @@ public class GUIFrameMain extends javax.swing.JFrame {
         browseTable.setAutoCreateRowSorter(true);
         browseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null}
             },
             new String [] {
                 "Group Name", "Number Of Members", "Tags", "Categories", "Join"
             }
         ));
+        browseTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                browseTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(browseTable);
 
         javax.swing.GroupLayout jPanelAllGroupsLayout = new javax.swing.GroupLayout(jPanelAllGroups);
@@ -785,7 +792,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
      * @param arg Either 'browse' or 'feed' depending on the table structure you
      * want
      */
-    private void updateTable(JTable tbl, String arg) throws InvalidParameterException{
+    private void updateTable(JTable tbl, String arg) throws InvalidParameterException {
         String col[] = {"Group Name", "Number of Members", "Tags", "Categories", ""};
         DefaultTableModel tabelModel = new DefaultTableModel(col, 0);
         ArrayList<Group> groupList = sessionSystem.getGroupList();
@@ -828,53 +835,68 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
     private void groupSearchButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_groupSearchButtonMouseClicked
         // Grab the text in the search field
-        String searchText = groupSearchField.getText();
 
-        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>();
-        sorter.setRowFilter(RowFilter.regexFilter(searchText));
-        browseTable.setRowSorter(sorter);
+        if (!groupSearchField.getText().equals("")) {
+            String searchText = groupSearchField.getText();
 
-        // TODO: search group functionality
+            TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>();
+            sorter.setRowFilter(RowFilter.regexFilter(searchText));
+            browseTable.setRowSorter(sorter);
+        }
+
     }//GEN-LAST:event_groupSearchButtonMouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         // Canceled; Go to profile tab
         jTabbedPaneGroups.setSelectedIndex(0);
-        
+
         // clear the fields
         groupCategoriesField.setText("");
         groupNameField.setText("");
         groupTagsField.setText("");
-        
+
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void createGroupButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createGroupButtonMouseClicked
         // TODO Create a new group
-        if(!groupNameField.getText().isEmpty() 
+        if (!groupNameField.getText().isEmpty()
                 && !groupCategoriesField.getText().isEmpty()
-                && !groupTagsField.getText().isEmpty()){
-            
+                && !groupTagsField.getText().isEmpty()) {
+
             String name = groupNameField.getText();
             String categories = groupCategoriesField.getText();
             String tags = groupTagsField.getText();
-            
+
             sessionSystem.createGroup(name, categories, tags);
-            
+
         } else {
-            JOptionPane.showMessageDialog(rootPane, 
+            JOptionPane.showMessageDialog(rootPane,
                     "Please enter a group name, "
-                            + "a list of group categories "
-                            + "seperated by commas, and group "
-                            + "tags seperated by commas.", 
+                    + "a list of group categories "
+                    + "seperated by commas, and group "
+                    + "tags seperated by commas.",
                     "Fields Cannot Be Blank", 1);
         }
 
     }//GEN-LAST:event_createGroupButtonMouseClicked
 
+   
     private void jTabbedPaneMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneMainMouseClicked
         // TODO add your handling code here:
         updateTable(feedTable, "feed");
     }//GEN-LAST:event_jTabbedPaneMainMouseClicked
+
+    private void browseTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_browseTableMouseClicked
+        // TODO add your handling code here:
+        browseTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+        public void valueChanged(ListSelectionEvent event) {
+            // do some actions here, for example
+            // print first column value from selected row
+            System.out.println(browseTable.getValueAt(browseTable.getSelectedRow(), 0).toString());
+        }
+    });
+
+    }//GEN-LAST:event_browseTableMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable browseTable;
