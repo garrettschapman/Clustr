@@ -350,6 +350,12 @@ public class GUIFrameMain extends javax.swing.JFrame {
             }
         });
 
+        jTabbedPaneMain.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPaneMainMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelAccountDetailsLayout = new javax.swing.GroupLayout(jPanelAccountDetails);
         jPanelAccountDetails.setLayout(jPanelAccountDetailsLayout);
         jPanelAccountDetailsLayout.setHorizontalGroup(
@@ -706,7 +712,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private void jTabbedPaneGroupsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneGroupsMouseClicked
         // TODO add your handling code here:
         // list all groups that exist into the table
-        updateTable(browseTable, "feed");
+        updateTable(browseTable, "browse");
+        updateTable(feedTable, "feed");
     }//GEN-LAST:event_jTabbedPaneGroupsMouseClicked
 
     private void groupSearchButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_groupSearchButtonMouseClicked
@@ -729,6 +736,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
         // TODO Create a new group
 
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jTabbedPaneMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneMainMouseClicked
+        // TODO add your handling code here:
+        updateTable(feedTable, "feed");
+    }//GEN-LAST:event_jTabbedPaneMainMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable browseTable;
