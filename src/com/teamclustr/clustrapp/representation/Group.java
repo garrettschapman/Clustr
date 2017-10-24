@@ -2,6 +2,7 @@ package com.teamclustr.clustrapp.representation;
 import java.io.Serializable;
 import com.teamclustr.clustrapp.communication.Post;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * BRIEF CLASS DESCRIPTION.
@@ -59,6 +60,11 @@ public class Group implements Serializable {
 			
 			//gui should insert a 
 		}
+	}
+	public void addCategories(String string){
+		ArrayList<String> hold = new ArrayList<String>(Arrays.asList(string.split(",")));
+		categories = hold;
+		hold = null;
 	}
 	
 }
