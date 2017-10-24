@@ -161,7 +161,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         feedTable = new javax.swing.JTable();
         jPanelCreateGroup = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        createGroupButton = new javax.swing.JButton();
         groupNameField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -426,15 +426,15 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         jTabbedPaneGroups.addTab("Your Feed", jPanelBrowseGroups);
 
-        jButton2.setText("Create Group");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        createGroupButton.setText("Create Group");
+        createGroupButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                createGroupButtonMouseClicked(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        createGroupButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                createGroupButtonActionPerformed(evt);
             }
         });
 
@@ -469,7 +469,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCreateGroupLayout.createSequentialGroup()
                 .addContainerGap(324, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(createGroupButton)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
                 .addContainerGap())
@@ -491,7 +491,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                     .addComponent(groupTagsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(65, 65, 65)
                 .addGroup(jPanelCreateGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(createGroupButton)
                     .addComponent(jButton3))
                 .addContainerGap())
         );
@@ -665,9 +665,9 @@ public class GUIFrameMain extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_groupSearchFieldActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void createGroupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createGroupButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_createGroupButtonActionPerformed
 
     /**
      *
@@ -730,12 +730,36 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         // Canceled; Go to profile tab
         jTabbedPaneGroups.setSelectedIndex(0);
+        
+        // clear the fields
+        groupCategoriesField.setText("");
+        groupNameField.setText("");
+        groupTagsField.setText("");
+        
     }//GEN-LAST:event_jButton3MouseClicked
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void createGroupButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createGroupButtonMouseClicked
         // TODO Create a new group
+        if(!groupNameField.getText().isEmpty() 
+                && !groupCategoriesField.getText().isEmpty()
+                && !groupTagsField.getText().isEmpty()){
+            
+            String name = groupNameField.getText();
+            String categories = groupCategoriesField.getText();
+            String tags = groupTagsField.getText();
+            
+            sessionSystem.createGroup(name, categories, tags);
+            
+        } else {
+            JOptionPane.showMessageDialog(rootPane, 
+                    "Please enter a group name, "
+                            + "a list of group categories "
+                            + "seperated by commas, and group "
+                            + "tags seperated by commas.", 
+                    "Fields Cannot Be Blank", 1);
+        }
 
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_createGroupButtonMouseClicked
 
     private void jTabbedPaneMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneMainMouseClicked
         // TODO add your handling code here:
@@ -744,13 +768,13 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable browseTable;
+    private javax.swing.JButton createGroupButton;
     private javax.swing.JTable feedTable;
     private javax.swing.JTextField groupCategoriesField;
     private javax.swing.JTextField groupNameField;
     private javax.swing.JButton groupSearchButton;
     private javax.swing.JTextField groupSearchField;
     private javax.swing.JTextField groupTagsField;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JButton jButtonLoginCancel;
