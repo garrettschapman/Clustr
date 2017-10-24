@@ -163,6 +163,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelDirectMessage = new javax.swing.JPanel();
         jTabbedPaneGroups = new javax.swing.JTabbedPane();
         jPanelBrowseGroups = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        feedTable = new javax.swing.JTable();
         jPanelCreateGroup = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         groupNameField = new javax.swing.JTextField();
@@ -177,7 +179,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         groupSearchButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        browseTable = new javax.swing.JTable();
         jLabelMainSessionUserStatus = new javax.swing.JLabel();
 
         jDialogLoginSignup.setTitle("Login/Signup");
@@ -400,15 +402,28 @@ public class GUIFrameMain extends javax.swing.JFrame {
             }
         });
 
+        feedTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(feedTable);
+
         javax.swing.GroupLayout jPanelBrowseGroupsLayout = new javax.swing.GroupLayout(jPanelBrowseGroups);
         jPanelBrowseGroups.setLayout(jPanelBrowseGroupsLayout);
         jPanelBrowseGroupsLayout.setHorizontalGroup(
             jPanelBrowseGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 514, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
         );
         jPanelBrowseGroupsLayout.setVerticalGroup(
             jPanelBrowseGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 235, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
         );
 
         jTabbedPaneGroups.addTab("Your Feed", jPanelBrowseGroups);
@@ -500,8 +515,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        browseTable.setAutoCreateRowSorter(true);
+        browseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -509,7 +524,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 "Group Name", "Number Of Members", "Tags", "Categories", "Join"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(browseTable);
 
         javax.swing.GroupLayout jPanelAllGroupsLayout = new javax.swing.GroupLayout(jPanelAllGroups);
         jPanelAllGroups.setLayout(jPanelAllGroupsLayout);
@@ -665,7 +680,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         String col[] = {"Group Name", "Number of Members", "Tags", "Categories", ""};
         DefaultTableModel tabelModel = new DefaultTableModel(col, 0);
         ArrayList<Group> groupList = sessionSystem.getGroupList();
-        jTable1.setModel(tabelModel);
+        browseTable.setModel(tabelModel);
         // for each group in groupList, add it as a row in the table
         for(Group group : groupList){
             System.out.println(group.getName());
@@ -687,7 +702,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(); 
         sorter.setRowFilter(RowFilter.regexFilter(searchText));
-        jTable1.setRowSorter(sorter);
+        browseTable.setRowSorter(sorter);
 
         // TODO: search group functionality
     }//GEN-LAST:event_groupSearchButtonMouseClicked
@@ -703,6 +718,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable browseTable;
+    private javax.swing.JTable feedTable;
     private javax.swing.JTextField groupCategoriesField;
     private javax.swing.JTextField groupNameField;
     private javax.swing.JButton groupSearchButton;
@@ -742,10 +759,10 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordFieldSignupPassword;
     private javax.swing.JPasswordField jPasswordFieldSignupPasswordConfirm;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPaneAcount;
     private javax.swing.JTabbedPane jTabbedPaneGroups;
     private javax.swing.JTabbedPane jTabbedPaneMain;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextFieldLoginUsername;
     private javax.swing.JTextField jTextFieldSignupUsername;
     // End of variables declaration//GEN-END:variables
