@@ -1,11 +1,19 @@
 package com.teamclustr.clustrapp.gui;
 
-import com.teamclustr.clustrapp.System;
+import com.teamclustr.clustrapp.Server;
+import com.teamclustr.clustrapp.representation.Group;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.LayoutManager;
+import java.awt.Toolkit;
 import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  * BRIEF CLASS DESCRIPTION.
@@ -23,7 +31,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 	// MEMBER DATA.
 	
 	// The system of this session.
-	public static System sessionSystem;
+	public static Server sessionSystem;
 	
 	// Active session user status constants.
 	public static String USER_STATUS_OUT_STRING = "Not Logged In";
@@ -44,8 +52,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
 		// Initialize session user status.
 		jLabelMainSessionUserStatus.setText(USER_STATUS_OUT_STRING);
 		jLabelMainSessionUserStatus.setForeground(USER_STATUS_OUT_COLOR);
+                
 	}
-        
         
         
 	/**
@@ -157,16 +165,17 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelBrowseGroups = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        groupNameField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        groupCategoriesField = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        groupTagsField = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
         jPanelAllGroups = new javax.swing.JPanel();
         groupSearchField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        groupSearchButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabelMainSessionUserStatus = new javax.swing.JLabel();
@@ -337,6 +346,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Clustr");
+        setIconImages(null);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -384,6 +394,12 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         jTabbedPaneMain.addTab("Account", jTabbedPaneAcount);
 
+        jTabbedPaneGroups.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPaneGroupsMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelBrowseGroupsLayout = new javax.swing.GroupLayout(jPanelBrowseGroups);
         jPanelBrowseGroups.setLayout(jPanelBrowseGroupsLayout);
         jPanelBrowseGroupsLayout.setHorizontalGroup(
@@ -406,55 +422,55 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         jLabel2.setText("Group Name");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Icon");
-
         jLabel4.setText("Categories");
+
+        jLabel5.setText("Tags");
+
+        jButton3.setText("Cancel");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(71, 71, 71))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(94, 94, 94)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
-                .addContainerGap(220, Short.MAX_VALUE))
+                    .addComponent(groupNameField)
+                    .addComponent(groupCategoriesField)
+                    .addComponent(groupTagsField, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(324, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(groupNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(30, 30, 30))
+                    .addComponent(groupCategoriesField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(groupTagsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(65, 65, 65)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addContainerGap())
         );
 
         jTabbedPaneGroups.addTab("Create Group", jPanel1);
@@ -467,8 +483,14 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         jLabel1.setText("Search Groups");
 
-        jButton1.setText("Search");
+        groupSearchButton.setText("Search");
+        groupSearchButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                groupSearchButtonMouseClicked(evt);
+            }
+        });
 
+        jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -489,7 +511,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(groupSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(groupSearchButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanelAllGroupsLayout.createSequentialGroup()
                 .addContainerGap()
@@ -503,7 +525,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 .addGroup(jPanelAllGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(groupSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton1))
+                    .addComponent(groupSearchButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                 .addContainerGap())
@@ -562,7 +584,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 			JOptionPane.PLAIN_MESSAGE);
 		
 		// Initialize the session system.
-		sessionSystem = new System();
+		sessionSystem = new Server();
         }//GEN-LAST:event_formWindowOpened
 
         private void jLabelMainSessionUserStatusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMainSessionUserStatusMouseClicked
@@ -627,14 +649,47 @@ public class GUIFrameMain extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void jTabbedPaneGroupsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneGroupsMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+        // list all groups that exist into the table
+        String col[] = {"Group Name", "Number of Members", "Tags", "Categories", ""};
+        DefaultTableModel tabelModel = new DefaultTableModel(col, 0);
+        ArrayList<Group> groupList = sessionSystem.getGroupList();
+        jTable1.setModel(tabelModel);
+        // for each group in groupList, add it as a row in the table
+        for(Group group : groupList){
+            System.out.println(group.getName());
+            Object obj[] = new Object[5];
+            
+            obj[0] = group.getName();
+            obj[1] = group.getMembers().size();
+            obj[2] = group.getTags();
+            obj[3] = group.getCategories();
+            obj[4] = "Join";
+            
+            tabelModel.addRow(obj);
+        }
+    }//GEN-LAST:event_jTabbedPaneGroupsMouseClicked
+
+    private void groupSearchButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_groupSearchButtonMouseClicked
+        // Grab the text in the search field
+        String searchText = groupSearchField.getText();
+
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(); 
+        sorter.setRowFilter(RowFilter.regexFilter(searchText));
+        jTable1.setRowSorter(sorter);
+
+        // TODO: search group functionality
+    }//GEN-LAST:event_groupSearchButtonMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField groupCategoriesField;
+    private javax.swing.JTextField groupNameField;
+    private javax.swing.JButton groupSearchButton;
     private javax.swing.JTextField groupSearchField;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField groupTagsField;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JButton jButtonLoginCancel;
     private javax.swing.JButton jButtonSIgnup;
@@ -644,8 +699,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JDialog jDialogLoginSignup;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelLogin;
     private javax.swing.JLabel jLabelLoginPassword;
     private javax.swing.JLabel jLabelLoginUsername;
@@ -671,9 +726,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPaneGroups;
     private javax.swing.JTabbedPane jTabbedPaneMain;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextFieldLoginUsername;
     private javax.swing.JTextField jTextFieldSignupUsername;
     // End of variables declaration//GEN-END:variables

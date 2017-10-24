@@ -1527,6 +1527,9 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Clustr"/>
+    <Property name="iconImages" type="java.util.List" editor="org.netbeans.modules.form.ComponentChooserEditor">
+      <ComponentRef name="null"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -1654,6 +1657,9 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JTabbedPane" name="jTabbedPaneGroups">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTabbedPaneGroupsMouseClicked"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Groups">
@@ -1698,25 +1704,27 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                      </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextField1" max="32767" attributes="0"/>
-                              <Component id="jTextField2" max="32767" attributes="0"/>
-                              <Component id="jTextField3" pref="123" max="32767" attributes="0"/>
+                              <Component id="groupNameField" max="32767" attributes="0"/>
+                              <Component id="groupCategoriesField" max="32767" attributes="0"/>
+                              <Component id="groupTagsField" pref="123" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="220" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace pref="324" max="32767" attributes="0"/>
+                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1725,22 +1733,25 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="groupNameField" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="45" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                              <Component id="groupCategoriesField" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                              <Component id="groupTagsField" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="80" max="32767" attributes="0"/>
-                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1754,21 +1765,11 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField1">
+                <Component class="javax.swing.JTextField" name="groupNameField">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel2">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Group Name"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="jTextField2">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField2ActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabel3">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Icon"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel4">
@@ -1776,7 +1777,19 @@
                     <Property name="text" type="java.lang.String" value="Categories"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField3">
+                <Component class="javax.swing.JTextField" name="groupCategoriesField">
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel5">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Tags"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="groupTagsField">
+                </Component>
+                <Component class="javax.swing.JButton" name="jButton3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Cancel"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -1798,7 +1811,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="groupSearchField" min="-2" pref="140" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <Component id="groupSearchButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -1815,7 +1828,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="groupSearchField" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="groupSearchButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane1" pref="184" max="32767" attributes="0"/>
@@ -1835,10 +1848,13 @@
                     <Property name="text" type="java.lang.String" value="Search Groups"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton1">
+                <Component class="javax.swing.JButton" name="groupSearchButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Search"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="groupSearchButtonMouseClicked"/>
+                  </Events>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane1">
 
@@ -1846,6 +1862,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JTable" name="jTable1">
                       <Properties>
+                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="5" rowCount="0">
                             <Column editable="true" title="Group Name" type="java.lang.Object"/>
