@@ -414,6 +414,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jTabbedPaneGroups.addTab("Your Feed", jPanelBrowseGroups);
 
         jButton2.setText("Create Group");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -427,6 +432,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jLabel5.setText("Tags");
 
         jButton3.setText("Cancel");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -681,6 +691,16 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         // TODO: search group functionality
     }//GEN-LAST:event_groupSearchButtonMouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // Canceled; Go to profile tab
+        jTabbedPaneGroups.setSelectedIndex(0);
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO Create a new group
+        Server.
+    }//GEN-LAST:event_jButton2MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField groupCategoriesField;
