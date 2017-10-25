@@ -63,4 +63,8 @@ public class Server implements Serializable {
         public void createGroup(String name, String categories, String tags){
             this.groups.add(new Group(this.sessionUser, name, categories, tags));
         }
+
+    public Group getGroup(int row) {
+        return this.groups.get(row);
+    }
 }

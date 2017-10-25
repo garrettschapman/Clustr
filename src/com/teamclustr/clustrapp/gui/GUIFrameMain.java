@@ -1,6 +1,7 @@
 package com.teamclustr.clustrapp.gui;
 
 import com.teamclustr.clustrapp.Server;
+import com.teamclustr.clustrapp.communication.Post;
 import com.teamclustr.clustrapp.representation.Group;
 import com.teamclustr.clustrapp.representation.User;
 import java.awt.CardLayout;
@@ -880,21 +881,40 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
     }//GEN-LAST:event_createGroupButtonMouseClicked
 
-   
+
     private void jTabbedPaneMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneMainMouseClicked
         // TODO add your handling code here:
         updateTable(feedTable, "feed");
     }//GEN-LAST:event_jTabbedPaneMainMouseClicked
 
     private void browseTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_browseTableMouseClicked
-        // TODO add your handling code here:
-        browseTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-        public void valueChanged(ListSelectionEvent event) {
-            // do some actions here, for example
-            // print first column value from selected row
-            System.out.println(browseTable.getValueAt(browseTable.getSelectedRow(), 0).toString());
+        try {
+            
+            // get the group row clicked
+            int row = browseTable.rowAtPoint(evt.getPoint());
+            
+            // get the corresponding group
+            Group group = sessionSystem.getGroup(row);
+
+            // set the labels 
+            groupNameLabel.setText(group.getName());
+            groupCategoriesLabel.setText(group.getCategories());
+            groupTagsLabel.setText(group.getTags());
+            
+            // populate the posts
+            for(Post post : group.getPosts()){
+                
+            }
+            
+            // populate the members
+            for(User user : group.getMembers()){
+                
+            }
+
+        } catch (Exception e) {
+            // do something
         }
-    });
+
 
     }//GEN-LAST:event_browseTableMouseClicked
 
