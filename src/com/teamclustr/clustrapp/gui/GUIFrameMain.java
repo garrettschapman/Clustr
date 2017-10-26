@@ -486,13 +486,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         createPostDialog.setTitle("Clustr");
         createPostDialog.setMinimumSize(new java.awt.Dimension(500, 500));
-        createPostDialog.addWindowFocusListener(new java.awt.event.WindowFocusListener() {
-            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
-            }
-            public void windowLostFocus(java.awt.event.WindowEvent evt) {
-                createPostDialogWindowLostFocus(evt);
-            }
-        });
 
         createPostButton.setText("Create Post");
         createPostButton.setMaximumSize(new java.awt.Dimension(500, 500));
@@ -1107,6 +1100,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
             } catch (NullPointerException n) {
                 // TODO DO SOMETHING
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please enter a post title & body.");
         }
 
     }//GEN-LAST:event_createPostButtonMouseClicked
@@ -1116,13 +1111,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         postBodyField.setText("");
         postTitleField.setText("");
     }//GEN-LAST:event_jButton2MouseClicked
-
-    private void createPostDialogWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_createPostDialogWindowLostFocus
-        createPostDialog.setVisible(false);
-        postBodyField.setText("");
-        postTitleField.setText("");
-
-    }//GEN-LAST:event_createPostDialogWindowLostFocus
 
     private void goToGroupPage(Group group) {
         try {
