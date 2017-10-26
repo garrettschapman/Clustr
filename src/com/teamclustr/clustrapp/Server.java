@@ -73,4 +73,13 @@ public class Server implements Serializable {
     public Group getGroup(int row) {
         return this.groups.get(row);
     }
+
+    public boolean groupExists(String text) {
+        for(Group group : this.groups){
+            if(group.getName().equals(text)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -801,18 +801,18 @@ public class GUIFrameMain extends javax.swing.JFrame {
      * This inner class defines a TableModel in which the cells are not editable
      */
     private class TableModel extends DefaultTableModel {
-        
-        public TableModel(String[] titles, int rows ){
+
+        public TableModel(String[] titles, int rows) {
             super(titles, rows);
         }
-        
+
         @Override
-        public boolean isCellEditable(int row, int col){
+        public boolean isCellEditable(int row, int col) {
             return false;
         }
-        
+
         @Override
-        public void setValueAt(Object val, int row, int col){
+        public void setValueAt(Object val, int row, int col) {
             // NO!
         }
     }
@@ -891,23 +891,31 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
     private void createGroupButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createGroupButtonMouseClicked
         // TODO Create a new group
-        if (!groupNameField.getText().isEmpty()
-                && !groupCategoriesField.getText().isEmpty()
-                && !groupTagsField.getText().isEmpty()) {
+        if (!sessionSystem.groupExists(groupNameField.getText())) {
+            if (!groupNameField.getText().isEmpty()
+                    && !groupCategoriesField.getText().isEmpty()
+                    && !groupTagsField.getText().isEmpty()) {
 
-            String name = groupNameField.getText();
-            String categories = groupCategoriesField.getText();
-            String tags = groupTagsField.getText();
+                String name = groupNameField.getText();
+                String categories = groupCategoriesField.getText();
+                String tags = groupTagsField.getText();
 
-            sessionSystem.createGroup(name, categories, tags);
+                sessionSystem.createGroup(name, categories, tags);
+                JOptionPane.showMessageDialog(rootPane,
+                        "Group " + groupNameField.getText() + " Created.",
+                        "Success", 1);
 
+            } else {
+                JOptionPane.showMessageDialog(rootPane,
+                        "Please enter a group name, "
+                        + "a list of group categories "
+                        + "seperated by commas, and group "
+                        + "tags seperated by commas.",
+                        "Fields Cannot Be Blank", 1);
+            }
         } else {
-            JOptionPane.showMessageDialog(rootPane,
-                    "Please enter a group name, "
-                    + "a list of group categories "
-                    + "seperated by commas, and group "
-                    + "tags seperated by commas.",
-                    "Fields Cannot Be Blank", 1);
+            JOptionPane.showMessageDialog(rootPane, 
+                    "This name is already taken.", "Error", 0);
         }
 
     }//GEN-LAST:event_createGroupButtonMouseClicked
@@ -978,7 +986,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
             // populate the members
             Vector<String> users = new Vector();
             for (User user : group.getMembers()) {
-                System.out.printf("Username: %s",user.getUsername());
+                System.out.printf("Username: %s", user.getUsername());
                 users.add(user.getUsername());
             }
             groupMemberList.setListData(users);
