@@ -30,6 +30,13 @@ public class Group implements Serializable {
         moderators.add(owner);
         
         // TODO: deal with the tags and categories
+        for(String s : categories.split(", ")){
+            this.categories.add(s);
+        }
+        
+        for(String s : tags.split(", ")){
+            this.tags.add(s);
+        }
 
     }
 
