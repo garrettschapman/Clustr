@@ -358,8 +358,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
             .addComponent(jPanelLoginSignup, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
 
-        groupWindow.setVisible(true);
-        groupWindow.setMinimumSize(new java.awt.Dimension(500, 500));
+        groupWindow.setTitle(getTitle());
+        groupWindow.setMinimumSize(new java.awt.Dimension(800, 500));
         groupWindow.setName("groupWindow"); // NOI18N
 
         groupNameLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -405,14 +405,14 @@ public class GUIFrameMain extends javax.swing.JFrame {
                             .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(groupWindowLayout.createSequentialGroup()
                                 .addComponent(jLabel7)
-                                .addGap(0, 425, Short.MAX_VALUE))
+                                .addGap(0, 431, Short.MAX_VALUE))
                             .addGroup(groupWindowLayout.createSequentialGroup()
                                 .addComponent(groupNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
                                 .addGroup(groupWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel6))
-                                .addGap(10, 10, 10)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(groupWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(groupWindowLayout.createSequentialGroup()
@@ -460,6 +460,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Clustr");
         setIconImages(null);
+        setMinimumSize(new java.awt.Dimension(800, 500));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -476,11 +477,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelAccountDetails.setLayout(jPanelAccountDetailsLayout);
         jPanelAccountDetailsLayout.setHorizontalGroup(
             jPanelAccountDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 514, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanelAccountDetailsLayout.setVerticalGroup(
             jPanelAccountDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 235, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jTabbedPaneAcount.addTab("Details", jPanelAccountDetails);
@@ -489,11 +490,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelAccountActivity.setLayout(jPanelAccountActivityLayout);
         jPanelAccountActivityLayout.setHorizontalGroup(
             jPanelAccountActivityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 514, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanelAccountActivityLayout.setVerticalGroup(
             jPanelAccountActivityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 235, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jTabbedPaneAcount.addTab("Activity", jPanelAccountActivity);
@@ -502,11 +503,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelDirectMessage.setLayout(jPanelDirectMessageLayout);
         jPanelDirectMessageLayout.setHorizontalGroup(
             jPanelDirectMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 514, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanelDirectMessageLayout.setVerticalGroup(
             jPanelDirectMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 235, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jTabbedPaneAcount.addTab("Messages", jPanelDirectMessage);
@@ -527,17 +528,22 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
             }
         ));
+        feedTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                feedTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(feedTable);
 
         javax.swing.GroupLayout jPanelBrowseGroupsLayout = new javax.swing.GroupLayout(jPanelBrowseGroups);
         jPanelBrowseGroups.setLayout(jPanelBrowseGroupsLayout);
         jPanelBrowseGroupsLayout.setHorizontalGroup(
             jPanelBrowseGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
         );
         jPanelBrowseGroupsLayout.setVerticalGroup(
             jPanelBrowseGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
         );
 
         jTabbedPaneGroups.addTab("Your Feed", jPanelBrowseGroups);
@@ -572,7 +578,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelCreateGroupLayout.setHorizontalGroup(
             jPanelCreateGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCreateGroupLayout.createSequentialGroup()
-                .addContainerGap(159, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelCreateGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCreateGroupLayout.createSequentialGroup()
                         .addComponent(createGroupButton)
@@ -598,7 +604,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 .addGroup(jPanelCreateGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(groupNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelCreateGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(groupCategoriesField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -660,7 +666,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanelAllGroupsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanelAllGroupsLayout.setVerticalGroup(
@@ -672,7 +678,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(groupSearchButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -930,6 +936,18 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_browseTableMouseClicked
+
+    private void feedTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_feedTableMouseClicked
+        try {
+            // get the group row clicked
+            //System.out.println("CLICKED!!");
+            int row = feedTable.rowAtPoint(evt.getPoint());
+            goToGroupPage(sessionSystem.getGroup(row));
+
+        } catch (Exception e) {
+            // do something
+        }
+    }//GEN-LAST:event_feedTableMouseClicked
 
     private void goToGroupPage(Group group) {
         try {
