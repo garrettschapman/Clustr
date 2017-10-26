@@ -168,7 +168,16 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        showPostDialogButton = new javax.swing.JButton();
+        createPostDialog = new javax.swing.JFrame();
+        jPanel1 = new javax.swing.JPanel();
         createPostButton = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        postTitleField = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        postBodyField = new javax.swing.JTextArea();
         jTabbedPaneMain = new javax.swing.JTabbedPane();
         jTabbedPaneAcount = new javax.swing.JTabbedPane();
         jPanelAccountDetails = new javax.swing.JPanel();
@@ -186,7 +195,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         groupCategoriesField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         groupTagsField = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        createGroupCancelButton = new javax.swing.JButton();
         jPanelAllGroups = new javax.swing.JPanel();
         groupSearchField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -196,6 +205,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jLabelMainSessionUserStatus = new javax.swing.JLabel();
 
         jDialogLoginSignup.setTitle("Login/Signup");
+        jDialogLoginSignup.setIconImage(null);
         jDialogLoginSignup.setMinimumSize(new java.awt.Dimension(300, 300));
         jDialogLoginSignup.setModal(true);
         jDialogLoginSignup.setResizable(false);
@@ -359,7 +369,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
             .addComponent(jPanelLoginSignup, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
 
-        groupWindow.setTitle(getTitle());
+        groupWindow.setTitle("Clustr");
         groupWindow.setMinimumSize(new java.awt.Dimension(800, 500));
         groupWindow.setName("groupWindow"); // NOI18N
 
@@ -393,10 +403,10 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setText("Members");
 
-        createPostButton.setText("Create Post");
-        createPostButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        showPostDialogButton.setText("Create Post");
+        showPostDialogButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                createPostButtonMouseClicked(evt);
+                showPostDialogButtonMouseClicked(evt);
             }
         });
 
@@ -416,7 +426,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                                     .addGroup(groupWindowLayout.createSequentialGroup()
                                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(61, 61, 61)
-                                        .addComponent(createPostButton))
+                                        .addComponent(showPostDialogButton))
                                     .addGroup(groupWindowLayout.createSequentialGroup()
                                         .addComponent(groupNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
@@ -466,12 +476,106 @@ public class GUIFrameMain extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, groupWindowLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(createPostButton)
+                        .addComponent(showPostDialogButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(groupWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3)
                     .addComponent(scrollPane))
                 .addContainerGap())
+        );
+
+        createPostDialog.setTitle("Clustr");
+        createPostDialog.setMinimumSize(new java.awt.Dimension(500, 500));
+        createPostDialog.addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+                createPostDialogWindowLostFocus(evt);
+            }
+        });
+
+        createPostButton.setText("Create Post");
+        createPostButton.setMaximumSize(new java.awt.Dimension(500, 500));
+        createPostButton.setMinimumSize(new java.awt.Dimension(500, 500));
+        createPostButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                createPostButtonMouseClicked(evt);
+            }
+        });
+
+        jButton2.setText("Cancel");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel9.setText("Post Title");
+
+        postTitleField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel10.setText("Post Content");
+
+        postBodyField.setColumns(20);
+        postBodyField.setRows(5);
+        jScrollPane4.setViewportView(postBodyField);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(createPostButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(jButton2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(postTitleField, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 59, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel9)
+                    .addComponent(postTitleField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(createPostButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout createPostDialogLayout = new javax.swing.GroupLayout(createPostDialog.getContentPane());
+        createPostDialog.getContentPane().setLayout(createPostDialogLayout);
+        createPostDialogLayout.setHorizontalGroup(
+            createPostDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        createPostDialogLayout.setVerticalGroup(
+            createPostDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -583,10 +687,10 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         jLabel5.setText("Tags");
 
-        jButton3.setText("Cancel");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        createGroupCancelButton.setText("Cancel");
+        createGroupCancelButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
+                createGroupCancelButtonMouseClicked(evt);
             }
         });
 
@@ -600,7 +704,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCreateGroupLayout.createSequentialGroup()
                         .addComponent(createGroupButton)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)
+                        .addComponent(createGroupCancelButton)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCreateGroupLayout.createSequentialGroup()
                         .addGroup(jPanelCreateGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -632,7 +736,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 .addGap(59, 59, 59)
                 .addGroup(jPanelCreateGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(createGroupButton)
-                    .addComponent(jButton3))
+                    .addComponent(createGroupCancelButton))
                 .addContainerGap())
         );
 
@@ -814,10 +918,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_createGroupButtonActionPerformed
 
-    private Post showCreatePostDialog() {
-        // TODO 
-    }
-
     /**
      * This inner class defines a TableModel in which the cells are not editable
      */
@@ -899,7 +999,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
     }//GEN-LAST:event_groupSearchButtonMouseClicked
 
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+    private void createGroupCancelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createGroupCancelButtonMouseClicked
         // Canceled; Go to profile tab
         jTabbedPaneGroups.setSelectedIndex(0);
 
@@ -908,7 +1008,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         groupNameField.setText("");
         groupTagsField.setText("");
 
-    }//GEN-LAST:event_jButton3MouseClicked
+    }//GEN-LAST:event_createGroupCancelButtonMouseClicked
 
     private void createGroupButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createGroupButtonMouseClicked
         // TODO Create a new group
@@ -935,7 +1035,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                         "Fields Cannot Be Blank", 1);
             }
         } else {
-            JOptionPane.showMessageDialog(rootPane, 
+            JOptionPane.showMessageDialog(rootPane,
                     "This name is already taken.", "Error", 0);
         }
 
@@ -978,16 +1078,51 @@ public class GUIFrameMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_feedTableMouseClicked
 
-    private void createPostButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createPostButtonMouseClicked
+    private void showPostDialogButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showPostDialogButtonMouseClicked
         // show a dialog box where you can create a new post
-        
-        Post post = showCreatePostDialog();
-        
-        if(post != null){
-            
+
+        createPostDialog.setAutoRequestFocus(true);
+        createPostDialog.setVisible(true); // show the create post dialog window
+
+    }//GEN-LAST:event_showPostDialogButtonMouseClicked
+
+    private void createPostButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createPostButtonMouseClicked
+        // TODO CREATE THE POST
+
+        if (!postTitleField.getText().isEmpty()
+                && !postBodyField.getText().isEmpty()
+                && !groupNameLabel.getText().isEmpty()) {
+            try {
+
+                Group grp = sessionSystem.getGroupByName(groupNameLabel.getText());
+
+                // add a new post to the group that is currently active in the 
+                // group window
+                grp.leavePost(new Post(
+                        sessionSystem.getSessionUser(),
+                        postBodyField.getText(),
+                        postTitleField.getText()
+                )
+                );
+            } catch (NullPointerException n) {
+                // TODO DO SOMETHING
+            }
         }
-        
+
     }//GEN-LAST:event_createPostButtonMouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        createPostDialog.setVisible(false);
+        postBodyField.setText("");
+        postTitleField.setText("");
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void createPostDialogWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_createPostDialogWindowLostFocus
+        createPostDialog.setVisible(false);
+        postBodyField.setText("");
+        postTitleField.setText("");
+
+    }//GEN-LAST:event_createPostDialogWindowLostFocus
 
     private void goToGroupPage(Group group) {
         try {
@@ -1034,7 +1169,9 @@ public class GUIFrameMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable browseTable;
     private javax.swing.JButton createGroupButton;
+    private javax.swing.JButton createGroupCancelButton;
     private javax.swing.JButton createPostButton;
+    private javax.swing.JFrame createPostDialog;
     private javax.swing.JTable feedTable;
     private javax.swing.JTextField groupCategoriesField;
     private javax.swing.JLabel groupCategoriesLabel;
@@ -1047,7 +1184,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JTextField groupTagsField;
     private javax.swing.JLabel groupTagsLabel;
     private javax.swing.JFrame groupWindow;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JButton jButtonLoginCancel;
     private javax.swing.JButton jButtonSIgnup;
@@ -1056,6 +1193,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSwitchSignup;
     private javax.swing.JDialog jDialogLoginSignup;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1063,6 +1201,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelLogin;
     private javax.swing.JLabel jLabelLoginPassword;
     private javax.swing.JLabel jLabelLoginUsername;
@@ -1071,6 +1210,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSignupPassword;
     private javax.swing.JLabel jLabelSignupPasswordConfirm;
     private javax.swing.JLabel jLabelSignupUsername;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelAccountActivity;
     private javax.swing.JPanel jPanelAccountDetails;
     private javax.swing.JPanel jPanelAllGroups;
@@ -1086,12 +1226,16 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPaneAcount;
     private javax.swing.JTabbedPane jTabbedPaneGroups;
     private javax.swing.JTabbedPane jTabbedPaneMain;
     private javax.swing.JTextField jTextFieldLoginUsername;
     private javax.swing.JTextField jTextFieldSignupUsername;
+    private javax.swing.JTextArea postBodyField;
+    private javax.swing.JTextField postTitleField;
     private javax.swing.JScrollPane scrollPane;
+    private javax.swing.JButton showPostDialogButton;
     // End of variables declaration//GEN-END:variables
 }
