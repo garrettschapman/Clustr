@@ -59,6 +59,10 @@ public class Group implements Serializable {
         }
     }
 
+    public void leavePost(Post pst){
+        this.posts.add(pst);
+    }
+    
     public ArrayList<User> getMembers() {
         return this.members;
     }
