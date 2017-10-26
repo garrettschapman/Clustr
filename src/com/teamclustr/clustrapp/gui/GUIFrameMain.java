@@ -10,6 +10,7 @@ import java.awt.LayoutManager;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Vector;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -161,7 +162,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         groupTagsLabel = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        groupMemberList = new javax.swing.JList<User>();
+        groupMemberList = new javax.swing.JList<String>();
         scrollPane = new javax.swing.JScrollPane();
         groupPostTable = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
@@ -372,6 +373,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         groupTagsLabel.setText("jLabel7");
 
+        groupMemberList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         jScrollPane3.setViewportView(groupMemberList);
 
         groupPostTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -956,9 +958,12 @@ public class GUIFrameMain extends javax.swing.JFrame {
             }
 
             // populate the members
+            Vector<String> users = new Vector();
             for (User user : group.getMembers()) {
-                listModel.addElement(user.getUsername());
+                System.out.printf("Username: %s",user.getUsername());
+                users.add(user.getUsername());
             }
+            groupMemberList.setListData(users);
 
             groupWindow.setAutoRequestFocus(true);
             groupWindow.setVisible(true);
@@ -974,7 +979,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JTable feedTable;
     private javax.swing.JTextField groupCategoriesField;
     private javax.swing.JLabel groupCategoriesLabel;
-    private javax.swing.JList<User> groupMemberList;
+    private javax.swing.JList<String> groupMemberList;
     private javax.swing.JTextField groupNameField;
     private javax.swing.JLabel groupNameLabel;
     private javax.swing.JTable groupPostTable;
