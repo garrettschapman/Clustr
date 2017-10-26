@@ -7,22 +7,15 @@ import com.teamclustr.clustrapp.representation.User;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.LayoutManager;
-import java.awt.Toolkit;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -792,6 +785,26 @@ public class GUIFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_createGroupButtonActionPerformed
 
     /**
+     * This inner class defines a TableModel in which the cells are not editable
+     */
+    private class TableModel extends DefaultTableModel {
+        
+        public TableModel(String[] titles, int rows ){
+            super(titles, rows);
+        }
+        
+        @Override
+        public boolean isCellEditable(int row, int col){
+            return false;
+        }
+        
+        @Override
+        public void setValueAt(Object val, int row, int col){
+            // NO!
+        }
+    }
+
+    /**
      *
      * @param tbl The table in question
      * @param arg Either 'browse' or 'feed' depending on the table structure you
@@ -799,13 +812,13 @@ public class GUIFrameMain extends javax.swing.JFrame {
      */
     private void updateTable(JTable tbl, String arg) throws InvalidParameterException {
         String col[] = {"Group Name", "Number of Members", "Tags", "Categories", ""};
-        DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+        TableModel tableModel = new TableModel(col, 0);
         ArrayList<Group> groupList = sessionSystem.getGroupList();
         tbl.setModel(tableModel);
 
         // for each group in groupList, add it as a row in the table
         for (Group group : groupList) {
-            System.out.println(group.getName());
+            //System.out.println(group.getName());
             Object obj[] = new Object[5];
 
             obj[0] = group.getName();
@@ -900,6 +913,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private void browseTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_browseTableMouseClicked
         try {
             // get the group row clicked
+            //System.out.println("CLICKED!!");
             int row = browseTable.rowAtPoint(evt.getPoint());
             goToGroupPage(sessionSystem.getGroup(row));
 
@@ -922,7 +936,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
             DefaultListModel listModel = new DefaultListModel();
 
             String col[] = {"Post ID", "Title", "Points"};
-            DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+            TableModel tableModel = new TableModel(col, 0);
             groupPostTable.setModel(tableModel);
 
             Random rand = new Random();
@@ -932,7 +946,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 obj[0] = rand.nextInt(256);
                 obj[1] = post.getTitle();
                 obj[2] = post.getPoints();
-                
+
                 tableModel.addRow(obj);
             }
 
@@ -940,6 +954,9 @@ public class GUIFrameMain extends javax.swing.JFrame {
             for (User user : group.getMembers()) {
                 listModel.addElement(user.getUsername());
             }
+
+            groupWindow.setAutoRequestFocus(true);
+            groupWindow.setVisible(true);
 
         } catch (Exception e) {
             // do something
