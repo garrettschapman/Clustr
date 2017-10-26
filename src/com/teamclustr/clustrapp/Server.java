@@ -73,6 +73,15 @@ public class Server implements Serializable {
     public Group getGroup(int row) {
         return this.groups.get(row);
     }
+    
+    public Group getGroupByName(String name) throws NullPointerException{
+        for(Group group : this.groups){
+            if(group.getName().equals(name)){
+                return group;
+            }
+        }
+        throw new NullPointerException("Group Does Not Exist!");
+    }
 
     public boolean groupExists(String text) {
         for(Group group : this.groups){
