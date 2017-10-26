@@ -11,11 +11,15 @@ import java.awt.Toolkit;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.ListModel;
+import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -165,8 +169,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
         groupTagsLabel = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         groupMemberList = new javax.swing.JList<User>();
-        groupPostTable = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        scrollPane = new javax.swing.JScrollPane();
+        groupPostTable = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -377,7 +381,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         jScrollPane3.setViewportView(groupMemberList);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        groupPostTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -385,7 +389,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        groupPostTable.setViewportView(jTable1);
+        scrollPane.setViewportView(groupPostTable);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Posts");
@@ -403,7 +407,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                     .addComponent(jSeparator1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, groupWindowLayout.createSequentialGroup()
                         .addGroup(groupWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(groupPostTable, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(groupWindowLayout.createSequentialGroup()
                                 .addGroup(groupWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(groupWindowLayout.createSequentialGroup()
@@ -449,7 +453,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(groupWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3)
-                    .addComponent(groupPostTable))
+                    .addComponent(scrollPane))
                 .addContainerGap())
         );
 
@@ -795,9 +799,9 @@ public class GUIFrameMain extends javax.swing.JFrame {
      */
     private void updateTable(JTable tbl, String arg) throws InvalidParameterException {
         String col[] = {"Group Name", "Number of Members", "Tags", "Categories", ""};
-        DefaultTableModel tabelModel = new DefaultTableModel(col, 0);
+        DefaultTableModel tableModel = new DefaultTableModel(col, 0);
         ArrayList<Group> groupList = sessionSystem.getGroupList();
-        tbl.setModel(tabelModel);
+        tbl.setModel(tableModel);
 
         // for each group in groupList, add it as a row in the table
         for (Group group : groupList) {
@@ -812,12 +816,12 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
             if (arg.equals("browse")) {
 
-                tabelModel.addRow(obj);
+                tableModel.addRow(obj);
 
             } else if (arg.equals("feed")) {
 
                 if (group.getMembers().contains(sessionSystem.getSessionUser())) {
-                    tabelModel.addRow(obj);
+                    tableModel.addRow(obj);
                 }
 
             } else {
@@ -826,6 +830,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         }
     }
+
 
     private void jTabbedPaneGroupsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneGroupsMouseClicked
         // TODO add your handling code here:
@@ -887,29 +892,16 @@ public class GUIFrameMain extends javax.swing.JFrame {
         updateTable(feedTable, "feed");
     }//GEN-LAST:event_jTabbedPaneMainMouseClicked
 
+    /**
+     * When the browse groups table is clicked, go to that group's page
+     *
+     * @param evt
+     */
     private void browseTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_browseTableMouseClicked
         try {
-            
             // get the group row clicked
             int row = browseTable.rowAtPoint(evt.getPoint());
-            
-            // get the corresponding group
-            Group group = sessionSystem.getGroup(row);
-
-            // set the labels 
-            groupNameLabel.setText(group.getName());
-            groupCategoriesLabel.setText(group.getCategories());
-            groupTagsLabel.setText(group.getTags());
-            
-            // populate the posts
-            for(Post post : group.getPosts()){
-                
-            }
-            
-            // populate the members
-            for(User user : group.getMembers()){
-                
-            }
+            goToGroupPage(sessionSystem.getGroup(row));
 
         } catch (Exception e) {
             // do something
@@ -917,6 +909,44 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_browseTableMouseClicked
+
+    private void goToGroupPage(Group group) {
+        try {
+
+            // set the labels 
+            groupNameLabel.setText(group.getName());
+            groupCategoriesLabel.setText(group.getCategories());
+            groupTagsLabel.setText(group.getTags());
+
+            groupMemberList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+            DefaultListModel listModel = new DefaultListModel();
+
+            String col[] = {"Post ID", "Title", "Tags", "Categories", "Points"};
+            DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+            groupPostTable.setModel(tableModel);
+
+            Random rand = new Random();
+            // populate the posts
+            for (Post post : group.getPosts()) {
+                Object[] obj = new Object[5];
+                obj[0] = rand.nextInt(256);
+                obj[1] = post.getTitle();
+                obj[2] = post.getTags();
+                obj[3] = post.getCategories();
+                obj[4] = post.getPoints();
+                
+                tableModel.addRow(obj);
+            }
+
+            // populate the members
+            for (User user : group.getMembers()) {
+                listModel.addElement(user.getName());
+            }
+
+        } catch (Exception e) {
+            // do something
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable browseTable;
@@ -927,7 +957,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JList<User> groupMemberList;
     private javax.swing.JTextField groupNameField;
     private javax.swing.JLabel groupNameLabel;
-    private javax.swing.JScrollPane groupPostTable;
+    private javax.swing.JTable groupPostTable;
     private javax.swing.JButton groupSearchButton;
     private javax.swing.JTextField groupSearchField;
     private javax.swing.JTextField groupTagsField;
@@ -976,8 +1006,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPaneAcount;
     private javax.swing.JTabbedPane jTabbedPaneGroups;
     private javax.swing.JTabbedPane jTabbedPaneMain;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextFieldLoginUsername;
     private javax.swing.JTextField jTextFieldSignupUsername;
+    private javax.swing.JScrollPane scrollPane;
     // End of variables declaration//GEN-END:variables
 }

@@ -24,10 +24,12 @@ public class Group implements Serializable {
     private String groupName = "";
 //end variables
 
-    public Group(User owner, String name /*icon*/) {
+    public Group(User owner, String name, String categories, String tags) {
         groupName = name;
         members.add(owner);
         moderators.add(owner);
+        
+        // TODO: deal with the tags and categories
 
     }
 
@@ -61,8 +63,8 @@ public class Group implements Serializable {
         return this.members;
     }
 
-    public ArrayList getTags() {
-        return this.tags;
+    public String getTags() {
+        return this.tags.toString();
     }
 
     public String getName() {
@@ -71,6 +73,10 @@ public class Group implements Serializable {
 
     public String getCategories() {
         return this.categories.toString();
+    }
+    
+    public ArrayList<Post> getPosts(){
+        return this.posts;
     }
 
 }
