@@ -31,7 +31,8 @@ public class User implements Serializable {
 	private ArrayList<String> Comments;
 	
 	//Constructor 
-	public User() {
+	public User(String Username,
+                String Password, String Email, String PhoneNum, String Bio) {
 		
 		createAccount(Username, Password, Email, PhoneNum, Bio);
 		addFriend(Username);

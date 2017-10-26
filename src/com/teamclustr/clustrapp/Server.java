@@ -33,14 +33,20 @@ public class Server implements Serializable {
     public Server() {
 
         // Initialize fields.
-        sessionUser = null;
+        sessionUser = null; // who is logged into the system
         users = new ArrayList<User>(16);
         groups = new ArrayList<Group>(16);
 
         // add some users, groups, and posts
-        User usr = new User(); // WHAT PARAMETERS?????
+        User usr = new User("TestUser", "TestPAssword", 
+                "test@email.com", "5555555555", "THIS IS A BIO");
         Group gp = new Group(usr, "First Group", "First, Group", "#First, #Java");
         Post pst = new Post(usr, "Body Of Post", "TITLE");
+        
+        users.add(usr);
+        sessionUser = usr; // TODO: MAKE THE SESSION USER A PARAMETER OF CONSTRUCTOR
+        groups.add(gp);
+        gp.leavePost(pst);
     }
 
     /**
