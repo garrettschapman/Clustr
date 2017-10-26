@@ -921,7 +921,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
             groupMemberList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
             DefaultListModel listModel = new DefaultListModel();
 
-            String col[] = {"Post ID", "Title", "Tags", "Categories", "Points"};
+            String col[] = {"Post ID", "Title", "Points"};
             DefaultTableModel tableModel = new DefaultTableModel(col, 0);
             groupPostTable.setModel(tableModel);
 
@@ -931,16 +931,14 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 Object[] obj = new Object[5];
                 obj[0] = rand.nextInt(256);
                 obj[1] = post.getTitle();
-                obj[2] = post.getTags();
-                obj[3] = post.getCategories();
-                obj[4] = post.getPoints();
+                obj[2] = post.getPoints();
                 
                 tableModel.addRow(obj);
             }
 
             // populate the members
             for (User user : group.getMembers()) {
-                listModel.addElement(user.getName());
+                listModel.addElement(user.getUsername());
             }
 
         } catch (Exception e) {
