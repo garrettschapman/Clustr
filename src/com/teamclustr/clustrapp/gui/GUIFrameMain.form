@@ -1903,6 +1903,11 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JFrame" name="viewPostWindow">
+      <Properties>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[400, 500]"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -1942,7 +1947,7 @@
                                       <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
                                       <Component id="PostUpvoteButton" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Component id="postNumOfPoints" min="-2" max="-2" attributes="0"/>
+                                      <Component id="viewPostNumOfPoints" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -1971,7 +1976,7 @@
                           <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="PostUpvoteButton" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="PostDownvoteButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="postNumOfPoints" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="viewPostNumOfPoints" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
@@ -2019,13 +2024,16 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Upvote"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="PostUpvoteButtonMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="PostDownvoteButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Downvote"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="postNumOfPoints">
+            <Component class="javax.swing.JLabel" name="viewPostNumOfPoints">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel14"/>
               </Properties>
@@ -2040,7 +2048,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextArea" name="postBodyArea">
+                <Component class="javax.swing.JTextArea" name="viewPostBodyArea">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="columns" type="int" value="20"/>

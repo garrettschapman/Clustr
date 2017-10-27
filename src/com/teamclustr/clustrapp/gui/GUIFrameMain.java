@@ -186,9 +186,9 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         PostUpvoteButton = new javax.swing.JButton();
         PostDownvoteButton = new javax.swing.JButton();
-        postNumOfPoints = new javax.swing.JLabel();
+        viewPostNumOfPoints = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        postBodyArea = new javax.swing.JTextArea();
+        viewPostBodyArea = new javax.swing.JTextArea();
         jTabbedPaneMain = new javax.swing.JTabbedPane();
         jTabbedPaneAcount = new javax.swing.JTabbedPane();
         jPanelAccountDetails = new javax.swing.JPanel();
@@ -587,6 +587,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        viewPostWindow.setMinimumSize(new java.awt.Dimension(400, 500));
+
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel11.setText("Post Title");
 
@@ -600,17 +602,22 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jLabel13.setText("Points");
 
         PostUpvoteButton.setText("Upvote");
+        PostUpvoteButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PostUpvoteButtonMouseClicked(evt);
+            }
+        });
 
         PostDownvoteButton.setText("Downvote");
 
-        postNumOfPoints.setText("jLabel14");
+        viewPostNumOfPoints.setText("jLabel14");
 
         jScrollPane5.setEnabled(false);
 
-        postBodyArea.setEditable(false);
-        postBodyArea.setColumns(20);
-        postBodyArea.setRows(5);
-        jScrollPane5.setViewportView(postBodyArea);
+        viewPostBodyArea.setEditable(false);
+        viewPostBodyArea.setColumns(20);
+        viewPostBodyArea.setRows(5);
+        jScrollPane5.setViewportView(viewPostBodyArea);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -634,7 +641,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                                 .addGap(84, 84, 84)
                                 .addComponent(PostUpvoteButton)
                                 .addGap(30, 30, 30)
-                                .addComponent(postNumOfPoints)
+                                .addComponent(viewPostNumOfPoints)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addComponent(PostDownvoteButton)))
                 .addContainerGap())
@@ -655,7 +662,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                     .addComponent(jLabel13)
                     .addComponent(PostUpvoteButton)
                     .addComponent(PostDownvoteButton)
-                    .addComponent(postNumOfPoints))
+                    .addComponent(viewPostNumOfPoints))
                 .addGap(28, 28, 28)
                 .addComponent(jLabel12)
                 .addGap(18, 18, 18)
@@ -1255,16 +1262,36 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private void groupPostTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_groupPostTableMouseClicked
        
             String postName = getPostNameFromTable(groupPostTable, evt);
-            goToPostPage(sessionSystem.getGroupByName(
-                    groupNameLabel.getText()).getPostByTitle(postName)
+            goToPostPage(sessionSystem.getActiveGroup().getPostByTitle(postName)
             ); 
        
     }//GEN-LAST:event_groupPostTableMouseClicked
+
+    private void PostUpvoteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostUpvoteButtonMouseClicked
+        // get the active post
+        Post pst = sessionSystem.getActivePost();
+        
+        // increment the points
+        
+        
+    }//GEN-LAST:event_PostUpvoteButtonMouseClicked
 
     public void goToPostPage(Post post){
         // TODO: CONFIGURE THE VIEW POST PAGE
         // THEN SHOW THE PAGE
         try{
+            
+            // set the label text
+            viewPostTitleLabel.setText(post.getTitle());
+            viewPostNumOfPoints.setText(Integer.toString(post.getPoints()));
+            viewPostBodyArea.setText(post.getBody());
+            
+            // set the active post
+            sessionSystem.setActivePost(post);
+            
+            // repaint the screen and show
+            viewPostWindow.validate();
+            viewPostWindow.setVisible(true);
             
         }catch(Exception e){
             // DO SOMETHING
@@ -1282,6 +1309,9 @@ public class GUIFrameMain extends javax.swing.JFrame {
             groupMemberList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
             DefaultListModel listModel = new DefaultListModel();
 
+            // set the active group
+            sessionSystem.setActiveGroup(group);
+            
             updatePostTable(group);
 
             // populate the members
@@ -1374,12 +1404,12 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPaneMain;
     private javax.swing.JTextField jTextFieldLoginUsername;
     private javax.swing.JTextField jTextFieldSignupUsername;
-    private javax.swing.JTextArea postBodyArea;
     private javax.swing.JTextArea postBodyField;
-    private javax.swing.JLabel postNumOfPoints;
     private javax.swing.JTextField postTitleField;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JButton showPostDialogButton;
+    private javax.swing.JTextArea viewPostBodyArea;
+    private javax.swing.JLabel viewPostNumOfPoints;
     private javax.swing.JLabel viewPostTitleLabel;
     private javax.swing.JFrame viewPostWindow;
     // End of variables declaration//GEN-END:variables

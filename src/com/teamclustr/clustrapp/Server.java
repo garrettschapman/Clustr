@@ -25,6 +25,10 @@ public class Server implements Serializable {
 
     // All groups.
     private ArrayList<Group> groups;
+    
+    // The active group and post being interacted with at a certain time
+    private Group activeGroup;
+    private Post activePost;
 
     // MEMBER METHODS.
     /**
@@ -100,6 +104,30 @@ public class Server implements Serializable {
 
     }
 
+    public Group getActiveGroup() throws NullPointerException{
+        if(this.activeGroup != null){
+            return this.activeGroup;
+        } else {
+            throw new NullPointerException("No Active Group");
+        }
+    }
+    
+    public void setActiveGroup(Group grp){
+        this.activeGroup = grp;
+    }
+    
+    public Post getActivePost() throws NullPointerException{
+        if(this.activePost != null){
+            return this.activePost;
+        } else {
+            throw new NullPointerException("No Active Post");
+        }
+    }
+    
+    public void setActivePost(Post pst){
+        this.activePost = pst;
+    }
+    
     /**
      * Get the active session user.
      *
