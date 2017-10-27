@@ -63,7 +63,6 @@ public class Server implements Serializable {
                 "TITLE");
 
         users.add(usr1);
-        sessionUser = usr1; // TODO: MAKE THE SESSION USER A PARAMETER OF CONSTRUCTOR
         groups.add(gp1);
         gp1.leavePost(pst1);
 
@@ -137,11 +136,11 @@ public class Server implements Serializable {
         return sessionUser;
     }
 
-    public ArrayList getGroupList() {
+    public ArrayList<Group> getGroupList() {
         return this.groups;
     }
 
-    public ArrayList getUserList() {
+    public ArrayList<User> getUserList() {
         return this.users;
     }
 
@@ -169,5 +168,10 @@ public class Server implements Serializable {
             }
         }
         return false;
+    }
+    
+    public void setSessionUser(User newSessionUser) {
+	    
+	    this.sessionUser = newSessionUser;
     }
 }
