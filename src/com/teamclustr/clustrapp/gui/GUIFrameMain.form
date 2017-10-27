@@ -1984,11 +1984,13 @@
                           <Component id="viewPostTitleLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="PostUpvoteButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="PostDownvoteButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="viewPostNumOfPoints" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="PostDownvoteButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="viewPostNumOfPoints" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
@@ -2044,6 +2046,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Downvote"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="PostDownvoteButtonMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="viewPostNumOfPoints">
               <Properties>
