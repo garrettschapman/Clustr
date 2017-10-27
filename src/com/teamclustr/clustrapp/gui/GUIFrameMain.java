@@ -1084,8 +1084,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         if (!postTitleField.getText().isEmpty()
                 && !postBodyField.getText().isEmpty()
-                && !groupNameLabel.getText().isEmpty()
-                ) {
+                && !groupNameLabel.getText().isEmpty()) {
             try {
 
                 Group grp = sessionSystem.getGroupByName(groupNameLabel.getText());
@@ -1096,8 +1095,16 @@ public class GUIFrameMain extends javax.swing.JFrame {
                         sessionSystem.getSessionUser(),
                         postBodyField.getText(),
                         postTitleField.getText()
-                    )
+                )
                 );
+
+                // clear the fields and close the window. 
+                postBodyField.setText("");
+                postTitleField.setText("");
+                
+                // then update the group window
+                groupWindow.repaint();
+
                 
                 JOptionPane.showMessageDialog(null, "Post Created Successfully");
             } catch (NullPointerException n) {
