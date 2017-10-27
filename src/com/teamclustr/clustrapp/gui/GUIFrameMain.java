@@ -937,7 +937,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
      * @param arg Either 'browse' or 'feed' depending on the table structure you
      * want
      */
-    private void updateTable(JTable tbl, String arg) throws InvalidParameterException {
+    private void updateGroupTable(JTable tbl, String arg) throws InvalidParameterException {
         String col[] = {"Group Name", "Number of Members", "Tags", "Categories", ""};
         TableModel tableModel = new TableModel(col, 0);
         ArrayList<Group> groupList = sessionSystem.getGroupList();
@@ -975,8 +975,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private void jTabbedPaneGroupsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneGroupsMouseClicked
         // TODO add your handling code here:
         // list all groups that exist into the table
-        updateTable(browseTable, "browse");
-        updateTable(feedTable, "feed");
+        updateGroupTable(browseTable, "browse");
+        updateGroupTable(feedTable, "feed");
     }//GEN-LAST:event_jTabbedPaneGroupsMouseClicked
 
     private void groupSearchButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_groupSearchButtonMouseClicked
@@ -1037,7 +1037,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
     private void jTabbedPaneMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneMainMouseClicked
         // TODO add your handling code here:
-        updateTable(feedTable, "feed");
+        updateGroupTable(feedTable, "feed");
     }//GEN-LAST:event_jTabbedPaneMainMouseClicked
 
     /**
@@ -1101,11 +1101,10 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 // clear the fields and close the window. 
                 postBodyField.setText("");
                 postTitleField.setText("");
-                
-                // then update the group window
-                groupWindow.repaint();
+                createPostDialog.setVisible(false);
 
-                
+                // then update the group window
+                updatePostTable(grp);
                 JOptionPane.showMessageDialog(null, "Post Created Successfully");
             } catch (NullPointerException n) {
                 // TODO DO SOMETHING
@@ -1116,6 +1115,25 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
     }//GEN-LAST:event_createPostButtonMouseClicked
 
+    private void updatePostTable(Group grp){
+        String col[] = {"Post ID", "Title", "Points"};
+        TableModel tableModel = new TableModel(col, 0);
+        groupPostTable.setModel(tableModel);
+
+
+            Random rand = new Random();
+            // populate the posts
+            for (Post post : grp.getPosts()) {
+                
+                Object[] obj = new Object[3];
+                obj[0] = rand.nextInt(256);
+                obj[1] = post.getTitle();
+                obj[2] = post.getPoints();
+
+                tableModel.addRow(obj);
+            }
+    }
+    
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         createPostDialog.setVisible(false);
         postBodyField.setText("");
@@ -1133,20 +1151,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
             groupMemberList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
             DefaultListModel listModel = new DefaultListModel();
 
-            String col[] = {"Post ID", "Title", "Points"};
-            TableModel tableModel = new TableModel(col, 0);
-            groupPostTable.setModel(tableModel);
-
-            Random rand = new Random();
-            // populate the posts
-            for (Post post : group.getPosts()) {
-                Object[] obj = new Object[5];
-                obj[0] = rand.nextInt(256);
-                obj[1] = post.getTitle();
-                obj[2] = post.getPoints();
-
-                tableModel.addRow(obj);
-            }
+            updatePostTable(group);
 
             // populate the members
             Vector<String> users = new Vector();
