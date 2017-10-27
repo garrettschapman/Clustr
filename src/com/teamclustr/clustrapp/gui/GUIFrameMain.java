@@ -395,6 +395,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        groupPostTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                groupPostTableMouseClicked(evt);
+            }
+        });
         scrollPane.setViewportView(groupPostTable);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -911,6 +916,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_createGroupButtonActionPerformed
 
+    private String getGroupNameFromTable(JTable tbl, java.awt.event.MouseEvent evt) {
+            int row = tbl.rowAtPoint(evt.getPoint());
+            return (String) tbl.getModel().getValueAt(row, 0);
+    }
+
     /**
      * This inner class defines a TableModel in which the cells are not editable
      */
@@ -1049,8 +1059,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
         try {
             // get the group row clicked
             //System.out.println("CLICKED!!");
-            int row = browseTable.rowAtPoint(evt.getPoint());
-            goToGroupPage(sessionSystem.getGroup(row));
+            String groupName = getGroupNameFromTable(browseTable, evt);
+            goToGroupPage(sessionSystem.getGroupByName(groupName));
 
         } catch (Exception e) {
             // do something
@@ -1062,9 +1072,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private void feedTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_feedTableMouseClicked
         try {
             // get the group row clicked
-            //System.out.println("CLICKED!!");
-            int row = feedTable.rowAtPoint(evt.getPoint());
-            goToGroupPage(sessionSystem.getGroup(row));
+            String groupName = getGroupNameFromTable(feedTable, evt);
+            goToGroupPage(sessionSystem.getGroupByName(groupName));
 
         } catch (Exception e) {
             // TODO do something
@@ -1139,6 +1148,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
         postBodyField.setText("");
         postTitleField.setText("");
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void groupPostTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_groupPostTableMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_groupPostTableMouseClicked
 
     private void goToGroupPage(Group group) {
         try {
