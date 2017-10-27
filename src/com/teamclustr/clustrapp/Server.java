@@ -42,6 +42,9 @@ public class Server implements Serializable {
         groups = new ArrayList<Group>(16);
 
         // add some users, groups, and posts
+        
+        users.add(new User("test", "test", "test@email.com", "5555555555", "BIO"));
+        
         User usr1 = new User(
                 "TestUser1",
                 "TestPassword1",
@@ -99,7 +102,6 @@ public class Server implements Serializable {
         );
         groups.add(gp3);
         gp3.addMember(usr2);
-        gp3.addMember(usr1);
 
     }
 
