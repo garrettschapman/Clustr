@@ -29,7 +29,7 @@ public class Group implements Serializable {
         members.add(owner);
         moderators.add(owner);
         
-        // TODO: deal with the tags and categories
+        //deal with the tags and categories
         for(String s : categories.split(", ")){
             this.categories.add(s);
         }
@@ -39,7 +39,7 @@ public class Group implements Serializable {
         }
 
     }
-
+//adds members
     public boolean addMember(User user) {
         if (bannedUsers.contains(user)) {
             return false;
@@ -48,16 +48,16 @@ public class Group implements Serializable {
             return true;
         }
     }
-
+//leaves the group
     public void leaveGroup(User user) {
         members.remove(user);
     }
-
+//bans a user
     public void banUser(User user) {
         members.remove(user);
         bannedUsers.add(user);
     }
-
+//changes the leader
     public void changeLeader(User owner) {
         if (moderators.contains(owner)) {
             moderators.remove(owner);
