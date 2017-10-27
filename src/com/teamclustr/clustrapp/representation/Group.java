@@ -90,4 +90,13 @@ public class Group implements Serializable {
         return this.posts;
     }
 
+    public Post getPostByTitle(String postName) {
+        for(Post post : this.posts){
+            if(post.getTitle().equals(postName)){
+                return post;
+            }
+        }
+        return null;
+    }
+
 }
