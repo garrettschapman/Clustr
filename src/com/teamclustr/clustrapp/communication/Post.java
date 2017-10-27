@@ -24,7 +24,7 @@ public class Post implements Serializable {
 	private ArrayList<Post> comments; //all comments on the post
 	private int points; //points for the post
 	private LocalDateTime date; //time the post was created
-	
+	private String title;
 	
 	
 	/*
@@ -33,12 +33,13 @@ public class Post implements Serializable {
 	 * The owner is the current User
 	 * The body will be requested by and entered into the System
 	 */
-	public Post(User owner, String body) {
+	public Post(User owner, String body, String title) {
 		this.owner = owner;
 		this.body = body;
 		this.comments = new ArrayList<Post>(0); //no current comments
 		this.points = 1; //owner automatically likes their post
 		this.date = LocalDateTime.now(); //sets date to date of posting
+                this.title = title; // set the title
 	} //end of constructor
 	
 //Methods for Posts
@@ -81,8 +82,8 @@ public class Post implements Serializable {
 	 * Takes the owner and body (entered by the User)
 	 * The owner is the current User
 	 */
-	public void addComment(User cowner, String cbody) {
-		Post newComment = new Post(cowner, cbody); //creates the comment
+	public void addComment(User cowner, String cbody, String title) {
+		Post newComment = new Post(cowner, cbody, title); //creates the comment
 		this.comments.add(newComment); //adds the comment to the array list
 	} //end of method
 	
@@ -101,7 +102,7 @@ public class Post implements Serializable {
 	 * Comment owner removed and body set to say that it was deleted
 	 */
 	public void deleteComment(int index) {
-		Post deleted = new Post(null, "[Deleted]"); //creates new deleted Post
+		Post deleted = new Post(null, "[Deleted]", "[Deleted]"); //creates new deleted Post
 		this.comments.set(index, deleted); //sets comment to deleted Post
 	} //end of method
 
@@ -138,6 +139,10 @@ public class Post implements Serializable {
 	public LocalDateTime getDate() {
 		return date;
 	} //end of getter
+
+    public String getTitle() {
+        return this.title;
+    }
 
 
 	

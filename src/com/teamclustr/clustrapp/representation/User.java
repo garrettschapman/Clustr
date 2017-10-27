@@ -31,12 +31,18 @@ public class User implements Serializable {
 	private ArrayList<String> Comments;
 	
 	//Constructor 
-	public User() {
+	public User(String Username,
+                String Password, String Email, String PhoneNum, String Bio) {
 		
 		createAccount(Username, Password, Email, PhoneNum, Bio);
-		addFriend(Username);
-		addEnemies(Username); 
-		removeFriend(Username);
+                
+                /*
+                TODO: WHY WERE THESE THREE METHODS CALLED HERE?
+                */
+		//addFriend(Username);
+		//addEnemies(Username); 
+		//removeFriend(Username);
+
 		Friends = new ArrayList<String>();
 		Enemies = new ArrayList<String>();
 		GroupList = new ArrayList<String>();
