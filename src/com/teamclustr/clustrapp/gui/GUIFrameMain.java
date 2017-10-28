@@ -1370,7 +1370,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         for (Post post : grp.getPosts()) {
 
             Object[] obj = new Object[3];
-            obj[0] = rand.nextInt(256);
+            obj[0] = post.hashCode();
             obj[1] = post.getTitle();
             obj[2] = post.getPoints();
 
