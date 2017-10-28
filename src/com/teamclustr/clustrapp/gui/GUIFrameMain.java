@@ -818,6 +818,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                         }
                 });
 
+                jTableAccountActivity.setAutoCreateRowSorter(true);
                 jTableAccountActivity.setModel(new javax.swing.table.DefaultTableModel(
                         new Object [][] {
 
