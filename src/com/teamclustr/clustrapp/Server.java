@@ -17,7 +17,7 @@ public class Server implements Serializable {
 
     // MEMEBR DATA.
     // The user active on this current session.
-    private transient User sessionUser;
+    private transient User activeUser;
 
     // All users.
     private ArrayList<User> users;
@@ -36,7 +36,7 @@ public class Server implements Serializable {
     public Server() {
 
         // Initialize fields.
-        sessionUser = null; // who is logged into the system
+        activeUser = null; // who is logged into the system
         users = new ArrayList<User>(16);
         groups = new ArrayList<Group>(16);
 
@@ -132,8 +132,8 @@ public class Server implements Serializable {
      *
      * @return session user
      */
-    public User getSessionUser() {
-        return sessionUser;
+    public User getActiveUser() {
+        return activeUser;
     }
 
     public ArrayList<Group> getGroupList() {
@@ -145,7 +145,7 @@ public class Server implements Serializable {
     }
 
     public void createGroup(String name, String categories, String tags) {
-        this.groups.add(new Group(this.sessionUser, name, categories, tags));
+        this.groups.add(new Group(this.activeUser, name, categories, tags));
     }
     
     public User createUser(String username, String password) {
@@ -199,6 +199,6 @@ public class Server implements Serializable {
     
     public void setSessionUser(User newSessionUser) {
 	    
-	    this.sessionUser = newSessionUser;
+	    this.activeUser = newSessionUser;
     }
 }
