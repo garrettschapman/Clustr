@@ -23,7 +23,6 @@ public class User implements Serializable {
 	private String Email;
 	private String PhoneNum; 
 	private String Bio; 
-	private Post post;
 	private ArrayList<User> Friends;
 	private ArrayList<User> Enemies;
 	private ArrayList<Group> GroupList; 
@@ -67,6 +66,10 @@ public class User implements Serializable {
 		
 	}
 	
+	public void addPost(Post post) { //add post to post list
+		this.Posts.add(post);
+	}
+	
 	public void addFriend(User Username) {  //add friend to friend list
 		this.Friends.add(Username);	
 	}
@@ -77,6 +80,15 @@ public class User implements Serializable {
 
 	public void removeFriend(User Username) {
 		this.Friends.remove(Username);
+	}
+	
+	public Post getPostByTitle(String postName) {
+		for (Post post : this.Posts) {
+			if (post.getTitle().equals(postName)) {
+				return post;
+			}
+		}
+		return null;
 	}
 	
 	public String getUsername() {
@@ -119,8 +131,8 @@ public class User implements Serializable {
 		Bio = bio;
 	}
 	
-	public Post getPosts(){
-		return this.post;
+	public ArrayList<Post> getPosts(){
+		return this.Posts;
 	}
 
 	

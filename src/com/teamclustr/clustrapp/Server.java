@@ -91,7 +91,6 @@ public class Server implements Serializable {
         users.add(usr2);
         groups.add(gp2);
         gp2.leavePost(pst2);
-        gp1.leavePost(pst2);
         
         Group gp3 = new Group(
                 usr1, 

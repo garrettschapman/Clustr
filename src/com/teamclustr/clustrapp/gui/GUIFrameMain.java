@@ -8,6 +8,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.LayoutManager;
 import java.security.InvalidParameterException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -40,6 +41,26 @@ public class GUIFrameMain extends javax.swing.JFrame {
     public static Color USER_STATUS_IN_COLOR = Color.BLUE;
     public static Color USER_STATUS_OUT_COLOR = Color.RED;
     public static Color USER_STATUS_HOVER_COLOR = Color.YELLOW;
+    
+    /**
+     * This inner class defines a TableModel in which the cells are not editable
+     */
+    private class TableModel extends DefaultTableModel {
+
+        public TableModel(String[] titles, int rows) {
+            super(titles, rows);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int col) {
+            return false;
+        }
+
+        @Override
+        public void setValueAt(Object val, int row, int col) {
+            // NO!
+        }
+    }
 
     // MEMBER METHODS.
     /**
@@ -197,7 +218,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 jTabbedPaneAcount = new javax.swing.JTabbedPane();
                 jPanelAccountDetails = new javax.swing.JPanel();
                 jPanelAccountActivity = new javax.swing.JPanel();
-                jPanelDirectMessage = new javax.swing.JPanel();
+                jScrollPaneAccountActivity = new javax.swing.JScrollPane();
+                jTableAccountActivity = new javax.swing.JTable();
                 jTabbedPaneGroups = new javax.swing.JTabbedPane();
                 jPanelBrowseGroups = new javax.swing.JPanel();
                 jScrollPane2 = new javax.swing.JScrollPane();
@@ -790,31 +812,39 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
                 jTabbedPaneAcount.addTab("Details", jPanelAccountDetails);
 
+                jPanelAccountActivity.addComponentListener(new java.awt.event.ComponentAdapter() {
+                        public void componentShown(java.awt.event.ComponentEvent evt) {
+                                jPanelAccountActivityComponentShown(evt);
+                        }
+                });
+
+                jTableAccountActivity.setModel(new javax.swing.table.DefaultTableModel(
+                        new Object [][] {
+
+                        },
+                        new String [] {
+
+                        }
+                ));
+                jTableAccountActivity.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                jTableAccountActivityMouseClicked(evt);
+                        }
+                });
+                jScrollPaneAccountActivity.setViewportView(jTableAccountActivity);
+
                 javax.swing.GroupLayout jPanelAccountActivityLayout = new javax.swing.GroupLayout(jPanelAccountActivity);
                 jPanelAccountActivity.setLayout(jPanelAccountActivityLayout);
                 jPanelAccountActivityLayout.setHorizontalGroup(
                         jPanelAccountActivityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPaneAccountActivity, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
                 );
                 jPanelAccountActivityLayout.setVerticalGroup(
                         jPanelAccountActivityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPaneAccountActivity, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
                 );
 
                 jTabbedPaneAcount.addTab("Activity", jPanelAccountActivity);
-
-                javax.swing.GroupLayout jPanelDirectMessageLayout = new javax.swing.GroupLayout(jPanelDirectMessage);
-                jPanelDirectMessage.setLayout(jPanelDirectMessageLayout);
-                jPanelDirectMessageLayout.setHorizontalGroup(
-                        jPanelDirectMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 0, Short.MAX_VALUE)
-                );
-                jPanelDirectMessageLayout.setVerticalGroup(
-                        jPanelDirectMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 0, Short.MAX_VALUE)
-                );
-
-                jTabbedPaneAcount.addTab("Messages", jPanelDirectMessage);
 
                 jTabbedPaneMain.addTab("Account", jTabbedPaneAcount);
 
@@ -847,7 +877,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 );
                 jPanelBrowseGroupsLayout.setVerticalGroup(
                         jPanelBrowseGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
                 );
 
                 jTabbedPaneGroups.addTab("Your Feed", jPanelBrowseGroups);
@@ -1003,7 +1033,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                                         .addComponent(jLabel1)
                                         .addComponent(groupSearchButton))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                                 .addContainerGap())
                 );
 
@@ -1142,29 +1172,9 @@ public class GUIFrameMain extends javax.swing.JFrame {
         return (String) tbl.getModel().getValueAt(row, 0);
     }
 
-    private String getPostNameFromTable(JTable tbl, java.awt.event.MouseEvent evt) {
+    private String getPostNameFromTable(JTable tbl, java.awt.event.MouseEvent evt, int postNameColumn) {
         int row = tbl.rowAtPoint(evt.getPoint());
-        return (String) tbl.getModel().getValueAt(row, 1);
-    }
-
-    /**
-     * This inner class defines a TableModel in which the cells are not editable
-     */
-    private class TableModel extends DefaultTableModel {
-
-        public TableModel(String[] titles, int rows) {
-            super(titles, rows);
-        }
-
-        @Override
-        public boolean isCellEditable(int row, int col) {
-            return false;
-        }
-
-        @Override
-        public void setValueAt(Object val, int row, int col) {
-            // NO!
-        }
+        return (String) tbl.getModel().getValueAt(row, postNameColumn);
     }
 
     /**
@@ -1425,10 +1435,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
     private void groupPostTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_groupPostTableMouseClicked
 
-        String postName = getPostNameFromTable(groupPostTable, evt);
-        goToPostPage(sessionSystem.getActiveGroup().getPostByTitle(postName)
-        );
-
+        String postName = getPostNameFromTable(groupPostTable, evt, 1);
+        goToPostPage(sessionSystem.getActiveGroup().getPostByTitle(postName));
     }//GEN-LAST:event_groupPostTableMouseClicked
 
     private void PostUpvoteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostUpvoteButtonMouseClicked
@@ -1526,6 +1534,41 @@ public class GUIFrameMain extends javax.swing.JFrame {
         viewPostWindowPanel.validate();
         viewPostWindow.repaint();
     }//GEN-LAST:event_viewPostWindowWindowGainedFocus
+
+        private void jPanelAccountActivityComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelAccountActivityComponentShown
+                
+		// Get session user.
+		User sesUser = sessionSystem.getSessionUser();
+		
+		// Create new DefaultTableModel.
+		TableModel tableModel = new TableModel(new String[]{"Post ID", "Title", "Date"}, 0);
+		this.jTableAccountActivity.setModel(tableModel);
+		
+		// Check if user is logged in.
+		if (sesUser != null) {
+		
+			// Populate table with user's posts.
+			for (Post userPost : sesUser.getPosts()) {
+			
+				tableModel.addRow(new String[]{
+					Integer.toString(userPost.hashCode() % 256), 
+					userPost.getTitle(), 
+					userPost.getDate().format(DateTimeFormatter.ISO_DATE)});
+			}
+		}
+		// User is not logged in.
+		else {
+			
+			
+		}
+        }//GEN-LAST:event_jPanelAccountActivityComponentShown
+
+        private void jTableAccountActivityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAccountActivityMouseClicked
+                
+		// Fetch appropriate post and display it.
+		String postName = getPostNameFromTable(this.jTableAccountActivity, evt, 1);
+		goToPostPage(sessionSystem.getSessionUser().getPostByTitle(postName));
+        }//GEN-LAST:event_jTableAccountActivityMouseClicked
 
     public void goToPostPage(Post post) {
         // TODO: CONFIGURE THE VIEW POST PAGE
@@ -1664,7 +1707,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         private javax.swing.JPanel jPanelAllGroups;
         private javax.swing.JPanel jPanelBrowseGroups;
         private javax.swing.JPanel jPanelCreateGroup;
-        private javax.swing.JPanel jPanelDirectMessage;
         private javax.swing.JPanel jPanelLogin;
         private javax.swing.JPanel jPanelLoginSignup;
         private javax.swing.JPanel jPanelSignup;
@@ -1676,12 +1718,14 @@ public class GUIFrameMain extends javax.swing.JFrame {
         private javax.swing.JScrollPane jScrollPane3;
         private javax.swing.JScrollPane jScrollPane4;
         private javax.swing.JScrollPane jScrollPane5;
+        private javax.swing.JScrollPane jScrollPaneAccountActivity;
         private javax.swing.JSeparator jSeparator1;
         private javax.swing.JSeparator jSeparator2;
         private javax.swing.JSeparator jSeparator3;
         private javax.swing.JTabbedPane jTabbedPaneAcount;
         private javax.swing.JTabbedPane jTabbedPaneGroups;
         private javax.swing.JTabbedPane jTabbedPaneMain;
+        private javax.swing.JTable jTableAccountActivity;
         private javax.swing.JTextField jTextFieldLoginUsername;
         private javax.swing.JTextField jTextFieldSignupUsername;
         private javax.swing.JTextArea postBodyField;
