@@ -77,6 +77,14 @@ public class Post implements Serializable {
 		return this.comments.get(index).getBody();
 	} //end of getter
 	
+        public void incrementPoints(){
+            this.points++;
+        }
+        
+        public void decrementPoints(){
+            this.points--;
+        }
+        
 	/*
 	 * Method to add a new comment to the Post
 	 * Takes the owner and body (entered by the User)

@@ -25,6 +25,10 @@ public class Server implements Serializable {
 
     // All groups.
     private ArrayList<Group> groups;
+    
+    // The active group and post being interacted with at a certain time
+    private Group activeGroup;
+    private Post activePost;
 
     // MEMBER METHODS.
     /**
@@ -38,6 +42,9 @@ public class Server implements Serializable {
         groups = new ArrayList<Group>(16);
 
         // add some users, groups, and posts
+        
+        users.add(new User("test", "test", "test@email.com", "5555555555", "BIO"));
+        
         User usr1 = new User(
                 "TestUser1",
                 "TestPassword1",
@@ -59,7 +66,6 @@ public class Server implements Serializable {
                 "TITLE");
 
         users.add(usr1);
-        sessionUser = usr1; // TODO: MAKE THE SESSION USER A PARAMETER OF CONSTRUCTOR
         groups.add(gp1);
         gp1.leavePost(pst1);
 
@@ -96,10 +102,33 @@ public class Server implements Serializable {
         );
         groups.add(gp3);
         gp3.addMember(usr2);
-        gp3.addMember(usr1);
 
     }
 
+    public Group getActiveGroup() throws NullPointerException{
+        if(this.activeGroup != null){
+            return this.activeGroup;
+        } else {
+            throw new NullPointerException("No Active Group");
+        }
+    }
+    
+    public void setActiveGroup(Group grp){
+        this.activeGroup = grp;
+    }
+    
+    public Post getActivePost() throws NullPointerException{
+        if(this.activePost != null){
+            return this.activePost;
+        } else {
+            throw new NullPointerException("No Active Post");
+        }
+    }
+    
+    public void setActivePost(Post pst){
+        this.activePost = pst;
+    }
+    
     /**
      * Get the active session user.
      *
@@ -109,16 +138,21 @@ public class Server implements Serializable {
         return sessionUser;
     }
 
-    public ArrayList getGroupList() {
+    public ArrayList<Group> getGroupList() {
         return this.groups;
     }
 
-    public ArrayList getUserList() {
+    public ArrayList<User> getUserList() {
         return this.users;
     }
 
     public void createGroup(String name, String categories, String tags) {
         this.groups.add(new Group(this.sessionUser, name, categories, tags));
+    }
+    
+    public void createUser(String username, String password) {
+    
+	    this.users.add(new User(username, password, "", "", ""));
     }
 
     public Group getGroup(int row) {
@@ -141,5 +175,26 @@ public class Server implements Serializable {
             }
         }
         return false;
+    }
+    
+    public User getUserFromUsername(String username) {
+	    
+		// Search for user.
+		for (User curUser : users) {
+
+			// Check if username matches.
+			if (curUser.getUsername().equals(username)) {
+
+				return curUser;
+			}
+		}
+		
+		// User not found.
+		return null;
+    }
+    
+    public void setSessionUser(User newSessionUser) {
+	    
+	    this.sessionUser = newSessionUser;
     }
 }
