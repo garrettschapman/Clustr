@@ -1396,6 +1396,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 			// Log user in.
 			sessionSystem.setSessionUser(curUser);
 			this.jLabelMainSessionUserStatus.setText(curUser.getUsername());
+			
 			this.jDialogLoginSignup.setVisible(false);
 		}
 		// Could not log in.
@@ -1454,7 +1455,45 @@ public class GUIFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_PostDownvoteButtonMouseClicked
 
         private void jButtonSignupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSignupMouseClicked
-                // TODO add your handling code here:
+                
+		// Get text field data.
+		String username = this.jTextFieldSignupUsername.getText().trim();
+		String password = this.jPasswordFieldSignupPassword.getText().trim();
+		String passwordConf = this.jPasswordFieldSignupPasswordConfirm.getText().trim();
+		
+		// Get user.
+		User curUser = sessionSystem.getUserFromUsername(username);
+		
+		// Check if user already exists.
+		if (curUser != null) {
+		
+			JOptionPane.showMessageDialog(this.jDialogLoginSignup, 
+				"Could not sign up.\nUsername already exists.",
+				"Signup Failed", JOptionPane.ERROR_MESSAGE);
+			
+			return;
+		}
+		// Check if passwords do not match.
+		else if (!password.equals(passwordConf)) {
+		
+			JOptionPane.showMessageDialog(this.jDialogLoginSignup, 
+				"Could not sign up.\nPasswords do not match.",
+				"Signup Failed", JOptionPane.ERROR_MESSAGE);
+			
+			return;
+		}
+		// Signup allowed.
+		else {
+			
+			// Create user.
+			curUser = sessionSystem.createUser(username, password);
+			
+			// Log user in.
+			sessionSystem.setSessionUser(curUser);
+			this.jLabelMainSessionUserStatus.setText(curUser.getUsername());
+			
+			this.jDialogLoginSignup.setVisible(false);
+		}
         }//GEN-LAST:event_jButtonSignupMouseClicked
 
         private void jButtonSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSignupActionPerformed
