@@ -17,18 +17,17 @@ import com.teamclustr.clustrapp.communication.Post;
  *  N/A
  */
 public class User implements Serializable {
-	//Its jirawat 
 	// MEMEBR DATA.
 	private String Username;
 	private String Password;
 	private String Email;
 	private String PhoneNum; 
 	private String Bio; 
-	private ArrayList<String> Friends;
-	private ArrayList<String> Enemies;
-	private ArrayList<String> GroupList; 
-	private ArrayList<String> Posts; 
-	private ArrayList<String> Comments;
+	private ArrayList<User> Friends;
+	private ArrayList<User> Enemies;
+	private ArrayList<Group> GroupList; 
+	private ArrayList<Post> Posts; 
+	private ArrayList<Post> Comments;
 	
 	//Constructor 
 	public User(String Username,
@@ -38,16 +37,19 @@ public class User implements Serializable {
                 
                 /*
                 TODO: WHY WERE THESE THREE METHODS CALLED HERE?
-                */
+                */ /*Jirawat- I thought I had to call it so that the- 
+					system class can use it, but I am probably wrong so thank you 
+					for correcting me*/
+		
 		//addFriend(Username);
 		//addEnemies(Username); 
-		//removeFriend(Username);
+		//removeFriend(Username);   
 
-		Friends = new ArrayList<String>();
-		Enemies = new ArrayList<String>();
-		GroupList = new ArrayList<String>();
-		Posts = new ArrayList<String>();
-		Comments = new ArrayList<String>();
+		Friends = new ArrayList<User>();
+		Enemies = new ArrayList<User>();
+		GroupList = new ArrayList<Group>();
+		Posts = new ArrayList<Post>();
+		Comments = new ArrayList<Post>();
 	
 	}
 	
@@ -63,15 +65,15 @@ public class User implements Serializable {
 		
 	}
 	
-	public void addFriend(String Username) {  //add friend to friend list
+	public void addFriend(User Username) {  //add friend to friend list
 		this.Friends.add(Username);	
 	}
 	
-	public void addEnemies(String Username) { //add blocked user to enemy list
+	public void addEnemies(User Username) { //add blocked user to enemy list
 		this.Enemies.add(Username);
 	}
 
-	public void removeFriend(String Username) {
+	public void removeFriend(User Username) {
 		this.Friends.remove(Username);
 	}
 	
