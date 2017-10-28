@@ -149,6 +149,11 @@ public class Server implements Serializable {
     public void createGroup(String name, String categories, String tags) {
         this.groups.add(new Group(this.sessionUser, name, categories, tags));
     }
+    
+    public void createUser(String username, String password) {
+    
+	    this.users.add(new User(username, password, "", "", ""));
+    }
 
     public Group getGroup(int row) {
         return this.groups.get(row);
@@ -170,6 +175,22 @@ public class Server implements Serializable {
             }
         }
         return false;
+    }
+    
+    public User getUserFromUsername(String username) {
+	    
+		// Search for user.
+		for (User curUser : users) {
+
+			// Check if username matches.
+			if (curUser.getUsername().equals(username)) {
+
+				return curUser;
+			}
+		}
+		
+		// User not found.
+		return null;
     }
     
     public void setSessionUser(User newSessionUser) {
