@@ -23,11 +23,13 @@ public class User implements Serializable {
 	private String Email;
 	private String PhoneNum; 
 	private String Bio; 
+	private Post post;
 	private ArrayList<User> Friends;
 	private ArrayList<User> Enemies;
 	private ArrayList<Group> GroupList; 
-	private ArrayList<Post> Posts; 
+	public ArrayList<Post> Posts; 
 	private ArrayList<Post> Comments;
+	
 	
 	//Constructor 
 	public User(String Username,
@@ -115,6 +117,10 @@ public class User implements Serializable {
 
 	public void setBio(String bio) {
 		Bio = bio;
+	}
+	
+	public Post getPosts(){
+		return this.post;
 	}
 
 	
