@@ -8,7 +8,7 @@ import com.teamclustr.clustrapp.communication.Post;
 /**
  * BRIEF CLASS DESCRIPTION.
  * 
- * @author Team Clustr (Jirawat is in charge of this class)
+ * @author Team Clustr (Jirawat is in charge of this task)
  * @version 1.0
  * File: User.java
  * Created: 10/17/2017
