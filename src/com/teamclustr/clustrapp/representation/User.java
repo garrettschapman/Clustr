@@ -8,7 +8,7 @@ import com.teamclustr.clustrapp.communication.Post;
 /**
  * BRIEF CLASS DESCRIPTION.
  * 
- * @author Team Clustr
+ * @author Team Clustr (Jirawat is in charge of this class)
  * @version 1.0
  * File: User.java
  * Created: 10/17/2017
@@ -39,7 +39,7 @@ public class User implements Serializable {
                 TODO: WHY WERE THESE THREE METHODS CALLED HERE?
                 */ /*Jirawat- I thought I had to call it so that the- 
 					system class can use it, but I am probably wrong so thank you 
-					for correcting me*/
+					for correcting me  */
 		
 		//addFriend(Username);
 		//addEnemies(Username); 
