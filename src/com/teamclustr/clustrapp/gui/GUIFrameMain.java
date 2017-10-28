@@ -1365,12 +1365,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
         TableModel tableModel = new TableModel(col, 0);
         groupPostTable.setModel(tableModel);
 
-        Random rand = new Random();
         // populate the posts
         for (Post post : grp.getPosts()) {
 
             Object[] obj = new Object[3];
-            obj[0] = post.hashCode();
+            obj[0] = post.hashCode() % 256;
             obj[1] = post.getTitle();
             obj[2] = post.getPoints();
 
