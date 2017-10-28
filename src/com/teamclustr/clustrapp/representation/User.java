@@ -27,7 +27,7 @@ public class User implements Serializable {
 	private ArrayList<User> Friends;
 	private ArrayList<User> Enemies;
 	private ArrayList<Group> GroupList; 
-	public ArrayList<Post> Posts; 
+	private ArrayList<Post> Posts; 
 	private ArrayList<Post> Comments;
 	
 	
