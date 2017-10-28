@@ -5,7 +5,6 @@ import com.teamclustr.clustrapp.representation.User;
 import com.teamclustr.clustrapp.representation.Group;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * BRIEF CLASS DESCRIPTION.
@@ -150,9 +149,15 @@ public class Server implements Serializable {
         this.groups.add(new Group(this.sessionUser, name, categories, tags));
     }
     
-    public void createUser(String username, String password) {
+    public User createUser(String username, String password) {
     
-	    this.users.add(new User(username, password, "", "", ""));
+	    // Create user.
+	    User newUser = new User(username, password, "", "", "");
+	    
+	    // Add user to server.
+	    this.users.add(newUser);
+	    
+	    return newUser;
     }
 
     public Group getGroup(int row) {
