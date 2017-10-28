@@ -28,17 +28,18 @@ public class Group implements Serializable {
         groupName = name;
         members.add(owner);
         moderators.add(owner);
-        
-        // TODO: deal with the tags and categories
-        for(String s : categories.split(", ")){
+
+        //deal with the tags and categories
+        for (String s : categories.split(", ")) {
             this.categories.add(s);
         }
-        
-        for(String s : tags.split(", ")){
+
+        for (String s : tags.split(", ")) {
             this.tags.add(s);
         }
 
     }
+//adds members
 
     public boolean addMember(User user) {
         if (bannedUsers.contains(user)) {
@@ -48,15 +49,18 @@ public class Group implements Serializable {
             return true;
         }
     }
+//leaves the group
 
     public void leaveGroup(User user) {
         members.remove(user);
     }
+//bans a user
 
     public void banUser(User user) {
         members.remove(user);
         bannedUsers.add(user);
     }
+//changes the leader
 
     public void changeLeader(User owner) {
         if (moderators.contains(owner)) {
@@ -66,10 +70,11 @@ public class Group implements Serializable {
         }
     }
 
-    public void leavePost(Post pst){
+    public void leavePost(Post pst) {
         this.posts.add(pst);
+	pst.getOwner().addPost(pst);
     }
-    
+
     public ArrayList<User> getMembers() {
         return this.members;
     }
@@ -85,9 +90,27 @@ public class Group implements Serializable {
     public String getCategories() {
         return this.categories.toString();
     }
-    
-    public ArrayList<Post> getPosts(){
+
+    public boolean isModerator(User usr) {
+        return this.moderators.contains(usr);
+    }
+
+    public ArrayList<Post> getPosts() {
         return this.posts;
+    }
+
+    public Post getPostByTitle(String postName) {
+        for (Post post : this.posts) {
+            if (post.getTitle().equals(postName)) {
+                return post;
+            }
+        }
+        return null;
+    }
+
+    public boolean isMember(User usr) {
+        return this.members.contains(usr);
+
     }
 
 }

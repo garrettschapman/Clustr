@@ -8,7 +8,7 @@ import com.teamclustr.clustrapp.communication.Post;
 /**
  * BRIEF CLASS DESCRIPTION.
  * 
- * @author Team Clustr
+ * @author Team Clustr (Jirawat is in charge of this task)
  * @version 1.0
  * File: User.java
  * Created: 10/17/2017
@@ -17,18 +17,18 @@ import com.teamclustr.clustrapp.communication.Post;
  *  N/A
  */
 public class User implements Serializable {
-	//Its jirawat 
 	// MEMEBR DATA.
 	private String Username;
 	private String Password;
 	private String Email;
 	private String PhoneNum; 
 	private String Bio; 
-	private ArrayList<String> Friends;
-	private ArrayList<String> Enemies;
-	private ArrayList<String> GroupList; 
-	private ArrayList<String> Posts; 
-	private ArrayList<String> Comments;
+	private ArrayList<User> Friends;
+	private ArrayList<User> Enemies;
+	private ArrayList<Group> GroupList; 
+	private ArrayList<Post> Posts; 
+	private ArrayList<Post> Comments;
+	
 	
 	//Constructor 
 	public User(String Username,
@@ -38,16 +38,19 @@ public class User implements Serializable {
                 
                 /*
                 TODO: WHY WERE THESE THREE METHODS CALLED HERE?
-                */
+                */ /*Jirawat- I thought I had to call it so that the- 
+					system class can use it, but I am probably wrong so thank you 
+					for correcting me  */
+		
 		//addFriend(Username);
 		//addEnemies(Username); 
-		//removeFriend(Username);
+		//removeFriend(Username);   
 
-		Friends = new ArrayList<String>();
-		Enemies = new ArrayList<String>();
-		GroupList = new ArrayList<String>();
-		Posts = new ArrayList<String>();
-		Comments = new ArrayList<String>();
+		Friends = new ArrayList<User>();
+		Enemies = new ArrayList<User>();
+		GroupList = new ArrayList<Group>();
+		Posts = new ArrayList<Post>();
+		Comments = new ArrayList<Post>();
 	
 	}
 	
@@ -63,16 +66,29 @@ public class User implements Serializable {
 		
 	}
 	
-	public void addFriend(String Username) {  //add friend to friend list
+	public void addPost(Post post) { //add post to post list
+		this.Posts.add(post);
+	}
+	
+	public void addFriend(User Username) {  //add friend to friend list
 		this.Friends.add(Username);	
 	}
 	
-	public void addEnemies(String Username) { //add blocked user to enemy list
+	public void addEnemies(User Username) { //add blocked user to enemy list
 		this.Enemies.add(Username);
 	}
 
-	public void removeFriend(String Username) {
+	public void removeFriend(User Username) {
 		this.Friends.remove(Username);
+	}
+	
+	public Post getPostByTitle(String postName) {
+		for (Post post : this.Posts) {
+			if (post.getTitle().equals(postName)) {
+				return post;
+			}
+		}
+		return null;
 	}
 	
 	public String getUsername() {
@@ -113,6 +129,10 @@ public class User implements Serializable {
 
 	public void setBio(String bio) {
 		Bio = bio;
+	}
+	
+	public ArrayList<Post> getPosts(){
+		return this.Posts;
 	}
 
 	
