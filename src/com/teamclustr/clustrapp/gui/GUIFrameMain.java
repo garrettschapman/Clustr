@@ -789,7 +789,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
                 jPanelAccountNull.setLayout(new java.awt.GridBagLayout());
 
-                jButtonAccountMustLogIn.setText("Log In/ Sign up");
+                jButtonAccountMustLogIn.setText("Log In/Sign up");
                 jButtonAccountMustLogIn.addMouseListener(new java.awt.event.MouseAdapter() {
                         public void mouseClicked(java.awt.event.MouseEvent evt) {
                                 jButtonAccountMustLogInMouseClicked(evt);
