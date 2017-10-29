@@ -1189,12 +1189,12 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
-            // Prompt the user for a system to load.
-            JOptionPane.showMessageDialog(
-                    this,
-                    "<TODO: ALLOW USER TO LOAD SYSTEM INFORMATION HERE>",
-                    "Load System Information",
-                    JOptionPane.PLAIN_MESSAGE);
+//            // Prompt the user for a system to load.
+//            JOptionPane.showMessageDialog(
+//                    this,
+//                    "<TODO: ALLOW USER TO LOAD SYSTEM INFORMATION HERE>",
+//                    "Load System Information",
+//                    JOptionPane.PLAIN_MESSAGE);
 
             // Initialize the session system.
             sessionServer = new Server();
