@@ -7,6 +7,8 @@ import com.teamclustr.clustrapp.representation.User;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.LayoutManager;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.security.InvalidParameterException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -39,7 +41,10 @@ public class GUIFrameMain extends javax.swing.JFrame {
     public static final Color USER_STATUS_HOVER_COLOR = Color.YELLOW;
     
     // Misc component theme constants.
-    public static final Color GUI_THEME_COLOR = new Color(230, 230, 230);
+    public static final Color GUI_THEME_COLOR = new Color(240, 240, 240);
+    
+    // Login/Signup dialog return value.
+    private User lsDialogResult;
     
     /**
      * This inner class defines a TableModel in which the cells are not editable
@@ -67,6 +72,9 @@ public class GUIFrameMain extends javax.swing.JFrame {
      */
     public GUIFrameMain() {
 
+	// Initialize the session server.
+        sessionServer = new Server();
+	    
         // Initialize GUI components.
         initComponents();
 
@@ -184,10 +192,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 jSeparator2 = new javax.swing.JSeparator();
                 jSeparator3 = new javax.swing.JSeparator();
                 jTabbedPaneMain = new javax.swing.JTabbedPane();
-                jTabbedPaneAcount = new javax.swing.JTabbedPane();
+                jPanelAccount = new javax.swing.JPanel();
+                jPanelAccountNull = new javax.swing.JPanel();
+                jButtonAccountMustLogIn = new javax.swing.JButton();
+                jTabbedPaneAcountValid = new javax.swing.JTabbedPane();
                 jPanelAccountDetails = new javax.swing.JPanel();
-                jPanelAccountDetailsNull = new javax.swing.JPanel();
-                jPanelAccountDetailsValid = new javax.swing.JPanel();
                 jLabelAccountEmail = new javax.swing.JLabel();
                 jTextFieldAccountEmail = new javax.swing.JTextField();
                 jTextFieldAccountEmailEdit = new javax.swing.JTextField();
@@ -258,11 +267,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 jPanelLogin.add(jLabelLoginUsername, gridBagConstraints);
 
                 jTextFieldLoginUsername.setPreferredSize(new java.awt.Dimension(250, 25));
-                jTextFieldLoginUsername.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                jTextFieldLoginUsernameActionPerformed(evt);
-                        }
-                });
                 gridBagConstraints = new java.awt.GridBagConstraints();
                 gridBagConstraints.gridx = 0;
                 gridBagConstraints.gridy = 4;
@@ -377,11 +381,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 jButtonSignup.addMouseListener(new java.awt.event.MouseAdapter() {
                         public void mouseClicked(java.awt.event.MouseEvent evt) {
                                 jButtonSignupMouseClicked(evt);
-                        }
-                });
-                jButtonSignup.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                jButtonSignupActionPerformed(evt);
                         }
                 });
                 gridBagConstraints = new java.awt.GridBagConstraints();
@@ -774,11 +773,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
                         public void windowLostFocus(java.awt.event.WindowEvent evt) {
                         }
                 });
-                addWindowListener(new java.awt.event.WindowAdapter() {
-                        public void windowOpened(java.awt.event.WindowEvent evt) {
-                                formWindowOpened(evt);
-                        }
-                });
 
                 jTabbedPaneMain.addMouseListener(new java.awt.event.MouseAdapter() {
                         public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -786,80 +780,79 @@ public class GUIFrameMain extends javax.swing.JFrame {
                         }
                 });
 
-                jPanelAccountDetails.addComponentListener(new java.awt.event.ComponentAdapter() {
+                jPanelAccount.addComponentListener(new java.awt.event.ComponentAdapter() {
                         public void componentShown(java.awt.event.ComponentEvent evt) {
-                                jPanelAccountDetailsComponentShown(evt);
+                                jPanelAccountComponentShown(evt);
                         }
                 });
-                jPanelAccountDetails.setLayout(new java.awt.CardLayout());
+                jPanelAccount.setLayout(new java.awt.CardLayout());
 
-                javax.swing.GroupLayout jPanelAccountDetailsNullLayout = new javax.swing.GroupLayout(jPanelAccountDetailsNull);
-                jPanelAccountDetailsNull.setLayout(jPanelAccountDetailsNullLayout);
-                jPanelAccountDetailsNullLayout.setHorizontalGroup(
-                        jPanelAccountDetailsNullLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 752, Short.MAX_VALUE)
-                );
-                jPanelAccountDetailsNullLayout.setVerticalGroup(
-                        jPanelAccountDetailsNullLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 347, Short.MAX_VALUE)
-                );
+                jPanelAccountNull.setLayout(new java.awt.GridBagLayout());
 
-                jPanelAccountDetails.add(jPanelAccountDetailsNull, "null");
+                jButtonAccountMustLogIn.setText("Log In/ Sign up");
+                jButtonAccountMustLogIn.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                jButtonAccountMustLogInMouseClicked(evt);
+                        }
+                });
+                jPanelAccountNull.add(jButtonAccountMustLogIn, new java.awt.GridBagConstraints());
+
+                jPanelAccount.add(jPanelAccountNull, "null");
 
                 java.awt.GridBagLayout jPanelAccountDetailsValidLayout = new java.awt.GridBagLayout();
                 jPanelAccountDetailsValidLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0};
                 jPanelAccountDetailsValidLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
-                jPanelAccountDetailsValid.setLayout(jPanelAccountDetailsValidLayout);
+                jPanelAccountDetails.setLayout(jPanelAccountDetailsValidLayout);
 
                 jLabelAccountEmail.setText("Email Address");
                 gridBagConstraints = new java.awt.GridBagConstraints();
                 gridBagConstraints.gridx = 0;
                 gridBagConstraints.gridy = 0;
-                jPanelAccountDetailsValid.add(jLabelAccountEmail, gridBagConstraints);
+                jPanelAccountDetails.add(jLabelAccountEmail, gridBagConstraints);
 
                 jTextFieldAccountEmail.setEditable(false);
                 jTextFieldAccountEmail.setPreferredSize(new java.awt.Dimension(250, 25));
                 gridBagConstraints = new java.awt.GridBagConstraints();
                 gridBagConstraints.gridx = 0;
                 gridBagConstraints.gridy = 2;
-                jPanelAccountDetailsValid.add(jTextFieldAccountEmail, gridBagConstraints);
+                jPanelAccountDetails.add(jTextFieldAccountEmail, gridBagConstraints);
 
                 jTextFieldAccountEmailEdit.setPreferredSize(new java.awt.Dimension(250, 25));
                 gridBagConstraints = new java.awt.GridBagConstraints();
                 gridBagConstraints.gridx = 4;
                 gridBagConstraints.gridy = 2;
-                jPanelAccountDetailsValid.add(jTextFieldAccountEmailEdit, gridBagConstraints);
+                jPanelAccountDetails.add(jTextFieldAccountEmailEdit, gridBagConstraints);
 
                 jLabelAccountPhoneNumber.setText("Phone Number");
                 gridBagConstraints = new java.awt.GridBagConstraints();
                 gridBagConstraints.gridx = 0;
                 gridBagConstraints.gridy = 4;
-                jPanelAccountDetailsValid.add(jLabelAccountPhoneNumber, gridBagConstraints);
+                jPanelAccountDetails.add(jLabelAccountPhoneNumber, gridBagConstraints);
 
                 jTextFieldAccountPhoneNumber.setEditable(false);
                 jTextFieldAccountPhoneNumber.setPreferredSize(new java.awt.Dimension(250, 25));
                 gridBagConstraints = new java.awt.GridBagConstraints();
                 gridBagConstraints.gridx = 0;
                 gridBagConstraints.gridy = 6;
-                jPanelAccountDetailsValid.add(jTextFieldAccountPhoneNumber, gridBagConstraints);
+                jPanelAccountDetails.add(jTextFieldAccountPhoneNumber, gridBagConstraints);
 
                 jTextFieldAccountPhoneNumberEdit.setPreferredSize(new java.awt.Dimension(250, 25));
                 gridBagConstraints = new java.awt.GridBagConstraints();
                 gridBagConstraints.gridx = 4;
                 gridBagConstraints.gridy = 6;
-                jPanelAccountDetailsValid.add(jTextFieldAccountPhoneNumberEdit, gridBagConstraints);
+                jPanelAccountDetails.add(jTextFieldAccountPhoneNumberEdit, gridBagConstraints);
 
                 jLabelAccountPassword.setText("Password");
                 gridBagConstraints = new java.awt.GridBagConstraints();
                 gridBagConstraints.gridx = 0;
                 gridBagConstraints.gridy = 8;
-                jPanelAccountDetailsValid.add(jLabelAccountPassword, gridBagConstraints);
+                jPanelAccountDetails.add(jLabelAccountPassword, gridBagConstraints);
 
                 jLabelAccountBio.setText("Biography");
                 gridBagConstraints = new java.awt.GridBagConstraints();
                 gridBagConstraints.gridx = 0;
                 gridBagConstraints.gridy = 12;
-                jPanelAccountDetailsValid.add(jLabelAccountBio, gridBagConstraints);
+                jPanelAccountDetails.add(jLabelAccountBio, gridBagConstraints);
 
                 jButtonAccountUpdate.setText("Update");
                 jButtonAccountUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -870,20 +863,20 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 gridBagConstraints = new java.awt.GridBagConstraints();
                 gridBagConstraints.gridx = 4;
                 gridBagConstraints.gridy = 0;
-                jPanelAccountDetailsValid.add(jButtonAccountUpdate, gridBagConstraints);
+                jPanelAccountDetails.add(jButtonAccountUpdate, gridBagConstraints);
 
                 jPasswordFieldAccountPassword.setEditable(false);
                 jPasswordFieldAccountPassword.setPreferredSize(new java.awt.Dimension(250, 25));
                 gridBagConstraints = new java.awt.GridBagConstraints();
                 gridBagConstraints.gridx = 0;
                 gridBagConstraints.gridy = 10;
-                jPanelAccountDetailsValid.add(jPasswordFieldAccountPassword, gridBagConstraints);
+                jPanelAccountDetails.add(jPasswordFieldAccountPassword, gridBagConstraints);
 
                 jPasswordFieldAccountPasswordEdit.setPreferredSize(new java.awt.Dimension(250, 25));
                 gridBagConstraints = new java.awt.GridBagConstraints();
                 gridBagConstraints.gridx = 4;
                 gridBagConstraints.gridy = 10;
-                jPanelAccountDetailsValid.add(jPasswordFieldAccountPasswordEdit, gridBagConstraints);
+                jPanelAccountDetails.add(jPasswordFieldAccountPasswordEdit, gridBagConstraints);
 
                 jTextAreaAccountBio.setEditable(false);
                 jTextAreaAccountBio.setColumns(20);
@@ -896,7 +889,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 gridBagConstraints.gridx = 0;
                 gridBagConstraints.gridy = 14;
                 gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-                jPanelAccountDetailsValid.add(jScrollPaneAccountBio, gridBagConstraints);
+                jPanelAccountDetails.add(jScrollPaneAccountBio, gridBagConstraints);
 
                 jTextAreaAccountBioEdit.setColumns(20);
                 jTextAreaAccountBioEdit.setLineWrap(true);
@@ -908,21 +901,13 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 gridBagConstraints.gridx = 4;
                 gridBagConstraints.gridy = 14;
                 gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-                jPanelAccountDetailsValid.add(jScrollPaneAccountBioEdit, gridBagConstraints);
+                jPanelAccountDetails.add(jScrollPaneAccountBioEdit, gridBagConstraints);
                 gridBagConstraints = new java.awt.GridBagConstraints();
                 gridBagConstraints.gridx = 2;
                 gridBagConstraints.gridy = 2;
-                jPanelAccountDetailsValid.add(fillerAccount, gridBagConstraints);
+                jPanelAccountDetails.add(fillerAccount, gridBagConstraints);
 
-                jPanelAccountDetails.add(jPanelAccountDetailsValid, "valid");
-
-                jTabbedPaneAcount.addTab("Details", jPanelAccountDetails);
-
-                jPanelAccountActivity.addComponentListener(new java.awt.event.ComponentAdapter() {
-                        public void componentShown(java.awt.event.ComponentEvent evt) {
-                                jPanelAccountActivityComponentShown(evt);
-                        }
-                });
+                jTabbedPaneAcountValid.addTab("Details", jPanelAccountDetails);
 
                 jTableAccountActivity.setAutoCreateRowSorter(true);
                 jTableAccountActivity.setModel(new javax.swing.table.DefaultTableModel(
@@ -951,9 +936,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
                         .addComponent(jScrollPaneAccountActivity, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
                 );
 
-                jTabbedPaneAcount.addTab("Activity", jPanelAccountActivity);
+                jTabbedPaneAcountValid.addTab("Activity", jPanelAccountActivity);
 
-                jTabbedPaneMain.addTab("Account", jTabbedPaneAcount);
+                jPanelAccount.add(jTabbedPaneAcountValid, "valid");
+
+                jTabbedPaneMain.addTab("Account", jPanelAccount);
 
                 jTabbedPaneGroups.addMouseListener(new java.awt.event.MouseAdapter() {
                         public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1187,63 +1174,22 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 pack();
         }// </editor-fold>//GEN-END:initComponents
 
-        private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-
-//            // Prompt the user for a system to load.
-//            JOptionPane.showMessageDialog(
-//                    this,
-//                    "<TODO: ALLOW USER TO LOAD SYSTEM INFORMATION HERE>",
-//                    "Load System Information",
-//                    JOptionPane.PLAIN_MESSAGE);
-
-            // Initialize the session system.
-            sessionServer = new Server();
-        }//GEN-LAST:event_formWindowOpened
-
         private void jLabelMainSessionUserStatusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMainSessionUserStatusMouseClicked
 
-            // User is not logged in.
-            if (sessionServer.getActiveUser() == null) {
-
-                // Prompt the user for login information.
-		this.jDialogLoginSignup.setVisible(true);
-            } // User is logged in.
-            else {
-
-                // Prompt user to log out.
-                int choice = JOptionPane.showConfirmDialog(
-                        this.jDialogLoginSignup,
-                        "Are you sure you want to log out?",
-                        "Log Out",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE);
-
-                // If user chose to log out.
-                if (choice == JOptionPane.YES_OPTION) {
-
-                    // Log user out.
-                    sessionServer.setSessionUser(null);
-                    this.jLabelMainSessionUserStatus.setText(USER_STATUS_OUT_STRING);
-                }
-            }
+		// Log user in.
+		this.logUserIn(this.promptUserForLogin());
         }//GEN-LAST:event_jLabelMainSessionUserStatusMouseClicked
 
         private void jLabelMainSessionUserStatusMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMainSessionUserStatusMouseEntered
 
-            // Change label color.
-            jLabelMainSessionUserStatus.setForeground(USER_STATUS_HOVER_COLOR);
+		// Update display.
+		this.refreshUserStatusLabel();
         }//GEN-LAST:event_jLabelMainSessionUserStatusMouseEntered
 
         private void jLabelMainSessionUserStatusMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMainSessionUserStatusMouseExited
 
-            // Change label color.
-            if (sessionServer.getActiveUser() == null) {
-
-                jLabelMainSessionUserStatus.setForeground(USER_STATUS_OUT_COLOR);
-            } else {
-
-                jLabelMainSessionUserStatus.setForeground(USER_STATUS_IN_COLOR);
-            }
+		// Update display.
+		this.refreshUserStatusLabel();
         }//GEN-LAST:event_jLabelMainSessionUserStatusMouseExited
 
         private void jButtonSwitchSignupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSwitchSignupMouseClicked
@@ -1509,9 +1455,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
 		if (curUser != null && 
 			curUser.getPassword().equals(this.jPasswordFieldLoginPassword.getText().trim())) {
 		
-			// Log user in.
-			sessionServer.setSessionUser(curUser);
-			this.jLabelMainSessionUserStatus.setText(curUser.getUsername());
+			// Set result.
+			this.lsDialogResult = curUser;
 			
 			this.jDialogLoginSignup.setVisible(false);
 		}
@@ -1524,20 +1469,16 @@ public class GUIFrameMain extends javax.swing.JFrame {
 		}
         }//GEN-LAST:event_jButtonLoginMouseClicked
 
-        private void jTextFieldLoginUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLoginUsernameActionPerformed
-            // TODO add your handling code here:
-        }//GEN-LAST:event_jTextFieldLoginUsernameActionPerformed
-
         private void jButtonLoginCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLoginCancelMouseClicked
 
-            // Hide login/signup dialog.
-            this.jDialogLoginSignup.setVisible(false);
+		// Hide login/signup dialog.
+		this.jDialogLoginSignup.setVisible(false);
         }//GEN-LAST:event_jButtonLoginCancelMouseClicked
 
         private void jButtonSignupCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSignupCancelMouseClicked
 
-            // Hide login/signup dialog.
-            this.jDialogLoginSignup.setVisible(false);
+		// Hide login/signup dialog.
+		this.jDialogLoginSignup.setVisible(false);
         }//GEN-LAST:event_jButtonSignupCancelMouseClicked
 
     private void groupPostTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_groupPostTableMouseClicked
@@ -1602,17 +1543,12 @@ public class GUIFrameMain extends javax.swing.JFrame {
 			// Create user.
 			curUser = sessionServer.createUser(username, password);
 			
-			// Log user in.
-			sessionServer.setSessionUser(curUser);
-			this.jLabelMainSessionUserStatus.setText(curUser.getUsername());
+			// Set result.
+			this.lsDialogResult = curUser;
 			
 			this.jDialogLoginSignup.setVisible(false);
 		}
         }//GEN-LAST:event_jButtonSignupMouseClicked
-
-        private void jButtonSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSignupActionPerformed
-                // TODO add your handling code here:
-        }//GEN-LAST:event_jButtonSignupActionPerformed
 
     private void groupWindowJoinGroupButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_groupWindowJoinGroupButtonMouseClicked
 
@@ -1642,45 +1578,12 @@ public class GUIFrameMain extends javax.swing.JFrame {
         viewPostWindow.repaint();
     }//GEN-LAST:event_viewPostWindowWindowGainedFocus
 
-        private void jPanelAccountActivityComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelAccountActivityComponentShown
-                
-		// Get session user.
-		User sesUser = sessionServer.getActiveUser();
-		
-		// Create new DefaultTableModel.
-		TableModel tableModel = new TableModel(new String[]{"Post ID", "Title", "Date"}, 0);
-		this.jTableAccountActivity.setModel(tableModel);
-		
-		// Check if user is logged in.
-		if (sesUser != null) {
-		
-			// Populate table with user's posts.
-			for (Post userPost : sesUser.getPosts()) {
-			
-				tableModel.addRow(new String[]{
-					Integer.toString(userPost.hashCode() % 256), 
-					userPost.getTitle(), 
-					userPost.getDate().format(DateTimeFormatter.ISO_DATE)});
-			}
-		}
-		// User is not logged in.
-		else {
-			
-			
-		}
-        }//GEN-LAST:event_jPanelAccountActivityComponentShown
-
         private void jTableAccountActivityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAccountActivityMouseClicked
                 
 		// Fetch appropriate post and display it.
 		String postName = getPostNameFromTable(this.jTableAccountActivity, evt, 1);
 		goToPostPage(sessionServer.getActiveUser().getPostByTitle(postName));
         }//GEN-LAST:event_jTableAccountActivityMouseClicked
-
-        private void jPanelAccountDetailsComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelAccountDetailsComponentShown
-                
-		this.refreshAccountDetailsDisplay();
-        }//GEN-LAST:event_jPanelAccountDetailsComponentShown
 
         private void jButtonAccountUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAccountUpdateMouseClicked
                 
@@ -1697,9 +1600,21 @@ public class GUIFrameMain extends javax.swing.JFrame {
 			curUser.setBio(this.jTextAreaAccountBioEdit.getText());
 			
 			// Refresh display.
-			this.refreshAccountDetailsDisplay();
+			this.refreshAccountTab();
 		}
         }//GEN-LAST:event_jButtonAccountUpdateMouseClicked
+
+        private void jButtonAccountMustLogInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAccountMustLogInMouseClicked
+                
+		// Log user in.
+		this.logUserIn(this.promptUserForLogin());
+        }//GEN-LAST:event_jButtonAccountMustLogInMouseClicked
+
+        private void jPanelAccountComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelAccountComponentShown
+                
+		// Refresh display.
+		this.refreshAccountTab();
+        }//GEN-LAST:event_jPanelAccountComponentShown
 
     public void goToPostPage(Post post) {
         // TODO: CONFIGURE THE VIEW POST PAGE
@@ -1781,43 +1696,133 @@ public class GUIFrameMain extends javax.swing.JFrame {
         }
     }
     
-	private void refreshAccountDetailsDisplay() {
+	private void refreshAccountTab() {
 
+		// Get session user.
+		User curUser = sessionServer.getActiveUser();
+		
 		// Check for active session user.
-		if (sessionServer == null || sessionServer.getActiveUser() == null) {
+		if (curUser == null) {
 
-			// Update shown panel.
-			LayoutManager panelLayout = this.jPanelAccountDetails.getLayout();
+			// Update shown account panel.
+			LayoutManager panelLayout = this.jPanelAccount.getLayout();
 			if (panelLayout instanceof CardLayout) {
 
-				((CardLayout)panelLayout).show(this.jPanelAccountDetails, "null");
+				((CardLayout)panelLayout).show(this.jPanelAccount, "null");
 			}
 		}
 		else {
 			
-			// Update panel colors.
+			// Updated account details display.
+			
+			// Update account details component colors.
 			this.jTextFieldAccountEmail.setBackground(GUI_THEME_COLOR);
 			this.jTextFieldAccountPhoneNumber.setBackground(GUI_THEME_COLOR);
 			this.jPasswordFieldAccountPassword.setBackground(GUI_THEME_COLOR);
 			this.jTextAreaAccountBio.setBackground(GUI_THEME_COLOR);
 			
-			// Update shown panel.
-			LayoutManager panelLayout = this.jPanelAccountDetails.getLayout();
-			if (panelLayout instanceof CardLayout) {
+			// Update account details component information.
+			this.jTextFieldAccountEmail.setText(curUser.getEmail());
+			this.jTextFieldAccountEmailEdit.setText(curUser.getEmail());
+			this.jTextFieldAccountPhoneNumber.setText(curUser.getPhoneNum());
+			this.jTextFieldAccountPhoneNumberEdit.setText(curUser.getPhoneNum());
+			this.jPasswordFieldAccountPassword.setText(curUser.getPassword());
+			this.jPasswordFieldAccountPasswordEdit.setText(curUser.getPassword());
+			this.jTextAreaAccountBio.setText(curUser.getBio());
+			this.jTextAreaAccountBioEdit.setText(curUser.getBio());
+			
+			// Update account activity display.
+			
+			// Create new TableModel for account activity table.
+			TableModel tableModel = new TableModel(new String[]{"Post ID", "Title", "Date"}, 0);
+			this.jTableAccountActivity.setModel(tableModel);
 
-				((CardLayout)panelLayout).show(this.jPanelAccountDetails, "valid");
+			// Populate account activity table with user's posts.
+			for (Post userPost : curUser.getPosts()) {
+
+				tableModel.addRow(new String[]{
+					Integer.toString(userPost.hashCode() % 256), 
+					userPost.getTitle(), 
+					userPost.getDate().format(DateTimeFormatter.ISO_DATE)});
 			}
 			
-			// Update information.
-			this.jTextFieldAccountEmail.setText(sessionServer.getActiveUser().getEmail());
-			this.jTextFieldAccountPhoneNumber.setText(sessionServer.getActiveUser().getPhoneNum());
-			this.jPasswordFieldAccountPassword.setText(sessionServer.getActiveUser().getPassword());
-			this.jTextAreaAccountBio.setText(sessionServer.getActiveUser().getBio());
+			// Update shown account panel.
+			LayoutManager panelLayout = this.jPanelAccount.getLayout();
+			if (panelLayout instanceof CardLayout) {
+
+				((CardLayout)panelLayout).show(this.jPanelAccount, "valid");
+			}
+		}
+	}
+	
+	private void refreshUserStatusLabel() {
+	
+		// Update displayed text and base color.
+		if (sessionServer.getActiveUser() == null) {
+		
+			this.jLabelMainSessionUserStatus.setText(USER_STATUS_OUT_STRING);
+			this.jLabelMainSessionUserStatus.setForeground(USER_STATUS_OUT_COLOR);
+		}
+		else {
+		
+			this.jLabelMainSessionUserStatus.setText(sessionServer.getActiveUser().getUsername());
+			this.jLabelMainSessionUserStatus.setForeground(USER_STATUS_IN_COLOR);
+		}
+		
+		// Check if mouse is on label.
+		Point mouseLocation = MouseInfo.getPointerInfo().getLocation();
+		Point relativeMouseLocation = new Point(
+			mouseLocation.x - this.jLabelMainSessionUserStatus.getLocationOnScreen().x, 
+			mouseLocation.y - this.jLabelMainSessionUserStatus.getLocationOnScreen().y);
+		if (this.jLabelMainSessionUserStatus.contains(relativeMouseLocation)) {
+		
+			this.jLabelMainSessionUserStatus.setForeground(USER_STATUS_HOVER_COLOR);
+		}
+	}
+	
+	private void logUserIn(User newSessionUser) {
+	
+		// Log user in (or out if null).
+		sessionServer.setSessionUser(newSessionUser);
+		
+		// Update displays.
+		refreshAccountTab();
+		refreshUserStatusLabel();
+	}
+	
+	private User promptUserForLogin() {
+	
+		// User is not logged in.
+		if (sessionServer.getActiveUser() == null) {
+
+			// Initialize return value.
+			this.lsDialogResult = null;
 			
-			this.jTextFieldAccountEmailEdit.setText(sessionServer.getActiveUser().getEmail());
-			this.jTextFieldAccountPhoneNumberEdit.setText(sessionServer.getActiveUser().getPhoneNum());
-			this.jPasswordFieldAccountPasswordEdit.setText(sessionServer.getActiveUser().getPassword());
-			this.jTextAreaAccountBioEdit.setText(sessionServer.getActiveUser().getBio());
+			// Show the login/signup dialog.
+			this.jDialogLoginSignup.setVisible(true);
+			
+			return this.lsDialogResult;
+		}
+		// User is logged in.
+		else {
+
+			// Prompt user to log out.
+			int choice = JOptionPane.showConfirmDialog(
+				this.jDialogLoginSignup,
+				"Are you sure you want to log out?",
+				"Log Out",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE);
+
+			// If user chose to log out.
+			if (choice == JOptionPane.YES_OPTION) {
+
+				return null;
+			}
+			else {
+			
+				return sessionServer.getActiveUser();
+			}
 		}
 	}
 
@@ -1844,6 +1849,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         private javax.swing.JFrame groupWindow;
         private javax.swing.JButton groupWindowJoinGroupButton;
         private javax.swing.JButton jButton2;
+        private javax.swing.JButton jButtonAccountMustLogIn;
         private javax.swing.JButton jButtonAccountUpdate;
         private javax.swing.JButton jButtonLogin;
         private javax.swing.JButton jButtonLoginCancel;
@@ -1879,10 +1885,10 @@ public class GUIFrameMain extends javax.swing.JFrame {
         private javax.swing.JLabel jLabelSignupUsername;
         private javax.swing.JPanel jPanel1;
         private javax.swing.JPanel jPanel2;
+        private javax.swing.JPanel jPanelAccount;
         private javax.swing.JPanel jPanelAccountActivity;
         private javax.swing.JPanel jPanelAccountDetails;
-        private javax.swing.JPanel jPanelAccountDetailsNull;
-        private javax.swing.JPanel jPanelAccountDetailsValid;
+        private javax.swing.JPanel jPanelAccountNull;
         private javax.swing.JPanel jPanelAllGroups;
         private javax.swing.JPanel jPanelBrowseGroups;
         private javax.swing.JPanel jPanelCreateGroup;
@@ -1905,7 +1911,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         private javax.swing.JSeparator jSeparator1;
         private javax.swing.JSeparator jSeparator2;
         private javax.swing.JSeparator jSeparator3;
-        private javax.swing.JTabbedPane jTabbedPaneAcount;
+        private javax.swing.JTabbedPane jTabbedPaneAcountValid;
         private javax.swing.JTabbedPane jTabbedPaneGroups;
         private javax.swing.JTabbedPane jTabbedPaneMain;
         private javax.swing.JTable jTableAccountActivity;
