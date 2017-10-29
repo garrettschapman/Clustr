@@ -2199,7 +2199,7 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="jButtonAccountMustLogIn">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Log In/Sign up"/>
+                    <Property name="text" type="java.lang.String" value="Login/Signup"/>
                   </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonAccountMustLogInMouseClicked"/>
