@@ -18,18 +18,37 @@ public class Message implements Serializable {
 	private User recipient;
 	private String body;
 	private LocalDateTime date;
+	private Boolean isHidden;
 	
 	/*
 	 * Constructor
 	 */
-	public Message(User author, User recipient, String body, LocalDateTime date) {
+	public Message(User author, User recipient, String body, LocalDateTime date, Boolean isHidden) {
 		this.author = author;
 		this.recipient = recipient;
 		this.body = body;
 		this.date = date;
+		this.isHidden = isHidden;
 	} //end of constructor
 	
-	//getter statements
+	/*
+	 * Method to edit a message
+	 */
+	public void setMessage(String newBody, LocalDateTime editDate) {
+		this.body = newBody;
+		this.date = editDate;
+	} //end of method setMessage
+	
+	/*
+	 * Method to set if the message is hidden
+	 */
+	public void setIsHidden(Boolean isBlocked) {
+		this.isHidden = isBlocked;
+	} //end of method setIsHidden
+	
+	/*
+	 * Getters for variables
+	 */
 	public User getAuthor() {
 		return this.author;
 	}
@@ -41,5 +60,8 @@ public class Message implements Serializable {
 	}
 	public LocalDateTime getDate() {
 		return this.date;
-	}
+	} 
+	public Boolean getIsHidden() {
+		return this.isHidden;
+	} //end of getter methods
 } //end of class Message

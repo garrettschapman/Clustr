@@ -80,6 +80,28 @@ public class User implements Serializable {
 		return null;
 	}
 	
+	/*
+	 * Method to write a message to a user
+	 * Checks if the author is blocked by the recipient
+	 */
+	public Message writeMessage(User recipient, String body, LocalDateTime date) {
+		Boolean isBlocked = false;
+		ArrayList<User> blockedUsers = recipient.getBlockedUsers();
+		Message newMessage;
+		
+		//for loop to determine if the author is blocked
+		for(int i = 0; i < blockedUsers.size(); i++) {
+			if(this.equals(blockedUsers).get(i)) {
+				isBlocked = true; //user is blocked
+				break;
+			}
+		} //end of for loop
+		
+		newMessage = new Message(this, recipient, body, date, isBlocked);
+		
+		return newMessage;
+	} //end of method writeMessage
+	
 	public String getUsername() {
 		return Username;
 	}
@@ -123,6 +145,8 @@ public class User implements Serializable {
 	public ArrayList<Post> getPosts(){
 		return this.Posts;
 	}
-
 	
+	public ArrayList<User> getBlockedUsers(){
+		return this.BlockUsers;
+	} //end of method getBlockedUsers
 }
