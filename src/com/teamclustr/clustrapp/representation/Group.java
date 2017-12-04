@@ -86,7 +86,9 @@ public class Group implements Serializable {
     public String getName() {
         return this.groupName;
     }
-
+    public ArrayList<String> getCatList(){
+    	return categories;
+    }
     public String getCategories() {
         return this.categories.toString();
     }

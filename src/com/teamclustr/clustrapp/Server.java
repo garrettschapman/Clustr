@@ -24,6 +24,7 @@ public class Server implements Serializable {
 
     // All groups.
     private ArrayList<Group> groups;
+    private ArrayList<Group> searchedGroups;
     
     // The active group and post being interacted with at a certain time
     private Group activeGroup;
@@ -39,6 +40,8 @@ public class Server implements Serializable {
         activeUser = null; // who is logged into the system
         users = new ArrayList<User>(16);
         groups = new ArrayList<Group>(16);
+        searchedGroups = new ArrayList<Group>(16);
+        
 
         // add some users, groups, and posts
         
@@ -101,6 +104,19 @@ public class Server implements Serializable {
         groups.add(gp3);
         gp3.addMember(usr2);
 
+    }
+    //searches overall group array, copies matching values into a visible arrayList
+    public void searchedGroups(ArrayList<Group> groupIN, String s, boolean tag){
+    	
+    	for(Group group : groupIN){
+    		
+    		//ArrayList<String> cat = group.getCatList();
+    		String name = group.getName();
+    		if(name.equals(s)){
+    			searchedGroups.add(group);
+    		}
+    	}
+    	
     }
 
     public Group getActiveGroup() throws NullPointerException{
