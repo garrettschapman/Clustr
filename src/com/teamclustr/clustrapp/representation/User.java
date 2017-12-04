@@ -63,7 +63,7 @@ public class User implements Serializable {
 		this.Friends.add(Username);	
 	}
 	
-	public void addBlockUser(User Username) { //add blocked user to enemy list
+	public void addBlockUser(User Username) { //add blocked user to block user list
 		this.BlockUsers.add(Username);
 	}
 
