@@ -1,8 +1,10 @@
 package com.teamclustr.clustrapp.representation;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.teamclustr.clustrapp.communication.Message;
 import com.teamclustr.clustrapp.communication.Post;
 
 /**
@@ -24,33 +26,22 @@ public class User implements Serializable {
 	private String PhoneNum; 
 	private String Bio; 
 	private ArrayList<User> Friends;
-	private ArrayList<User> Enemies;
 	private ArrayList<Group> GroupList; 
 	private ArrayList<Post> Posts; 
 	private ArrayList<Post> Comments;
-	
+	private ArrayList<User> BlockUsers; //blocked users
 	
 	//Constructor 
 	public User(String Username,
                 String Password, String Email, String PhoneNum, String Bio) {
 		
-		createAccount(Username, Password, Email, PhoneNum, Bio);
-                
-                /*
-                TODO: WHY WERE THESE THREE METHODS CALLED HERE?
-                */ /*Jirawat- I thought I had to call it so that the- 
-					system class can use it, but I am probably wrong so thank you 
-					for correcting me  */
-		
-		//addFriend(Username);
-		//addEnemies(Username); 
-		//removeFriend(Username);   
+		createAccount(Username, Password, Email, PhoneNum, Bio);  
 
 		Friends = new ArrayList<User>();
-		Enemies = new ArrayList<User>();
 		GroupList = new ArrayList<Group>();
 		Posts = new ArrayList<Post>();
 		Comments = new ArrayList<Post>();
+		BlockUsers = new ArrayList<User>();
 	
 	}
 	
@@ -74,8 +65,8 @@ public class User implements Serializable {
 		this.Friends.add(Username);	
 	}
 	
-	public void addEnemies(User Username) { //add blocked user to enemy list
-		this.Enemies.add(Username);
+	public void addBlockUser(User Username) { //add blocked user to block user list
+		this.BlockUsers.add(Username);
 	}
 
 	public void removeFriend(User Username) {
@@ -90,6 +81,28 @@ public class User implements Serializable {
 		}
 		return null;
 	}
+	
+	/*
+	 * Method to write a message to a user
+	 * Checks if the author is blocked by the recipient
+	 */
+	public Message writeMessage(User recipient, String body, LocalDateTime date) {
+		Boolean isBlocked = false;
+		ArrayList<User> blockedUsers = recipient.getBlockedUsers();
+		Message newMessage;
+		
+		//for loop to determine if the author is blocked
+		for(int i = 0; i < blockedUsers.size(); i++) {
+			if(this.equals(blockedUsers.get(i))) {
+				isBlocked = true; //user is blocked
+				break;
+			}
+		} //end of for loop
+		
+		newMessage = new Message(this, recipient, body, date, isBlocked);
+		
+		return newMessage;
+	} //end of method writeMessage
 	
 	public String getUsername() {
 		return Username;
@@ -134,6 +147,8 @@ public class User implements Serializable {
 	public ArrayList<Post> getPosts(){
 		return this.Posts;
 	}
-
 	
+	public ArrayList<User> getBlockedUsers(){
+		return this.BlockUsers;
+	} //end of method getBlockedUsers
 }
