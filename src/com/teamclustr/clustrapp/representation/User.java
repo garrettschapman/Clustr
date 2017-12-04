@@ -24,33 +24,22 @@ public class User implements Serializable {
 	private String PhoneNum; 
 	private String Bio; 
 	private ArrayList<User> Friends;
-	private ArrayList<User> Enemies;
 	private ArrayList<Group> GroupList; 
 	private ArrayList<Post> Posts; 
 	private ArrayList<Post> Comments;
-	
+	private ArrayList<User> BlockUsers; //blocked users
 	
 	//Constructor 
 	public User(String Username,
                 String Password, String Email, String PhoneNum, String Bio) {
 		
-		createAccount(Username, Password, Email, PhoneNum, Bio);
-                
-                /*
-                TODO: WHY WERE THESE THREE METHODS CALLED HERE?
-                */ /*Jirawat- I thought I had to call it so that the- 
-					system class can use it, but I am probably wrong so thank you 
-					for correcting me  */
-		
-		//addFriend(Username);
-		//addEnemies(Username); 
-		//removeFriend(Username);   
+		createAccount(Username, Password, Email, PhoneNum, Bio);  
 
 		Friends = new ArrayList<User>();
-		Enemies = new ArrayList<User>();
 		GroupList = new ArrayList<Group>();
 		Posts = new ArrayList<Post>();
 		Comments = new ArrayList<Post>();
+		BlockUsers = new ArrayList<User>();
 	
 	}
 	
@@ -74,8 +63,8 @@ public class User implements Serializable {
 		this.Friends.add(Username);	
 	}
 	
-	public void addEnemies(User Username) { //add blocked user to enemy list
-		this.Enemies.add(Username);
+	public void addBlockUser(User Username) { //add blocked user to enemy list
+		this.BlockUsers.add(Username);
 	}
 
 	public void removeFriend(User Username) {
