@@ -1,6 +1,9 @@
 package com.teamclustr.clustrapp.communication;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+
+import com.teamclustr.clustrapp.representation.User;
 
 /**
  * BRIEF CLASS DESCRIPTION.

@@ -1,8 +1,10 @@
 package com.teamclustr.clustrapp.representation;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.teamclustr.clustrapp.communication.Message;
 import com.teamclustr.clustrapp.communication.Post;
 
 /**
@@ -91,7 +93,7 @@ public class User implements Serializable {
 		
 		//for loop to determine if the author is blocked
 		for(int i = 0; i < blockedUsers.size(); i++) {
-			if(this.equals(blockedUsers).get(i)) {
+			if(this.equals(blockedUsers.get(i))) {
 				isBlocked = true; //user is blocked
 				break;
 			}
