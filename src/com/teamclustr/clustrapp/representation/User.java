@@ -65,12 +65,16 @@ public class User implements Serializable {
 		this.Friends.add(Username);	
 	}
 	
+	public void removeFriend(User Username) { //delete friend
+		this.Friends.remove(Username);
+	}
+	
 	public void addBlockUser(User Username) { //add blocked user to block user list
 		this.BlockUsers.add(Username);
 	}
-
-	public void removeFriend(User Username) {
-		this.Friends.remove(Username);
+	
+	public void unBlockUser(User Username) {  //unblock the blocked user
+		this.BlockUsers.remove(Username);
 	}
 	
 	public Post getPostByTitle(String postName) {
