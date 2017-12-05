@@ -30,6 +30,7 @@ import javax.swing.table.TableRowSorter;
 import java.nio.file.Path;
 import javax.swing.Icon;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  * BRIEF CLASS DESCRIPTION.
@@ -57,6 +58,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private User lsDialogResult;
 
     private JPanel getGradientPanel(String color1, String color2) {
+        
         class GradientPanel extends JPanel{
             String color1;
             String color2;
@@ -90,8 +92,36 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 
             }
         }
+        
         GradientPanel panel = new GradientPanel(color1, color2);
         return panel;
+    }
+    
+    private JScrollPane getJScrollPane(String colorTop, String colorBottom){
+        
+        class XJScrollPane extends JScrollPane{
+            private Color colorTop;
+            private Color colorBottom;
+            
+            public XJScrollPane(String topColor, String bottomColor){
+                this.colorTop = Color.decode(topColor);
+                this.colorBottom = Color.decode(bottomColor);
+            }
+            @Override
+            public void paint(Graphics g){
+                //super.paint(g);
+                
+                Graphics2D g2d = (Graphics2D) g;
+                int w = getWidth();
+                int h = getHeight();
+                                
+                GradientPaint gp = new GradientPaint( 0, 0, colorBottom, 0, h, colorTop);
+                g2d.setPaint(gp);
+                g2d.fillRect(0, 0, w, h);
+            }
+        }
+        XJScrollPane pane = new XJScrollPane(colorTop, colorBottom);
+        return pane;
     }
     
     /**
@@ -254,7 +284,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelAccountNull = getGradientPanel("#FFFFFF", "#90E0FF");
         jButtonAccountMustLogIn = new javax.swing.JButton();
         jTabbedPaneAcountValid = new javax.swing.JTabbedPane();
-        jPanelAccountDetails = new javax.swing.JPanel();
+        jPanelAccountDetails = getGradientPanel("#FFFFFF", "#90E0FF");
         jLabelAccountEmail = new javax.swing.JLabel();
         jTextFieldAccountEmail = new javax.swing.JTextField();
         jTextFieldAccountEmailEdit = new javax.swing.JTextField();
@@ -271,13 +301,16 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jScrollPaneAccountBioEdit = new javax.swing.JScrollPane();
         jTextAreaAccountBioEdit = new javax.swing.JTextArea();
         fillerAccount = new javax.swing.Box.Filler(new java.awt.Dimension(150, 25), new java.awt.Dimension(150, 25), new java.awt.Dimension(150, 25));
-        jPanelAccountActivity = new javax.swing.JPanel();
+        jPanelAccountActivity = getGradientPanel("#FFFFFF", "#90E0FF");
         jScrollPaneAccountActivity = new javax.swing.JScrollPane();
         jTableAccountActivity = new javax.swing.JTable();
-        jTabbedPaneGroups = new javax.swing.JTabbedPane();
-        jPanelBrowseGroups = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        feedTable = new javax.swing.JTable();
+        jPanelGroups = new javax.swing.JPanel();
+        jPanelAllGroups = new javax.swing.JPanel();
+        groupSearchField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        groupSearchButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        browseTable = new javax.swing.JTable();
         jPanelCreateGroup = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -288,12 +321,9 @@ public class GUIFrameMain extends javax.swing.JFrame {
         groupTagsField = new javax.swing.JTextField();
         groupCategoriesField = new javax.swing.JTextField();
         groupNameField = new javax.swing.JTextField();
-        jPanelAllGroups = new javax.swing.JPanel();
-        groupSearchField = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        groupSearchButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        browseTable = new javax.swing.JTable();
+        jPanelBrowseGroups = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        feedTable = new javax.swing.JTable();
         jLabelMainSessionUserStatus = new javax.swing.JLabel();
 
         jDialogLoginSignup.setTitle("Login/Signup");
@@ -845,7 +875,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         });
         jPanelAccount.setLayout(new java.awt.CardLayout());
 
-        jPanelAccountNull.setBackground(new java.awt.Color(144, 224, 255));
+        jPanelAccountNull.setBackground(new java.awt.Color(255, 255, 255));
         jPanelAccountNull.setLayout(new java.awt.GridBagLayout());
 
         jButtonAccountMustLogIn.setBackground(new java.awt.Color(255, 255, 255));
@@ -1009,39 +1039,70 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         jTabbedPaneMain.addTab("Account", jPanelAccount);
 
-        jTabbedPaneGroups.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTabbedPaneGroupsMouseClicked(evt);
+        jPanelGroups.setLayout(new java.awt.CardLayout());
+
+        groupSearchField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                groupSearchFieldActionPerformed(evt);
             }
         });
 
-        feedTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        jLabel1.setText("Search Groups");
 
+        groupSearchButton.setText("Search");
+        groupSearchButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                groupSearchButtonMouseClicked(evt);
+            }
+        });
+
+        browseTable.setAutoCreateRowSorter(true);
+        browseTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null}
             },
             new String [] {
-
+                "Group Name", "Number Of Members", "Tags", "Categories", "Join"
             }
         ));
-        feedTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        browseTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                feedTableMouseClicked(evt);
+                browseTableMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(feedTable);
+        jScrollPane1.setViewportView(browseTable);
 
-        javax.swing.GroupLayout jPanelBrowseGroupsLayout = new javax.swing.GroupLayout(jPanelBrowseGroups);
-        jPanelBrowseGroups.setLayout(jPanelBrowseGroupsLayout);
-        jPanelBrowseGroupsLayout.setHorizontalGroup(
-            jPanelBrowseGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanelAllGroupsLayout = new javax.swing.GroupLayout(jPanelAllGroups);
+        jPanelAllGroups.setLayout(jPanelAllGroupsLayout);
+        jPanelAllGroupsLayout.setHorizontalGroup(
+            jPanelAllGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAllGroupsLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(groupSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(groupSearchButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanelAllGroupsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        jPanelBrowseGroupsLayout.setVerticalGroup(
-            jPanelBrowseGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+        jPanelAllGroupsLayout.setVerticalGroup(
+            jPanelAllGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAllGroupsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelAllGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(groupSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(groupSearchButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jTabbedPaneGroups.addTab("Your Feed", jPanelBrowseGroups);
+        jPanelGroups.add(jPanelAllGroups, "card2");
 
         jLabel2.setText("Group Name");
 
@@ -1125,7 +1186,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
             .addGroup(jPanelCreateGroupLayout.createSequentialGroup()
                 .addGap(150, 150, 150)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addContainerGap(401, Short.MAX_VALUE))
         );
         jPanelCreateGroupLayout.setVerticalGroup(
             jPanelCreateGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1135,72 +1196,39 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 .addGap(150, 150, 150))
         );
 
-        jTabbedPaneGroups.addTab("Create Group", jPanelCreateGroup);
+        jPanelGroups.add(jPanelCreateGroup, "card3");
 
-        groupSearchField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                groupSearchFieldActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Search Groups");
-
-        groupSearchButton.setText("Search");
-        groupSearchButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                groupSearchButtonMouseClicked(evt);
-            }
-        });
-
-        browseTable.setAutoCreateRowSorter(true);
-        browseTable.setModel(new javax.swing.table.DefaultTableModel(
+        feedTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Group Name", "Number Of Members", "Tags", "Categories", "Join"
+
             }
         ));
-        browseTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        feedTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                browseTableMouseClicked(evt);
+                feedTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(browseTable);
+        jScrollPane2.setViewportView(feedTable);
 
-        javax.swing.GroupLayout jPanelAllGroupsLayout = new javax.swing.GroupLayout(jPanelAllGroups);
-        jPanelAllGroups.setLayout(jPanelAllGroupsLayout);
-        jPanelAllGroupsLayout.setHorizontalGroup(
-            jPanelAllGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelAllGroupsLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(groupSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(groupSearchButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanelAllGroupsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+        javax.swing.GroupLayout jPanelBrowseGroupsLayout = new javax.swing.GroupLayout(jPanelBrowseGroups);
+        jPanelBrowseGroups.setLayout(jPanelBrowseGroupsLayout);
+        jPanelBrowseGroupsLayout.setHorizontalGroup(
+            jPanelBrowseGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelBrowseGroupsLayout.createSequentialGroup()
+                .addGap(106, 106, 106)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE))
         );
-        jPanelAllGroupsLayout.setVerticalGroup(
-            jPanelAllGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelAllGroupsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelAllGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(groupSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(groupSearchButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
-                .addContainerGap())
+        jPanelBrowseGroupsLayout.setVerticalGroup(
+            jPanelBrowseGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
         );
 
-        jTabbedPaneGroups.addTab("Browse All Groups", jPanelAllGroups);
+        jPanelGroups.add(jPanelBrowseGroups, "card4");
 
-        jTabbedPaneMain.addTab("Groups", jTabbedPaneGroups);
+        jTabbedPaneMain.addTab("Groups", jPanelGroups);
 
         jLabelMainSessionUserStatus.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabelMainSessionUserStatus.setText("USER LOGIN STATUS");
@@ -1342,13 +1370,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         }
     }
 
-
-    private void jTabbedPaneGroupsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneGroupsMouseClicked
-        // TODO add your handling code here:
-        // list all groups that exist into the table
-        updateGroupTable(browseTable, "browse");
-        updateGroupTable(feedTable, "feed");
-    }//GEN-LAST:event_jTabbedPaneGroupsMouseClicked
 
     private void groupSearchButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_groupSearchButtonMouseClicked
         // Grab the text in the search field
@@ -1963,6 +1984,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelAllGroups;
     private javax.swing.JPanel jPanelBrowseGroups;
     private javax.swing.JPanel jPanelCreateGroup;
+    private javax.swing.JPanel jPanelGroups;
     private javax.swing.JPanel jPanelLogin;
     private javax.swing.JPanel jPanelLoginSignup;
     private javax.swing.JPanel jPanelSignup;
@@ -1983,7 +2005,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPaneAcountValid;
-    private javax.swing.JTabbedPane jTabbedPaneGroups;
     private javax.swing.JTabbedPane jTabbedPaneMain;
     private javax.swing.JTable jTableAccountActivity;
     private javax.swing.JTextArea jTextAreaAccountBio;
