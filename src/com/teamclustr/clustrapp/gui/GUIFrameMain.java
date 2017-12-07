@@ -1386,7 +1386,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
     private void createGroupCancelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createGroupCancelButtonMouseClicked
         // Canceled; Go to profile tab
-        jTabbedPaneGroups.setSelectedIndex(0);
+        //jTabbedPaneGroups.setSelectedIndex(0);
 
         // clear the fields
         groupCategoriesField.setText("");
