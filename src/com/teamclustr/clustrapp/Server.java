@@ -113,9 +113,16 @@ public class Server implements Serializable {
     		s = s.toLowerCase();
     		name = name.toLowerCase();
     		if(name.equals(s)){
+    			searchedGroups.clear();
     			searchedGroups.add(group);
+    		}else if(s.equals("")){
+    			searchedGroups.clear();
     		}else{
     			searchedGroups.clear();
+    			for(int i = 0; i < groups.size(); i++){
+    				searchedGroups.clear();
+    				searchedGroups.set(i, groups.get(i));
+    			}
     		}
     	}
     }
