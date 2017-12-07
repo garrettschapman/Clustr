@@ -106,17 +106,18 @@ public class Server implements Serializable {
 
     }
     //searches overall group array, copies matching values into a visible arrayList
-    public void searchedGroups(ArrayList<Group> groupIN, String s, boolean tag){
-    	
-    	for(Group group : groupIN){
-    		
+    public void searchedGroups(String s, boolean tag){
+    	for(Group group : groups){
     		//ArrayList<String> cat = group.getCatList();
     		String name = group.getName();
+    		s = s.toLowerCase();
+    		name = name.toLowerCase();
     		if(name.equals(s)){
     			searchedGroups.add(group);
+    		}else{
+    			searchedGroups.clear();
     		}
     	}
-    	
     }
 
     public Group getActiveGroup() throws NullPointerException{
