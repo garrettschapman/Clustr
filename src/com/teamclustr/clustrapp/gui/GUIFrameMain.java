@@ -30,7 +30,6 @@ import javax.swing.table.TableRowSorter;
 import java.nio.file.Path;
 import javax.swing.Icon;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 /**
  * BRIEF CLASS DESCRIPTION.
@@ -58,7 +57,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private User lsDialogResult;
 
     private JPanel getGradientPanel(String color1, String color2) {
-        
         class GradientPanel extends JPanel{
             String color1;
             String color2;
@@ -92,36 +90,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 
             }
         }
-        
         GradientPanel panel = new GradientPanel(color1, color2);
         return panel;
-    }
-    
-    private JScrollPane getJScrollPane(String colorTop, String colorBottom){
-        
-        class XJScrollPane extends JScrollPane{
-            private Color colorTop;
-            private Color colorBottom;
-            
-            public XJScrollPane(String topColor, String bottomColor){
-                this.colorTop = Color.decode(topColor);
-                this.colorBottom = Color.decode(bottomColor);
-            }
-            @Override
-            public void paint(Graphics g){
-                //super.paint(g);
-                
-                Graphics2D g2d = (Graphics2D) g;
-                int w = getWidth();
-                int h = getHeight();
-                                
-                GradientPaint gp = new GradientPaint( 0, 0, colorBottom, 0, h, colorTop);
-                g2d.setPaint(gp);
-                g2d.fillRect(0, 0, w, h);
-            }
-        }
-        XJScrollPane pane = new XJScrollPane(colorTop, colorBottom);
-        return pane;
     }
     
     /**
@@ -305,6 +275,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jScrollPaneAccountActivity = new javax.swing.JScrollPane();
         jTableAccountActivity = new javax.swing.JTable();
         jPanelGroups = new javax.swing.JPanel();
+        jTabbedPaneGroups = new javax.swing.JTabbedPane();
         jPanelAllGroups = new javax.swing.JPanel();
         groupSearchField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -1030,7 +1001,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         );
         jPanelAccountActivityLayout.setVerticalGroup(
             jPanelAccountActivityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPaneAccountActivity, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+            .addComponent(jScrollPaneAccountActivity, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
         );
 
         jTabbedPaneAcountValid.addTab("Activity", jPanelAccountActivity);
@@ -1038,8 +1009,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelAccount.add(jTabbedPaneAcountValid, "valid");
 
         jTabbedPaneMain.addTab("Account", jPanelAccount);
-
-        jPanelGroups.setLayout(new java.awt.CardLayout());
 
         groupSearchField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1102,7 +1071,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanelGroups.add(jPanelAllGroups, "card2");
+        jTabbedPaneGroups.addTab("Browse All Groups", jPanelAllGroups);
 
         jLabel2.setText("Group Name");
 
@@ -1186,7 +1155,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
             .addGroup(jPanelCreateGroupLayout.createSequentialGroup()
                 .addGap(150, 150, 150)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(401, Short.MAX_VALUE))
+                .addContainerGap(396, Short.MAX_VALUE))
         );
         jPanelCreateGroupLayout.setVerticalGroup(
             jPanelCreateGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1196,7 +1165,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 .addGap(150, 150, 150))
         );
 
-        jPanelGroups.add(jPanelCreateGroup, "card3");
+        jTabbedPaneGroups.addTab("Create Group", jPanelCreateGroup);
 
         feedTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1217,16 +1186,25 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelBrowseGroups.setLayout(jPanelBrowseGroupsLayout);
         jPanelBrowseGroupsLayout.setHorizontalGroup(
             jPanelBrowseGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBrowseGroupsLayout.createSequentialGroup()
-                .addGap(106, 106, 106)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
         );
         jPanelBrowseGroupsLayout.setVerticalGroup(
             jPanelBrowseGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
         );
 
-        jPanelGroups.add(jPanelBrowseGroups, "card4");
+        jTabbedPaneGroups.addTab("Your Groups", jPanelBrowseGroups);
+
+        javax.swing.GroupLayout jPanelGroupsLayout = new javax.swing.GroupLayout(jPanelGroups);
+        jPanelGroups.setLayout(jPanelGroupsLayout);
+        jPanelGroupsLayout.setHorizontalGroup(
+            jPanelGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPaneGroups, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanelGroupsLayout.setVerticalGroup(
+            jPanelGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPaneGroups, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         jTabbedPaneMain.addTab("Groups", jPanelGroups);
 
@@ -1371,6 +1349,13 @@ public class GUIFrameMain extends javax.swing.JFrame {
     }
 
 
+    private void jTabbedPaneGroupsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneGroupsMouseClicked
+        // TODO add your handling code here:
+        // list all groups that exist into the table
+        updateGroupTable(browseTable, "browse");
+        updateGroupTable(feedTable, "feed");
+    }//GEN-LAST:event_jTabbedPaneGroupsMouseClicked
+
     private void groupSearchButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_groupSearchButtonMouseClicked
         // Grab the text in the search field
 
@@ -1386,7 +1371,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
     private void createGroupCancelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createGroupCancelButtonMouseClicked
         // Canceled; Go to profile tab
-        //jTabbedPaneGroups.setSelectedIndex(0);
+        jTabbedPaneGroups.setSelectedIndex(0);
 
         // clear the fields
         groupCategoriesField.setText("");
@@ -1455,17 +1440,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_browseTableMouseClicked
-
-    private void feedTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_feedTableMouseClicked
-        try {
-            // get the group row clicked
-            String groupName = getGroupNameFromTable(feedTable, evt);
-            goToGroupPage(sessionServer.getGroupByName(groupName));
-
-        } catch (Exception e) {
-            // TODO do something
-        }
-    }//GEN-LAST:event_feedTableMouseClicked
 
     private void showCreatePostDialogButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showCreatePostDialogButtonMouseClicked
         // show a dialog box where you can create a new post
@@ -1707,6 +1681,17 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private void jButtonAccountMustLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAccountMustLogInActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAccountMustLogInActionPerformed
+
+    private void feedTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_feedTableMouseClicked
+        try {
+            // get the group row clicked
+            String groupName = getGroupNameFromTable(feedTable, evt);
+            goToGroupPage(sessionServer.getGroupByName(groupName));
+
+        } catch (Exception e) {
+            // TODO do something
+        }
+    }//GEN-LAST:event_feedTableMouseClicked
 
     public void goToPostPage(Post post) {
         // TODO: CONFIGURE THE VIEW POST PAGE
@@ -2005,6 +1990,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPaneAcountValid;
+    private javax.swing.JTabbedPane jTabbedPaneGroups;
     private javax.swing.JTabbedPane jTabbedPaneMain;
     private javax.swing.JTable jTableAccountActivity;
     private javax.swing.JTextArea jTextAreaAccountBio;
