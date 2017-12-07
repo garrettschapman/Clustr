@@ -276,13 +276,13 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jTableAccountActivity = new javax.swing.JTable();
         jPanelGroups = new javax.swing.JPanel();
         jTabbedPaneGroups = new javax.swing.JTabbedPane();
-        jPanelAllGroups = new javax.swing.JPanel();
+        jPanelAllGroups = getGradientPanel("#FFFFFF", "#90E0FF");
         groupSearchField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         groupSearchButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         browseTable = new javax.swing.JTable();
-        jPanelCreateGroup = new javax.swing.JPanel();
+        jPanelCreateGroup = getGradientPanel("#FFFFFF", "#90E0FF");
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -292,7 +292,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         groupTagsField = new javax.swing.JTextField();
         groupCategoriesField = new javax.swing.JTextField();
         groupNameField = new javax.swing.JTextField();
-        jPanelBrowseGroups = new javax.swing.JPanel();
+        jPanelBrowseGroups = getGradientPanel("#FFFFFF", "#90E0FF");
         jScrollPane2 = new javax.swing.JScrollPane();
         feedTable = new javax.swing.JTable();
         jLabelMainSessionUserStatus = new javax.swing.JLabel();
@@ -997,7 +997,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelAccountActivity.setLayout(jPanelAccountActivityLayout);
         jPanelAccountActivityLayout.setHorizontalGroup(
             jPanelAccountActivityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPaneAccountActivity, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
+            .addComponent(jScrollPaneAccountActivity, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE)
         );
         jPanelAccountActivityLayout.setVerticalGroup(
             jPanelAccountActivityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1072,6 +1072,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
         );
 
         jTabbedPaneGroups.addTab("Browse All Groups", jPanelAllGroups);
+
+        jPanel2.setOpaque(false);
 
         jLabel2.setText("Group Name");
 
@@ -1155,7 +1157,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
             .addGroup(jPanelCreateGroupLayout.createSequentialGroup()
                 .addGap(150, 150, 150)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(396, Short.MAX_VALUE))
+                .addContainerGap(428, Short.MAX_VALUE))
         );
         jPanelCreateGroupLayout.setVerticalGroup(
             jPanelCreateGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1186,11 +1188,17 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelBrowseGroups.setLayout(jPanelBrowseGroupsLayout);
         jPanelBrowseGroupsLayout.setHorizontalGroup(
             jPanelBrowseGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBrowseGroupsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanelBrowseGroupsLayout.setVerticalGroup(
             jPanelBrowseGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+            .addGroup(jPanelBrowseGroupsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPaneGroups.addTab("Your Groups", jPanelBrowseGroups);
@@ -1199,7 +1207,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelGroups.setLayout(jPanelGroupsLayout);
         jPanelGroupsLayout.setHorizontalGroup(
             jPanelGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPaneGroups, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPaneGroups)
         );
         jPanelGroupsLayout.setVerticalGroup(
             jPanelGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
