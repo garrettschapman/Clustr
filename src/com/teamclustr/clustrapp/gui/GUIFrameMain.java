@@ -46,9 +46,9 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
     // Active session user status constants.
     public static final String USER_STATUS_OUT_STRING = "Not Logged In";
-    public static final Color USER_STATUS_IN_COLOR = Color.BLUE;
-    public static final Color USER_STATUS_OUT_COLOR = Color.RED;
-    public static final Color USER_STATUS_HOVER_COLOR = Color.YELLOW;
+    public static final Color USER_STATUS_IN_COLOR = Color.DARK_GRAY;
+    public static final Color USER_STATUS_OUT_COLOR = Color.GRAY;
+    public static final Color USER_STATUS_HOVER_COLOR = Color.LIGHT_GRAY;
     
     // Misc component theme constants.
     public static final Color GUI_THEME_COLOR = new Color(240, 240, 240);
