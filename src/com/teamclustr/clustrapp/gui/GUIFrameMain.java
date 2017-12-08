@@ -823,6 +823,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Clustr");
+        setBackground(new java.awt.Color(255, 255, 255));
         setIconImages(null);
         setMinimumSize(new java.awt.Dimension(800, 500));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
@@ -833,6 +834,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
             }
         });
 
+        jTabbedPaneMain.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPaneMain.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTabbedPaneMainMouseClicked(evt);
@@ -1001,7 +1003,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         );
         jPanelAccountActivityLayout.setVerticalGroup(
             jPanelAccountActivityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPaneAccountActivity, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+            .addComponent(jScrollPaneAccountActivity, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
         );
 
         jTabbedPaneAcountValid.addTab("Activity", jPanelAccountActivity);
@@ -1009,6 +1011,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelAccount.add(jTabbedPaneAcountValid, "valid");
 
         jTabbedPaneMain.addTab("Account", jPanelAccount);
+
+        jPanelAllGroups.setOpaque(false);
 
         groupSearchField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1025,6 +1029,9 @@ public class GUIFrameMain extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setOpaque(false);
+
         browseTable.setAutoCreateRowSorter(true);
         browseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1034,6 +1041,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 "Group Name", "Number Of Members", "Tags", "Categories", "Join"
             }
         ));
+        browseTable.setOpaque(false);
         browseTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 browseTableMouseClicked(evt);
@@ -1067,7 +1075,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(groupSearchButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1197,7 +1205,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
             jPanelBrowseGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBrowseGroupsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1211,7 +1219,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         );
         jPanelGroupsLayout.setVerticalGroup(
             jPanelGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPaneGroups, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPaneGroups)
         );
 
         jTabbedPaneMain.addTab("Groups", jPanelGroups);
