@@ -30,6 +30,8 @@ import javax.swing.table.TableRowSorter;
 import java.nio.file.Path;
 import javax.swing.Icon;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JViewport;
 
 /**
  * BRIEF CLASS DESCRIPTION.
@@ -49,7 +51,10 @@ public class GUIFrameMain extends javax.swing.JFrame {
     public static final Color USER_STATUS_IN_COLOR = Color.DARK_GRAY;
     public static final Color USER_STATUS_OUT_COLOR = Color.GRAY;
     public static final Color USER_STATUS_HOVER_COLOR = Color.LIGHT_GRAY;
+    
+    // colors for the gradient theme
     public static final Color GRADIENT_BOTTOM_COLOR = Color.decode("#90E0FF");
+    public static final Color GRADIENT_TOP_COLOR = Color.WHITE;
     
     // Misc component theme constants.
     public static final Color GUI_THEME_COLOR = new Color(240, 240, 240);
@@ -57,6 +62,23 @@ public class GUIFrameMain extends javax.swing.JFrame {
     // Login/Signup dialog return value.
     private User lsDialogResult;
 
+    /**
+     * This method creates a translucent JScrollPane so that you can see the 
+     * gradient behind the ScrollPane. 
+     * @return 
+     */
+    public JScrollPane getTranslucentScrollPane(){
+        JScrollPane pane = new JScrollPane();
+        pane.getViewport().setOpaque(false); // set the viewport to translucent
+        return pane;
+    }
+    
+    /**
+     * This method is called by the netbeans GUI BUILDER by changing the "custom code"
+     * option from default to "custom code" in the properties. This method 
+     * creates a new JPanel that has a gradient background.
+     * @return 
+     */
     private JPanel getGradientPanel() {
         class GradientPanel extends JPanel{
             
@@ -71,7 +93,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 Graphics2D g2d = (Graphics2D) g;
                 int w = getWidth();
                 int h = getHeight();
-                Color col1 = Color.WHITE;
+                Color col1 = GRADIENT_TOP_COLOR;
                 
                 Color col2 = GRADIENT_BOTTOM_COLOR;
                 
@@ -84,6 +106,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
         GradientPanel panel = new GradientPanel();
         return panel;
     }
+    
+    
     
     /**
      * This inner class defines a TableModel in which the cells are not editable
@@ -116,6 +140,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
 	    
         // Initialize GUI components.
         initComponents();
+        
+        
         
         // Initialize session user status.
         jLabelMainSessionUserStatus.setText(USER_STATUS_OUT_STRING);
@@ -271,7 +297,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         groupSearchField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         groupSearchButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        browseGroupsPane = getTranslucentScrollPane();
         browseTable = new javax.swing.JTable();
         jPanelCreateGroup = getGradientPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -284,7 +310,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         groupCategoriesField = new javax.swing.JTextField();
         groupNameField = new javax.swing.JTextField();
         jPanelBrowseGroups = getGradientPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane2 = getTranslucentScrollPane();
         feedTable = new javax.swing.JTable();
         jLabelMainSessionUserStatus = new javax.swing.JLabel();
 
@@ -1020,8 +1046,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setOpaque(false);
+        browseGroupsPane.setBackground(new java.awt.Color(255, 255, 255));
+        browseGroupsPane.setOpaque(false);
 
         browseTable.setAutoCreateRowSorter(true);
         browseTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -1038,7 +1064,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 browseTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(browseTable);
+        browseGroupsPane.setViewportView(browseTable);
 
         javax.swing.GroupLayout jPanelAllGroupsLayout = new javax.swing.GroupLayout(jPanelAllGroups);
         jPanelAllGroups.setLayout(jPanelAllGroupsLayout);
@@ -1054,7 +1080,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanelAllGroupsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(browseGroupsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanelAllGroupsLayout.setVerticalGroup(
@@ -1066,7 +1092,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(groupSearchButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addComponent(browseGroupsPane, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1913,6 +1939,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton PostDownvoteButton;
     private javax.swing.JButton PostUpvoteButton;
+    private javax.swing.JScrollPane browseGroupsPane;
     private javax.swing.JTable browseTable;
     private javax.swing.JButton createGroupButton;
     private javax.swing.JButton createGroupCancelButton;
@@ -1985,7 +2012,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordFieldLoginPassword;
     private javax.swing.JPasswordField jPasswordFieldSignupPassword;
     private javax.swing.JPasswordField jPasswordFieldSignupPasswordConfirm;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
