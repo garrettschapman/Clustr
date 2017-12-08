@@ -29,6 +29,9 @@ public class Server implements Serializable {
     // The active group and post being interacted with at a certain time
     private Group activeGroup;
     private Post activePost;
+    
+    //flag for search in progress
+    private boolean	search = false;
 
     // MEMBER METHODS.
     /**
@@ -41,6 +44,7 @@ public class Server implements Serializable {
         users = new ArrayList<User>(16);
         groups = new ArrayList<Group>(16);
         searchedGroups = new ArrayList<Group>(16);
+        
         
 
         // add some users, groups, and posts
@@ -113,13 +117,12 @@ public class Server implements Serializable {
     		s = s.toLowerCase();
     		name = name.toLowerCase();
     		if(name.equals(s)){
-    			searchedGroups.clear();
-    			searchedGroups.add(group);
+    			this.searchedGroups.clear();
+    			this.searchedGroups.add(group);
+    			this.search = true;
     		}else if(s.equals("")){
-    			searchedGroups.clear();
-    			for(Group group1 : groups){
-    				searchedGroups.add(group);
-    			}
+    			this.searchedGroups.clear();
+    			this.search = false;
     		}
     	}
     }
@@ -158,7 +161,12 @@ public class Server implements Serializable {
     }
 
     public ArrayList<Group> getGroupList() {
-        return this.searchedGroups;
+    	if(search){
+    		return searchedGroups;
+    	}else{
+    		return groups;
+    	}
+        
     }
 
     public ArrayList<User> getUserList() {
