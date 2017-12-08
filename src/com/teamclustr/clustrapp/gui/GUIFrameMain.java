@@ -1322,10 +1322,10 @@ public class GUIFrameMain extends javax.swing.JFrame {
     /**
      *
      * @param tbl The table in question
-     * @param arg Either 'browse' or 'feed' depending on the table structure you
+     * @param tableName Either 'browse' or 'feed' depending on the table structure you
      * want
      */
-    private void updateGroupTable(JTable tbl, String arg) throws InvalidParameterException {
+    private void updateGroupTable(JTable tbl, String tableName) throws InvalidParameterException {
         String col[] = {"Group Name", "Number of Members", "Tags", "Categories", "Posts"};
         TableModel tableModel = new TableModel(col, 0);
         try {
@@ -1344,11 +1344,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 obj[3] = group.getCategories();
                 obj[4] = group.getPosts().size();
 
-                if (arg.equals("browse")) {
+                if (tableName.equals("browse")) {
 
                     tableModel.addRow(obj);
 
-                } else if (arg.equals("feed")) {
+                } else if (tableName.equals("feed")) {
 
                     if (group.getMembers().contains(sessionServer.getActiveUser())) {
                         tableModel.addRow(obj);
