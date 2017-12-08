@@ -1,14 +1,18 @@
 package com.teamclustr.clustrapp.communication;
 
+//import statements
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import com.teamclustr.clustrapp.representation.User;
 
 /**
- * BRIEF CLASS DESCRIPTION.
+ * Class file for Post
+ * Creates and stores information about posts
+ * Have an author, a title, a body, a date, points, and comments
+ * Comments are structured in the same way as posts (like sub-posts)
  * 
- * @author Team Clustr
+ * @author Garrett Chapman (Team Clustr)
  * @version 1.0
  * File: Post.java
  * Created: 10/17/2017
@@ -66,8 +70,6 @@ public class Post implements Serializable {
 		this.body = newBody; //sets the body to the new body
 	} //end of method
 
-	
-	
 //Methods for comments
 	/*
 	 * Getter for the body of a comment
@@ -77,6 +79,7 @@ public class Post implements Serializable {
 		return this.comments.get(index).getBody();
 	} //end of getter
 	
+	// I don't know where these came from but they might be important
         public void incrementPoints(){
             this.points++;
         }
@@ -113,8 +116,6 @@ public class Post implements Serializable {
 		Post deleted = new Post(null, "[Deleted]", "[Deleted]"); //creates new deleted Post
 		this.comments.set(index, deleted); //sets comment to deleted Post
 	} //end of method
-
-
 	
 //Methods for points
 	/*
@@ -129,29 +130,27 @@ public class Post implements Serializable {
 	 */
 	public void addPoint() {
 		this.points++; //increments by one
-	} //end of method
+	} //end of method addPoint
 	
 	/*
 	 * Method to remove a point from the Post
 	 */
 	public void removePoint() {
 		this.points--; //decrements by one
-	} //end of method
+	} //end of method removePoint
 	
-	
-	
-//Methods for the date
+//Misc. getters
 	/*
 	 * Getter for the date
 	 */
 	public LocalDateTime getDate() {
 		return date;
 	} //end of getter
-
+	
+	/*
+	 * Getter for the title
+	 */
     public String getTitle() {
         return this.title;
-    }
-
-
-	
-} //end of class
+    } //end of getter
+} //end of class Post

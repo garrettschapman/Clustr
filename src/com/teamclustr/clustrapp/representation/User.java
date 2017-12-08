@@ -1,4 +1,5 @@
 package com.teamclustr.clustrapp.representation;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -8,76 +9,73 @@ import com.teamclustr.clustrapp.communication.Message;
 import com.teamclustr.clustrapp.communication.Post;
 
 /**
- * BRIEF CLASS DESCRIPTION.
+ * This User class receives general information of a user and keeps track of the user's 
+ * friends list, group list, posts, comments, and blocked users.
  * 
  * @author Team Clustr (Jirawat is in charge of this task)
- * @version 1.0
- * File: User.java
- * Created: 10/17/2017
- * Copyright (c) 2017, Team Clustr, All rights reserved.
- * Summary of Modifications:
- *  N/A
+ * @version 1.0 File: User.java Created: 10/17/2017 Copyright (c) 2017, Team
+ *          Clustr, All rights reserved. Summary of Modifications: N/A
  */
 public class User implements Serializable {
 	// MEMEBR DATA.
 	private String Username;
 	private String Password;
 	private String Email;
-	private String PhoneNum; 
-	private String Bio; 
+	private String PhoneNum;
+	private String Bio;
 	private ArrayList<User> Friends;
-	private ArrayList<Group> GroupList; 
-	private ArrayList<Post> Posts; 
+	private ArrayList<Group> GroupList;
+	private ArrayList<Post> Posts;
 	private ArrayList<Post> Comments;
-	private ArrayList<User> BlockUsers; //blocked users
-	
-	//Constructor 
-	public User(String Username,
-                String Password, String Email, String PhoneNum, String Bio) {
-		
-		createAccount(Username, Password, Email, PhoneNum, Bio);  
+	private ArrayList<User> BlockUsers;
+
+	// Constructor with parameters of user's general information
+	public User(String Username, String Password, String Email, String PhoneNum, String Bio) {
+
+		createAccount(Username, Password, Email, PhoneNum, Bio);
 
 		Friends = new ArrayList<User>();
 		GroupList = new ArrayList<Group>();
 		Posts = new ArrayList<Post>();
 		Comments = new ArrayList<Post>();
 		BlockUsers = new ArrayList<User>();
-	
+
 	}
-	
+
 	// MEMBER METHODS.
-	
-	public void createAccount(String Username, String Password, String Email, 
-			String PhoneNum, String Bio) {  
+
+	// function to create user's account with general info
+	public void createAccount(String Username, String Password, String Email, String PhoneNum, String Bio) {
 		this.setUsername(Username);
 		this.setPassword(Password);
 		this.setEmail(Email);
 		this.setPhoneNum(PhoneNum);
 		this.setBio(Bio);
-		
+
 	}
-	
-	public void addPost(Post post) { //add post to post list
+
+	public void addPost(Post post) { // add post to post list
 		this.Posts.add(post);
 	}
-	
-	public void addFriend(User Username) {  //add friend to friend list
-		this.Friends.add(Username);	
+
+	public void addFriend(User Username) { // add friend to friend list
+		this.Friends.add(Username);
 	}
-	
-	public void removeFriend(User Username) { //delete friend
+
+	public void removeFriend(User Username) { // delete friend
 		this.Friends.remove(Username);
 	}
-	
-	public void addBlockUser(User Username) { //add blocked user to block user list
+
+	public void addBlockUser(User Username) { // add blocked user to block user
+												
 		this.BlockUsers.add(Username);
 	}
-	
-	public void unBlockUser(User Username) {  //unblock the blocked user
+
+	public void unBlockUser(User Username) { // unblock the blocked user
 		this.BlockUsers.remove(Username);
 	}
-	
-	public Post getPostByTitle(String postName) {
+
+	public Post getPostByTitle(String postName) { // get the post from title
 		for (Post post : this.Posts) {
 			if (post.getTitle().equals(postName)) {
 				return post;
@@ -85,29 +83,30 @@ public class User implements Serializable {
 		}
 		return null;
 	}
-	
+
 	/*
-	 * Method to write a message to a user
-	 * Checks if the author is blocked by the recipient
+	 * Method to write a message to a user Checks if the author is blocked by
+	 * the recipient
 	 */
 	public Message writeMessage(User recipient, String body, LocalDateTime date) {
 		Boolean isBlocked = false;
 		ArrayList<User> blockedUsers = recipient.getBlockedUsers();
 		Message newMessage;
-		
-		//for loop to determine if the author is blocked
-		for(int i = 0; i < blockedUsers.size(); i++) {
-			if(this.equals(blockedUsers.get(i))) {
-				isBlocked = true; //user is blocked
+
+		// for loop to determine if the author is blocked
+		for (int i = 0; i < blockedUsers.size(); i++) {
+			if (this.equals(blockedUsers.get(i))) {
+				isBlocked = true; // user is blocked
 				break;
 			}
-		} //end of for loop
-		
+		} // end of for loop
+
 		newMessage = new Message(this, recipient, body, date, isBlocked);
-		
+
 		return newMessage;
-	} //end of method writeMessage
-	
+	} // end of method writeMessage
+
+	// Getters and Setters
 	public String getUsername() {
 		return Username;
 	}
@@ -115,7 +114,7 @@ public class User implements Serializable {
 	public void setUsername(String username) {
 		Username = username;
 	}
-	
+
 	public String getPassword() {
 		return Password;
 	}
@@ -123,7 +122,7 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		Password = password;
 	}
-	
+
 	public String getEmail() {
 		return Email;
 	}
@@ -147,12 +146,13 @@ public class User implements Serializable {
 	public void setBio(String bio) {
 		Bio = bio;
 	}
-	
-	public ArrayList<Post> getPosts(){
+
+	public ArrayList<Post> getPosts() {
 		return this.Posts;
 	}
-	
-	public ArrayList<User> getBlockedUsers(){
+
+	public ArrayList<User> getBlockedUsers() {
 		return this.BlockUsers;
-	} //end of method getBlockedUsers
+	} 
+	// end of Getters and Setters 
 }
