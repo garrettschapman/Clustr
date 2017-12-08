@@ -49,6 +49,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     public static final Color USER_STATUS_IN_COLOR = Color.DARK_GRAY;
     public static final Color USER_STATUS_OUT_COLOR = Color.GRAY;
     public static final Color USER_STATUS_HOVER_COLOR = Color.LIGHT_GRAY;
+    public static final Color GRADIENT_BOTTOM_COLOR = Color.decode("#90E0FF");
     
     // Misc component theme constants.
     public static final Color GUI_THEME_COLOR = new Color(240, 240, 240);
@@ -56,14 +57,12 @@ public class GUIFrameMain extends javax.swing.JFrame {
     // Login/Signup dialog return value.
     private User lsDialogResult;
 
-    private JPanel getGradientPanel(String color1, String color2) {
+    private JPanel getGradientPanel() {
         class GradientPanel extends JPanel{
-            String color1;
-            String color2;
             
-            public GradientPanel(String c1, String c2){
-                this.color1 = c1;
-                this.color2 = c2;
+            
+            public GradientPanel(){
+                
             }
             
             @Override
@@ -72,17 +71,9 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 Graphics2D g2d = (Graphics2D) g;
                 int w = getWidth();
                 int h = getHeight();
-                Color col1 = new Color(
-                    Integer.valueOf( this.color1.substring( 1, 3 ), 16 ),
-                    Integer.valueOf( this.color1.substring( 3, 5 ), 16 ),
-                    Integer.valueOf( this.color1.substring( 5, 7 ), 16 ) 
-                );
+                Color col1 = Color.WHITE;
                 
-                Color col2 = new Color(
-                    Integer.valueOf( this.color2.substring( 1, 3 ), 16 ),
-                    Integer.valueOf( this.color2.substring( 3, 5 ), 16 ),
-                    Integer.valueOf( this.color2.substring( 5, 7 ), 16 ) 
-                );
+                Color col2 = GRADIENT_BOTTOM_COLOR;
                 
                 GradientPaint gp = new GradientPaint( 0, 0, col1, 0, h, col2);
                 g2d.setPaint(gp);
@@ -90,7 +81,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 
             }
         }
-        GradientPanel panel = new GradientPanel(color1, color2);
+        GradientPanel panel = new GradientPanel();
         return panel;
     }
     
@@ -251,10 +242,10 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jTabbedPaneMain = new javax.swing.JTabbedPane();
         jPanelAccount = new javax.swing.JPanel();
-        jPanelAccountNull = getGradientPanel("#FFFFFF", "#90E0FF");
+        jPanelAccountNull = getGradientPanel();
         jButtonAccountMustLogIn = new javax.swing.JButton();
         jTabbedPaneAcountValid = new javax.swing.JTabbedPane();
-        jPanelAccountDetails = getGradientPanel("#FFFFFF", "#90E0FF");
+        jPanelAccountDetails = getGradientPanel();
         jLabelAccountEmail = new javax.swing.JLabel();
         jTextFieldAccountEmail = new javax.swing.JTextField();
         jTextFieldAccountEmailEdit = new javax.swing.JTextField();
@@ -271,18 +262,18 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jScrollPaneAccountBioEdit = new javax.swing.JScrollPane();
         jTextAreaAccountBioEdit = new javax.swing.JTextArea();
         fillerAccount = new javax.swing.Box.Filler(new java.awt.Dimension(150, 25), new java.awt.Dimension(150, 25), new java.awt.Dimension(150, 25));
-        jPanelAccountActivity = getGradientPanel("#FFFFFF", "#90E0FF");
+        jPanelAccountActivity = getGradientPanel();
         jScrollPaneAccountActivity = new javax.swing.JScrollPane();
         jTableAccountActivity = new javax.swing.JTable();
         jPanelGroups = new javax.swing.JPanel();
         jTabbedPaneGroups = new javax.swing.JTabbedPane();
-        jPanelAllGroups = getGradientPanel("#FFFFFF", "#90E0FF");
+        jPanelAllGroups = getGradientPanel();
         groupSearchField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         groupSearchButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         browseTable = new javax.swing.JTable();
-        jPanelCreateGroup = getGradientPanel("#FFFFFF", "#90E0FF");
+        jPanelCreateGroup = getGradientPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -292,7 +283,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         groupTagsField = new javax.swing.JTextField();
         groupCategoriesField = new javax.swing.JTextField();
         groupNameField = new javax.swing.JTextField();
-        jPanelBrowseGroups = getGradientPanel("#FFFFFF", "#90E0FF");
+        jPanelBrowseGroups = getGradientPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         feedTable = new javax.swing.JTable();
         jLabelMainSessionUserStatus = new javax.swing.JLabel();
