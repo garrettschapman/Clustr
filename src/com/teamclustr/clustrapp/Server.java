@@ -117,11 +117,8 @@ public class Server implements Serializable {
     			searchedGroups.add(group);
     		}else if(s.equals("")){
     			searchedGroups.clear();
-    		}else{
-    			searchedGroups.clear();
-    			for(int i = 0; i < groups.size(); i++){
-    				searchedGroups.clear();
-    				searchedGroups.set(i, groups.get(i));
+    			for(Group group1 : groups){
+    				searchedGroups.add(group);
     			}
     		}
     	}
@@ -161,7 +158,7 @@ public class Server implements Serializable {
     }
 
     public ArrayList<Group> getGroupList() {
-        return this.groups;
+        return this.searchedGroups;
     }
 
     public ArrayList<User> getUserList() {
