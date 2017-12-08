@@ -29,9 +29,9 @@ public class User implements Serializable {
 	private ArrayList<Group> GroupList; 
 	private ArrayList<Post> Posts; 
 	private ArrayList<Post> Comments;
-	private ArrayList<User> BlockUsers; //blocked users
+	private ArrayList<User> BlockUsers;
 	
-	//Constructor 
+	//Constructor with parameters of user's general information
 	public User(String Username,
                 String Password, String Email, String PhoneNum, String Bio) {
 		
@@ -47,6 +47,7 @@ public class User implements Serializable {
 	
 	// MEMBER METHODS.
 	
+	// function to create user's account with general info
 	public void createAccount(String Username, String Password, String Email, 
 			String PhoneNum, String Bio) {  
 		this.setUsername(Username);
@@ -77,7 +78,7 @@ public class User implements Serializable {
 		this.BlockUsers.remove(Username);
 	}
 	
-	public Post getPostByTitle(String postName) {
+	public Post getPostByTitle(String postName) { //get the post from title
 		for (Post post : this.Posts) {
 			if (post.getTitle().equals(postName)) {
 				return post;
