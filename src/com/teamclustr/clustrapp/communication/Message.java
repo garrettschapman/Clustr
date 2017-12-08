@@ -1,12 +1,17 @@
 package com.teamclustr.clustrapp.communication;
 
+//import statements
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import com.teamclustr.clustrapp.representation.User;
 
 /**
- * BRIEF CLASS DESCRIPTION.
+ * Class file for Message
+ * Creates and stores information about messages
+ * Messages have an author, recipient, body, and date
+ * Messages can be hidden or unhidden
+ * Messages from blocked users are hidden
  * 
  * @author Team Clustr
  * @version 1.0
@@ -36,6 +41,8 @@ public class Message implements Serializable {
 	
 	/*
 	 * Method to edit a message
+	 * User will get the message body back and be able to adjust it in the GUI
+	 * Uses the adjusted body as a parameter
 	 */
 	public void setMessage(String newBody, LocalDateTime editDate) {
 		this.body = newBody;
@@ -44,6 +51,9 @@ public class Message implements Serializable {
 	
 	/*
 	 * Method to set if the message is hidden
+	 * If the author is blocked, the recipient does not see the message
+	 * If/when the recipient unblocks the author, they can see all messages
+	 * If the recipient blocks the author, they can no longer see past messages
 	 */
 	public void setIsHidden(Boolean isBlocked) {
 		this.isHidden = isBlocked;
