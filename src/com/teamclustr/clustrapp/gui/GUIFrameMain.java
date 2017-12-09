@@ -1742,25 +1742,38 @@ public class GUIFrameMain extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_groupPostTableMouseClicked
+ 
+   /* boolean postupClicked = false;
+    boolean postdownClicked = false;*/
 
+   // int countVote = 0;
+    
     private void PostUpvoteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostUpvoteButtonMouseClicked
         // get the active post
         Post pst = sessionServer.getActivePost();
+        // get the active user
+        User user = sessionServer.getActiveUser();
+       
+		// increment the points
+		pst.incrementPoints(user.getUsername());   
+		pst.addVotedUsers(user.getUsername()); //add user to voted list
 
-        // increment the points
-        pst.incrementPoints();
-
-        // refresh the page
+		// refresh the page
         goToPostPage(pst);
+        
+  
     }//GEN-LAST:event_PostUpvoteButtonMouseClicked
 
     private void PostDownvoteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostDownvoteButtonMouseClicked
         // get the active post
         Post pst = sessionServer.getActivePost();
-
+        // get the active user
+        User user = sessionServer.getActiveUser();
+       
         // decrement the points
-        pst.decrementPoints();
-
+        pst.decrementPoints(user.getUsername());
+        pst.addVotedUsers(user.getUsername()); //add user to voted list
+     
         // refresh the page
         goToPostPage(pst);
     }//GEN-LAST:event_PostDownvoteButtonMouseClicked

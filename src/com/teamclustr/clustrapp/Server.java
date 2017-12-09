@@ -129,6 +129,7 @@ public class Server implements Serializable {
     	}
         return this.searchedGroups;
     }
+    
 
     public Group getActiveGroup() throws NullPointerException{
         if(this.activeGroup != null){
