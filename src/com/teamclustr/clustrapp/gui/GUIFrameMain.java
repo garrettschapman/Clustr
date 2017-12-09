@@ -1409,11 +1409,10 @@ public class GUIFrameMain extends javax.swing.JFrame {
      * @param tableName Either 'browse' or 'feed' depending on the table structure you
      * want
      */
-    private void updateGroupTable(JTable tbl, String tableName) throws InvalidParameterException {
+    private void updateGroupTable(JTable tbl, String tableName, ArrayList<Group> groupList) throws InvalidParameterException {
         String col[] = {"Group Name", "Number of Members", "Tags", "Categories", "Posts"};
         TableModel tableModel = new TableModel(col, 0);
         try {
-            ArrayList<Group> groupList = sessionServer.getGroupList();
 
             tbl.setModel(tableModel);
 
@@ -1458,21 +1457,22 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private void jTabbedPaneGroupsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneGroupsMouseClicked
         // TODO add your handling code here:
         // list all groups that exist into the table
-        updateGroupTable(browseTable, "browse");
-        updateGroupTable(feedTable, "feed");
+        updateGroupTable(browseTable, "browse", sessionServer.getGroupList());
+        updateGroupTable(feedTable, "feed", sessionServer.getGroupList());
     }//GEN-LAST:event_jTabbedPaneGroupsMouseClicked
 
     private void groupSearchButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_groupSearchButtonMouseClicked
         // Grab the text in the search field
 
         if (!groupSearchField.getText().equals("")) {
+            // get the search text
             String searchText = groupSearchField.getText();
-
-            TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>();
-            sorter.setRowFilter(RowFilter.regexFilter(searchText));
-            browseTable.setRowSorter(sorter);
+            
+            // get the searched array and add the elements to the table
+            updateGroupTable(browseTable, "browse", sessionServer.searchedGroups(searchText));
+            
         } else {
-            updateGroupTable(browseTable, "browse");
+            updateGroupTable(browseTable, "browse", sessionServer.getGroupList());
         }
 
     }//GEN-LAST:event_groupSearchButtonMouseClicked
@@ -1546,7 +1546,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
     private void jTabbedPaneMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneMainMouseClicked
         // TODO add your handling code here:
-        updateGroupTable(feedTable, "feed");
+        updateGroupTable(feedTable, "feed", sessionServer.getGroupList());
     }//GEN-LAST:event_jTabbedPaneMainMouseClicked
 
     /**
@@ -1754,8 +1754,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         // UPDATE WINDOW
-        updateGroupTable(feedTable, "feed");
-        updateGroupTable(browseTable, "browse");
+        updateGroupTable(feedTable, "feed", sessionServer.getGroupList());
+        updateGroupTable(browseTable, "browse", sessionServer.getGroupList());
     }//GEN-LAST:event_formWindowGainedFocus
 
         private void jTableAccountActivityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAccountActivityMouseClicked

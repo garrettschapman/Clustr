@@ -110,14 +110,14 @@ public class Server implements Serializable {
 
     }
     //searches overall group array, copies matching values into a visible arrayList
-    public void searchedGroups(String s, boolean tag){
+    public ArrayList<Group> searchedGroups(String s){
     	for(Group group : groups){
     		//ArrayList<String> cat = group.getCatList();
     		String name = group.getName();
     		s = s.toLowerCase();
     		name = name.toLowerCase();
     		if(name.equals(s)){
-    			this.searchedGroups.clear();
+    			//this.searchedGroups.clear();
     			this.searchedGroups.add(group);
     			this.search = true;
     		}else if(s.equals("")){
@@ -125,6 +125,7 @@ public class Server implements Serializable {
     			this.search = false;
     		}
     	}
+        return this.searchedGroups;
     }
 
     public Group getActiveGroup() throws NullPointerException{
