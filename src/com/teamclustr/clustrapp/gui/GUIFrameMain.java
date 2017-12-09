@@ -261,7 +261,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jTextAreaAccountBioEdit = new javax.swing.JTextArea();
         fillerAccount = new javax.swing.Box.Filler(new java.awt.Dimension(150, 25), new java.awt.Dimension(150, 25), new java.awt.Dimension(150, 25));
         jPanelAccountActivity = getGradientPanel();
-        jScrollPaneAccountActivity = new javax.swing.JScrollPane();
+        jScrollPaneAccountActivity = getTranslucentScrollPane();
         jTableAccountActivity = new javax.swing.JTable();
         jPanelGroups = new javax.swing.JPanel();
         jPanelAllGroups = getGradientPanel();
@@ -760,7 +760,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jTableAccountActivity.setAutoCreateRowSorter(true);
         jTableAccountActivity.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {}
             },
             new String [] {
 
@@ -1471,6 +1471,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
             TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>();
             sorter.setRowFilter(RowFilter.regexFilter(searchText));
             browseTable.setRowSorter(sorter);
+        } else {
+            updateGroupTable(browseTable, "browse");
         }
 
     }//GEN-LAST:event_groupSearchButtonMouseClicked
@@ -1628,7 +1630,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
     }
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        createPostDialog.setVisible(false);
+        // close the create post dialog box and pretend nothing happened
+        createPostDialog.setVisible(false); // nothing to see here folks
         postBodyField.setText("");
         postTitleField.setText("");
     }//GEN-LAST:event_jButton2MouseClicked
@@ -1869,6 +1872,9 @@ public class GUIFrameMain extends javax.swing.JFrame {
             // show the card
             CardLayout layout = (CardLayout) jPanelGroups.getLayout();
             layout.show(jPanelGroups, "postCard");
+            
+            // now you have to switch over to the other tab
+            jTabbedPaneMain.setSelectedIndex(1);
 
             
             if (!sessionServer.getActiveGroup().isMember(sessionServer.getActiveUser())) {
