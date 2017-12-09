@@ -48,7 +48,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
     // Active session user status constants.
     public static final String USER_STATUS_OUT_STRING = "Not Logged In";
-    public static final Color USER_STATUS_IN_COLOR = Color.DARK_GRAY;
+    public static final Color USER_STATUS_IN_COLOR = Color.BLACK;
     public static final Color USER_STATUS_OUT_COLOR = Color.GRAY;
     public static final Color USER_STATUS_HOVER_COLOR = Color.LIGHT_GRAY;
     
@@ -229,21 +229,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jButtonSignup = new javax.swing.JButton();
         jButtonSwitchLogin = new javax.swing.JButton();
         jButtonSignupCancel = new javax.swing.JButton();
-        groupWindow = new javax.swing.JFrame();
-        groupNameLabel = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        groupCategoriesLabel = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        groupTagsLabel = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        groupMemberList = new javax.swing.JList<String>();
-        scrollPane = new javax.swing.JScrollPane();
-        groupPostTable = new javax.swing.JTable();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        showCreatePostDialogButton = new javax.swing.JButton();
-        groupWindowJoinGroupButton = new javax.swing.JButton();
         createPostDialog = new javax.swing.JFrame();
         jPanel1 = new javax.swing.JPanel();
         createPostButton = new javax.swing.JButton();
@@ -253,19 +238,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         postBodyField = new javax.swing.JTextArea();
-        viewPostWindow = new javax.swing.JFrame();
-        viewPostWindowPanel = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        viewPostTitleLabel = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        PostUpvoteButton = new javax.swing.JButton();
-        PostDownvoteButton = new javax.swing.JButton();
-        viewPostNumOfPoints = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        viewPostBodyArea = new javax.swing.JTextArea();
-        jSeparator2 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
         jTabbedPaneMain = new javax.swing.JTabbedPane();
         jPanelAccount = new javax.swing.JPanel();
         jPanelAccountNull = getGradientPanel();
@@ -315,6 +287,39 @@ public class GUIFrameMain extends javax.swing.JFrame {
         feedTable = new javax.swing.JTable();
         backToBrowseCardButton = new javax.swing.JButton();
         createAGroupCardButtonFeed = new javax.swing.JButton();
+        groupWindowPanel = getGradientPanel();
+        groupNameLabel = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        groupCategoriesLabel = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        groupTagsLabel = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        groupMemberList = new javax.swing.JList<String>();
+        scrollPane = new javax.swing.JScrollPane();
+        groupPostTable = new javax.swing.JTable();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        showCreatePostDialogButton = new javax.swing.JButton();
+        groupWindowJoinGroupButton = new javax.swing.JButton();
+        browseGroupsButtonGroupPage = new javax.swing.JButton();
+        feedButtonGroupPage = new javax.swing.JButton();
+        viewPostWindowPanel = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        viewPostTitleLabel = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        PostUpvoteButton = new javax.swing.JButton();
+        PostDownvoteButton = new javax.swing.JButton();
+        viewPostNumOfPoints = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        postCardBackButton = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        viewPostBodyArea = new javax.swing.JTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        commentArea = new javax.swing.JTextArea();
+        jLabel14 = new javax.swing.JLabel();
         jLabelMainSessionUserStatus = new javax.swing.JLabel();
 
         jDialogLoginSignup.setTitle("Login/Signup");
@@ -507,144 +512,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
             .addComponent(jPanelLoginSignup, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
         );
 
-        groupWindow.setTitle("Clustr");
-        groupWindow.setMinimumSize(new java.awt.Dimension(800, 500));
-        groupWindow.setName("groupWindow"); // NOI18N
-        groupWindow.addWindowFocusListener(new java.awt.event.WindowFocusListener() {
-            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
-                groupWindowWindowGainedFocus(evt);
-            }
-            public void windowLostFocus(java.awt.event.WindowEvent evt) {
-            }
-        });
-
-        groupNameLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        groupNameLabel.setText("jLabel3");
-
-        jLabel3.setText("Categories");
-
-        groupCategoriesLabel.setText("jLabel6");
-
-        jLabel6.setText("Tags");
-
-        groupTagsLabel.setText("jLabel7");
-
-        groupMemberList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        jScrollPane3.setViewportView(groupMemberList);
-
-        groupPostTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        groupPostTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                groupPostTableMouseClicked(evt);
-            }
-        });
-        scrollPane.setViewportView(groupPostTable);
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel7.setText("Posts");
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel8.setText("Members");
-
-        showCreatePostDialogButton.setText("Create Post");
-        showCreatePostDialogButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                showCreatePostDialogButtonMouseClicked(evt);
-            }
-        });
-
-        groupWindowJoinGroupButton.setText("Join Group");
-        groupWindowJoinGroupButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                groupWindowJoinGroupButtonMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout groupWindowLayout = new javax.swing.GroupLayout(groupWindow.getContentPane());
-        groupWindow.getContentPane().setLayout(groupWindowLayout);
-        groupWindowLayout.setHorizontalGroup(
-            groupWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(groupWindowLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(groupWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, groupWindowLayout.createSequentialGroup()
-                        .addGroup(groupWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
-                            .addGroup(groupWindowLayout.createSequentialGroup()
-                                .addGroup(groupWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(groupWindowLayout.createSequentialGroup()
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(61, 61, 61)
-                                        .addComponent(showCreatePostDialogButton)
-                                        .addGap(43, 43, 43)
-                                        .addComponent(groupWindowJoinGroupButton))
-                                    .addGroup(groupWindowLayout.createSequentialGroup()
-                                        .addComponent(groupNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(groupWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel6))))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(groupWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(groupWindowLayout.createSequentialGroup()
-                                .addGroup(groupWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(4, 4, 4))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, groupWindowLayout.createSequentialGroup()
-                                .addGroup(groupWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(groupTagsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                                    .addComponent(groupCategoriesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(13, 13, 13)))))
-                .addContainerGap())
-        );
-        groupWindowLayout.setVerticalGroup(
-            groupWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(groupWindowLayout.createSequentialGroup()
-                .addGroup(groupWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, groupWindowLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(groupCategoriesLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(groupTagsLabel))
-                    .addGroup(groupWindowLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(groupWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(groupNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(groupWindowLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(groupWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(groupWindowLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(groupWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, groupWindowLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(groupWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(showCreatePostDialogButton)
-                            .addComponent(groupWindowJoinGroupButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(groupWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane3)
-                    .addComponent(scrollPane))
-                .addContainerGap())
-        );
-
         createPostDialog.setTitle("Clustr");
         createPostDialog.setMinimumSize(new java.awt.Dimension(500, 500));
 
@@ -730,117 +597,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         createPostDialogLayout.setVerticalGroup(
             createPostDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        viewPostWindow.setMinimumSize(new java.awt.Dimension(400, 500));
-        viewPostWindow.addWindowFocusListener(new java.awt.event.WindowFocusListener() {
-            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
-                viewPostWindowWindowGainedFocus(evt);
-            }
-            public void windowLostFocus(java.awt.event.WindowEvent evt) {
-            }
-        });
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel11.setText("Post Title");
-
-        viewPostTitleLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        viewPostTitleLabel.setText("jLabel12");
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel12.setText("Post Content");
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel13.setText("Points");
-
-        PostUpvoteButton.setText("Upvote");
-        PostUpvoteButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                PostUpvoteButtonMouseClicked(evt);
-            }
-        });
-
-        PostDownvoteButton.setText("Downvote");
-        PostDownvoteButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                PostDownvoteButtonMouseClicked(evt);
-            }
-        });
-
-        viewPostNumOfPoints.setText("jLabel14");
-
-        jScrollPane5.setEnabled(false);
-
-        viewPostBodyArea.setEditable(false);
-        viewPostBodyArea.setColumns(20);
-        viewPostBodyArea.setRows(5);
-        jScrollPane5.setViewportView(viewPostBodyArea);
-
-        javax.swing.GroupLayout viewPostWindowPanelLayout = new javax.swing.GroupLayout(viewPostWindowPanel);
-        viewPostWindowPanel.setLayout(viewPostWindowPanelLayout);
-        viewPostWindowPanelLayout.setHorizontalGroup(
-            viewPostWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewPostWindowPanelLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
-            .addGroup(viewPostWindowPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(viewPostWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(viewPostWindowPanelLayout.createSequentialGroup()
-                        .addGroup(viewPostWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, viewPostWindowPanelLayout.createSequentialGroup()
-                                .addGroup(viewPostWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel11))
-                                .addGap(1, 1, 1)
-                                .addComponent(PostUpvoteButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(viewPostWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(viewPostTitleLabel)
-                                    .addGroup(viewPostWindowPanelLayout.createSequentialGroup()
-                                        .addComponent(viewPostNumOfPoints)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(PostDownvoteButton)))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jSeparator3))
-                .addContainerGap())
-        );
-        viewPostWindowPanelLayout.setVerticalGroup(
-            viewPostWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewPostWindowPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(viewPostWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(viewPostTitleLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(viewPostWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(PostDownvoteButton)
-                    .addComponent(viewPostNumOfPoints)
-                    .addComponent(PostUpvoteButton))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel12)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout viewPostWindowLayout = new javax.swing.GroupLayout(viewPostWindow.getContentPane());
-        viewPostWindow.getContentPane().setLayout(viewPostWindowLayout);
-        viewPostWindowLayout.setHorizontalGroup(
-            viewPostWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(viewPostWindowPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        viewPostWindowLayout.setVerticalGroup(
-            viewPostWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(viewPostWindowPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1021,11 +777,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelAccountActivity.setLayout(jPanelAccountActivityLayout);
         jPanelAccountActivityLayout.setHorizontalGroup(
             jPanelAccountActivityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPaneAccountActivity, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE)
+            .addComponent(jScrollPaneAccountActivity, javax.swing.GroupLayout.DEFAULT_SIZE, 964, Short.MAX_VALUE)
         );
         jPanelAccountActivityLayout.setVerticalGroup(
             jPanelAccountActivityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPaneAccountActivity, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+            .addComponent(jScrollPaneAccountActivity, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
         );
 
         jTabbedPaneAcountValid.addTab("Activity", jPanelAccountActivity);
@@ -1105,7 +861,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanelAllGroupsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(browseGroupsPane, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE)
+                .addComponent(browseGroupsPane, javax.swing.GroupLayout.DEFAULT_SIZE, 949, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanelAllGroupsLayout.setVerticalGroup(
@@ -1119,11 +875,12 @@ public class GUIFrameMain extends javax.swing.JFrame {
                     .addComponent(createAGroupCardButton)
                     .addComponent(yourGroupsCardButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(browseGroupsPane, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                .addComponent(browseGroupsPane, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jPanelGroups.add(jPanelAllGroups, "card3");
+        jPanelGroups.add(jPanelAllGroups, "browseAllCard");
 
         jPanel2.setOpaque(false);
 
@@ -1209,7 +966,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
             .addGroup(jPanelCreateGroupLayout.createSequentialGroup()
                 .addGap(150, 150, 150)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(433, Short.MAX_VALUE))
+                .addContainerGap(613, Short.MAX_VALUE))
         );
         jPanelCreateGroupLayout.setVerticalGroup(
             jPanelCreateGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1220,6 +977,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         );
 
         jPanelGroups.add(jPanelCreateGroup, "card4");
+        jPanelGroups.add(jPanelCreateGroup, "createGroupCard");
 
         feedTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1256,7 +1014,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
             jPanelFeedGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFeedGroupsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 949, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFeedGroupsLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1273,14 +1031,281 @@ public class GUIFrameMain extends javax.swing.JFrame {
                     .addComponent(backToBrowseCardButton)
                     .addComponent(createAGroupCardButtonFeed))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jPanelGroups.add(jPanelFeedGroups, "card5");
+        jPanelGroups.add(jPanelFeedGroups, "feedCard");
+
+        groupNameLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        groupNameLabel.setText("jLabel3");
+
+        jLabel3.setText("Categories");
+
+        groupCategoriesLabel.setText("jLabel6");
+
+        jLabel6.setText("Tags");
+
+        groupTagsLabel.setText("jLabel7");
+
+        groupMemberList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jScrollPane3.setViewportView(groupMemberList);
+
+        groupPostTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        groupPostTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                groupPostTableMouseClicked(evt);
+            }
+        });
+        scrollPane.setViewportView(groupPostTable);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("Posts");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setText("Members");
+
+        showCreatePostDialogButton.setText("Create Post");
+        showCreatePostDialogButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                showCreatePostDialogButtonMouseClicked(evt);
+            }
+        });
+
+        groupWindowJoinGroupButton.setText("Join Group");
+        groupWindowJoinGroupButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                groupWindowJoinGroupButtonMouseClicked(evt);
+            }
+        });
+
+        browseGroupsButtonGroupPage.setText("Browse Groups");
+        browseGroupsButtonGroupPage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browseGroupsButtonGroupPageActionPerformed(evt);
+            }
+        });
+
+        feedButtonGroupPage.setText("Feed");
+        feedButtonGroupPage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                feedButtonGroupPageActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout groupWindowPanelLayout = new javax.swing.GroupLayout(groupWindowPanel);
+        groupWindowPanel.setLayout(groupWindowPanelLayout);
+        groupWindowPanelLayout.setHorizontalGroup(
+            groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(groupWindowPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(groupWindowPanelLayout.createSequentialGroup()
+                        .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(groupWindowPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)
+                                .addComponent(showCreatePostDialogButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(groupWindowJoinGroupButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(browseGroupsButtonGroupPage))
+                            .addGroup(groupWindowPanelLayout.createSequentialGroup()
+                                .addComponent(groupNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(groupWindowPanelLayout.createSequentialGroup()
+                                        .addGap(55, 55, 55)
+                                        .addComponent(feedButtonGroupPage))
+                                    .addGroup(groupWindowPanelLayout.createSequentialGroup()
+                                        .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel6))
+                                        .addGap(104, 104, 104)
+                                        .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(groupTagsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                                            .addComponent(groupCategoriesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, groupWindowPanelLayout.createSequentialGroup()
+                        .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 843, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+            .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(groupWindowPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jSeparator1)
+                    .addContainerGap()))
+        );
+        groupWindowPanelLayout.setVerticalGroup(
+            groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(groupWindowPanelLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(groupNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(groupWindowPanelLayout.createSequentialGroup()
+                        .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(groupCategoriesLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(groupTagsLabel))))
+                .addGap(18, 18, 18)
+                .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel7)
+                    .addComponent(showCreatePostDialogButton)
+                    .addComponent(groupWindowJoinGroupButton)
+                    .addComponent(browseGroupsButtonGroupPage)
+                    .addComponent(feedButtonGroupPage)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3)
+                    .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(groupWindowPanelLayout.createSequentialGroup()
+                    .addGap(51, 51, 51)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(637, Short.MAX_VALUE)))
+        );
+
+        jPanelGroups.add(groupWindowPanel, "card5");
+        jPanelGroups.add(groupWindowPanel, "groupPageCard");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel11.setText("Post Title");
+
+        viewPostTitleLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        viewPostTitleLabel.setText("jLabel12");
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel12.setText("Post Content");
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel13.setText("Points");
+
+        PostUpvoteButton.setText("Upvote");
+        PostUpvoteButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PostUpvoteButtonMouseClicked(evt);
+            }
+        });
+
+        PostDownvoteButton.setText("Downvote");
+        PostDownvoteButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PostDownvoteButtonMouseClicked(evt);
+            }
+        });
+
+        viewPostNumOfPoints.setText("jLabel14");
+
+        postCardBackButton.setText("Back");
+        postCardBackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postCardBackButtonActionPerformed(evt);
+            }
+        });
+
+        jScrollPane5.setEnabled(false);
+
+        viewPostBodyArea.setEditable(false);
+        viewPostBodyArea.setColumns(20);
+        viewPostBodyArea.setRows(5);
+        jScrollPane5.setViewportView(viewPostBodyArea);
+
+        commentArea.setColumns(20);
+        commentArea.setRows(5);
+        jScrollPane1.setViewportView(commentArea);
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel14.setText("Comments");
+
+        javax.swing.GroupLayout viewPostWindowPanelLayout = new javax.swing.GroupLayout(viewPostWindowPanel);
+        viewPostWindowPanel.setLayout(viewPostWindowPanelLayout);
+        viewPostWindowPanelLayout.setHorizontalGroup(
+            viewPostWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewPostWindowPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(viewPostWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(viewPostWindowPanelLayout.createSequentialGroup()
+                        .addGroup(viewPostWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(viewPostWindowPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(59, 59, 59)
+                                .addComponent(postCardBackButton)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jSeparator3))
+                        .addContainerGap())
+                    .addGroup(viewPostWindowPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(72, 72, 72)
+                        .addComponent(viewPostTitleLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 393, Short.MAX_VALUE)
+                        .addComponent(jLabel13)
+                        .addGap(18, 18, 18)
+                        .addComponent(PostUpvoteButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(viewPostNumOfPoints)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PostDownvoteButton)
+                        .addGap(92, 92, 92))
+                    .addGroup(viewPostWindowPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewPostWindowPanelLayout.createSequentialGroup()
+                        .addGroup(viewPostWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane5))
+                        .addContainerGap())))
+        );
+        viewPostWindowPanelLayout.setVerticalGroup(
+            viewPostWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewPostWindowPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(viewPostWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel11)
+                    .addComponent(viewPostTitleLabel)
+                    .addComponent(jLabel13)
+                    .addComponent(PostUpvoteButton)
+                    .addComponent(viewPostNumOfPoints)
+                    .addComponent(PostDownvoteButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(viewPostWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(postCardBackButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(jLabel14)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+
+        jPanelGroups.add(viewPostWindowPanel, "card6");
+        jPanelGroups.add(viewPostWindowPanel, "postCard");
 
         jTabbedPaneMain.addTab("Groups", jPanelGroups);
 
+        jLabelMainSessionUserStatus.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelMainSessionUserStatus.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabelMainSessionUserStatus.setText("USER LOGIN STATUS");
         jLabelMainSessionUserStatus.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -1453,7 +1478,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private void createGroupCancelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createGroupCancelButtonMouseClicked
         // Canceled; Go back to the other view
         CardLayout layout = (CardLayout) jPanelGroups.getLayout();
-        layout.show(jPanelGroups, "card3");
+        layout.show(jPanelGroups, "browseAllCard");
 
         // clear the fields
         groupCategoriesField.setText("");
@@ -1490,7 +1515,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                     
                     // now, take the user to their groups page
                     CardLayout layout = (CardLayout) jPanelGroups.getLayout();
-                    layout.show(jPanelGroups, "card5");
+                    layout.show(jPanelGroups, "groupPageCard");
                 } else {
                     
                     // error message to indicate invalid entries
@@ -1724,21 +1749,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_groupWindowJoinGroupButtonMouseClicked
 
-    private void groupWindowWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_groupWindowWindowGainedFocus
-        // UPDATE WINDOW
-        goToGroupPage(sessionServer.getActiveGroup());
-    }//GEN-LAST:event_groupWindowWindowGainedFocus
-
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         // UPDATE WINDOW
         updateGroupTable(feedTable, "feed");
         updateGroupTable(browseTable, "browse");
     }//GEN-LAST:event_formWindowGainedFocus
-
-    private void viewPostWindowWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_viewPostWindowWindowGainedFocus
-        viewPostWindowPanel.validate();
-        viewPostWindow.repaint();
-    }//GEN-LAST:event_viewPostWindowWindowGainedFocus
 
         private void jTableAccountActivityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAccountActivityMouseClicked
                 
@@ -1796,29 +1811,47 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private void createAGroupCardButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createAGroupCardButtonMouseClicked
         // go to create a group page
         CardLayout layout = (CardLayout) jPanelGroups.getLayout();
-        layout.show(jPanelGroups, "card4");// I got this card # from the properties. I cant change it
+        layout.show(jPanelGroups, "createGroupCard");// I got this card # from the properties. I cant change it
     }//GEN-LAST:event_createAGroupCardButtonMouseClicked
 
     private void yourGroupsCardButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_yourGroupsCardButtonMouseClicked
         // view your "feed"
         CardLayout layout = (CardLayout) jPanelGroups.getLayout();
-        layout.show(jPanelGroups, "card5");// I got this card # from the properties. I cant change it
+        layout.show(jPanelGroups, "feedCard");// I got this card # from the properties. I cant change it
     }//GEN-LAST:event_yourGroupsCardButtonMouseClicked
 
     private void backToBrowseCardButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backToBrowseCardButtonMouseClicked
         // go back to "browse groups"
         CardLayout layout = (CardLayout) jPanelGroups.getLayout();
-        layout.show(jPanelGroups, "card3");// I got this card # from the properties. I cant change it
+        layout.show(jPanelGroups, "browseAllCard");// I got this card # from the properties. I cant change it
     }//GEN-LAST:event_backToBrowseCardButtonMouseClicked
 
     private void createAGroupCardButtonFeedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createAGroupCardButtonFeedMouseClicked
         // go back to "Create A Group"
         CardLayout layout = (CardLayout) jPanelGroups.getLayout();
-        layout.show(jPanelGroups, "card4");// I got this card # from the properties. I cant change it
+        layout.show(jPanelGroups, "createGroupCard");// I got this card # from the properties. I cant change it
     }//GEN-LAST:event_createAGroupCardButtonFeedMouseClicked
 
+    private void browseGroupsButtonGroupPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseGroupsButtonGroupPageActionPerformed
+        // go back to browse
+        CardLayout layout = (CardLayout) jPanelGroups.getLayout();
+        layout.show(jPanelGroups, "browseAllCard");// I got this card # from the properties. I cant change it
+    }//GEN-LAST:event_browseGroupsButtonGroupPageActionPerformed
+
+    private void feedButtonGroupPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_feedButtonGroupPageActionPerformed
+        // go back to your feed
+        CardLayout layout = (CardLayout) jPanelGroups.getLayout();
+        layout.show(jPanelGroups, "feedCard");
+    }//GEN-LAST:event_feedButtonGroupPageActionPerformed
+
+    private void postCardBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postCardBackButtonActionPerformed
+        
+        // go back to the active group from the post
+        goToGroupPage(sessionServer.getActiveGroup());
+    }//GEN-LAST:event_postCardBackButtonActionPerformed
+
     public void goToPostPage(Post post) {
-        // TODO: CONFIGURE THE VIEW POST PAGE
+        // CONFIGURE THE VIEW POST PAGE
         // THEN SHOW THE PAGE
 
         try {
@@ -1830,10 +1863,13 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
             // set the active post
             sessionServer.setActivePost(post);
+            
+            
 
-            // repaint the screen and show
-            viewPostWindow.validate();
-            viewPostWindow.setVisible(true);
+            // show the card
+            CardLayout layout = (CardLayout) jPanelGroups.getLayout();
+            layout.show(jPanelGroups, "postCard");
+
             
             if (!sessionServer.getActiveGroup().isMember(sessionServer.getActiveUser())) {
                 // hide the upvote and downvote buttons
@@ -1850,12 +1886,13 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
     private void goToGroupPage(Group group) {
         try {
-
+            // GET THE GROUP VIEW SET UP -> INITIALIZE
             // set the labels 
             groupNameLabel.setText(group.getName());
             groupCategoriesLabel.setText(group.getCategories());
             groupTagsLabel.setText(group.getTags());
 
+            // set the selection model for the list on the right of the screen
             groupMemberList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
             DefaultListModel listModel = new DefaultListModel();
 
@@ -1872,25 +1909,29 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 users.add(user.getUsername());
             }
 
+            // show the members of the group
             groupMemberList.setListData(users);
 
+            // check to see if the current user is a member, and hide the create post button
             if (sessionServer == null || !group.isMember(sessionServer.getActiveUser())) {
-                showCreatePostDialogButton.setVisible(false);
+                showCreatePostDialogButton.setVisible(false); // not a member, hide the button
             } else {
-                showCreatePostDialogButton.setVisible(true);
+                showCreatePostDialogButton.setVisible(true); // is a member, dont hide button
                 createPostButton.setVisible(true);
-                groupWindow.repaint();
+                
                 
             }
 
+            // check to see if the current user is a member of the group
             if (sessionServer == null || group.isMember(sessionServer.getActiveUser())) {
-                groupWindowJoinGroupButton.setVisible(false);
+                groupWindowJoinGroupButton.setVisible(false); // is a member, hide the join button
             } else {
-                groupWindowJoinGroupButton.setVisible(true);
+                groupWindowJoinGroupButton.setVisible(true); // not a member, show join button
             }
 
-            groupWindow.setAutoRequestFocus(true);
-            groupWindow.setVisible(true);
+            // show group page
+            CardLayout layout = (CardLayout) jPanelGroups.getLayout();
+            layout.show(jPanelGroups, "groupPageCard");// I got this card # from the properties. I cant change it
 
         } catch (Exception e) {
             // do something
@@ -2031,14 +2072,17 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JButton PostDownvoteButton;
     private javax.swing.JButton PostUpvoteButton;
     private javax.swing.JButton backToBrowseCardButton;
+    private javax.swing.JButton browseGroupsButtonGroupPage;
     private javax.swing.JScrollPane browseGroupsPane;
     private javax.swing.JTable browseTable;
+    private javax.swing.JTextArea commentArea;
     private javax.swing.JButton createAGroupCardButton;
     private javax.swing.JButton createAGroupCardButtonFeed;
     private javax.swing.JButton createGroupButton;
     private javax.swing.JButton createGroupCancelButton;
     private javax.swing.JButton createPostButton;
     private javax.swing.JFrame createPostDialog;
+    private javax.swing.JButton feedButtonGroupPage;
     private javax.swing.JTable feedTable;
     private javax.swing.Box.Filler fillerAccount;
     private javax.swing.JTextField groupCategoriesField;
@@ -2051,8 +2095,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JTextField groupSearchField;
     private javax.swing.JTextField groupTagsField;
     private javax.swing.JLabel groupTagsLabel;
-    private javax.swing.JFrame groupWindow;
     private javax.swing.JButton groupWindowJoinGroupButton;
+    private javax.swing.JPanel groupWindowPanel;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAccountMustLogIn;
     private javax.swing.JButton jButtonAccountUpdate;
@@ -2068,6 +2112,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -2106,6 +2151,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordFieldLoginPassword;
     private javax.swing.JPasswordField jPasswordFieldSignupPassword;
     private javax.swing.JPasswordField jPasswordFieldSignupPasswordConfirm;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -2128,13 +2174,13 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldLoginUsername;
     private javax.swing.JTextField jTextFieldSignupUsername;
     private javax.swing.JTextArea postBodyField;
+    private javax.swing.JButton postCardBackButton;
     private javax.swing.JTextField postTitleField;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JButton showCreatePostDialogButton;
     private javax.swing.JTextArea viewPostBodyArea;
     private javax.swing.JLabel viewPostNumOfPoints;
     private javax.swing.JLabel viewPostTitleLabel;
-    private javax.swing.JFrame viewPostWindow;
     private javax.swing.JPanel viewPostWindowPanel;
     private javax.swing.JButton yourGroupsCardButton;
     // End of variables declaration//GEN-END:variables
