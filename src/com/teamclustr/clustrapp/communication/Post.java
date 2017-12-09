@@ -84,6 +84,10 @@ public class Post implements Serializable {
             this.points++;
         }
         
+        public ArrayList<Post> getCommentList(){
+            return this.comments;
+        }
+        
         public void decrementPoints(){
             this.points--;
         }

@@ -71,6 +71,8 @@ public class Server implements Serializable {
                 "Body Of Post", 
                 "TITLE");
 
+        pst1.addComment(usr1, "THIS IS A TRIUMPH", "THE CAKE IS A LIE");
+        
         users.add(usr1);
         groups.add(gp1);
         gp1.leavePost(pst1);
