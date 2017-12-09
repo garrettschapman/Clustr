@@ -110,9 +110,11 @@ public class Post implements Serializable {
 				}
 				break;
 			} else { // decrements points if down vote was clicked first
+				if (this.countVote == 1) {
 				this.points--; // decrements
 				this.countVote = 0;
 				break;
+				}
 			}
 		}
 	}
