@@ -13,8 +13,6 @@ import java.awt.LayoutManager;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.security.InvalidParameterException;
 import java.time.format.DateTimeFormatter;
@@ -24,14 +22,10 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 import java.nio.file.Path;
-import javax.swing.Icon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JViewport;
 
 /**
  * This class handles all functionality having to do with the user interface
@@ -47,10 +41,16 @@ public class GUIFrameMain extends javax.swing.JFrame {
     public static Server sessionServer;
 
     // Active session user status constants.
-    public static final String USER_STATUS_OUT_STRING = "Not Logged In";
+    public static final String USER_STATUS_OUT_TEXT = "Not Logged In";
     public static final Color USER_STATUS_IN_COLOR = Color.BLACK;
     public static final Color USER_STATUS_OUT_COLOR = Color.GRAY;
     public static final Color USER_STATUS_HOVER_COLOR = Color.LIGHT_GRAY;
+	
+	// Account relationship constants.
+	public static final String BUTTON_ADD_FRIEND_TEXT = "Add Friend";
+	public static final String BUTTON_REMOVE_FRIEND_TEXT = "Remove Friend";
+	public static final String BUTTON_ADD_BLOCK_TEXT = "Block User";
+	public static final String BUTTON_REMOVE_BLOCK_TEXT = "Unblock User";
     
     // colors for the gradient theme
     public static final Color GRADIENT_BOTTOM_COLOR = Color.decode("#90E0FF");
@@ -144,7 +144,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         
         
         // Initialize session user status.
-        jLabelMainSessionUserStatus.setText(USER_STATUS_OUT_STRING);
+        jLabelMainSessionUserStatus.setText(USER_STATUS_OUT_TEXT);
         jLabelMainSessionUserStatus.setForeground(USER_STATUS_OUT_COLOR);
         
         // Add the logo to the login button
@@ -263,6 +263,14 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelAccountActivity = getGradientPanel();
         jScrollPaneAccountActivity = getTranslucentScrollPane();
         jTableAccountActivity = new javax.swing.JTable();
+        jPanelAccountRelations = new javax.swing.JPanel();
+        jPanelRelationsControl = new javax.swing.JPanel();
+        jComboBoxRelationsContext = new javax.swing.JComboBox<>();
+        jButtonRelationsAdd = new javax.swing.JButton();
+        jTextFieldRelationsUser = new javax.swing.JTextField();
+        jButtonRelationsRemove = new javax.swing.JButton();
+        jScrollPaneRelations = new javax.swing.JScrollPane();
+        jTableRelations = new javax.swing.JTable();
         jPanelGroups = new javax.swing.JPanel();
         jPanelAllGroups = getGradientPanel();
         groupSearchField = new javax.swing.JTextField();
@@ -790,6 +798,39 @@ public class GUIFrameMain extends javax.swing.JFrame {
         );
 
         jTabbedPaneAcountValid.addTab("Activity", jPanelAccountActivity);
+
+        jPanelAccountRelations.setLayout(new java.awt.BorderLayout());
+
+        jComboBoxRelationsContext.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Friends", "Blocked Users" }));
+        jPanelRelationsControl.add(jComboBoxRelationsContext);
+
+        jButtonRelationsAdd.setText("Add $CONTEXT");
+        jPanelRelationsControl.add(jButtonRelationsAdd);
+
+        jTextFieldRelationsUser.setPreferredSize(new java.awt.Dimension(250, 25));
+        jPanelRelationsControl.add(jTextFieldRelationsUser);
+
+        jButtonRelationsRemove.setText("Remove $CONTEXT");
+        jPanelRelationsControl.add(jButtonRelationsRemove);
+
+        jPanelAccountRelations.add(jPanelRelationsControl, java.awt.BorderLayout.NORTH);
+
+        jTableRelations.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPaneRelations.setViewportView(jTableRelations);
+
+        jPanelAccountRelations.add(jScrollPaneRelations, java.awt.BorderLayout.CENTER);
+
+        jTabbedPaneAcountValid.addTab("Relations", jPanelAccountRelations);
 
         jPanelAccount.add(jTabbedPaneAcountValid, "valid");
 
@@ -1340,7 +1381,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         jLabelMainSessionUserStatus.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelMainSessionUserStatus.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabelMainSessionUserStatus.setText("USER LOGIN STATUS");
+        jLabelMainSessionUserStatus.setText("$USER_LOGIN_STATUS");
         jLabelMainSessionUserStatus.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabelMainSessionUserStatus.setMaximumSize(new java.awt.Dimension(200, 15));
         jLabelMainSessionUserStatus.setMinimumSize(new java.awt.Dimension(0, 15));
@@ -1846,21 +1887,21 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         private void jButtonAccountUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAccountUpdateMouseClicked
                 
-		// Get active session user.
-		User curUser = sessionServer.getActiveUser();
-		
-		// Check for valid user.
-		if (curUser != null) {
-		
-			// Update account details.
-			curUser.setEmail(this.jTextFieldAccountEmailEdit.getText().trim());
-			curUser.setPhoneNum(this.jTextFieldAccountPhoneNumberEdit.getText().trim());
-			curUser.setPassword(this.jPasswordFieldAccountPasswordEdit.getText().trim());
-			curUser.setBio(this.jTextAreaAccountBioEdit.getText());
-			
-			// Refresh display.
-			this.refreshAccountTab();
-		}
+			// Get active session user.
+			User curUser = sessionServer.getActiveUser();
+
+			// Check for valid user.
+			if (curUser != null) {
+
+				// Update account details.
+				curUser.setEmail(this.jTextFieldAccountEmailEdit.getText().trim());
+				curUser.setPhoneNum(this.jTextFieldAccountPhoneNumberEdit.getText().trim());
+				curUser.setPassword(this.jPasswordFieldAccountPasswordEdit.getText().trim());
+				curUser.setBio(this.jTextAreaAccountBioEdit.getText());
+
+				// Refresh display.
+				this.refreshAccountTab();
+			}
         }//GEN-LAST:event_jButtonAccountUpdateMouseClicked
 
         private void jButtonAccountMustLogInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAccountMustLogInMouseClicked
@@ -2035,6 +2076,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
         }
     }
     
+	private boolean isRelationsContextFriends() {
+	
+		return this.jComboBoxRelationsContext.getSelectedIndex() == 0;
+	}
+	
 	private void refreshAccountTab() {
 
 		// Get session user.
@@ -2073,16 +2119,43 @@ public class GUIFrameMain extends javax.swing.JFrame {
 			// Update account activity display.
 			
 			// Create new TableModel for account activity table.
-			TableModel tableModel = new TableModel(new String[]{"Post ID", "Title", "Date"}, 0);
-			this.jTableAccountActivity.setModel(tableModel);
+			TableModel tableModelActivity = new TableModel(new String[]{"Post ID", "Title", "Date"}, 0);
+			this.jTableAccountActivity.setModel(tableModelActivity);
 
 			// Populate account activity table with user's posts.
 			for (Post userPost : curUser.getPosts()) {
 
-				tableModel.addRow(new String[]{
+				tableModelActivity.addRow(new String[]{
 					Integer.toString(userPost.hashCode() % 256), 
 					userPost.getTitle(), 
 					userPost.getDate().format(DateTimeFormatter.ISO_DATE)});
+			}
+			
+			// Update account relations display.
+			
+			// Get relations context.
+			boolean isFriends = this.isRelationsContextFriends();
+			
+			// Update control information.
+			if (isFriends) {
+			
+				this.jButtonRelationsAdd.setText(BUTTON_ADD_FRIEND_TEXT);
+				this.jButtonRelationsRemove.setText(BUTTON_REMOVE_FRIEND_TEXT);
+			}
+			else {
+			
+				this.jButtonRelationsAdd.setText(BUTTON_ADD_BLOCK_TEXT);
+				this.jButtonRelationsRemove.setText(BUTTON_REMOVE_BLOCK_TEXT);
+			}
+			
+			// Create new TableModel for account relations table.
+			TableModel tableModelRelations = new TableModel(new String[]{ "Username" }, 0);
+			this.jTableRelations.setModel(tableModelRelations);
+
+			// Populate account relations table with user's friends or blocks.
+			for (User frenemy : (isFriends ? curUser.getFriends() : curUser.getBlockedUsers())) {
+
+				tableModelRelations.addRow(new String[]{ frenemy.getUsername() });
 			}
 			
 			// Update shown account panel.
@@ -2099,7 +2172,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 		// Update displayed text and base color.
 		if (sessionServer.getActiveUser() == null) {
 		
-			this.jLabelMainSessionUserStatus.setText(USER_STATUS_OUT_STRING);
+			this.jLabelMainSessionUserStatus.setText(USER_STATUS_OUT_TEXT);
 			this.jLabelMainSessionUserStatus.setForeground(USER_STATUS_OUT_COLOR);
 		}
 		else {
@@ -2202,10 +2275,13 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAccountUpdate;
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JButton jButtonLoginCancel;
+    private javax.swing.JButton jButtonRelationsAdd;
+    private javax.swing.JButton jButtonRelationsRemove;
     private javax.swing.JButton jButtonSignup;
     private javax.swing.JButton jButtonSignupCancel;
     private javax.swing.JButton jButtonSwitchLogin;
     private javax.swing.JButton jButtonSwitchSignup;
+    private javax.swing.JComboBox<String> jComboBoxRelationsContext;
     private javax.swing.JDialog jDialogLoginSignup;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -2241,12 +2317,14 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelAccountActivity;
     private javax.swing.JPanel jPanelAccountDetails;
     private javax.swing.JPanel jPanelAccountNull;
+    private javax.swing.JPanel jPanelAccountRelations;
     private javax.swing.JPanel jPanelAllGroups;
     private javax.swing.JPanel jPanelCreateGroup;
     private javax.swing.JPanel jPanelFeedGroups;
     private javax.swing.JPanel jPanelGroups;
     private javax.swing.JPanel jPanelLogin;
     private javax.swing.JPanel jPanelLoginSignup;
+    private javax.swing.JPanel jPanelRelationsControl;
     private javax.swing.JPanel jPanelSignup;
     private javax.swing.JPasswordField jPasswordFieldAccountPassword;
     private javax.swing.JPasswordField jPasswordFieldAccountPasswordEdit;
@@ -2262,11 +2340,13 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPaneAccountActivity;
     private javax.swing.JScrollPane jScrollPaneAccountBio;
     private javax.swing.JScrollPane jScrollPaneAccountBioEdit;
+    private javax.swing.JScrollPane jScrollPaneRelations;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPaneAcountValid;
     private javax.swing.JTabbedPane jTabbedPaneMain;
     private javax.swing.JTable jTableAccountActivity;
+    private javax.swing.JTable jTableRelations;
     private javax.swing.JTextArea jTextAreaAccountBio;
     private javax.swing.JTextArea jTextAreaAccountBioEdit;
     private javax.swing.JTextField jTextFieldAccountEmail;
@@ -2274,6 +2354,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldAccountPhoneNumber;
     private javax.swing.JTextField jTextFieldAccountPhoneNumberEdit;
     private javax.swing.JTextField jTextFieldLoginUsername;
+    private javax.swing.JTextField jTextFieldRelationsUser;
     private javax.swing.JTextField jTextFieldSignupUsername;
     private javax.swing.JTextArea postBodyField;
     private javax.swing.JButton postCardBackButton;
