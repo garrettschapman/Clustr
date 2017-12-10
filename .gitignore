@@ -1,13 +1,8 @@
 /target/
-
 /bin/
-
 /.settings/
-
 /nb-configuration.xml
-
 /.idea
-
 /.classpath
-
 /.project
+/**/*.swp
