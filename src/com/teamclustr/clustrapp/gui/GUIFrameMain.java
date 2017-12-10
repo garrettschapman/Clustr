@@ -263,13 +263,13 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelAccountActivity = getGradientPanel();
         jScrollPaneAccountActivity = getTranslucentScrollPane();
         jTableAccountActivity = new javax.swing.JTable();
-        jPanelAccountRelations = new javax.swing.JPanel();
+        jPanelAccountRelations = getGradientPanel();
         jPanelRelationsControl = new javax.swing.JPanel();
         jComboBoxRelationsContext = new javax.swing.JComboBox<>();
         jButtonRelationsAdd = new javax.swing.JButton();
         jTextFieldRelationsUser = new javax.swing.JTextField();
         jButtonRelationsRemove = new javax.swing.JButton();
-        jScrollPaneRelations = new javax.swing.JScrollPane();
+        jScrollPaneRelations = getTranslucentScrollPane();
         jTableRelations = new javax.swing.JTable();
         jPanelGroups = new javax.swing.JPanel();
         jPanelAllGroups = getGradientPanel();
