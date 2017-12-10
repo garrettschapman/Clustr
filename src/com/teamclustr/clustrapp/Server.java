@@ -45,8 +45,6 @@ public class Server implements Serializable {
         groups = new ArrayList<Group>(16);
         searchedGroups = new ArrayList<Group>(16);
         
-        
-
         // add some users, groups, and posts
         
         users.add(new User("test", "test", "test@email.com", "5555555555", "BIO"));

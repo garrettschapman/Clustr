@@ -13,6 +13,11 @@ import java.awt.LayoutManager;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.file.Paths;
 import java.security.InvalidParameterException;
 import java.time.format.DateTimeFormatter;
@@ -24,6 +29,8 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import java.nio.file.Path;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -107,8 +114,40 @@ public class GUIFrameMain extends javax.swing.JFrame {
         return panel;
     }
     
+    private void dumpSession(String filepath) {
+	
+		// Try to open file.
+		try (FileOutputStream fileOutStream = new FileOutputStream(filepath)) {
+			
+			// Write session server to file.
+			ObjectOutputStream objOutStream = new ObjectOutputStream(fileOutStream);
+			objOutStream.writeObject(sessionServer);
+		}
+		catch (IOException ex) {
+			
+			JOptionPane.showMessageDialog(this, 
+					"Could not write server image dump.",
+					"Dump Failed", JOptionPane.ERROR_MESSAGE);
+		}
+	}
     
-    
+	private void restoreSession(String filepath) {
+	
+		// Try to open file.
+		try (FileInputStream fileInStream = new FileInputStream(filepath)) {
+			
+			// Read session server from file.
+			ObjectInputStream objInStream = new ObjectInputStream(fileInStream);
+			sessionServer = (Server)objInStream.readObject();
+		}
+		catch (Exception ex) {
+			
+			JOptionPane.showMessageDialog(this, 
+					"Could not read server image dump.",
+					"Restore Failed", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
     /**
      * This inner class defines a TableModel in which the cells are not editable
      */
@@ -334,6 +373,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jLabelMainSessionUserStatus = new javax.swing.JLabel();
+        jButtonDump = new javax.swing.JButton();
+        jButtonRestore = new javax.swing.JButton();
 
         jDialogLoginSignup.setTitle("Login/Signup");
         jDialogLoginSignup.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -794,7 +835,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         );
         jPanelAccountActivityLayout.setVerticalGroup(
             jPanelAccountActivityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPaneAccountActivity, javax.swing.GroupLayout.DEFAULT_SIZE, 879, Short.MAX_VALUE)
+            .addComponent(jScrollPaneAccountActivity, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
         );
 
         jTabbedPaneAcountValid.addTab("Activity", jPanelAccountActivity);
@@ -933,7 +974,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                     .addComponent(createAGroupCardButton)
                     .addComponent(yourGroupsCardButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(browseGroupsPane, javax.swing.GroupLayout.DEFAULT_SIZE, 856, Short.MAX_VALUE)
+                .addComponent(browseGroupsPane, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1089,7 +1130,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                     .addComponent(backToBrowseCardButton)
                     .addComponent(createAGroupCardButtonFeed))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 862, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 861, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1230,13 +1271,13 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
-                    .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
+                    .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(groupWindowPanelLayout.createSequentialGroup()
                     .addGap(51, 51, 51)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(846, Short.MAX_VALUE)))
+                    .addContainerGap(845, Short.MAX_VALUE)))
         );
 
         jPanelGroups.add(groupWindowPanel, "card5");
@@ -1374,7 +1415,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 .addComponent(jLabel14)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(viewPostWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel15)
                     .addComponent(jLabel16)
@@ -1409,13 +1450,31 @@ public class GUIFrameMain extends javax.swing.JFrame {
             }
         });
 
+        jButtonDump.setText("Save");
+        jButtonDump.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonDumpMouseClicked(evt);
+            }
+        });
+
+        jButtonRestore.setText("Load");
+        jButtonRestore.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonRestoreMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPaneMain)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jButtonDump)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonRestore)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelMainSessionUserStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1423,7 +1482,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelMainSessionUserStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelMainSessionUserStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonDump)
+                        .addComponent(jButtonRestore)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPaneMain))
         );
@@ -2015,7 +2078,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 		int selRow = this.jTableRelations.getSelectedRow();
 		if (selRow < 0) {
 		
-			JOptionPane.showMessageDialog(this.jPanelAccountRelations, 
+			JOptionPane.showMessageDialog(this, 
 				"Must select a user from the list.",
 				"Action Failed", JOptionPane.ERROR_MESSAGE);
 		}
@@ -2028,6 +2091,36 @@ public class GUIFrameMain extends javax.swing.JFrame {
 					this.isRelationsContextFriends());
 		}
     }//GEN-LAST:event_jButtonRelationsRemoveMouseClicked
+
+    private void jButtonDumpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDumpMouseClicked
+        
+		// Prompt user for dump location.
+		String filepath = JOptionPane.showInputDialog(this, 
+				"Select location to dump server image to.", 
+				"Dump Image", 
+				JOptionPane.QUESTION_MESSAGE);
+		
+		// Dump server image.
+		if (filepath != null) {
+			
+			this.dumpSession(filepath);
+		}
+    }//GEN-LAST:event_jButtonDumpMouseClicked
+
+    private void jButtonRestoreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRestoreMouseClicked
+        
+		// Prompt user for dump location.
+		String filepath = JOptionPane.showInputDialog(this, 
+				"Select location to read server image from.", 
+				"Restore Image", 
+				JOptionPane.QUESTION_MESSAGE);
+		
+		// Dump server image.
+		if (filepath != null) {
+			
+			this.restoreSession(filepath);
+		}
+    }//GEN-LAST:event_jButtonRestoreMouseClicked
 
     public void goToPostPage(Post post) {
         // CONFIGURE THE VIEW POST PAGE
@@ -2131,7 +2224,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 		User specUser = sessionServer.getUserFromUsername(username);
 		if (specUser == null) {
 			
-			JOptionPane.showMessageDialog(this.jPanelAccountRelations, 
+			JOptionPane.showMessageDialog(this, 
 				"Could not find user with username \'" + 
 						this.jTextFieldRelationsUser.getText() + "\'.",
 				"Action Failed", JOptionPane.ERROR_MESSAGE);
@@ -2152,13 +2245,13 @@ public class GUIFrameMain extends javax.swing.JFrame {
 			// Check that the action is valid.
 			if (shouldAdd && userIsPresent) {
 			
-				JOptionPane.showMessageDialog(this.jPanelAccountRelations, 
+				JOptionPane.showMessageDialog(this, 
 					"User is already " + (asFriend ? "a friend." : "blocked."),
 					"Action Failed", JOptionPane.ERROR_MESSAGE);
 			}
 			else if (!(shouldAdd || userIsPresent)) {
 			
-				JOptionPane.showMessageDialog(this.jPanelAccountRelations, 
+				JOptionPane.showMessageDialog(this, 
 					"User was not " + (asFriend ? "a friend." : "blocked."),
 					"Action Failed", JOptionPane.ERROR_MESSAGE);
 			}
@@ -2391,10 +2484,12 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAccountMustLogIn;
     private javax.swing.JButton jButtonAccountUpdate;
+    private javax.swing.JButton jButtonDump;
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JButton jButtonLoginCancel;
     private javax.swing.JButton jButtonRelationsAdd;
     private javax.swing.JButton jButtonRelationsRemove;
+    private javax.swing.JButton jButtonRestore;
     private javax.swing.JButton jButtonSignup;
     private javax.swing.JButton jButtonSignupCancel;
     private javax.swing.JButton jButtonSwitchLogin;
