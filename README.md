@@ -89,11 +89,10 @@
 
  * Section of code from Post class:
  
-	 /*
-	 * Constructor for Post Uses the owner and the body (entered by the User) as
-	 * parameters The owner is the current User The body will be requested by and
-	 * entered into the System
-	 */
+	 
+	// Constructor for Post Uses the owner and the body (entered by the User) as
+	// parameters The owner is the current User The body will be requested by and
+	// entered into the System
 	public Post(User owner, String body, String title) {
 		this.owner = owner;
 		this.body = body;
@@ -105,21 +104,14 @@
 	} // end of constructor
 
 	// Methods for Posts
-	/*
-	 * Getter for the body of the Post
-	 */
+	
+	// Getter for the body of the Post
 	public String getBody() {
 		return this.body;
 	} // end of getter
 
-	/*
-	 * Getter for the owner of the Post
-	 */
+	 //Getter for the owner of the Post
 	public User getOwner() {
 		return this.owner;
 	} // end of getter
 	
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
- 
- 
-
