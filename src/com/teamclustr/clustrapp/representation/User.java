@@ -154,5 +154,9 @@ public class User implements Serializable {
 	public ArrayList<User> getBlockedUsers() {
 		return this.BlockUsers;
 	} 
+	
+	public ArrayList<User> getFriends() {
+		return this.Friends;
+	}
 	// end of Getters and Setters 
 }
