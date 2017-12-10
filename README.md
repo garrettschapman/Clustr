@@ -1,6 +1,6 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-											DESCRIPTION
+										    DESCRIPTION
 	Clustr is an application that allows people to create and find groups of people with similar interests.
 People can create posts in their groups in order to schedule events and discuss things related to their group, 
 and can create and join groups whenever they want.
