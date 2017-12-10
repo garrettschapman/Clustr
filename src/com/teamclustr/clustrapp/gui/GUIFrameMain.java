@@ -802,28 +802,40 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelAccountRelations.setLayout(new java.awt.BorderLayout());
 
         jComboBoxRelationsContext.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Friends", "Blocked Users" }));
+        jComboBoxRelationsContext.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxRelationsContextItemStateChanged(evt);
+            }
+        });
         jPanelRelationsControl.add(jComboBoxRelationsContext);
 
         jButtonRelationsAdd.setText("Add $CONTEXT");
+        jButtonRelationsAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonRelationsAddMouseClicked(evt);
+            }
+        });
         jPanelRelationsControl.add(jButtonRelationsAdd);
 
         jTextFieldRelationsUser.setPreferredSize(new java.awt.Dimension(250, 25));
         jPanelRelationsControl.add(jTextFieldRelationsUser);
 
         jButtonRelationsRemove.setText("Remove $CONTEXT");
+        jButtonRelationsRemove.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonRelationsRemoveMouseClicked(evt);
+            }
+        });
         jPanelRelationsControl.add(jButtonRelationsRemove);
 
         jPanelAccountRelations.add(jPanelRelationsControl, java.awt.BorderLayout.NORTH);
 
         jTableRelations.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPaneRelations.setViewportView(jTableRelations);
@@ -1983,6 +1995,40 @@ public class GUIFrameMain extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1MouseClicked
 
+    private void jComboBoxRelationsContextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxRelationsContextItemStateChanged
+        
+		this.refreshAccountTab();
+    }//GEN-LAST:event_jComboBoxRelationsContextItemStateChanged
+
+    private void jButtonRelationsAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRelationsAddMouseClicked
+        
+		// Try to add frenemy.
+		this.addOrRemoveFrenemy(
+				this.jTextFieldRelationsUser.getText(), 
+				true, 
+				this.isRelationsContextFriends());
+    }//GEN-LAST:event_jButtonRelationsAddMouseClicked
+
+    private void jButtonRelationsRemoveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRelationsRemoveMouseClicked
+        
+		// Get selected row index.
+		int selRow = this.jTableRelations.getSelectedRow();
+		if (selRow < 0) {
+		
+			JOptionPane.showMessageDialog(this.jPanelAccountRelations, 
+				"Must select a user from the list.",
+				"Action Failed", JOptionPane.ERROR_MESSAGE);
+		}
+		else {
+		
+			// Try to remove frenemy.
+			this.addOrRemoveFrenemy(
+					(String)this.jTableRelations.getValueAt(selRow, 0), 
+					false, 
+					this.isRelationsContextFriends());
+		}
+    }//GEN-LAST:event_jButtonRelationsRemoveMouseClicked
+
     public void goToPostPage(Post post) {
         // CONFIGURE THE VIEW POST PAGE
         // THEN SHOW THE PAGE
@@ -2076,6 +2122,78 @@ public class GUIFrameMain extends javax.swing.JFrame {
         }
     }
     
+	private void addOrRemoveFrenemy(String username, boolean shouldAdd, boolean asFriend) {
+	
+		// Get session user.
+		User curUser = sessionServer.getActiveUser();
+		
+		// Check if specified user does not exist.
+		User specUser = sessionServer.getUserFromUsername(username);
+		if (specUser == null) {
+			
+			JOptionPane.showMessageDialog(this.jPanelAccountRelations, 
+				"Could not find user with username \'" + 
+						this.jTextFieldRelationsUser.getText() + "\'.",
+				"Action Failed", JOptionPane.ERROR_MESSAGE);
+		}
+		else {
+		
+			// Check if specified user is in the session user's list.
+			boolean userIsPresent = false;
+			for (User frenemy : (asFriend ? curUser.getFriends() : curUser.getBlockedUsers())) {
+			
+				if (specUser == frenemy) {
+				
+					userIsPresent = true;
+					break;
+				}
+			}
+			
+			// Check that the action is valid.
+			if (shouldAdd && userIsPresent) {
+			
+				JOptionPane.showMessageDialog(this.jPanelAccountRelations, 
+					"User is already " + (asFriend ? "a friend." : "blocked."),
+					"Action Failed", JOptionPane.ERROR_MESSAGE);
+			}
+			else if (!(shouldAdd || userIsPresent)) {
+			
+				JOptionPane.showMessageDialog(this.jPanelAccountRelations, 
+					"User was not " + (asFriend ? "a friend." : "blocked."),
+					"Action Failed", JOptionPane.ERROR_MESSAGE);
+			}
+			else {
+			
+				// Perform action.
+				if (shouldAdd) {
+					
+					if (asFriend) {
+					
+						curUser.addFriend(specUser);
+					}
+					else {
+					
+						curUser.addBlockUser(specUser);
+					}
+				}
+				else {
+				
+					if (asFriend) {
+					
+						curUser.removeFriend(specUser);
+					}
+					else {
+					
+						curUser.unBlockUser(specUser);
+					}
+				}
+				
+				// Refresh display.
+				this.refreshAccountTab();
+			}
+		}
+	}
+	
 	private boolean isRelationsContextFriends() {
 	
 		return this.jComboBoxRelationsContext.getSelectedIndex() == 0;
