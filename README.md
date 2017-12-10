@@ -1,31 +1,31 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DESCRIPTION
+											DESCRIPTION
 	Clustr is an application that allows people to create and find groups of people with similar interests.
-	People can create posts in their groups in order to schedule events and discuss things related to their group, 
-	and can create and join groups whenever they want.
+People can create posts in their groups in order to schedule events and discuss things related to their group, 
+and can create and join groups whenever they want.
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-PROJECT SOURCE
-	https://bitbucket.org/findyourselfagroup/clustrapp/src
+										   PROJECT SOURCE
+				     	https://bitbucket.org/findyourselfagroup/clustrapp/src
 					 					
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-AUTHORS
-	A group of Software Engineering students from Florida Gulf Coast University 
-	Tyler Dalbora: Team Leader and GUI Design
-    Garrett Fairburn: GUI Design and Implementation
-	Garrett Chapman: Communication Classes
-	Jirawat Hirunkum: User Class
-	Thomas Price-Gedrites: Groups and Testing
+										      AUTHORS
+				A group of Software Engineering students from Florida Gulf Coast University 
+				 			Tyler Dalbora: Team Leader and GUI Design
+							Garrett Fairburn: GUI Design and Implementation
+							Garrett Chapman: Communication Classes
+							Jirawat Hirunkum: User Class
+							Thomas Price-Gedrites: Groups and Testing
 		
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-MOTIVATION
+										     MOTIVATION
 	Our team was formed to build this project as a part of the Software Engineering Fundamentals course		  
 										
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-CODE EXAMPLE	
-	The GUI was built by using NetBeans GUI Builder.
-	The back-end programming was done using Eclipse.
+										 	CODE EXAMPLE	
+						  The GUI was built by using NetBeans GUI Builder.
+						  The back-end programming was done using Eclipse.
   
   Here are sections of codes on how we structured our User class, Group class, and Post class:
   
