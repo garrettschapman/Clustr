@@ -25,7 +25,8 @@ public class Post implements Serializable {
 	private LocalDateTime date; // time the post was created
 	private String title;
 	private ArrayList<String> votedUsers; // users who voted
-	private int countVote = 0; //check up and down vote 
+	private boolean incremented; // upvoted
+	private boolean decremented; // downvoted
 
 	/*
 	 * Constructor for Post Uses the owner and the body (entered by the User) as
@@ -85,18 +86,19 @@ public class Post implements Serializable {
 		for (int i = -1; i < votedUsers.size(); i++) {
 			if (votedUsers.contains(username)) {
 				// does not increment points unless down vote was clicked first
-				if (this.countVote == 0) {
+				if (decremented == true) {
 					this.points++;
-					this.countVote = 1;
-				} 
+					this.points++;
+					decremented = false;
+					incremented = true;
+				}
 				break;
 			} else { //increments points if up vote was clicked first
 				this.points++; // increments
-				this.countVote = 1;
+				incremented = true;
 				break;
 			}
 		}
-
 	}
 	
 	//decrement post points
@@ -104,17 +106,17 @@ public class Post implements Serializable {
 		for (int i = -1; i < votedUsers.size(); i++) {
 			if (votedUsers.contains(username)) {
 				// does not decrement points unless up vote was clicked first
-				if (this.countVote == 1) {
+				if (incremented == true) {
 					this.points--;
-					this.countVote = 0;
+					this.points--;
+					incremented = false;
+					decremented = true;
 				}
 				break;
-			} else { // decrements points if down vote was clicked first
-				if (this.countVote == 1) {
-				this.points--; // decrements
-				this.countVote = 0;
-				break;
-				}
+			}else { // decrements points if down vote was clicked first
+					this.points--; // decrements
+					decremented = true;
+					break;
 			}
 		}
 	}
