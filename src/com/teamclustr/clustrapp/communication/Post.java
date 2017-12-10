@@ -85,7 +85,7 @@ public class Post implements Serializable {
 
 		for (int i = -1; i < votedUsers.size(); i++) {
 			if (votedUsers.contains(username)) {
-				// does not increment points unless down vote was clicked first
+				// increments points after downvoted 
 				if (decremented == true) {
 					this.points++;
 					this.points++;
@@ -93,7 +93,7 @@ public class Post implements Serializable {
 					incremented = true;
 				}
 				break;
-			} else { //increments points if up vote was clicked first
+			} else { //increments points when user is not added to votedUsers yet
 				this.points++; // increments
 				incremented = true;
 				break;
@@ -101,11 +101,11 @@ public class Post implements Serializable {
 		}
 	}
 	
-	//decrement post points
+	//decrement post points 
 	public void decrementPoints(String username) {
 		for (int i = -1; i < votedUsers.size(); i++) {
 			if (votedUsers.contains(username)) {
-				// does not decrement points unless up vote was clicked first
+				//decrement points after upvoted
 				if (incremented == true) {
 					this.points--;
 					this.points--;
@@ -113,7 +113,7 @@ public class Post implements Serializable {
 					decremented = true;
 				}
 				break;
-			}else { // decrements points if down vote was clicked first
+			}else { //decrement points when user is not added to votedUsers yet
 					this.points--; // decrements
 					decremented = true;
 					break;
