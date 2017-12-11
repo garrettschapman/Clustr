@@ -657,6 +657,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         setTitle("Clustr");
         setBackground(new java.awt.Color(255, 255, 255));
         setIconImages(null);
+        setMaximumSize(new java.awt.Dimension(1600, 1200));
         setMinimumSize(new java.awt.Dimension(800, 500));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
@@ -835,7 +836,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         );
         jPanelAccountActivityLayout.setVerticalGroup(
             jPanelAccountActivityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPaneAccountActivity, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
+            .addComponent(jScrollPaneAccountActivity, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
         );
 
         jTabbedPaneAcountValid.addTab("Activity", jPanelAccountActivity);
@@ -974,7 +975,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                     .addComponent(createAGroupCardButton)
                     .addComponent(yourGroupsCardButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(browseGroupsPane, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE)
+                .addComponent(browseGroupsPane, javax.swing.GroupLayout.DEFAULT_SIZE, 826, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1083,7 +1084,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
             .addGroup(jPanelCreateGroupLayout.createSequentialGroup()
                 .addGap(85, 85, 85)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(312, Short.MAX_VALUE))
+                .addContainerGap(283, Short.MAX_VALUE))
         );
 
         jPanelGroups.add(jPanelCreateGroup, "card4");
@@ -1141,7 +1142,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                     .addComponent(backToBrowseCardButton)
                     .addComponent(createAGroupCardButtonFeed))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 861, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 832, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1282,13 +1283,13 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
-                    .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE))
+                    .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(groupWindowPanelLayout.createSequentialGroup()
                     .addGap(51, 51, 51)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(845, Short.MAX_VALUE)))
+                    .addContainerGap(816, Short.MAX_VALUE)))
         );
 
         jPanelGroups.add(groupWindowPanel, "card5");
@@ -1426,7 +1427,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 .addComponent(jLabel14)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(viewPostWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel15)
                     .addComponent(jLabel16)
