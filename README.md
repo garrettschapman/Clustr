@@ -11,7 +11,7 @@
 	DOWNLOAD INSTRUCTION: 
 	Go to project source link and download the Clustr.jar file
 	Make sure java 1.8 or higher was installed.
-
+ 
 	AUTHORS:
 	A group of Software Engineering students from Florida Gulf Coast University 
 	Tyler Dalbora: Team Leader and GUI Design
