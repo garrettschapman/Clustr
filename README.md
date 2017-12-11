@@ -7,7 +7,10 @@
 
 	PROJECT SOURCE:
 	https://bitbucket.org/findyourselfagroup/clustrapp/src
-					 					
+	
+	DOWNLOAD INSTRUCTION: 
+	Go to project source link and download the Clustr.jar file
+	Make sure java 1.8 or higher was installed.
 
 	AUTHORS:
 	A group of Software Engineering students from Florida Gulf Coast University 
@@ -19,7 +22,7 @@
 		
 
 	MOTIVATION:
-	Our team was formed to build this project as a part of the Software Engineering Fundamentals course		  
+	Our team was formed to build this project as a part of the Software Engineering Fundamentals course	.  
 
 	PROGRAMMING STYLE AND CODE EXAMPLE:
 	The GUI was built by using NetBeans GUI Builder.
