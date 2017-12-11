@@ -8,10 +8,9 @@
 	PROJECT SOURCE:
 	https://bitbucket.org/findyourselfagroup/clustrapp/src
 	
-	DOWNLOAD INSTRUCTION: 
-	Go to project source link and download the Clustr.jar file
-	Make sure java 1.8 or higher was installed.
- 
+	INSTALLING REQUIRMENT:
+	Make sure JRE 7 or higher was installed on your computer.
+   
 	AUTHORS:
 	A group of Software Engineering students from Florida Gulf Coast University 
 	Tyler Dalbora: Team Leader and GUI Design
@@ -19,7 +18,6 @@
 	Garrett Chapman: Communication Classes
 	Jirawat Hirunkum: User Class
 	Thomas Price-Gedrites: Groups and Testing
-		
 
 	MOTIVATION:
 	Our team was formed to build this project as a part of the Software Engineering Fundamentals course	.  
