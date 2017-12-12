@@ -8,6 +8,9 @@
 	PROJECT SOURCE:
 	https://bitbucket.org/findyourselfagroup/clustrapp/src
 	
+	WEBSITE:
+	https://tylerdalbora.wixsite.com/clustr
+	
 	INSTALLING REQUIRMENT:
 	Make sure JRE 7 or higher was installed on your computer.
    
@@ -115,4 +118,5 @@
 	public User getOwner() {
 		return this.owner;
 	} // end of getter
+	
 	
