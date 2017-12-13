@@ -185,17 +185,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         // Initialize session user status.
         jLabelMainSessionUserStatus.setText(USER_STATUS_OUT_TEXT);
         jLabelMainSessionUserStatus.setForeground(USER_STATUS_OUT_COLOR);
-        
-        // Add the logo to the login button
-        Path currentRelativePath = Paths.get("resources/");
-        String s = currentRelativePath.toAbsolutePath().toString();
-        System.out.println("Current relative path is: " + s);
-        File file = new File(s);
-        for(String f : file.list()){
-             System.out.println(f);
-        }
-        
-        
     }
 
     /**
@@ -685,7 +674,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelAccountNull.setLayout(new java.awt.GridBagLayout());
 
         jButtonAccountMustLogIn.setBackground(new java.awt.Color(255, 255, 255));
-        jButtonAccountMustLogIn.setIcon(new javax.swing.ImageIcon(Paths.get("./resources/logo.png").toAbsolutePath().toString())); // NOI18N
+        jButtonAccountMustLogIn.setIcon(new javax.swing.ImageIcon(this.getClass().getResource("/images/logo.png"))); // NOI18N
         jButtonAccountMustLogIn.setText("Login/Signup");
         jButtonAccountMustLogIn.setToolTipText("");
         jButtonAccountMustLogIn.addMouseListener(new java.awt.event.MouseAdapter() {
