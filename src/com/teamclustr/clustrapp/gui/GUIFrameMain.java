@@ -31,6 +31,7 @@ import javax.swing.table.DefaultTableModel;
 import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -149,6 +150,91 @@ public class GUIFrameMain extends javax.swing.JFrame {
 					"Restore Failed", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+
+    private void refreshGroupsTab() {
+        
+        
+        try {
+            // refresh posts view
+
+            // set the label text
+            Post post = sessionServer.getActivePost();
+            viewPostTitleLabel.setText(post.getTitle());
+            viewPostNumOfPoints.setText(Integer.toString(post.getPoints()));
+            viewPostBodyArea.setText(post.getBody());
+
+            // set the active post
+            sessionServer.setActivePost(post);
+            
+            // initialize the comments
+            updateCommentTable(commentTable, sessionServer.getActivePost().getCommentList());
+
+
+            // show the card
+            CardLayout layout = (CardLayout) jPanelGroups.getLayout();
+            layout.show(jPanelGroups, "postCard");
+            
+            
+            if (!sessionServer.getActiveGroup().isMember(sessionServer.getActiveUser())) {
+                // hide the upvote and downvote buttons
+                PostUpvoteButton.setVisible(false);
+                PostDownvoteButton.setVisible(false);
+            }
+            
+
+            // refresh groups view
+            
+            Group group = sessionServer.getActiveGroup();
+            // GET THE GROUP VIEW SET UP -> INITIALIZE
+            // set the labels 
+            groupNameLabel.setText(group.getName());
+            groupCategoriesLabel.setText(group.getCategories());
+            groupTagsLabel.setText(group.getTags());
+
+            // set the selection model for the list on the right of the screen
+            groupMemberList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+            DefaultListModel listModel = new DefaultListModel();
+
+            // set the active group
+            sessionServer.setActiveGroup(group);
+
+            updatePostTable(group);
+
+            // populate the members
+            Vector<String> users = new Vector();
+
+            for (User user : group.getMembers()) {
+                System.out.printf("Username: %s", user.getUsername());
+                users.add(user.getUsername());
+            }
+
+            // show the members of the group
+            groupMemberList.setListData(users);
+
+            // check to see if the current user is a member, and hide the create post button
+            if (sessionServer == null || !group.isMember(sessionServer.getActiveUser())) {
+                showCreatePostDialogButton.setVisible(false); // not a member, hide the button
+                leaveGroupButton.setVisible(false);
+            } else {
+                showCreatePostDialogButton.setVisible(true); // is a member, dont hide button
+                createPostButton.setVisible(true);
+                leaveGroupButton.setVisible(true);
+
+                
+            }
+
+            // check to see if the current user is a member of the group
+            if (sessionServer == null || group.isMember(sessionServer.getActiveUser())) {
+                groupWindowJoinGroupButton.setVisible(false); // is a member, hide the join button
+            } else {
+                groupWindowJoinGroupButton.setVisible(true); // not a member, show join button
+            }
+           
+        } catch (NullPointerException e) {
+            // Ignore It
+        }
+        
+    }
 	
     /**
      * This inner class defines a TableModel in which the cells are not editable
@@ -678,7 +764,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelAccountNull.setLayout(new java.awt.GridBagLayout());
 
         jButtonAccountMustLogIn.setBackground(new java.awt.Color(255, 255, 255));
-        jButtonAccountMustLogIn.setIcon(new javax.swing.ImageIcon(this.getClass().getResource("/images/logo.png"))); // NOI18N
+        jButtonAccountMustLogIn.setIcon(new javax.swing.ImageIcon(Paths.get("/resources/logo.png").toAbsolutePath().toString())); // NOI18N
         jButtonAccountMustLogIn.setText("Login/Signup");
         jButtonAccountMustLogIn.setToolTipText("");
         jButtonAccountMustLogIn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2122,11 +2208,15 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private void jButtonDumpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDumpMouseClicked
         
 		// Prompt user for dump location.
-		String filepath = JOptionPane.showInputDialog(this, 
-				"Select location to dump server image to.", 
-				"Dump Image", 
-				JOptionPane.QUESTION_MESSAGE);
-		
+//		String filepath = JOptionPane.showInputDialog(this, 
+//				"Select location to dump server image to.", 
+//				"Dump Image", 
+//				JOptionPane.QUESTION_MESSAGE);
+        String filepath = null;
+        JFileChooser chooser = new JFileChooser();
+        if(chooser.showSaveDialog(jPanel1) == JFileChooser.APPROVE_OPTION){
+            filepath = chooser.getSelectedFile().getAbsolutePath();
+        }
 		// Dump server image.
 		if (filepath != null) {
 			
@@ -2137,11 +2227,18 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private void jButtonRestoreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRestoreMouseClicked
         
 		// Prompt user for dump location.
-		String filepath = JOptionPane.showInputDialog(this, 
-				"Select location to read server image from.", 
-				"Restore Image", 
-				JOptionPane.QUESTION_MESSAGE);
+//		String filepath = JOptionPane.showInputDialog(this, 
+//				"Select location to read server image from.", 
+//				"Restore Image", 
+//				JOptionPane.QUESTION_MESSAGE);
+                String filepath = null;
 		
+                JFileChooser chooser = new JFileChooser();
+                if(chooser.showOpenDialog(jPanel1) == JFileChooser.APPROVE_OPTION){
+                    File file = chooser.getSelectedFile();
+                    filepath = file.getAbsolutePath();
+                }
+                
 		// Restore server image.
 		if (filepath != null) {
 			
@@ -2151,6 +2248,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 		// Refresh displays.
 		this.refreshAccountTab();
 		this.refreshUserStatusLabel();
+                this.refreshGroupsTab();
     }//GEN-LAST:event_jButtonRestoreMouseClicked
 
     private void leaveGroupButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_leaveGroupButtonMouseClicked
