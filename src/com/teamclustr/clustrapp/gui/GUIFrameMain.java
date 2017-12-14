@@ -31,6 +31,7 @@ import javax.swing.table.DefaultTableModel;
 import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -273,6 +274,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         // Initialize session user status.
         jLabelMainSessionUserStatus.setText(USER_STATUS_OUT_TEXT);
         jLabelMainSessionUserStatus.setForeground(USER_STATUS_OUT_COLOR);
+        jButtonAccountMustLogIn.setIcon(new ImageIcon(getClass().getResource("/images/logo.png")));
     }
 
     /**
