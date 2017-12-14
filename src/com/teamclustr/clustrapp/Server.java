@@ -44,71 +44,8 @@ public class Server implements Serializable {
         users = new ArrayList<User>(16);
         groups = new ArrayList<Group>(16);
         searchedGroups = new ArrayList<Group>(16);
-        
-        // add some users, groups, and posts
-        
-        users.add(new User("test", "test", "test@email.com", "5555555555", "BIO"));
-        
-        User usr1 = new User(
-                "TestUser1",
-                "TestPassword1",
-                "test1@email.com",
-                "5555555555",
-                "THIS IS A BIO"
-        );
-        
-        Group gp1 = new Group(
-                usr1, 
-                "First Group", 
-                "First, Group", 
-                "#First, #Java"
-        );
-        
-        Post pst1 = new Post(
-                usr1, 
-                "Body Of Post", 
-                "TITLE");
-
-        pst1.addComment(usr1, "THIS IS A TRIUMPH", "THE CAKE IS A LIE");
-        
-        users.add(usr1);
-        groups.add(gp1);
-        gp1.leavePost(pst1);
-
-        User usr2 = new User(
-                "TestUser2",
-                "TestPassword2",
-                "test2@email.com",
-                "5555555555",
-                "THIS IS ANOTHER BIO"
-        );
-
-        Group gp2 = new Group(
-                usr2, 
-                "Second Group", 
-                "Second, Group",
-                "#Second, #Python"
-        );
-        
-        Post pst2 = new Post(
-                usr2, 
-                "HERE IS SOME TEXT", 
-                "THIS IS A TITLE"
-        );
-        users.add(usr2);
-        groups.add(gp2);
-        gp2.leavePost(pst2);
-        
-        Group gp3 = new Group(
-                usr1, 
-                "Group Three",
-                "Third, Blah, Blah",
-                "#ThirdGroup"
-        );
-        groups.add(gp3);
-        gp3.addMember(usr2);
-
     }
+
     //searches overall group array, copies matching values into a visible arrayList
     public ArrayList<Group> searchedGroups(String s){
     	for(Group group : groups){

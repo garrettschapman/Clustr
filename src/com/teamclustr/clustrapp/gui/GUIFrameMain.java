@@ -138,7 +138,9 @@ public class GUIFrameMain extends javax.swing.JFrame {
 			
 			// Read session server from file.
 			ObjectInputStream objInStream = new ObjectInputStream(fileInStream);
-			sessionServer = (Server)objInStream.readObject();
+			// Use buffer in case dump is malformed.
+			Server buffServer = (Server)objInStream.readObject();
+			sessionServer = buffServer;
 		}
 		catch (Exception ex) {
 			
@@ -2118,11 +2120,15 @@ public class GUIFrameMain extends javax.swing.JFrame {
 				"Restore Image", 
 				JOptionPane.QUESTION_MESSAGE);
 		
-		// Dump server image.
+		// Restore server image.
 		if (filepath != null) {
 			
 			this.restoreSession(filepath);
 		}
+
+		// Refresh displays.
+		this.refreshAccountTab();
+		this.refreshUserStatusLabel();
     }//GEN-LAST:event_jButtonRestoreMouseClicked
 
     public void goToPostPage(Post post) {
