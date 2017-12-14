@@ -1081,11 +1081,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 createGroupButtonMouseClicked(evt);
             }
         });
-        createGroupButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createGroupButtonActionPerformed(evt);
-            }
-        });
 
         createGroupCancelButton.setText("Cancel");
         createGroupCancelButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1651,10 +1646,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_groupSearchFieldActionPerformed
 
-    private void createGroupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createGroupButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_createGroupButtonActionPerformed
-
     private String getGroupNameFromTable(JTable tbl, java.awt.event.MouseEvent evt) {
         int row = tbl.rowAtPoint(evt.getPoint());
         return (String) tbl.getModel().getValueAt(row, 0);
@@ -1802,6 +1793,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
                     // create the group in the array in the server
                     sessionServer.createGroup(name, categories, tags);
+                    System.out.println("CREATING GROUP");
                     
                     // alert success
                     JOptionPane.showMessageDialog(rootPane,
@@ -1810,8 +1802,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
                     
                     // now, take the user to their groups page
-                    CardLayout layout = (CardLayout) jPanelGroups.getLayout();
-                    layout.show(jPanelGroups, "groupPageCard");
+                    goToGroupPage(sessionServer.getActiveGroup());
                 } else {
                     
                     // error message to indicate invalid entries
