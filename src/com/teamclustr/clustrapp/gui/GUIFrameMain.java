@@ -351,6 +351,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         groupWindowJoinGroupButton = new javax.swing.JButton();
         browseGroupsButtonGroupPage = new javax.swing.JButton();
         feedButtonGroupPage = new javax.swing.JButton();
+        leaveGroupButton = new javax.swing.JButton();
         viewPostWindowPanel = getGradientPanel();
         jLabel11 = new javax.swing.JLabel();
         viewPostTitleLabel = new javax.swing.JLabel();
@@ -1212,6 +1213,13 @@ public class GUIFrameMain extends javax.swing.JFrame {
             }
         });
 
+        leaveGroupButton.setText("Leave Group");
+        leaveGroupButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                leaveGroupButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout groupWindowPanelLayout = new javax.swing.GroupLayout(groupWindowPanel);
         groupWindowPanel.setLayout(groupWindowPanelLayout);
         groupWindowPanelLayout.setHorizontalGroup(
@@ -1235,7 +1243,9 @@ public class GUIFrameMain extends javax.swing.JFrame {
                                 .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(groupWindowPanelLayout.createSequentialGroup()
                                         .addGap(55, 55, 55)
-                                        .addComponent(feedButtonGroupPage))
+                                        .addComponent(feedButtonGroupPage)
+                                        .addGap(28, 28, 28)
+                                        .addComponent(leaveGroupButton))
                                     .addGroup(groupWindowPanelLayout.createSequentialGroup()
                                         .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel3)
@@ -1279,7 +1289,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
                     .addComponent(groupWindowJoinGroupButton)
                     .addComponent(browseGroupsButtonGroupPage)
                     .addComponent(feedButtonGroupPage)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(leaveGroupButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
@@ -2136,6 +2147,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_jButtonRestoreMouseClicked
 
+    private void leaveGroupButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_leaveGroupButtonMouseClicked
+        sessionServer.getActiveGroup().leaveGroup(sessionServer.getActiveUser());
+        goToGroupPage(sessionServer.getActiveGroup());
+    }//GEN-LAST:event_leaveGroupButtonMouseClicked
+
     public void goToPostPage(Post post) {
         // CONFIGURE THE VIEW POST PAGE
         // THEN SHOW THE PAGE
@@ -2206,10 +2222,12 @@ public class GUIFrameMain extends javax.swing.JFrame {
             // check to see if the current user is a member, and hide the create post button
             if (sessionServer == null || !group.isMember(sessionServer.getActiveUser())) {
                 showCreatePostDialogButton.setVisible(false); // not a member, hide the button
+                leaveGroupButton.setVisible(false);
             } else {
                 showCreatePostDialogButton.setVisible(true); // is a member, dont hide button
                 createPostButton.setVisible(true);
-                
+                leaveGroupButton.setVisible(true);
+
                 
             }
 
@@ -2583,6 +2601,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldLoginUsername;
     private javax.swing.JTextField jTextFieldRelationsUser;
     private javax.swing.JTextField jTextFieldSignupUsername;
+    private javax.swing.JButton leaveGroupButton;
     private javax.swing.JTextArea postBodyField;
     private javax.swing.JButton postCardBackButton;
     private javax.swing.JTextField postTitleField;
