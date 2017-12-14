@@ -373,6 +373,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         commentTitleField = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
+        deletePostButton = new javax.swing.JButton();
         jLabelMainSessionUserStatus = new javax.swing.JLabel();
         jButtonDump = new javax.swing.JButton();
         jButtonRestore = new javax.swing.JButton();
@@ -1370,6 +1371,13 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel16.setText("Title");
 
+        deletePostButton.setText("Delete Post");
+        deletePostButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deletePostButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout viewPostWindowPanelLayout = new javax.swing.GroupLayout(viewPostWindowPanel);
         viewPostWindowPanel.setLayout(viewPostWindowPanelLayout);
         viewPostWindowPanelLayout.setHorizontalGroup(
@@ -1386,6 +1394,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
                         .addComponent(jLabel11)
                         .addGap(72, 72, 72)
                         .addComponent(viewPostTitleLabel)
+                        .addGap(155, 155, 155)
+                        .addComponent(deletePostButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel13)
                         .addGap(18, 18, 18)
@@ -1427,7 +1437,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
                     .addComponent(jLabel13)
                     .addComponent(PostUpvoteButton)
                     .addComponent(viewPostNumOfPoints)
-                    .addComponent(PostDownvoteButton))
+                    .addComponent(PostDownvoteButton)
+                    .addComponent(deletePostButton))
                 .addGap(68, 68, 68)
                 .addGroup(viewPostWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
@@ -2148,10 +2159,24 @@ public class GUIFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRestoreMouseClicked
 
     private void leaveGroupButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_leaveGroupButtonMouseClicked
+        // have the active user leave the active group
         sessionServer.getActiveGroup().leaveGroup(sessionServer.getActiveUser());
+        
+        // refresh the page
         goToGroupPage(sessionServer.getActiveGroup());
     }//GEN-LAST:event_leaveGroupButtonMouseClicked
 
+    private void deletePostButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletePostButtonMouseClicked
+        // remove the post
+        if(sessionServer.getActivePost().getOwner().equals(sessionServer.getActiveUser())){
+            System.out.println(sessionServer.getActiveGroup().removePost(sessionServer.getActivePost()));
+        } else {
+            JOptionPane.showMessageDialog(null, "You don't own this post");
+        }
+        
+        goToGroupPage(sessionServer.getActiveGroup());
+    }//GEN-LAST:event_deletePostButtonMouseClicked
+    
     public void goToPostPage(Post post) {
         // CONFIGURE THE VIEW POST PAGE
         // THEN SHOW THE PAGE
@@ -2497,6 +2522,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JButton createGroupCancelButton;
     private javax.swing.JButton createPostButton;
     private javax.swing.JFrame createPostDialog;
+    private javax.swing.JButton deletePostButton;
     private javax.swing.JButton feedButtonGroupPage;
     private javax.swing.JTable feedTable;
     private javax.swing.Box.Filler fillerAccount;

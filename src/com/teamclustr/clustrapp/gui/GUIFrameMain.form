@@ -3805,6 +3805,8 @@
                                   <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                                   <Component id="viewPostTitleLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="155" max="-2" attributes="0"/>
+                                  <Component id="deletePostButton" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -3858,6 +3860,7 @@
                               <Component id="PostUpvoteButton" alignment="2" min="-2" max="-2" attributes="0"/>
                               <Component id="viewPostNumOfPoints" alignment="2" min="-2" max="-2" attributes="0"/>
                               <Component id="PostDownvoteButton" alignment="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="deletePostButton" alignment="2" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -4052,6 +4055,14 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JSeparator" name="jSeparator2">
+                </Component>
+                <Component class="javax.swing.JButton" name="deletePostButton">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Delete Post"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="deletePostButtonMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

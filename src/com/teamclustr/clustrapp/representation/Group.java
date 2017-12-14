@@ -115,4 +115,14 @@ public class Group implements Serializable {
 
     }
 
+    public boolean removePost(Post activePost) {
+        try{
+            return this.posts.remove(activePost);
+        } catch (Exception e){
+            // do nothing
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
