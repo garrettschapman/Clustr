@@ -3,7 +3,6 @@ package com.teamclustr.clustrapp.representation;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.teamclustr.clustrapp.communication.Message;
 import com.teamclustr.clustrapp.communication.Post;
@@ -23,6 +22,14 @@ public class User implements Serializable {
 	private String Email;
 	private String PhoneNum;
 	private String Bio;
+	private int Age;
+	private String Major;
+	private String Year;
+	private String Location;
+	private String Interests;
+	private String Ethnicity;
+	private String Gender;
+	private String maritalStatus;
 	private ArrayList<User> Friends;
 	private ArrayList<Group> GroupList;
 	private ArrayList<Post> Posts;
@@ -30,9 +37,10 @@ public class User implements Serializable {
 	private ArrayList<User> BlockUsers;
 
 	// Constructor with parameters of user's general information
-	public User(String Username, String Password, String Email, String PhoneNum, String Bio) {
+	public User(String Username, String Password, String Email, String PhoneNum, String Bio, int Age, String Gender, String Ethnicity, String maritalStatus,
+            String Major, String Year, String Location) {
 
-		createAccount(Username, Password, Email, PhoneNum, Bio);
+		createAccount(Username, Password, Email, PhoneNum, Bio, Age, Gender, Ethnicity, maritalStatus, Major, Year, Location);
 
 		Friends = new ArrayList<User>();
 		GroupList = new ArrayList<Group>();
@@ -45,12 +53,20 @@ public class User implements Serializable {
 	// MEMBER METHODS.
 
 	// function to create user's account with general info
-	public void createAccount(String Username, String Password, String Email, String PhoneNum, String Bio) {
+	public void createAccount(String Username, String Password, String Email, String PhoneNum, String Bio, int Age, String Gender, String Ethnicity, String maritalStatus,
+            String Major, String Year, String Location) {
 		this.setUsername(Username);
 		this.setPassword(Password);
 		this.setEmail(Email);
 		this.setPhoneNum(PhoneNum);
 		this.setBio(Bio);
+                this.setAge(Age);
+                this.setGender(Gender);
+                this.setEthnicity(Ethnicity);
+                this.setMaritalStatus(maritalStatus);
+                this.setMajor(Major);
+                this.setYear(Year);
+                this.setLocation(Location);
 
 	}
 
@@ -145,6 +161,70 @@ public class User implements Serializable {
 
 	public void setBio(String bio) {
 		Bio = bio;
+	}
+	
+	public int getAge() {
+		return Age;
+	}
+
+	public void setAge(int age) {
+		Age = age;
+	}
+
+	public String getMajor() {
+		return Major;
+	}
+
+	public void setMajor(String major) {
+		Major = major;
+	}
+
+	public String getYear() {
+		return Year;
+	}
+
+	public void setYear(String year) {
+		Year = year;
+	}
+
+	public String getLocation() {
+		return Location;
+	}
+
+	public void setLocation(String location) {
+		Location = location;
+	}
+
+	public String getInterests() {
+		return Interests;
+	}
+
+	public void setInterests(String interests) {
+		Interests = interests;
+	}
+
+	public String getEthnicity() {
+		return Ethnicity;
+	}
+
+	public void setEthnicity(String ethnicity) {
+		Ethnicity = ethnicity;
+	}
+
+	public String getGender() {
+		return Gender;
+	}
+
+	public void setGender(String gender) {
+		Gender = gender;
+	}
+
+	public String getMaritalStatus() {
+		return maritalStatus;
+	}
+
+	public void setMaritalStatus(String maritalStatus) {
+		this.maritalStatus = maritalStatus;
 	}
 
 	public ArrayList<Post> getPosts() {
