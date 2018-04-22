@@ -394,14 +394,14 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jComboBox6 = new javax.swing.JComboBox<>();
+        jInterest0Text = new javax.swing.JTextField();
+        jInterest1Text = new javax.swing.JTextField();
+        jInterest2Text = new javax.swing.JTextField();
+        jComboBoxInterest0 = new javax.swing.JComboBox<>();
+        jComboBoxInterest1 = new javax.swing.JComboBox<>();
         jTextAreaAccountMarital = new javax.swing.JTextField();
         jTextAreaAccountEthnicity = new javax.swing.JTextField();
-        jComboBox7 = new javax.swing.JComboBox<>();
+        jComboBoxInterest2 = new javax.swing.JComboBox<>();
         jTextAreaAccountMaritalEdit = new javax.swing.JComboBox<>();
         jTextAreaAccountLocationEdit = new javax.swing.JComboBox<>();
         jPanelAccountActivity = getGradientPanel();
@@ -938,6 +938,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         jTextAreaAccountAge.setMinimumSize(new java.awt.Dimension(250, 25));
         jTextAreaAccountAge.setPreferredSize(new java.awt.Dimension(250, 25));
+        jTextAreaAccountAge.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 18;
@@ -974,7 +975,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         gridBagConstraints.gridy = 40;
         jPanelAccountDetails.add(jLabel21, gridBagConstraints);
 
-        jTextAreaAccountGenderEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
+        jTextAreaAccountGenderEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Other", "Prefer not to Answer" }));
         jTextAreaAccountGenderEdit.setMinimumSize(new java.awt.Dimension(250, 25));
         jTextAreaAccountGenderEdit.setPreferredSize(new java.awt.Dimension(250, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -984,6 +985,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         jTextAreaAccountGender.setMinimumSize(new java.awt.Dimension(250, 25));
         jTextAreaAccountGender.setPreferredSize(new java.awt.Dimension(250, 25));
+        jTextAreaAccountGender.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 22;
@@ -991,6 +993,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         jTextAreaAccountMajor.setMinimumSize(new java.awt.Dimension(250, 25));
         jTextAreaAccountMajor.setPreferredSize(new java.awt.Dimension(250, 25));
+        jTextAreaAccountMajor.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 34;
@@ -999,12 +1002,14 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jTextAreaAccountYear.setToolTipText("");
         jTextAreaAccountYear.setMinimumSize(new java.awt.Dimension(250, 25));
         jTextAreaAccountYear.setPreferredSize(new java.awt.Dimension(250, 25));
+        jTextAreaAccountYear.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 38;
         jPanelAccountDetails.add(jTextAreaAccountYear, gridBagConstraints);
 
         jTextAreaAccountLocation.setPreferredSize(new java.awt.Dimension(250, 25));
+        jTextAreaAccountLocation.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 42;
@@ -1051,44 +1056,48 @@ public class GUIFrameMain extends javax.swing.JFrame {
         gridBagConstraints.gridy = 24;
         jPanelAccountDetails.add(jLabel25, gridBagConstraints);
 
-        jTextField8.setPreferredSize(new java.awt.Dimension(250, 25));
+        jInterest0Text.setPreferredSize(new java.awt.Dimension(250, 25));
+        jInterest0Text.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 46;
-        jPanelAccountDetails.add(jTextField8, gridBagConstraints);
+        jPanelAccountDetails.add(jInterest0Text, gridBagConstraints);
 
-        jTextField9.setPreferredSize(new java.awt.Dimension(250, 25));
+        jInterest1Text.setPreferredSize(new java.awt.Dimension(250, 25));
+        jInterest1Text.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 48;
-        jPanelAccountDetails.add(jTextField9, gridBagConstraints);
+        jPanelAccountDetails.add(jInterest1Text, gridBagConstraints);
 
-        jTextField10.setPreferredSize(new java.awt.Dimension(250, 25));
+        jInterest2Text.setPreferredSize(new java.awt.Dimension(250, 25));
+        jInterest2Text.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 50;
-        jPanelAccountDetails.add(jTextField10, gridBagConstraints);
+        jPanelAccountDetails.add(jInterest2Text, gridBagConstraints);
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Baseball", "Basketball", "Football", "Soccer" }));
-        jComboBox5.setMinimumSize(new java.awt.Dimension(250, 25));
-        jComboBox5.setName(""); // NOI18N
-        jComboBox5.setPreferredSize(new java.awt.Dimension(250, 25));
+        jComboBoxInterest0.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Baseball", "Basketball", "Football", "Soccer" }));
+        jComboBoxInterest0.setMinimumSize(new java.awt.Dimension(250, 25));
+        jComboBoxInterest0.setName(""); // NOI18N
+        jComboBoxInterest0.setPreferredSize(new java.awt.Dimension(250, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 50;
-        jPanelAccountDetails.add(jComboBox5, gridBagConstraints);
+        jPanelAccountDetails.add(jComboBoxInterest0, gridBagConstraints);
 
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Drawing", "Painting", "Photography", "Writing" }));
-        jComboBox6.setMinimumSize(new java.awt.Dimension(250, 25));
-        jComboBox6.setName(""); // NOI18N
-        jComboBox6.setPreferredSize(new java.awt.Dimension(250, 25));
+        jComboBoxInterest1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Drawing", "Painting", "Photography", "Writing" }));
+        jComboBoxInterest1.setMinimumSize(new java.awt.Dimension(250, 25));
+        jComboBoxInterest1.setName(""); // NOI18N
+        jComboBoxInterest1.setPreferredSize(new java.awt.Dimension(250, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 46;
-        jPanelAccountDetails.add(jComboBox6, gridBagConstraints);
+        jPanelAccountDetails.add(jComboBoxInterest1, gridBagConstraints);
 
         jTextAreaAccountMarital.setMinimumSize(new java.awt.Dimension(250, 25));
         jTextAreaAccountMarital.setPreferredSize(new java.awt.Dimension(250, 25));
+        jTextAreaAccountMarital.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 30;
@@ -1096,27 +1105,28 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         jTextAreaAccountEthnicity.setMinimumSize(new java.awt.Dimension(250, 25));
         jTextAreaAccountEthnicity.setPreferredSize(new java.awt.Dimension(250, 25));
+        jTextAreaAccountEthnicity.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 26;
         jPanelAccountDetails.add(jTextAreaAccountEthnicity, gridBagConstraints);
 
-        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Video Games", "Television", "Movies", "Music" }));
-        jComboBox7.setMinimumSize(new java.awt.Dimension(250, 25));
-        jComboBox7.setPreferredSize(new java.awt.Dimension(250, 25));
+        jComboBoxInterest2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Video Games", "Television", "Movies", "Music" }));
+        jComboBoxInterest2.setMinimumSize(new java.awt.Dimension(250, 25));
+        jComboBoxInterest2.setPreferredSize(new java.awt.Dimension(250, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 48;
-        jPanelAccountDetails.add(jComboBox7, gridBagConstraints);
+        jPanelAccountDetails.add(jComboBoxInterest2, gridBagConstraints);
 
-        jTextAreaAccountMaritalEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Married", "In a Relationship", "Single" }));
+        jTextAreaAccountMaritalEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unmarried", "Married" }));
         jTextAreaAccountMaritalEdit.setPreferredSize(new java.awt.Dimension(250, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 30;
         jPanelAccountDetails.add(jTextAreaAccountMaritalEdit, gridBagConstraints);
 
-        jTextAreaAccountLocationEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SoVi", "North Lake Village", "West Lake Village", "Coastal Village", "off-campus" }));
+        jTextAreaAccountLocationEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SoVi", "North Lake Village", "West Lake Village", "Coastal Village", "Off-Campus" }));
         jTextAreaAccountLocationEdit.setPreferredSize(new java.awt.Dimension(250, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
@@ -2311,6 +2321,20 @@ public class GUIFrameMain extends javax.swing.JFrame {
 				curUser.setPhoneNum(this.jTextFieldAccountPhoneNumberEdit.getText().trim());
 				curUser.setPassword(this.jPasswordFieldAccountPasswordEdit.getText().trim());
 				curUser.setBio(this.jTextAreaAccountBioEdit.getText());
+				curUser.setAge(Integer.parseInt(this.jTextAreaAccountAgeEdit.getText()));
+				curUser.setMajor(this.jTextAreaAccountMajorEdit.getSelectedItem().toString());
+				curUser.setYear(this.jTextAreaAccountYearEdit.getSelectedItem().toString());
+				curUser.setLocation(this.jTextAreaAccountLocationEdit.getSelectedItem().toString());
+				curUser.setInterest(this.jComboBoxInterest0.getSelectedItem().toString(), 0);
+				curUser.setInterest(this.jComboBoxInterest1.getSelectedItem().toString(), 1);
+				curUser.setInterest(this.jComboBoxInterest2.getSelectedItem().toString(), 2);
+				curUser.setEthnicity(this.jTextAreaAccountEthnicityEdit.getSelectedItem().toString());
+				curUser.setGender(this.jTextAreaAccountGenderEdit.getSelectedItem().toString());
+				if(this.jTextAreaAccountGenderEdit.getSelectedIndex() == 0) {
+					curUser.setMaritalStatus(false);
+				}else {
+					curUser.setMaritalStatus(true);
+				}
 
 				// Refresh display.
 				this.refreshAccountTab();
@@ -2701,6 +2725,21 @@ public class GUIFrameMain extends javax.swing.JFrame {
 			this.jPasswordFieldAccountPasswordEdit.setText(curUser.getPassword());
 			this.jTextAreaAccountBio.setText(curUser.getBio());
 			this.jTextAreaAccountBioEdit.setText(curUser.getBio());
+			this.jTextAreaAccountAge.setText(Integer.toString(curUser.getAge()));
+			this.jTextAreaAccountMajor.setText(curUser.getMajor());
+			this.jTextAreaAccountYear.setText(curUser.getYear());
+			this.jTextAreaAccountLocation.setText(curUser.getLocation());
+			this.jInterest0Text.setText(curUser.getInterest(0));
+			this.jInterest1Text.setText(curUser.getInterest(1));
+			this.jInterest2Text.setText(curUser.getInterest(2));
+			this.jTextAreaAccountEthnicity.setText(curUser.getEthnicity());
+			this.jTextAreaAccountGender.setText(curUser.getGender());
+			if(curUser.getMaritalStatus()) {
+				this.jTextAreaAccountMarital.setText("Married");
+			}
+			else {
+				this.jTextAreaAccountMarital.setText("Unmarried");
+			}
 			
 			// Update account activity display.
 			
@@ -2870,9 +2909,9 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSignupCancel;
     private javax.swing.JButton jButtonSwitchLogin;
     private javax.swing.JButton jButtonSwitchSignup;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
-    private javax.swing.JComboBox<String> jComboBox7;
+    private javax.swing.JComboBox<String> jComboBoxInterest0;
+    private javax.swing.JComboBox<String> jComboBoxInterest1;
+    private javax.swing.JComboBox<String> jComboBoxInterest2;
     private javax.swing.JComboBox<String> jComboBoxRelationsContext;
     private javax.swing.JDialog jDialogLoginSignup;
     private javax.swing.JLabel jLabel1;
@@ -2964,9 +3003,9 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JTextField jTextAreaAccountYear;
     private javax.swing.JComboBox<String> jTextAreaAccountYearEdit;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField jInterest2Text;
+    private javax.swing.JTextField jInterest0Text;
+    private javax.swing.JTextField jInterest1Text;
     private javax.swing.JTextField jTextFieldAccountEmail;
     private javax.swing.JTextField jTextFieldAccountEmailEdit;
     private javax.swing.JTextField jTextFieldAccountPhoneNumber;

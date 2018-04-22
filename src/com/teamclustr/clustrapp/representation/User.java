@@ -26,10 +26,10 @@ public class User implements Serializable {
 	private String Major;
 	private String Year;
 	private String Location;
-	private String Interests;
+	private String[] Interests = {"","",""};
 	private String Ethnicity;
 	private String Gender;
-	private String maritalStatus;
+	private Boolean MaritalStatus;
 	private ArrayList<User> Friends;
 	private ArrayList<Group> GroupList;
 	private ArrayList<Post> Posts;
@@ -37,10 +37,10 @@ public class User implements Serializable {
 	private ArrayList<User> BlockUsers;
 
 	// Constructor with parameters of user's general information
-	public User(String Username, String Password, String Email, String PhoneNum, String Bio, int Age, String Gender, String Ethnicity, String maritalStatus,
+	public User(String Username, String Password, String Email, String PhoneNum, String Bio, int Age, String Gender, String Ethnicity, Boolean MaritalStatus,
             String Major, String Year, String Location) {
 
-		createAccount(Username, Password, Email, PhoneNum, Bio, Age, Gender, Ethnicity, maritalStatus, Major, Year, Location);
+		createAccount(Username, Password, Email, PhoneNum, Bio, Age, Gender, Ethnicity, MaritalStatus, Major, Year, Location);
 
 		Friends = new ArrayList<User>();
 		GroupList = new ArrayList<Group>();
@@ -53,7 +53,7 @@ public class User implements Serializable {
 	// MEMBER METHODS.
 
 	// function to create user's account with general info
-	public void createAccount(String Username, String Password, String Email, String PhoneNum, String Bio, int Age, String Gender, String Ethnicity, String maritalStatus,
+	public void createAccount(String Username, String Password, String Email, String PhoneNum, String Bio, int Age, String Gender, String Ethnicity, Boolean MaritalStatus,
             String Major, String Year, String Location) {
 		this.setUsername(Username);
 		this.setPassword(Password);
@@ -63,7 +63,7 @@ public class User implements Serializable {
                 this.setAge(Age);
                 this.setGender(Gender);
                 this.setEthnicity(Ethnicity);
-                this.setMaritalStatus(maritalStatus);
+                this.setMaritalStatus(MaritalStatus);
                 this.setMajor(Major);
                 this.setYear(Year);
                 this.setLocation(Location);
@@ -195,12 +195,12 @@ public class User implements Serializable {
 		Location = location;
 	}
 
-	public String getInterests() {
-		return Interests;
+	public String getInterest(int i) {
+		return Interests[i];
 	}
 
-	public void setInterests(String interests) {
-		Interests = interests;
+	public void setInterest(String interest, int i) {
+		Interests[i] = interest;
 	}
 
 	public String getEthnicity() {
@@ -219,12 +219,12 @@ public class User implements Serializable {
 		Gender = gender;
 	}
 
-	public String getMaritalStatus() {
-		return maritalStatus;
+	public Boolean getMaritalStatus() {
+		return MaritalStatus;
 	}
 
-	public void setMaritalStatus(String maritalStatus) {
-		this.maritalStatus = maritalStatus;
+	public void setMaritalStatus(Boolean MaritalStatus) {
+		this.MaritalStatus = MaritalStatus;
 	}
 
 	public ArrayList<Post> getPosts() {
