@@ -122,7 +122,7 @@ public class Server implements Serializable {
     public User createUser(String username, String password) {
     
 	    // Create user.
-	    User newUser = new User(username, password, "", "", "", 0, "", "", false, "", "", "", this.users.size());
+	    User newUser = new User(username, password, "", "", "", 0, "", "", false, "", "", "");
 	    
 	    // Add user to server.
 	    this.users.add(newUser);

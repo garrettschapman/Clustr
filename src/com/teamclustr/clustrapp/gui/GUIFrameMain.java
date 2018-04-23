@@ -1835,7 +1835,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         }//GEN-LAST:event_jButtonSwitchLoginMouseClicked
 
     private void groupSearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_groupSearchFieldActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_groupSearchFieldActionPerformed
 
     private String getGroupNameFromTable(JTable tbl, java.awt.event.MouseEvent evt) {
@@ -1931,9 +1931,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
     }
 
 
-    @SuppressWarnings("unused")
 	private void jTabbedPaneGroupsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneGroupsMouseClicked
-        // TODO add your handling code here:
+        
         // list all groups that exist into the table
         updateGroupTable(browseTable, "browse", sessionServer.getGroupList());
         updateGroupTable(feedTable, "feed", sessionServer.getGroupList());
@@ -2023,7 +2022,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
 
     private void jTabbedPaneMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneMainMouseClicked
-        // TODO add your handling code here:
+        
         updateGroupTable(feedTable, "feed", sessionServer.getGroupList());
     }//GEN-LAST:event_jTabbedPaneMainMouseClicked
 
@@ -2053,7 +2052,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_showCreatePostDialogButtonMouseClicked
 
     private void createPostButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createPostButtonMouseClicked
-        // TODO CREATE THE POST
+        
 
         if (!postTitleField.getText().isEmpty()
                 && !postBodyField.getText().isEmpty()
@@ -2080,7 +2079,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 updatePostTable(grp);
                 JOptionPane.showMessageDialog(null, "Post Created Successfully");
             } catch (NullPointerException n) {
-                // TODO DO SOMETHING
+                
             }
         } else {
             JOptionPane.showMessageDialog(null, "Please enter a post title & body.");
@@ -2308,7 +2307,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         }//GEN-LAST:event_jPanelAccountComponentShown
 
     private void jButtonAccountMustLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAccountMustLogInActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButtonAccountMustLogInActionPerformed
 
     private void feedTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_feedTableMouseClicked
@@ -2318,7 +2317,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
             goToGroupPage(sessionServer.getGroupByName(groupName));
 
         } catch (Exception e) {
-            // TODO do something
+            
         }
     }//GEN-LAST:event_feedTableMouseClicked
 
@@ -2483,7 +2482,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
     }
 
-    @SuppressWarnings({ "rawtypes", "unused", "unchecked" })
+    @SuppressWarnings({ "rawtypes", "unchecked" })
 	private void goToGroupPage(Group group) {
         try {
             // GET THE GROUP VIEW SET UP -> INITIALIZE

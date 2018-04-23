@@ -65,14 +65,6 @@ public class Group implements Serializable {
     }
 //changes the leader
 
-    public void changeLeader(User owner) {
-        if (moderators.contains(owner)) {
-            moderators.remove(owner);
-
-            //gui should insert a 
-        }
-    }
-
     public void leavePost(Post pst) {
         this.posts.add(pst);
         pst.getOwner().addPost(pst);
