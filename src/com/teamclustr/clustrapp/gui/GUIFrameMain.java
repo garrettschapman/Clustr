@@ -410,14 +410,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelAccountActivity = getGradientPanel();
         jScrollPaneAccountActivity = getTranslucentScrollPane();
         jTableAccountActivity = new javax.swing.JTable();
-        jPanelAccountRelations = getGradientPanel();
-        jPanelRelationsControl = new javax.swing.JPanel();
-        jComboBoxRelationsContext = new javax.swing.JComboBox<>();
-        jButtonRelationsAdd = new javax.swing.JButton();
-        jTextFieldRelationsUser = new javax.swing.JTextField();
-        jButtonRelationsRemove = new javax.swing.JButton();
-        jScrollPaneRelations = getTranslucentScrollPane();
-        jTableRelations = new javax.swing.JTable();
         jPanelGroups = new javax.swing.JPanel();
         jPanelAllGroups = getGradientPanel();
         groupSearchField = new javax.swing.JTextField();
@@ -1166,51 +1158,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         );
 
         jTabbedPaneAcountValid.addTab("Activity", jPanelAccountActivity);
-
-        jPanelAccountRelations.setLayout(new java.awt.BorderLayout());
-
-        jComboBoxRelationsContext.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Friends", "Blocked Users" }));
-        jComboBoxRelationsContext.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBoxRelationsContextItemStateChanged(evt);
-            }
-        });
-        jPanelRelationsControl.add(jComboBoxRelationsContext);
-
-        jButtonRelationsAdd.setText("Add $CONTEXT");
-        jButtonRelationsAdd.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonRelationsAddMouseClicked(evt);
-            }
-        });
-        jPanelRelationsControl.add(jButtonRelationsAdd);
-
-        jTextFieldRelationsUser.setPreferredSize(new java.awt.Dimension(250, 25));
-        jPanelRelationsControl.add(jTextFieldRelationsUser);
-
-        jButtonRelationsRemove.setText("Remove $CONTEXT");
-        jButtonRelationsRemove.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonRelationsRemoveMouseClicked(evt);
-            }
-        });
-        jPanelRelationsControl.add(jButtonRelationsRemove);
-
-        jPanelAccountRelations.add(jPanelRelationsControl, java.awt.BorderLayout.NORTH);
-
-        jTableRelations.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPaneRelations.setViewportView(jTableRelations);
-
-        jPanelAccountRelations.add(jScrollPaneRelations, java.awt.BorderLayout.CENTER);
-
-        jTabbedPaneAcountValid.addTab("Relations", jPanelAccountRelations);
 
         jPanelAccount.add(jTabbedPaneAcountValid, "valid");
 
@@ -2432,35 +2379,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
 		this.refreshAccountTab();
     }//GEN-LAST:event_jComboBoxRelationsContextItemStateChanged
 
-    private void jButtonRelationsAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRelationsAddMouseClicked
-        
-		// Try to add frenemy.
-		this.addOrRemoveFrenemy(
-				this.jTextFieldRelationsUser.getText(), 
-				true, 
-				this.isRelationsContextFriends());
-    }//GEN-LAST:event_jButtonRelationsAddMouseClicked
-
-    private void jButtonRelationsRemoveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRelationsRemoveMouseClicked
-        
-		// Get selected row index.
-		int selRow = this.jTableRelations.getSelectedRow();
-		if (selRow < 0) {
-		
-			JOptionPane.showMessageDialog(this, 
-				"Must select a user from the list.",
-				"Action Failed", JOptionPane.ERROR_MESSAGE);
-		}
-		else {
-		
-			// Try to remove frenemy.
-			this.addOrRemoveFrenemy(
-					(String)this.jTableRelations.getValueAt(selRow, 0), 
-					false, 
-					this.isRelationsContextFriends());
-		}
-    }//GEN-LAST:event_jButtonRelationsRemoveMouseClicked
-
     private void jButtonDumpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDumpMouseClicked
         
 		// Prompt user for dump location.
@@ -2621,83 +2539,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
             // do something
         }
     }
-    
-	private void addOrRemoveFrenemy(String username, boolean shouldAdd, boolean asFriend) {
-	
-		// Get session user.
-		User curUser = sessionServer.getActiveUser();
-		
-		// Check if specified user does not exist.
-		User specUser = sessionServer.getUserFromUsername(username);
-		if (specUser == null) {
-			
-			JOptionPane.showMessageDialog(this, 
-				"Could not find user with username \'" + 
-						this.jTextFieldRelationsUser.getText() + "\'.",
-				"Action Failed", JOptionPane.ERROR_MESSAGE);
-		}
-		else {
-		
-			// Check if specified user is in the session user's list.
-			boolean userIsPresent = false;
-			for (User frenemy : (asFriend ? curUser.getFriends() : curUser.getBlockedUsers())) {
-			
-				if (specUser == frenemy) {
-				
-					userIsPresent = true;
-					break;
-				}
-			}
-			
-			// Check that the action is valid.
-			if (shouldAdd && userIsPresent) {
-			
-				JOptionPane.showMessageDialog(this, 
-					"User is already " + (asFriend ? "a friend." : "blocked."),
-					"Action Failed", JOptionPane.ERROR_MESSAGE);
-			}
-			else if (!(shouldAdd || userIsPresent)) {
-			
-				JOptionPane.showMessageDialog(this, 
-					"User was not " + (asFriend ? "a friend." : "blocked."),
-					"Action Failed", JOptionPane.ERROR_MESSAGE);
-			}
-			else {
-			
-				// Perform action.
-				if (shouldAdd) {
-					
-					if (asFriend) {
-					
-						curUser.addFriend(specUser);
-					}
-					else {
-					
-						curUser.addBlockUser(specUser);
-					}
-				}
-				else {
-				
-					if (asFriend) {
-					
-						curUser.removeFriend(specUser);
-					}
-					else {
-					
-						curUser.unBlockUser(specUser);
-					}
-				}
-				
-				// Refresh display.
-				this.refreshAccountTab();
-			}
-		}
-	}
-	
-	private boolean isRelationsContextFriends() {
-	
-		return this.jComboBoxRelationsContext.getSelectedIndex() == 0;
-	}
 	
 	private void refreshAccountTab() {
 
@@ -2765,31 +2606,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
 			}
 			
 			// Update account relations display.
-			
-			// Get relations context.
-			boolean isFriends = this.isRelationsContextFriends();
-			
-			// Update control information.
-			if (isFriends) {
-			
-				this.jButtonRelationsAdd.setText(BUTTON_ADD_FRIEND_TEXT);
-				this.jButtonRelationsRemove.setText(BUTTON_REMOVE_FRIEND_TEXT);
-			}
-			else {
-			
-				this.jButtonRelationsAdd.setText(BUTTON_ADD_BLOCK_TEXT);
-				this.jButtonRelationsRemove.setText(BUTTON_REMOVE_BLOCK_TEXT);
-			}
-			
-			// Create new TableModel for account relations table.
-			TableModel tableModelRelations = new TableModel(new String[]{ "Username" }, 0);
-			this.jTableRelations.setModel(tableModelRelations);
-
-			// Populate account relations table with user's friends or blocks.
-			for (User frenemy : (isFriends ? curUser.getFriends() : curUser.getBlockedUsers())) {
-
-				tableModelRelations.addRow(new String[]{ frenemy.getUsername() });
-			}
 			
 			// Update shown account panel.
 			LayoutManager panelLayout = this.jPanelAccount.getLayout();
@@ -2910,8 +2726,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JButton jButtonDump;
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JButton jButtonLoginCancel;
-    private javax.swing.JButton jButtonRelationsAdd;
-    private javax.swing.JButton jButtonRelationsRemove;
     private javax.swing.JButton jButtonRestore;
     private javax.swing.JButton jButtonSignup;
     private javax.swing.JButton jButtonSignupCancel;
@@ -2920,7 +2734,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxInterest0;
     private javax.swing.JComboBox<String> jComboBoxInterest1;
     private javax.swing.JComboBox<String> jComboBoxInterest2;
-    private javax.swing.JComboBox<String> jComboBoxRelationsContext;
     private javax.swing.JDialog jDialogLoginSignup;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -2964,14 +2777,12 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelAccountActivity;
     private javax.swing.JPanel jPanelAccountDetails;
     private javax.swing.JPanel jPanelAccountNull;
-    private javax.swing.JPanel jPanelAccountRelations;
     private javax.swing.JPanel jPanelAllGroups;
     private javax.swing.JPanel jPanelCreateGroup;
     private javax.swing.JPanel jPanelFeedGroups;
     private javax.swing.JPanel jPanelGroups;
     private javax.swing.JPanel jPanelLogin;
     private javax.swing.JPanel jPanelLoginSignup;
-    private javax.swing.JPanel jPanelRelationsControl;
     private javax.swing.JPanel jPanelSignup;
     private javax.swing.JPasswordField jPasswordFieldAccountPassword;
     private javax.swing.JPasswordField jPasswordFieldAccountPasswordEdit;
@@ -2987,13 +2798,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPaneAccountActivity;
     private javax.swing.JScrollPane jScrollPaneAccountBio;
     private javax.swing.JScrollPane jScrollPaneAccountBioEdit;
-    private javax.swing.JScrollPane jScrollPaneRelations;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPaneAcountValid;
     private javax.swing.JTabbedPane jTabbedPaneMain;
     private javax.swing.JTable jTableAccountActivity;
-    private javax.swing.JTable jTableRelations;
     private javax.swing.JTextField jTextAreaAccountAge;
     private javax.swing.JTextField jTextAreaAccountAgeEdit;
     private javax.swing.JTextArea jTextAreaAccountBio;
@@ -3019,7 +2828,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldAccountPhoneNumber;
     private javax.swing.JTextField jTextFieldAccountPhoneNumberEdit;
     private javax.swing.JTextField jTextFieldLoginUsername;
-    private javax.swing.JTextField jTextFieldRelationsUser;
     private javax.swing.JTextField jTextFieldSignupUsername;
     private javax.swing.JButton leaveGroupButton;
     private javax.swing.JTextArea postBodyField;

@@ -29,13 +29,11 @@ public class User implements Serializable {
 	private String Ethnicity;
 	private String Gender;
 	private Boolean MaritalStatus;
-	private ArrayList<User> Friends;
 	@SuppressWarnings("unused")
 	private ArrayList<Group> GroupList;
 	private ArrayList<Post> Posts;
 	@SuppressWarnings("unused")
 	private ArrayList<Post> Comments;
-	private ArrayList<User> BlockUsers;
 
 	// Constructor with parameters of user's general information
 	public User(String Username, String Password, String Email, String PhoneNum, String Bio, int Age, String Gender, String Ethnicity, Boolean MaritalStatus,
@@ -43,11 +41,9 @@ public class User implements Serializable {
 
 		createAccount(Username, Password, Email, PhoneNum, Bio, Age, Gender, Ethnicity, MaritalStatus, Major, Year, Location);
 
-		Friends = new ArrayList<User>();
 		GroupList = new ArrayList<Group>();
 		Posts = new ArrayList<Post>();
 		Comments = new ArrayList<Post>();
-		BlockUsers = new ArrayList<User>();
 
 	}
 
@@ -73,23 +69,6 @@ public class User implements Serializable {
 
 	public void addPost(Post post) { // add post to post list
 		this.Posts.add(post);
-	}
-
-	public void addFriend(User Username) { // add friend to friend list
-		this.Friends.add(Username);
-	}
-
-	public void removeFriend(User Username) { // delete friend
-		this.Friends.remove(Username);
-	}
-
-	public void addBlockUser(User Username) { // add blocked user to block user
-												
-		this.BlockUsers.add(Username);
-	}
-
-	public void unBlockUser(User Username) { // unblock the blocked user
-		this.BlockUsers.remove(Username);
 	}
 
 	public Post getPostByTitle(String postName) { // get the post from title
@@ -208,14 +187,6 @@ public class User implements Serializable {
 
 	public ArrayList<Post> getPosts() {
 		return this.Posts;
-	}
-
-	public ArrayList<User> getBlockedUsers() {
-		return this.BlockUsers;
-	} 
-	
-	public ArrayList<User> getFriends() {
-		return this.Friends;
 	}
 	// end of Getters and Setters 
 }
