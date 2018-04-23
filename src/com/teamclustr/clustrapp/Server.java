@@ -114,7 +114,7 @@ public class Server implements Serializable {
     }
 
     public void createGroup(String name, String categories, String tags) {
-        Group group = new Group(this.activeUser, name, categories, tags);
+        Group group = new Group(this.activeUser, name, categories, tags, this.groups.size());
         this.groups.add(group);
         this.setActiveGroup(group);
     }
@@ -122,7 +122,7 @@ public class Server implements Serializable {
     public User createUser(String username, String password) {
     
 	    // Create user.
-	    User newUser = new User(username, password, "", "", "", 0, "", "", false, "", "", "");
+	    User newUser = new User(username, password, "", "", "", 0, "", "", false, "", "", "", this.users.size());
 	    
 	    // Add user to server.
 	    this.users.add(newUser);

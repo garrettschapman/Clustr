@@ -16,6 +16,7 @@ import com.teamclustr.clustrapp.communication.Post;
 @SuppressWarnings("serial")
 public class User implements Serializable {
 	// MEMEBR DATA.
+	private int UserID;
 	private String Username;
 	private String Password;
 	private String Email;
@@ -37,9 +38,9 @@ public class User implements Serializable {
 
 	// Constructor with parameters of user's general information
 	public User(String Username, String Password, String Email, String PhoneNum, String Bio, int Age, String Gender, String Ethnicity, Boolean MaritalStatus,
-            String Major, String Year, String Location) {
+            String Major, String Year, String Location, int userID) {
 
-		createAccount(Username, Password, Email, PhoneNum, Bio, Age, Gender, Ethnicity, MaritalStatus, Major, Year, Location);
+		createAccount(Username, Password, Email, PhoneNum, Bio, Age, Gender, Ethnicity, MaritalStatus, Major, Year, Location, userID);
 
 		GroupList = new ArrayList<Group>();
 		Posts = new ArrayList<Post>();
@@ -51,20 +52,20 @@ public class User implements Serializable {
 
 	// function to create user's account with general info
 	public void createAccount(String Username, String Password, String Email, String PhoneNum, String Bio, int Age, String Gender, String Ethnicity, Boolean MaritalStatus,
-            String Major, String Year, String Location) {
+            String Major, String Year, String Location, int userID) {
+		this.UserID = userID;
 		this.setUsername(Username);
 		this.setPassword(Password);
 		this.setEmail(Email);
 		this.setPhoneNum(PhoneNum);
 		this.setBio(Bio);
-                this.setAge(Age);
-                this.setGender(Gender);
-                this.setEthnicity(Ethnicity);
-                this.setMaritalStatus(MaritalStatus);
-                this.setMajor(Major);
-                this.setYear(Year);
-                this.setLocation(Location);
-
+        this.setAge(Age);
+        this.setGender(Gender);
+        this.setEthnicity(Ethnicity);
+        this.setMaritalStatus(MaritalStatus);
+        this.setMajor(Major);
+        this.setYear(Year);
+        this.setLocation(Location);
 	}
 
 	public void addPost(Post post) { // add post to post list
@@ -187,6 +188,10 @@ public class User implements Serializable {
 
 	public ArrayList<Post> getPosts() {
 		return this.Posts;
+	}
+	
+	public int getUserID() {
+		return this.UserID;
 	}
 	// end of Getters and Setters 
 }

@@ -16,6 +16,7 @@ public class Group implements Serializable {
 
 //variables for group
 //test for push
+	private int groupID;
     private ArrayList<User> members = new ArrayList<User>();
     private ArrayList<User> moderators = new ArrayList<User>();
     private ArrayList<User> bannedUsers = new ArrayList<User>();
@@ -25,8 +26,9 @@ public class Group implements Serializable {
     private String groupName = "";
 //end variables
 
-    public Group(User owner, String name, String categories, String tags) {
-        groupName = name;
+    public Group(User owner, String name, String categories, String tags, int ID) {
+        groupID = ID;
+    	groupName = name;
         members.add(owner);
         moderators.add(owner);
 
@@ -124,6 +126,10 @@ public class Group implements Serializable {
             e.printStackTrace();
             return false;
         }
+    }
+    
+    public int getGroupID() {
+    	return this.groupID;
     }
 
 }
