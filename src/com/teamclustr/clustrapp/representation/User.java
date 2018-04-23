@@ -1,10 +1,8 @@
 package com.teamclustr.clustrapp.representation;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import com.teamclustr.clustrapp.communication.Message;
 import com.teamclustr.clustrapp.communication.Post;
 
 /**
@@ -15,6 +13,7 @@ import com.teamclustr.clustrapp.communication.Post;
  * @version 1.0 File: User.java Created: 10/17/2017 Copyright (c) 2017, Team
  *          Clustr, All rights reserved. Summary of Modifications: N/A
  */
+@SuppressWarnings("serial")
 public class User implements Serializable {
 	// MEMEBR DATA.
 	private String Username;
@@ -31,8 +30,10 @@ public class User implements Serializable {
 	private String Gender;
 	private Boolean MaritalStatus;
 	private ArrayList<User> Friends;
+	@SuppressWarnings("unused")
 	private ArrayList<Group> GroupList;
 	private ArrayList<Post> Posts;
+	@SuppressWarnings("unused")
 	private ArrayList<Post> Comments;
 	private ArrayList<User> BlockUsers;
 
@@ -99,28 +100,6 @@ public class User implements Serializable {
 		}
 		return null;
 	}
-
-	/*
-	 * Method to write a message to a user Checks if the author is blocked by
-	 * the recipient
-	 */
-	public Message writeMessage(User recipient, String body, LocalDateTime date) {
-		Boolean isBlocked = false;
-		ArrayList<User> blockedUsers = recipient.getBlockedUsers();
-		Message newMessage;
-
-		// for loop to determine if the author is blocked
-		for (int i = 0; i < blockedUsers.size(); i++) {
-			if (this.equals(blockedUsers.get(i))) {
-				isBlocked = true; // user is blocked
-				break;
-			}
-		} // end of for loop
-
-		newMessage = new Message(this, recipient, body, date, isBlocked);
-
-		return newMessage;
-	} // end of method writeMessage
 
 	// Getters and Setters
 	public String getUsername() {

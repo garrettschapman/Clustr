@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @version 1.0 File: Group.java Created: 10/17/2017 Copyright (c) 2017, Team
  * Clustr, All rights reserved. Summary of Modifications: N/A
  */
+@SuppressWarnings("serial")
 public class Group implements Serializable {
 
 //variables for group

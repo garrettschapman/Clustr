@@ -13,6 +13,7 @@ import java.util.ArrayList;
  * @version 1.0 File: Server.java Created: 10/17/2017 Copyright (c) 2017, Team
  * Clustr, All rights reserved. Summary of Modifications: N/A
  */
+@SuppressWarnings("serial")
 public class Server implements Serializable {
 
     // MEMEBR DATA.

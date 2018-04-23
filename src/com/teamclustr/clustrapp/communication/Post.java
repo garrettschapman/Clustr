@@ -15,6 +15,7 @@ import com.teamclustr.clustrapp.representation.User;
  * @version 1.0 File: Post.java Created: 10/17/2017 Copyright (c) 2017, Team
  *          Clustr, All rights reserved. Summary of Modifications: N/A
  */
+@SuppressWarnings("serial")
 public class Post implements Serializable {
 
 	// Variables for Post
@@ -81,9 +82,10 @@ public class Post implements Serializable {
 	}
 
 	//increment post points
+	@SuppressWarnings("unused")
 	public void incrementPoints(String username) {
 
-		for (int i = -1; i < votedUsers.size(); i++) {
+		for (int i = 0; i < votedUsers.size() - 1; i++) {
 			if (votedUsers.contains(username)) {
 				// increments points after downvoted 
 				if (decremented == true) {
@@ -102,8 +104,9 @@ public class Post implements Serializable {
 	}
 	
 	//decrement post points 
+	@SuppressWarnings("unused")
 	public void decrementPoints(String username) {
-		for (int i = -1; i < votedUsers.size(); i++) {
+		for (int i = 0; i < votedUsers.size() - 1; i++) {
 			if (votedUsers.contains(username)) {
 				//decrement points after upvoted
 				if (incremented == true) {
