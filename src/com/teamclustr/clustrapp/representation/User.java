@@ -56,8 +56,6 @@ public class User implements Serializable {
         this.Interests[2] = "Baseball";
 
 		GroupList = new ArrayList<Group>();
-		Posts = new ArrayList<Post>();
-		Comments = new ArrayList<Post>();
 
 	}
 

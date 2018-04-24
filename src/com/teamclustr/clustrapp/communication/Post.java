@@ -4,7 +4,6 @@ package com.teamclustr.clustrapp.communication;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import com.teamclustr.clustrapp.representation.User;
 
 /**
  * Class file for Post Creates and stores information about posts Have an
@@ -19,8 +18,9 @@ import com.teamclustr.clustrapp.representation.User;
 public class Post implements Serializable {
 
 	// Variables for Post
-	private User owner; // owner (creator) of the post
+	private String owner; // owner (creator) of the post
 	private String body; // body of the post
+	private ArrayList<String> commentTitles;
 	private ArrayList<Post> comments; // all comments on the post
 	private int points; // points for the post
 	private LocalDateTime date; // time the post was created
@@ -34,10 +34,11 @@ public class Post implements Serializable {
 	 * parameters The owner is the current User The body will be requested by and
 	 * entered into the System
 	 */
-	public Post(User owner, String body, String title) {
+	public Post(String owner, String body, String title) {
 		this.owner = owner;
 		this.body = body;
 		this.comments = new ArrayList<Post>(0); // no current comments
+		this.commentTitles = new ArrayList<String>(0);
 		this.points = 0; // owner automatically likes their post
 		this.date = LocalDateTime.now(); // sets date to date of posting
 		this.title = title; // set the title
@@ -55,7 +56,7 @@ public class Post implements Serializable {
 	/*
 	 * Getter for the owner of the Post
 	 */
-	public User getOwner() {
+	public String getOwner() {
 		return this.owner;
 	} // end of getter
 
@@ -132,10 +133,19 @@ public class Post implements Serializable {
 	 * Method to add a new comment to the Post Takes the owner and body (entered by
 	 * the User) The owner is the current User
 	 */
-	public void addComment(User cowner, String cbody, String title) {
+	public void addComment(String cowner, String cbody, String title) {
 		Post newComment = new Post(cowner, cbody, title); // creates the comment
 		this.comments.add(newComment); // adds the comment to the array list
+		this.commentTitles.add(newComment.getTitle());
 	} // end of method
+	
+	public void setCommentTitles(ArrayList<String> titles) {
+		this.commentTitles = titles;
+	}
+	
+	public ArrayList<String> getCommentTitles(){
+		return this.commentTitles;
+	}
 
 	/*
 	 * Method to edit a comment Uses the index of the comment to find it Uses Post

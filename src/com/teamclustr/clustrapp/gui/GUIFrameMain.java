@@ -415,7 +415,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jTextAreaAccountLocationEdit = new javax.swing.JComboBox<>();
         jPanelAccountActivity = getGradientPanel();
         jScrollPaneAccountActivity = getTranslucentScrollPane();
-        jTableAccountActivity = new javax.swing.JTable();
         jPanelGroups = new javax.swing.JPanel();
         jPanelAllGroups = getGradientPanel();
         groupSearchField = new javax.swing.JTextField();
@@ -1135,22 +1134,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelAccountDetails.add(jTextAreaAccountLocationEdit, gridBagConstraints);
 
         jTabbedPaneAcountValid.addTab("Details", jPanelAccountDetails);
-
-        jTableAccountActivity.setAutoCreateRowSorter(true);
-        jTableAccountActivity.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jTableAccountActivity.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableAccountActivityMouseClicked(evt);
-            }
-        });
-        jScrollPaneAccountActivity.setViewportView(jTableAccountActivity);
 
         javax.swing.GroupLayout jPanelAccountActivityLayout = new javax.swing.GroupLayout(jPanelAccountActivity);
         jPanelAccountActivity.setLayout(jPanelAccountActivityLayout);
@@ -2073,12 +2056,13 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
                 // add a new post to the group that is currently active in the 
                 // group window
-                grp.leavePost(new Post(
-                        sessionServer.getActiveUser(),
+                Post newPost = new Post(
+                        sessionServer.getActiveUser().getUsername(),
                         postBodyField.getText(),
                         postTitleField.getText()
-                )
                 );
+                grp.leavePost(newPost);
+                client.UpdateGroupPosts(grp);
 
                 // clear the fields and close the window. 
                 postBodyField.setText("");
@@ -2274,8 +2258,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
         private void jTableAccountActivityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAccountActivityMouseClicked
                 
 		// Fetch appropriate post and display it.
-		String postName = getPostNameFromTable(this.jTableAccountActivity, evt, 1);
-		goToPostPage(sessionServer.getActiveUser().getPostByTitle(postName));
+		//String postName = getPostNameFromTable(this.jTableAccountActivity, evt, 1);
+		//goToPostPage(sessionServer.getActiveUser().getPostByTitle(postName));
         }//GEN-LAST:event_jTableAccountActivityMouseClicked
 
         @SuppressWarnings("deprecation")
@@ -2387,7 +2371,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         
         // leave a comment
         Post post = sessionServer.getActivePost();
-        post.addComment(sessionServer.getActiveUser(), commentTextArea.getText(), commentTitleField.getText());
+        post.addComment(sessionServer.getActiveUser().getUsername(), commentTextArea.getText(), commentTitleField.getText());
         
         goToPostPage(post);
         
@@ -2466,6 +2450,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "You don't own this post");
         }
         
+        client.UpdateGroupPosts(sessionServer.getActiveGroup());
         goToGroupPage(sessionServer.getActiveGroup());
     }//GEN-LAST:event_deletePostButtonMouseClicked
     
@@ -2802,23 +2787,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
 				this.jTextAreaAccountMaritalEdit.setSelectedIndex(0);
 			}
 			
-			// Update account activity display.
-			
-			// Create new TableModel for account activity table.
-			TableModel tableModelActivity = new TableModel(new String[]{"Post ID", "Title", "Date"}, 0);
-			this.jTableAccountActivity.setModel(tableModelActivity);
-
-			// Populate account activity table with user's posts.
-			for (Post userPost : curUser.getPosts()) {
-
-				tableModelActivity.addRow(new String[]{
-					Integer.toString(userPost.hashCode() % 256), 
-					userPost.getTitle(), 
-					userPost.getDate().format(DateTimeFormatter.ISO_DATE)});
-			}
-			
-			// Update account relations display.
-			
 			// Update shown account panel.
 			LayoutManager panelLayout = this.jPanelAccount.getLayout();
 			if (panelLayout instanceof CardLayout) {
@@ -3014,7 +2982,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPaneAcountValid;
     private javax.swing.JTabbedPane jTabbedPaneMain;
-    private javax.swing.JTable jTableAccountActivity;
     private javax.swing.JTextField jTextAreaAccountAge;
     private javax.swing.JTextField jTextAreaAccountAgeEdit;
     private javax.swing.JTextArea jTextAreaAccountBio;

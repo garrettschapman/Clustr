@@ -21,6 +21,7 @@ public class Group implements Serializable {
     private ArrayList<User> members = new ArrayList<User>();
     private ArrayList<String> memberList = new ArrayList<String>();
     private ArrayList<Post> posts = new ArrayList<Post>();
+    private ArrayList<String> postNames = new ArrayList<String>();
     private ArrayList<String> categories = new ArrayList<String>();
     private ArrayList<String> tags = new ArrayList<String>();
     private String groupName = "";
@@ -66,7 +67,7 @@ public class Group implements Serializable {
 
     public void leavePost(Post pst) {
         this.posts.add(pst);
-        pst.getOwner().addPost(pst);
+        this.postNames.add(pst.getTitle());
     }
 
     public ArrayList<User> getMembers() {
@@ -173,5 +174,13 @@ public class Group implements Serializable {
     
     public int getSize() {
     	return groupSize;
+    }
+    
+    public ArrayList<String> getPostNames(){
+    	return this.postNames;
+    }
+    
+    public void setPostNames(ArrayList<String> names) {
+    	this.postNames = names;
     }
 }

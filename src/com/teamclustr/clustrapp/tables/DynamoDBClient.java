@@ -40,13 +40,14 @@ import com.amazonaws.services.dynamodbv2.model.UpdateItemRequest;
 import com.amazonaws.services.dynamodbv2.model.UpdateItemResult;
 import com.amazonaws.services.dynamodbv2.model.UpdateTableRequest;
 import com.amazonaws.services.dynamodbv2.model.UpdateTableResult;
+import com.teamclustr.clustrapp.communication.Post;
 import com.teamclustr.clustrapp.representation.Group;
 import com.teamclustr.clustrapp.representation.User;
 
 public class DynamoDBClient {
 	private AmazonDynamoDBClient client = null;
-	private static final String AWS_KEY = "AKIAIRFXXDXETQTTBG7Q";
-	private static final String AWS_SECRET = "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";
+	private static final String AWS_KEY = "AKIAJAZ7OIFHZ6RMBWCA";
+	private static final String AWS_SECRET = "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";
 	
 	public DynamoDBClient() {
 		AWSCredentials credentials = new BasicAWSCredentials(AWS_KEY, AWS_SECRET);
@@ -263,6 +264,13 @@ public class DynamoDBClient {
 		item.put("Members", new AttributeValue().withSS(group.getMemberList()));
 		item.put("Size", new AttributeValue().withN(Integer.toString(group.getSize())));
 		
+		if(group.getPostNames().size() > 0) {
+			item.put("Posts", new AttributeValue().withSS(group.getPostNames()));
+			
+			for(Post post : group.getPosts()) {
+				this.PutPost(post);
+			}
+		}
 		
 		PutItemRequest itemRequest = new PutItemRequest().withTableName(tableName).withItem(item);
 		client.putItem(itemRequest);
@@ -294,6 +302,7 @@ public class DynamoDBClient {
 		ArrayList<String> categories = new ArrayList<String>(0);
 		ArrayList<String> tags = new ArrayList<String>(0);
 		ArrayList<String> memberNames = new ArrayList<String>(0);
+		ArrayList<String> postNames = new ArrayList<String>(0);
 		int size;
 		
 		ScanRequest scanRequest = new ScanRequest().withTableName(tableName);
@@ -307,17 +316,28 @@ public class DynamoDBClient {
 				categories = (ArrayList<String>) item.get("Categories").getSS();
 				tags = (ArrayList<String>) item.get("Tags").getSS();
 				memberNames = (ArrayList<String>) item.get("Members").getSS();
+				try {
+					postNames = (ArrayList<String>) item.get("Posts").getSS();
+				}catch(NullPointerException e) {
+					postNames = new ArrayList<String>(0);
+				}
+				
 				size = Integer.parseInt(item.get("Size").getN());
 				
 				group.setOwner(owner);
 				group.setCatList(categories);
 				group.setTagList(tags);
+				group.setPostNames(postNames);
 				group.setSize(size);
 				
 				for(String memberName : memberNames) {
 					if(!(memberName.equals(group.getOwner().getUsername()))) {
 						group.addMemberName(memberName);
 					}
+				}
+				
+				for(String postName : postNames) {
+					//add new post to group
 				}
 				return group;
 			}
@@ -342,5 +362,71 @@ public class DynamoDBClient {
 	}
 	/*
 	 * End of methods for groups
+	 */
+	
+	/*
+	 * Methods for posts
+	 */
+	public void PutPost(Post post) {
+		String tableName = "ClusterPost";
+		
+		Map<String, AttributeValue> item = new HashMap<String, AttributeValue>();
+		
+		item.put("Title", new AttributeValue().withS(post.getTitle()));
+		
+		item.put("Owner", new AttributeValue().withS(post.getOwner()));
+		item.put("Body", new AttributeValue().withS(post.getBody()));
+		item.put("Points", new AttributeValue().withN(Integer.toString(post.getPoints())));
+		
+		if(post.getCommentList().size() > 0) {
+			item.put("Comments", new AttributeValue().withSS(post.getCommentTitles()));
+		}
+		
+		for(Post comment : post.getCommentList()) {
+			this.PutPost(comment);
+		}
+		
+		PutItemRequest itemRequest = new PutItemRequest().withTableName(tableName).withItem(item);
+		client.putItem(itemRequest);
+	}
+	
+	public void DeletePost(Post post) {
+		for(Post comment : post.getCommentList()) {
+			this.DeletePost(comment);
+		}
+		
+		String tableName = "ClusterPost";
+		
+		Map<String, ExpectedAttributeValue> expectedValues = new HashMap<String, ExpectedAttributeValue>();
+		HashMap<String, AttributeValue> key = new HashMap<String, AttributeValue>();
+		key.put("Title", new AttributeValue().withS(post.getTitle()));
+		
+		expectedValues.put("Title", new ExpectedAttributeValue().withValue(new AttributeValue().withS(post.getTitle())));
+		
+		ReturnValue returnValues = ReturnValue.ALL_OLD;
+		
+		DeleteItemRequest deleteItemRequest = new DeleteItemRequest().withTableName(tableName).withKey(key).withExpected(expectedValues).withReturnValues(returnValues);
+		
+		@SuppressWarnings("unused")
+		DeleteItemResult result = client.deleteItem(deleteItemRequest);
+	}
+	
+	public void UpdateGroupPosts(Group group) {
+		for(Post post : group.getPosts()) {
+			try {
+				this.DeletePost(post);
+			}catch(Exception e) {
+				
+			}
+			
+			this.PutPost(post);
+		}
+	}
+	
+	public void GetPostData(String title) {
+		
+	}
+	/*
+	 * End of methods for posts
 	 */
 }
