@@ -966,7 +966,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         gridBagConstraints.gridy = 40;
         jPanelAccountDetails.add(jLabel21, gridBagConstraints);
 
-        jTextAreaAccountGenderEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
+        jTextAreaAccountGenderEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Other", "Prefer Not to Specify" }));
         jTextAreaAccountGenderEdit.setMinimumSize(new java.awt.Dimension(250, 25));
         jTextAreaAccountGenderEdit.setPreferredSize(new java.awt.Dimension(250, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1104,7 +1104,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         gridBagConstraints.gridy = 50;
         jPanelAccountDetails.add(jComboBoxInterest2, gridBagConstraints);
 
-        jTextAreaAccountMaritalEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Married", "In a Relationship", "Single" }));
+        jTextAreaAccountMaritalEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unmarried", "Married" }));
         jTextAreaAccountMaritalEdit.setPreferredSize(new java.awt.Dimension(250, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
