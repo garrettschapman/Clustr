@@ -59,6 +59,10 @@ public class Post implements Serializable {
 	public String getOwner() {
 		return this.owner;
 	} // end of getter
+	
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
 
 	/*
 	 * Method to edit the body of the Post System will have to use the getter to
@@ -127,6 +131,14 @@ public class Post implements Serializable {
 	
 	public ArrayList<Post> getCommentList() {
 		return this.comments;
+	}
+	
+	public void setCommentList(ArrayList<Post> comments) {
+		this.comments = comments;
+	}
+	
+	public void setPoints(int points) {
+		this.points = points;
 	}
 
 	/*

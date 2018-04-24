@@ -2171,6 +2171,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 		pst.addVotedUsers(user.getUsername()); //add user to voted list
 
 		// refresh the page
+		client.UpdateGroupPosts(sessionServer.getActiveGroup());
         goToPostPage(pst);
         
   
@@ -2187,6 +2188,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         pst.addVotedUsers(user.getUsername()); //add user to voted list
      
         // refresh the page
+        client.UpdateGroupPosts(sessionServer.getActiveGroup());
         goToPostPage(pst);
     }//GEN-LAST:event_PostDownvoteButtonMouseClicked
 
@@ -2373,6 +2375,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         Post post = sessionServer.getActivePost();
         post.addComment(sessionServer.getActiveUser().getUsername(), commentTextArea.getText(), commentTitleField.getText());
         
+        client.UpdateGroupPosts(sessionServer.getActiveGroup());
         goToPostPage(post);
         
     }//GEN-LAST:event_jButton1MouseClicked
@@ -2469,6 +2472,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
             sessionServer.setActivePost(post);
             
             // initialize the comments
+            client.UpdateGroupPosts(sessionServer.getActiveGroup());
             updateCommentTable(commentTable, sessionServer.getActivePost().getCommentList());
 
 

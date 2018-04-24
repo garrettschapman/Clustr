@@ -46,8 +46,8 @@ import com.teamclustr.clustrapp.representation.User;
 
 public class DynamoDBClient {
 	private AmazonDynamoDBClient client = null;
-	private static final String AWS_KEY = "AKIAJAZ7OIFHZ6RMBWCA";
-	private static final String AWS_SECRET = "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";
+	private static final String AWS_KEY = "AKIAIOSPNHD3KKXPQ6SQ";
+	private static final String AWS_SECRET = "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";
 	
 	public DynamoDBClient() {
 		AWSCredentials credentials = new BasicAWSCredentials(AWS_KEY, AWS_SECRET);
@@ -336,8 +336,14 @@ public class DynamoDBClient {
 					}
 				}
 				
+				ArrayList<Post> posts = new ArrayList<Post>(0);
 				for(String postName : postNames) {
-					//add new post to group
+					Post post = this.GetPostData(postName);
+					posts.add(post);
+				}
+				
+				for(Post post : posts) {
+					group.leavePost(post);
 				}
 				return group;
 			}
@@ -412,6 +418,9 @@ public class DynamoDBClient {
 	}
 	
 	public void UpdateGroupPosts(Group group) {
+		this.DeleteGroup(group);
+		this.PutGroup(group);
+		
 		for(Post post : group.getPosts()) {
 			try {
 				this.DeletePost(post);
@@ -423,8 +432,46 @@ public class DynamoDBClient {
 		}
 	}
 	
-	public void GetPostData(String title) {
+	public Post GetPostData(String title) {
+		String tableName = "ClusterPost";
+		Post post = new Post("", "", title);
 		
+		String owner = "", body = "";
+		int points = 0;
+		ArrayList<Post> comments = new ArrayList<Post>(0);
+		ArrayList<String> commentNames = new ArrayList<String>(0);
+		
+		ScanRequest scanRequest = new ScanRequest().withTableName(tableName);
+		ScanResult result = client.scan(scanRequest);
+		for (Map<String, AttributeValue> item : result.getItems()) {
+			AttributeValue Title = item.get("Title");
+			String titleString = Title.getS();
+			
+			if(title.equals(titleString)) {
+				owner = item.get("Owner").getS();
+				body = item.get("Body").getS();
+				points = Integer.parseInt(item.get("Points").getN());
+				
+				try {
+					commentNames = (ArrayList<String>) item.get("Comments").getSS();
+					
+					for(String commentName : commentNames) {
+						Post newPost = this.GetPostData(commentName);
+						comments.add(newPost);
+					}
+				}catch(Exception e) {
+					
+				}
+				
+				post.setOwner(owner);
+				post.setBody(body);
+				post.setPoints(points);
+				post.setCommentList(comments);
+				post.setCommentTitles(commentNames);
+			}
+		}
+		
+		return post;
 	}
 	/*
 	 * End of methods for posts
