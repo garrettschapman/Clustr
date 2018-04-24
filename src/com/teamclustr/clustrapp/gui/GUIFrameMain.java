@@ -2444,6 +2444,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private void deletePostButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletePostButtonMouseClicked
         // remove the post
         if(sessionServer.getActivePost().getOwner().equals(sessionServer.getActiveUser().getUsername())){
+        	
             client.DeletePost(sessionServer.getActivePost());
         } else {
             JOptionPane.showMessageDialog(null, "You don't own this post");

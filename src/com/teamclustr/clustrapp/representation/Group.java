@@ -144,6 +144,7 @@ public class Group implements Serializable {
 
     public boolean removePost(Post activePost) {
         try{
+        	this.postNames.remove(activePost.getTitle());
             return this.posts.remove(activePost);
         } catch (Exception e){
             // do nothing
