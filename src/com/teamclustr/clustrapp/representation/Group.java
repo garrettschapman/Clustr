@@ -17,7 +17,9 @@ public class Group implements Serializable {
 //variables for group
 //test for push
 	private User owner;
+	private int groupSize;
     private ArrayList<User> members = new ArrayList<User>();
+    private ArrayList<String> memberList = new ArrayList<String>();
     private ArrayList<Post> posts = new ArrayList<Post>();
     private ArrayList<String> categories = new ArrayList<String>();
     private ArrayList<String> tags = new ArrayList<String>();
@@ -28,6 +30,13 @@ public class Group implements Serializable {
     	groupName = name;
     	this.owner = owner;
         members.add(owner);
+        groupSize = 1;
+        
+        try{
+        	memberList.add(this.owner.getUsername());
+        }catch(NullPointerException e) {
+        	
+        }
 
         //deal with the tags and categories
         for (String s : categories.split(", ")) {
@@ -43,12 +52,16 @@ public class Group implements Serializable {
 
     public boolean addMember(User user) {
         members.add(user);
+        memberList.add(user.getUsername());
+        groupSize++;
         return true;
     }
 //leaves the group
 
     public void leaveGroup(User user) {
         members.remove(user);
+        memberList.remove(user.getUsername());
+        groupSize--;
     }
 
     public void leavePost(Post pst) {
@@ -66,6 +79,7 @@ public class Group implements Serializable {
     
     public void setOwner(User owner) {
     	this.owner = owner;
+    	memberList.add(this.owner.getUsername());
     }
     
     public ArrayList<String> getMemberNames() {
@@ -118,7 +132,13 @@ public class Group implements Serializable {
     }
 
     public boolean isMember(User usr) {
-        return this.members.contains(usr);
+        for(String username : memberList) {
+        	if(username.equals(usr.getUsername())) {
+        		return true;
+        	}
+        }
+        
+        return false;
     }
 
     public boolean removePost(Post activePost) {
@@ -130,5 +150,28 @@ public class Group implements Serializable {
             return false;
         }
     }
+    
+    public void addMemberName(String username) {
+    	this.memberList.add(username);
+    }
 
+    public void updateMembers(ArrayList<User> userList) {
+    	for(User user : userList) {
+    		if(!(isMember(user)) && this.memberList.contains(user.getUsername())) {
+    			this.addMember(user);
+    		}
+    	}
+    }
+    
+    public ArrayList<String> getMemberList() {
+    	return this.memberList;
+    }
+    
+    public void setSize(int size) {
+    	groupSize = size;
+    }
+    
+    public int getSize() {
+    	return groupSize;
+    }
 }

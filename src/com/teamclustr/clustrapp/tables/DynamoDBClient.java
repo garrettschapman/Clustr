@@ -45,8 +45,8 @@ import com.teamclustr.clustrapp.representation.User;
 
 public class DynamoDBClient {
 	private AmazonDynamoDBClient client = null;
-	private static final String AWS_KEY = "AKIAIM2N2TPXGR2M63DA";
-	private static final String AWS_SECRET = "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";
+	private static final String AWS_KEY = "AKIAICBDTODKUAHYEGTA";
+	private static final String AWS_SECRET = "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";
 	
 	public DynamoDBClient() {
 		AWSCredentials credentials = new BasicAWSCredentials(AWS_KEY, AWS_SECRET);
@@ -185,6 +185,21 @@ public class DynamoDBClient {
 		return user;
 	}
 	
+	public ArrayList<User> getAllUsers() {
+		String tableName = "ClusterUser";
+		ArrayList<User> userList = new ArrayList<User>(0);
+		
+		ScanRequest scanRequest = new ScanRequest().withTableName(tableName);
+		ScanResult result = client.scan(scanRequest);
+		for (Map<String, AttributeValue> item : result.getItems()) {
+			String username = item.get("UserName").getS();
+			User user = this.getUserData(username);
+			userList.add(user);
+		}
+		
+		return userList;
+	}
+	
 	public void PutUser(User user) {
 		String tableName = "ClusterUser";
 		
@@ -228,7 +243,7 @@ public class DynamoDBClient {
 		DeleteItemResult result = client.deleteItem(deleteItemRequest);
 	}
 	/*
-	 * End of methods for tables
+	 * End of methods for users
 	 */
 	
 	
@@ -245,7 +260,8 @@ public class DynamoDBClient {
 		item.put("Owner", new AttributeValue().withS(group.getOwner().getUsername()));
 		item.put("Categories", new AttributeValue().withSS(group.getCatList()));
 		item.put("Tags", new AttributeValue().withSS(group.getTagList()));
-		item.put("Members", new AttributeValue().withSS(group.getMemberNames()));
+		item.put("Members", new AttributeValue().withSS(group.getMemberList()));
+		item.put("Size", new AttributeValue().withN(Integer.toString(group.getSize())));
 		
 		
 		PutItemRequest itemRequest = new PutItemRequest().withTableName(tableName).withItem(item);
@@ -253,7 +269,20 @@ public class DynamoDBClient {
 	}
 	
 	public void DeleteGroup(Group group) {
+		String tableName = "ClusterGroup";
 		
+		Map<String, ExpectedAttributeValue> expectedValues = new HashMap<String, ExpectedAttributeValue>();
+		HashMap<String, AttributeValue> key = new HashMap<String, AttributeValue>();
+		key.put("GroupName", new AttributeValue().withS(group.getName()));
+		
+		expectedValues.put("GroupName", new ExpectedAttributeValue().withValue(new AttributeValue().withS(group.getName())));
+		
+		ReturnValue returnValues = ReturnValue.ALL_OLD;
+		
+		DeleteItemRequest deleteItemRequest = new DeleteItemRequest().withTableName(tableName).withKey(key).withExpected(expectedValues).withReturnValues(returnValues);
+		
+		@SuppressWarnings("unused")
+		DeleteItemResult result = client.deleteItem(deleteItemRequest);
 	}
 	
 	public Group GetGroupData(String groupname) {
@@ -265,6 +294,7 @@ public class DynamoDBClient {
 		ArrayList<String> categories = new ArrayList<String>(0);
 		ArrayList<String> tags = new ArrayList<String>(0);
 		ArrayList<String> memberNames = new ArrayList<String>(0);
+		int size;
 		
 		ScanRequest scanRequest = new ScanRequest().withTableName(tableName);
 		ScanResult result = client.scan(scanRequest);
@@ -277,15 +307,16 @@ public class DynamoDBClient {
 				categories = (ArrayList<String>) item.get("Categories").getSS();
 				tags = (ArrayList<String>) item.get("Tags").getSS();
 				memberNames = (ArrayList<String>) item.get("Members").getSS();
+				size = Integer.parseInt(item.get("Size").getN());
 				
 				group.setOwner(owner);
 				group.setCatList(categories);
 				group.setTagList(tags);
+				group.setSize(size);
 				
 				for(String memberName : memberNames) {
 					if(!(memberName.equals(group.getOwner().getUsername()))) {
-						User user = this.getUserData(memberName);
-						group.addMember(user);
+						group.addMemberName(memberName);
 					}
 				}
 				return group;

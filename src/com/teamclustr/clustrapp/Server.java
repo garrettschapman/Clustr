@@ -111,10 +111,18 @@ public class Server implements Serializable {
     
     public void setGroupList(ArrayList<Group> groupList) {
     	this.groups = groupList;
+    	
+    	for(Group group : this.groups) {
+    		group.updateMembers(this.users);
+    	}
     }
 
     public ArrayList<User> getUserList() {
         return this.users;
+    }
+    
+    public void setUserList(ArrayList<User> userList) {
+    	this.users = userList;
     }
 
     public Group createGroup(String name, String categories, String tags) {

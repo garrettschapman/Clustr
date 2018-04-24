@@ -269,6 +269,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
 	// Initialize the session server.
         sessionServer = new Server();
+        sessionServer.setUserList(client.getAllUsers());
+        sessionServer.setGroupList(client.GetAllGroups());
 	    
         // Initialize GUI components.
         initComponents();
@@ -1873,7 +1875,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 Object obj[] = new Object[5];
 
                 obj[0] = group.getName();
-                obj[1] = group.getMembers().size();
+                obj[1] = group.getSize();
                 obj[2] = group.getTags();
                 obj[3] = group.getCategories();
                 obj[4] = group.getPosts().size();
@@ -1936,7 +1938,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
 
 	private void jTabbedPaneGroupsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneGroupsMouseClicked
-        sessionServer.setGroupList(client.GetAllGroups());
+        //sessionServer.setGroupList(client.GetAllGroups());
 		
         // list all groups that exist into the table
         updateGroupTable(browseTable, "browse", sessionServer.getGroupList());
@@ -1951,11 +1953,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
             String searchText = groupSearchField.getText();
             
             // get the searched array and add the elements to the table
-            sessionServer.setGroupList(client.GetAllGroups());
+            //sessionServer.setGroupList(client.GetAllGroups());
             updateGroupTable(browseTable, "browse", sessionServer.searchedGroups(searchText));
             
         } else {
-        	sessionServer.setGroupList(client.GetAllGroups());
+        	//sessionServer.setGroupList(client.GetAllGroups());
             updateGroupTable(browseTable, "browse", sessionServer.getGroupList());
         }
 
@@ -2031,7 +2033,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
 
     private void jTabbedPaneMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneMainMouseClicked
-    	sessionServer.setGroupList(client.GetAllGroups());
+    	//sessionServer.setGroupList(client.GetAllGroups());
         updateGroupTable(feedTable, "feed", sessionServer.getGroupList());
     }//GEN-LAST:event_jTabbedPaneMainMouseClicked
 
@@ -2255,6 +2257,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
             sessionServer.getActiveGroup().addMember(sessionServer.getActiveUser());
 
             // refresh the page
+            client.DeleteGroup(sessionServer.getActiveGroup());
+            client.PutGroup(sessionServer.getActiveGroup());
             goToGroupPage(sessionServer.getActiveGroup());
         } else {
             JOptionPane.showMessageDialog(null, "Please Sign In", "Could Not Join Group", 0);
@@ -2263,7 +2267,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         // UPDATE WINDOW
-    	sessionServer.setGroupList(client.GetAllGroups());
+    	//sessionServer.setGroupList(client.GetAllGroups());
         updateGroupTable(feedTable, "feed", sessionServer.getGroupList());
         updateGroupTable(browseTable, "browse", sessionServer.getGroupList());
     }//GEN-LAST:event_formWindowGainedFocus
@@ -2450,6 +2454,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
         sessionServer.getActiveGroup().leaveGroup(sessionServer.getActiveUser());
         
         // refresh the page
+        client.DeleteGroup(sessionServer.getActiveGroup());
+        client.PutGroup(sessionServer.getActiveGroup());
         goToGroupPage(sessionServer.getActiveGroup());
     }//GEN-LAST:event_leaveGroupButtonMouseClicked
 
@@ -2524,43 +2530,40 @@ public class GUIFrameMain extends javax.swing.JFrame {
             // populate the members
             
             /**
-             * TODO Fix this thing so it doesn't give a nullpointerexception
+             * TODO Fix this thing so it doesn't give a NullPointerException
              */
             Vector<String> users = new Vector();
 
-            for (User user : group.getMembers()) {
-                System.out.printf("Username: %s", user.getUsername());
-                users.add(user.getUsername());
+            for (String username : group.getMemberList()) {
+                users.add(username);
             }
 
             // show the members of the group
-            //groupMemberList.setListData(users);
+            groupMemberList.setListData(users);
 
             // check to see if the current user is a member, and hide the create post button
-            //if (sessionServer == null || !group.isMember(sessionServer.getActiveUser())) {
-            //    showCreatePostDialogButton.setVisible(false); // not a member, hide the button
-            //    leaveGroupButton.setVisible(false);
-            //} else {
-            //    showCreatePostDialogButton.setVisible(true); // is a member, dont hide button
-             //   createPostButton.setVisible(true);
-             //   leaveGroupButton.setVisible(true);
-
-                
-            //}
+            if (sessionServer == null || !group.isMember(sessionServer.getActiveUser())) {
+                showCreatePostDialogButton.setVisible(false); // not a member, hide the button
+                leaveGroupButton.setVisible(false);
+            } else {
+               showCreatePostDialogButton.setVisible(true); // is a member, dont hide button
+                createPostButton.setVisible(true);
+                leaveGroupButton.setVisible(true);
+            }
 
             // check to see if the current user is a member of the group
-            //if (sessionServer == null || group.isMember(sessionServer.getActiveUser())) {
-            //    groupWindowJoinGroupButton.setVisible(false); // is a member, hide the join button
-            //} else {
-            //    groupWindowJoinGroupButton.setVisible(true); // not a member, show join button
-            //}
+            if (sessionServer == null || group.isMember(sessionServer.getActiveUser())) {
+                groupWindowJoinGroupButton.setVisible(false); // is a member, hide the join button
+            } else {
+                groupWindowJoinGroupButton.setVisible(true); // not a member, show join button
+            }
 
             // show group page
             CardLayout layout = (CardLayout) jPanelGroups.getLayout();
             layout.show(jPanelGroups, "groupPageCard");// I got this card # from the properties. I cant change it
 
         } catch (Exception e) {
-        	System.out.println(e);
+        	
         }
     }
 	
