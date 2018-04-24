@@ -1994,7 +1994,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
                     // create the group in the array in the server
                     Group curGroup = sessionServer.createGroup(name, categories, tags);
-                    System.out.println("CREATING GROUP");
                     
                     client.PutGroup(curGroup);
                     
