@@ -2165,8 +2165,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         User user = sessionServer.getActiveUser();
        
 		// increment the points
-		pst.incrementPoints(user.getUsername());   
-		pst.addVotedUsers(user.getUsername()); //add user to voted list
+		pst.incrementPoints();   
 
 		// refresh the page
 		client.UpdateGroupPosts(sessionServer.getActiveGroup());
@@ -2182,8 +2181,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         User user = sessionServer.getActiveUser();
        
         // decrement the points
-        pst.decrementPoints(user.getUsername());
-        pst.addVotedUsers(user.getUsername()); //add user to voted list
+        pst.decrementPoints();
      
         // refresh the page
         client.UpdateGroupPosts(sessionServer.getActiveGroup());

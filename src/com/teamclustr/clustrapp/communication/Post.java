@@ -25,9 +25,6 @@ public class Post implements Serializable {
 	private int points; // points for the post
 	private LocalDateTime date; // time the post was created
 	private String title;
-	private ArrayList<String> votedUsers; // users who voted
-	private boolean incremented; // upvoted
-	private boolean decremented; // downvoted
 
 	/*
 	 * Constructor for Post Uses the owner and the body (entered by the User) as
@@ -42,7 +39,6 @@ public class Post implements Serializable {
 		this.points = 0; // owner automatically likes their post
 		this.date = LocalDateTime.now(); // sets date to date of posting
 		this.title = title; // set the title
-		votedUsers = new ArrayList<String>(); // users who voted 
 	} // end of constructor
 
 	// Methods for Posts
@@ -80,53 +76,15 @@ public class Post implements Serializable {
 	public String getComment(int index) {
 		return this.comments.get(index).getBody();
 	} // end of getter
-	
-	//get voted users
-	public void addVotedUsers(String username) { 
-		votedUsers.add(username);
-	}
 
 	//increment post points
-	@SuppressWarnings("unused")
-	public void incrementPoints(String username) {
-
-		for (int i = 0; i < votedUsers.size() - 1; i++) {
-			if (votedUsers.contains(username)) {
-				// increments points after downvoted 
-				if (decremented == true) {
-					this.points++;
-					this.points++;
-					decremented = false;
-					incremented = true;
-				}
-				break;
-			} else { //increments points when user is not added to votedUsers yet
-				this.points++; // increments
-				incremented = true;
-				break;
-			}
-		}
+	public void incrementPoints() {
+		this.points++;
 	}
 	
 	//decrement post points 
-	@SuppressWarnings("unused")
-	public void decrementPoints(String username) {
-		for (int i = 0; i < votedUsers.size() - 1; i++) {
-			if (votedUsers.contains(username)) {
-				//decrement points after upvoted
-				if (incremented == true) {
-					this.points--;
-					this.points--;
-					incremented = false;
-					decremented = true;
-				}
-				break;
-			}else { //decrement points when user is not added to votedUsers yet
-					this.points--; // decrements
-					decremented = true;
-					break;
-			}
-		}
+	public void decrementPoints() {
+		this.points--;
 	}
 	
 	public ArrayList<Post> getCommentList() {
