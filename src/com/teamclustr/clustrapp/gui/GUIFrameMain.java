@@ -2505,7 +2505,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	private void goToGroupPage(Group group) {
-        try {
+    	try {
             // GET THE GROUP VIEW SET UP -> INITIALIZE
             // set the labels 
             groupNameLabel.setText(group.getName());
@@ -2519,9 +2519,13 @@ public class GUIFrameMain extends javax.swing.JFrame {
             // set the active group
             sessionServer.setActiveGroup(group);
 
-            updatePostTable(group);
+            //updatePostTable(group);
 
             // populate the members
+            
+            /**
+             * TODO Fix this thing so it doesn't give a nullpointerexception
+             */
             Vector<String> users = new Vector();
 
             for (User user : group.getMembers()) {
@@ -2530,33 +2534,33 @@ public class GUIFrameMain extends javax.swing.JFrame {
             }
 
             // show the members of the group
-            groupMemberList.setListData(users);
+            //groupMemberList.setListData(users);
 
             // check to see if the current user is a member, and hide the create post button
-            if (sessionServer == null || !group.isMember(sessionServer.getActiveUser())) {
-                showCreatePostDialogButton.setVisible(false); // not a member, hide the button
-                leaveGroupButton.setVisible(false);
-            } else {
-                showCreatePostDialogButton.setVisible(true); // is a member, dont hide button
-                createPostButton.setVisible(true);
-                leaveGroupButton.setVisible(true);
+            //if (sessionServer == null || !group.isMember(sessionServer.getActiveUser())) {
+            //    showCreatePostDialogButton.setVisible(false); // not a member, hide the button
+            //    leaveGroupButton.setVisible(false);
+            //} else {
+            //    showCreatePostDialogButton.setVisible(true); // is a member, dont hide button
+             //   createPostButton.setVisible(true);
+             //   leaveGroupButton.setVisible(true);
 
                 
-            }
+            //}
 
             // check to see if the current user is a member of the group
-            if (sessionServer == null || group.isMember(sessionServer.getActiveUser())) {
-                groupWindowJoinGroupButton.setVisible(false); // is a member, hide the join button
-            } else {
-                groupWindowJoinGroupButton.setVisible(true); // not a member, show join button
-            }
+            //if (sessionServer == null || group.isMember(sessionServer.getActiveUser())) {
+            //    groupWindowJoinGroupButton.setVisible(false); // is a member, hide the join button
+            //} else {
+            //    groupWindowJoinGroupButton.setVisible(true); // not a member, show join button
+            //}
 
             // show group page
             CardLayout layout = (CardLayout) jPanelGroups.getLayout();
             layout.show(jPanelGroups, "groupPageCard");// I got this card # from the properties. I cant change it
 
         } catch (Exception e) {
-            // do something
+        	System.out.println(e);
         }
     }
 	

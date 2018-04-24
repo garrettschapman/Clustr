@@ -45,8 +45,8 @@ import com.teamclustr.clustrapp.representation.User;
 
 public class DynamoDBClient {
 	private AmazonDynamoDBClient client = null;
-	private static final String AWS_KEY = "AKIAJ756GTQLD75GLMMQ";
-	private static final String AWS_SECRET = "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";
+	private static final String AWS_KEY = "AKIAIM2N2TPXGR2M63DA";
+	private static final String AWS_SECRET = "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";
 	
 	public DynamoDBClient() {
 		AWSCredentials credentials = new BasicAWSCredentials(AWS_KEY, AWS_SECRET);
@@ -288,7 +288,6 @@ public class DynamoDBClient {
 						group.addMember(user);
 					}
 				}
-				System.out.println(group.getName());
 				return group;
 			}
 		}
