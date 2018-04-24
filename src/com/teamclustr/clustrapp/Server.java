@@ -114,7 +114,7 @@ public class Server implements Serializable {
     }
 
     public void createGroup(String name, String categories, String tags) {
-        Group group = new Group(this.activeUser, name, categories, tags, this.groups.size());
+        Group group = new Group(this.activeUser, name, categories, tags);
         this.groups.add(group);
         this.setActiveGroup(group);
     }

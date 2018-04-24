@@ -4,6 +4,8 @@ import com.teamclustr.clustrapp.Server;
 import com.teamclustr.clustrapp.communication.Post;
 import com.teamclustr.clustrapp.representation.Group;
 import com.teamclustr.clustrapp.representation.User;
+import com.teamclustr.clustrapp.tables.DynamoDBClient;
+
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -68,6 +70,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
     
     // Login/Signup dialog return value.
     private User lsDialogResult;
+    
+    private static final DynamoDBClient client = new DynamoDBClient();
 
     /**
      * This method creates a translucent JScrollPane so that you can see the 
@@ -2379,7 +2383,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxRelationsContextItemStateChanged
 
     private void jButtonDumpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDumpMouseClicked
-        
+        /*
 		// Prompt user for dump location.
 //		String filepath = JOptionPane.showInputDialog(this, 
 //				"Select location to dump server image to.", 
@@ -2394,11 +2398,13 @@ public class GUIFrameMain extends javax.swing.JFrame {
 		if (filepath != null) {
 			
 			this.dumpSession(filepath);
-		}
+		}*/
+    	
+    	client.PutUser(sessionServer.getActiveUser());
     }//GEN-LAST:event_jButtonDumpMouseClicked
 
     private void jButtonRestoreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRestoreMouseClicked
-        
+        /*
 		// Prompt user for dump location.
 //		String filepath = JOptionPane.showInputDialog(this, 
 //				"Select location to read server image from.", 
@@ -2416,7 +2422,9 @@ public class GUIFrameMain extends javax.swing.JFrame {
 		if (filepath != null) {
 			
 			this.restoreSession(filepath);
-		}
+		} */
+    	
+    	client.listTables();
 
 		// Refresh displays.
 		this.refreshAccountTab();
