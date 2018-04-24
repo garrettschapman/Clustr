@@ -196,7 +196,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
             // set the selection model for the list on the right of the screen
             groupMemberList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-            @SuppressWarnings({ "rawtypes", "unused" })
+            @SuppressWarnings({ "rawtypes" })
 			DefaultListModel listModel = new DefaultListModel();
 
             // set the active group
@@ -2444,11 +2444,12 @@ public class GUIFrameMain extends javax.swing.JFrame {
         client.PutGroup(sessionServer.getActiveGroup());
         goToGroupPage(sessionServer.getActiveGroup());
     }//GEN-LAST:event_leaveGroupButtonMouseClicked
-
+    
     private void deletePostButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletePostButtonMouseClicked
         // remove the post
         if(sessionServer.getActivePost().getOwner().equals(sessionServer.getActiveUser())){
             System.out.println(sessionServer.getActiveGroup().removePost(sessionServer.getActivePost()));
+            client.DeletePost(sessionServer.getActivePost());
         } else {
             JOptionPane.showMessageDialog(null, "You don't own this post");
         }
@@ -2513,7 +2514,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
             // set the active group
             sessionServer.setActiveGroup(group);
 
-            //updatePostTable(group);
+            updatePostTable(group);
 
             // populate the members
             Vector<String> users = new Vector();
