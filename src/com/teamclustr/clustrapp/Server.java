@@ -89,7 +89,6 @@ public class Server implements Serializable {
     
     public void setActivePost(Post pst){
         this.activePost = pst;
-        System.out.println(pst.getBody());
     }
     
     /**

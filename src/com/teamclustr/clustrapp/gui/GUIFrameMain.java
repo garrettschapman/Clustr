@@ -209,7 +209,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
 			Vector<String> users = new Vector();
 
             for (User user : group.getMembers()) {
-                System.out.printf("Username: %s", user.getUsername());
                 users.add(user.getUsername());
             }
 
@@ -1854,7 +1853,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
             // for each group in groupList, add it as a row in the table
             for (Group group : groupList) {
-                //System.out.println(group.getName());
                 Object obj[] = new Object[5];
 
                 obj[0] = group.getName();
@@ -2445,8 +2443,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
     
     private void deletePostButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletePostButtonMouseClicked
         // remove the post
-        if(sessionServer.getActivePost().getOwner().equals(sessionServer.getActiveUser())){
-            System.out.println(sessionServer.getActiveGroup().removePost(sessionServer.getActivePost()));
+        if(sessionServer.getActivePost().getOwner().equals(sessionServer.getActiveUser().getUsername())){
             client.DeletePost(sessionServer.getActivePost());
         } else {
             JOptionPane.showMessageDialog(null, "You don't own this post");
