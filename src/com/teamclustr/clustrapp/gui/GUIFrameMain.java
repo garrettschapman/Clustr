@@ -1082,7 +1082,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jComboBoxInterest0.setPreferredSize(new java.awt.Dimension(250, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 50;
+        gridBagConstraints.gridy = 46;
         jPanelAccountDetails.add(jComboBoxInterest0, gridBagConstraints);
 
         jComboBoxInterest1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Drawing", "Painting", "Photography", "Writing" }));
@@ -1091,7 +1091,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jComboBoxInterest1.setPreferredSize(new java.awt.Dimension(250, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 46;
+        gridBagConstraints.gridy = 48;
         jPanelAccountDetails.add(jComboBoxInterest1, gridBagConstraints);
 
         jTextAreaAccountMarital.setMinimumSize(new java.awt.Dimension(250, 25));
@@ -1115,7 +1115,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jComboBoxInterest2.setPreferredSize(new java.awt.Dimension(250, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 48;
+        gridBagConstraints.gridy = 50;
         jPanelAccountDetails.add(jComboBoxInterest2, gridBagConstraints);
 
         jTextAreaAccountMaritalEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unmarried", "Married" }));
@@ -2592,10 +2592,141 @@ public class GUIFrameMain extends javax.swing.JFrame {
 			this.jTextAreaAccountAgeEdit.setText(Integer.toString(curUser.getAge()));
 			
 			this.jTextAreaAccountMajor.setText(curUser.getMajor());
+			if(curUser.getMajor().equals("Accounting")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(0);
+			}else if(curUser.getMajor().equals("Anthropology")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(1);
+			}else if(curUser.getMajor().equals("Art")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(2);
+			}else if(curUser.getMajor().equals("Athletic Training")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(3);
+			}else if(curUser.getMajor().equals("Biochemistry")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(4);
+			}else if(curUser.getMajor().equals("Bioengineering")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(5);
+			}else if(curUser.getMajor().equals("Biology")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(6);
+			}else if(curUser.getMajor().equals("Biology-Accelerated")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(7);
+			}else if(curUser.getMajor().equals("Biotechnology")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(8);
+			}else if(curUser.getMajor().equals("Chemistry")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(9);
+			}else if(curUser.getMajor().equals("Child and Youth Studies")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(10);
+			}else if(curUser.getMajor().equals("Civil Engineering")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(11);
+			}else if(curUser.getMajor().equals("Clinical Laboratory Science")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(12);
+			}else if(curUser.getMajor().equals("Communication")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(13);
+			}else if(curUser.getMajor().equals("Community Health")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(14);
+			}else if(curUser.getMajor().equals("Computer Information Systems")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(15);
+			}else if(curUser.getMajor().equals("Criminal Justice")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(16);
+			}else if(curUser.getMajor().equals("Early Childhood Education")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(17);
+			}else if(curUser.getMajor().equals("Economics")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(18);
+			}else if(curUser.getMajor().equals("Elementary Education")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(19);
+			}else if(curUser.getMajor().equals("English")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(20);
+			}else if(curUser.getMajor().equals("Environmental Engineering")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(21);
+			}else if(curUser.getMajor().equals("Environmental Studies")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(22);
+			}else if(curUser.getMajor().equals("Exercise Science")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(23);
+			}else if(curUser.getMajor().equals("Finance")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(24);
+			}else if(curUser.getMajor().equals("Forensic Science")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(25);
+			}else if(curUser.getMajor().equals("Forensic Studies")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(26);
+			}else if(curUser.getMajor().equals("Health Science")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(27);
+			}else if(curUser.getMajor().equals("History")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(28);
+			}else if(curUser.getMajor().equals("Integrated Studies")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(29);
+			}else if(curUser.getMajor().equals("Interdisciplinary Entrepreneurship Studies")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(30);
+			}else if(curUser.getMajor().equals("Journalism")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(31);
+			}else if(curUser.getMajor().equals("Legal Studies")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(32);
+			}else if(curUser.getMajor().equals("Management")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(33);
+			}else if(curUser.getMajor().equals("Marine Science")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(34);
+			}else if(curUser.getMajor().equals("Marketing")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(35);
+			}else if(curUser.getMajor().equals("Mathematics")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(36);
+			}else if(curUser.getMajor().equals("Music - Performance")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(37);
+			}else if(curUser.getMajor().equals("Music Education")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(38);
+			}else if(curUser.getMajor().equals("Music Therapy")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(39);
+			}else if(curUser.getMajor().equals("Nursing")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(40);
+			}else if(curUser.getMajor().equals("PGA Golf Management")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(41);
+			}else if(curUser.getMajor().equals("Philosophy")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(42);
+			}else if(curUser.getMajor().equals("Political Science")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(43);
+			}else if(curUser.getMajor().equals("Psychology")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(44);
+			}else if(curUser.getMajor().equals("Public Health")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(45);
+			}else if(curUser.getMajor().equals("Resort & Hospitality Management")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(46);
+			}else if(curUser.getMajor().equals("Secondary Biology Education")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(47);
+			}else if(curUser.getMajor().equals("Secondary Mathematics Education")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(48);
+			}else if(curUser.getMajor().equals("Secondary Social Science Education")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(49);
+			}else if(curUser.getMajor().equals("Social Work")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(50);
+			}else if(curUser.getMajor().equals("Sociology")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(51);
+			}else if(curUser.getMajor().equals("Software Engineering")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(52);
+			}else if(curUser.getMajor().equals("Special Education")) {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(53);
+			}else {
+				this.jTextAreaAccountMajorEdit.setSelectedIndex(54);
+			}
 			
 			this.jTextAreaAccountYear.setText(curUser.getYear());
+			if(curUser.getYear().equals("Freshman")) {
+				this.jTextAreaAccountYearEdit.setSelectedIndex(0);
+			}else if(curUser.getYear().equals("Sophomore")) {
+				this.jTextAreaAccountYearEdit.setSelectedIndex(1);
+			}else if(curUser.getYear().equals("Junior")) {
+				this.jTextAreaAccountYearEdit.setSelectedIndex(2);
+			}else {
+				this.jTextAreaAccountYearEdit.setSelectedIndex(3);
+			}
 			
 			this.jTextAreaAccountLocation.setText(curUser.getLocation());
+			if(curUser.getLocation().equals("SoVi")) {
+				this.jTextAreaAccountLocationEdit.setSelectedIndex(0);
+			}else if(curUser.getLocation().equals("North Lake Village")) {
+				this.jTextAreaAccountLocationEdit.setSelectedIndex(1);
+			}else if(curUser.getLocation().equals("West Lake Village")) {
+				this.jTextAreaAccountLocationEdit.setSelectedIndex(2);
+			}else if(curUser.getLocation().equals("Coastal Village")) {
+				this.jTextAreaAccountLocationEdit.setSelectedIndex(3);
+			}else {
+				this.jTextAreaAccountLocationEdit.setSelectedIndex(4);
+			}
 			
 			this.jInterest0Text.setText(curUser.getInterest(0));
 			if(curUser.getInterest(0).equals("Baseball")) {
@@ -2631,8 +2762,28 @@ public class GUIFrameMain extends javax.swing.JFrame {
 			}
 			
 			this.jTextAreaAccountEthnicity.setText(curUser.getEthnicity());
+			if(curUser.getEthnicity().equals("Caucasian")) {
+				this.jTextAreaAccountEthnicityEdit.setSelectedIndex(0);
+			}else if(curUser.getEthnicity().equals("African American")) {
+				this.jTextAreaAccountEthnicityEdit.setSelectedIndex(1);
+			}else if(curUser.getEthnicity().equals("Hispanic/Latino")) {
+				this.jTextAreaAccountEthnicityEdit.setSelectedIndex(2);
+			}else if(curUser.getEthnicity().equals("Asian/Pacific Islander")) {
+				this.jTextAreaAccountEthnicityEdit.setSelectedIndex(3);
+			}else {
+				this.jTextAreaAccountEthnicityEdit.setSelectedIndex(4);
+			}
 			
 			this.jTextAreaAccountGender.setText(curUser.getGender());
+			if(curUser.getGender().equals("Male")) {
+				this.jTextAreaAccountGenderEdit.setSelectedIndex(0);
+			}else if(curUser.getGender().equals("Female")) {
+				this.jTextAreaAccountGenderEdit.setSelectedIndex(1);
+			}else if(curUser.getGender().equals("Other")) {
+				this.jTextAreaAccountGenderEdit.setSelectedIndex(2);
+			}else {
+				this.jTextAreaAccountGenderEdit.setSelectedIndex(3);
+			}
 			
 			if(curUser.getMaritalStatus()) {
 				this.jTextAreaAccountMarital.setText("Married");

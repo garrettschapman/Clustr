@@ -44,8 +44,8 @@ import com.teamclustr.clustrapp.representation.User;
 
 public class DynamoDBClient {
 	private AmazonDynamoDBClient client = null;
-	private static final String AWS_KEY = "AKIAJLAT7N3VLFSIS6JA";
-	private static final String AWS_SECRET = "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";
+	private static final String AWS_KEY = "AKIAJD32BAGYCD3VXBZA";
+	private static final String AWS_SECRET = "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";
 	
 	public DynamoDBClient() {
 		AWSCredentials credentials = new BasicAWSCredentials(AWS_KEY, AWS_SECRET);
