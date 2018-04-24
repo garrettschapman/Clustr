@@ -40,12 +40,13 @@ import com.amazonaws.services.dynamodbv2.model.UpdateItemRequest;
 import com.amazonaws.services.dynamodbv2.model.UpdateItemResult;
 import com.amazonaws.services.dynamodbv2.model.UpdateTableRequest;
 import com.amazonaws.services.dynamodbv2.model.UpdateTableResult;
+import com.teamclustr.clustrapp.representation.Group;
 import com.teamclustr.clustrapp.representation.User;
 
 public class DynamoDBClient {
 	private AmazonDynamoDBClient client = null;
-	private static final String AWS_KEY = "AKIAJD32BAGYCD3VXBZA";
-	private static final String AWS_SECRET = "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";
+	private static final String AWS_KEY = "AKIAJA3FHY5P6IDUC6QQ";
+	private static final String AWS_SECRET = "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";
 	
 	public DynamoDBClient() {
 		AWSCredentials credentials = new BasicAWSCredentials(AWS_KEY, AWS_SECRET);
@@ -58,6 +59,10 @@ public class DynamoDBClient {
 		System.out.println(sdf.format(new Date()) + " ==> " + msg);
 	}
 	
+	/*
+	 * Methods for all tables in general
+	 * get status, describe, update, and list
+	 */
 	public String getTableStatus(String tableName) {
 		TableDescription tableDescription = client.describeTable(new DescribeTableRequest().withTableName(tableName)).getTable();
 		
@@ -109,7 +114,15 @@ public class DynamoDBClient {
 
 		} while (lastEvaluatedTableName != null);
 	}
+	/*
+	 * End of methods for tables
+	 */
 	
+	
+	/*
+	 * Methods for users
+	 * login, create, pull data, delete, and update (by deleting and re-creating)
+	 */
 	public Boolean CheckLogin(String username, String password) {
 		String tableName = "ClusterUser";
 		
@@ -214,4 +227,29 @@ public class DynamoDBClient {
 		@SuppressWarnings("unused")
 		DeleteItemResult result = client.deleteItem(deleteItemRequest);
 	}
+	/*
+	 * End of methods for tables
+	 */
+	
+	
+	/*
+	 * Methods for groups
+	 */
+	public void PutGroup(Group group) {
+		String tableName = "ClusterGroup";
+		
+		Map<String, AttributeValue> item = new HashMap<String, AttributeValue>();
+		
+		item.put("GroupName", new AttributeValue().withS(group.getName()));
+		
+		item.put("Categories", new AttributeValue().withSS(group.getCatList()));
+		item.put("Tags", new AttributeValue().withSS(group.getTagList()));
+		item.put("Members", new AttributeValue().withSS(group.getMemberNames()));
+		
+		PutItemRequest itemRequest = new PutItemRequest().withTableName(tableName).withItem(item);
+		client.putItem(itemRequest);
+	}
+	/*
+	 * End of methods for groups
+	 */
 }

@@ -113,10 +113,12 @@ public class Server implements Serializable {
         return this.users;
     }
 
-    public void createGroup(String name, String categories, String tags) {
+    public Group createGroup(String name, String categories, String tags) {
         Group group = new Group(this.activeUser, name, categories, tags);
         this.groups.add(group);
         this.setActiveGroup(group);
+        
+        return group;
     }
     
     public User createUser(String username, String password) {

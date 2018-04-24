@@ -1988,8 +1988,10 @@ public class GUIFrameMain extends javax.swing.JFrame {
                     String tags = groupTagsField.getText();
 
                     // create the group in the array in the server
-                    sessionServer.createGroup(name, categories, tags);
+                    Group curGroup = sessionServer.createGroup(name, categories, tags);
                     System.out.println("CREATING GROUP");
+                    
+                    client.PutGroup(curGroup);
                     
                     // alert success
                     JOptionPane.showMessageDialog(rootPane,

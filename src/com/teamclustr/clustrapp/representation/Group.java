@@ -17,8 +17,6 @@ public class Group implements Serializable {
 //variables for group
 //test for push
     private ArrayList<User> members = new ArrayList<User>();
-    private ArrayList<User> moderators = new ArrayList<User>();
-    private ArrayList<User> bannedUsers = new ArrayList<User>();
     private ArrayList<Post> posts = new ArrayList<Post>();
     private ArrayList<String> categories = new ArrayList<String>();
     private ArrayList<String> tags = new ArrayList<String>();
@@ -28,7 +26,6 @@ public class Group implements Serializable {
     public Group(User owner, String name, String categories, String tags) {
     	groupName = name;
         members.add(owner);
-        moderators.add(owner);
 
         //deal with the tags and categories
         for (String s : categories.split(", ")) {
@@ -43,25 +40,14 @@ public class Group implements Serializable {
 //adds members
 
     public boolean addMember(User user) {
-        if (bannedUsers.contains(user)) {
-            return false;
-        } else {
-            members.add(user);
-            return true;
-        }
+        members.add(user);
+        return true;
     }
 //leaves the group
 
     public void leaveGroup(User user) {
         members.remove(user);
     }
-//bans a user
-
-    public void banUser(User user) {
-        members.remove(user);
-        bannedUsers.add(user);
-    }
-//changes the leader
 
     public void leavePost(Post pst) {
         this.posts.add(pst);
@@ -70,6 +56,17 @@ public class Group implements Serializable {
 
     public ArrayList<User> getMembers() {
         return this.members;
+    }
+    
+    public ArrayList<String> getMemberNames() {
+    	ArrayList<User> members = this.getMembers();
+    	ArrayList<String> memberNames = new ArrayList<String>(0);
+    	
+    	for(User user : members) {
+    		memberNames.add(user.getUsername());
+    	}
+    	
+    	return memberNames;
     }
 
     public String getTags() {
@@ -82,12 +79,11 @@ public class Group implements Serializable {
     public ArrayList<String> getCatList(){
     	return categories;
     }
+    public ArrayList<String> getTagList(){
+    	return tags;
+    }
     public String getCategories() {
         return this.categories.toString();
-    }
-
-    public boolean isModerator(User usr) {
-        return this.moderators.contains(usr);
     }
 
     public ArrayList<Post> getPosts() {
@@ -105,7 +101,6 @@ public class Group implements Serializable {
 
     public boolean isMember(User usr) {
         return this.members.contains(usr);
-
     }
 
     public boolean removePost(Post activePost) {
