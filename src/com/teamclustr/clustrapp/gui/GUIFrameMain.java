@@ -412,8 +412,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jComboBoxInterest2 = new javax.swing.JComboBox<>();
         jTextAreaAccountMaritalEdit = new javax.swing.JComboBox<>();
         jTextAreaAccountLocationEdit = new javax.swing.JComboBox<>();
-        jPanelAccountActivity = getGradientPanel();
-        jScrollPaneAccountActivity = getTranslucentScrollPane();
         jPanelGroups = new javax.swing.JPanel();
         jPanelAllGroups = getGradientPanel();
         groupSearchField = new javax.swing.JTextField();
@@ -422,7 +420,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         browseGroupsPane = getTranslucentScrollPane();
         browseTable = new javax.swing.JTable();
         createAGroupCardButton = new javax.swing.JButton();
-        yourGroupsCardButton = new javax.swing.JButton();
         jPanelCreateGroup = getGradientPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -454,7 +451,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         showCreatePostDialogButton = new javax.swing.JButton();
         groupWindowJoinGroupButton = new javax.swing.JButton();
         browseGroupsButtonGroupPage = new javax.swing.JButton();
-        feedButtonGroupPage = new javax.swing.JButton();
         leaveGroupButton = new javax.swing.JButton();
         viewPostWindowPanel = getGradientPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -477,10 +473,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         commentTitleField = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        deletePostButton = new javax.swing.JButton();
         jLabelMainSessionUserStatus = new javax.swing.JLabel();
-        jButtonDump = new javax.swing.JButton();
-        jButtonRestore = new javax.swing.JButton();
 
         jDialogLoginSignup.setTitle("Login/Signup");
         jDialogLoginSignup.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -872,11 +865,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 jButtonAccountUpdateMouseClicked(evt);
             }
         });
-        /*jButtonAccountUpdate.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAccountUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAccountUpdateActionPerformed(evt);
             }
-        });*/
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
@@ -937,7 +930,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         jTextAreaAccountAge.setMinimumSize(new java.awt.Dimension(250, 25));
         jTextAreaAccountAge.setPreferredSize(new java.awt.Dimension(250, 25));
-        jTextAreaAccountAge.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 18;
@@ -974,7 +966,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         gridBagConstraints.gridy = 40;
         jPanelAccountDetails.add(jLabel21, gridBagConstraints);
 
-        jTextAreaAccountGenderEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Other", "Prefer not to Answer" }));
+        jTextAreaAccountGenderEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
         jTextAreaAccountGenderEdit.setMinimumSize(new java.awt.Dimension(250, 25));
         jTextAreaAccountGenderEdit.setPreferredSize(new java.awt.Dimension(250, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -984,7 +976,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         jTextAreaAccountGender.setMinimumSize(new java.awt.Dimension(250, 25));
         jTextAreaAccountGender.setPreferredSize(new java.awt.Dimension(250, 25));
-        jTextAreaAccountGender.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 22;
@@ -992,7 +983,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         jTextAreaAccountMajor.setMinimumSize(new java.awt.Dimension(250, 25));
         jTextAreaAccountMajor.setPreferredSize(new java.awt.Dimension(250, 25));
-        jTextAreaAccountMajor.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 34;
@@ -1001,14 +991,12 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jTextAreaAccountYear.setToolTipText("");
         jTextAreaAccountYear.setMinimumSize(new java.awt.Dimension(250, 25));
         jTextAreaAccountYear.setPreferredSize(new java.awt.Dimension(250, 25));
-        jTextAreaAccountYear.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 38;
         jPanelAccountDetails.add(jTextAreaAccountYear, gridBagConstraints);
 
         jTextAreaAccountLocation.setPreferredSize(new java.awt.Dimension(250, 25));
-        jTextAreaAccountLocation.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 42;
@@ -1096,7 +1084,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         jTextAreaAccountMarital.setMinimumSize(new java.awt.Dimension(250, 25));
         jTextAreaAccountMarital.setPreferredSize(new java.awt.Dimension(250, 25));
-        jTextAreaAccountMarital.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 30;
@@ -1104,7 +1091,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
         jTextAreaAccountEthnicity.setMinimumSize(new java.awt.Dimension(250, 25));
         jTextAreaAccountEthnicity.setPreferredSize(new java.awt.Dimension(250, 25));
-        jTextAreaAccountEthnicity.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 26;
@@ -1118,14 +1104,14 @@ public class GUIFrameMain extends javax.swing.JFrame {
         gridBagConstraints.gridy = 50;
         jPanelAccountDetails.add(jComboBoxInterest2, gridBagConstraints);
 
-        jTextAreaAccountMaritalEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unmarried", "Married" }));
+        jTextAreaAccountMaritalEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Married", "In a Relationship", "Single" }));
         jTextAreaAccountMaritalEdit.setPreferredSize(new java.awt.Dimension(250, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 30;
         jPanelAccountDetails.add(jTextAreaAccountMaritalEdit, gridBagConstraints);
 
-        jTextAreaAccountLocationEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SoVi", "North Lake Village", "West Lake Village", "Coastal Village", "Off-Campus" }));
+        jTextAreaAccountLocationEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SoVi", "North Lake Village", "West Lake Village", "Coastal Village", "off-campus" }));
         jTextAreaAccountLocationEdit.setPreferredSize(new java.awt.Dimension(250, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
@@ -1133,19 +1119,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jPanelAccountDetails.add(jTextAreaAccountLocationEdit, gridBagConstraints);
 
         jTabbedPaneAcountValid.addTab("Details", jPanelAccountDetails);
-
-        javax.swing.GroupLayout jPanelAccountActivityLayout = new javax.swing.GroupLayout(jPanelAccountActivity);
-        jPanelAccountActivity.setLayout(jPanelAccountActivityLayout);
-        jPanelAccountActivityLayout.setHorizontalGroup(
-            jPanelAccountActivityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPaneAccountActivity, javax.swing.GroupLayout.DEFAULT_SIZE, 964, Short.MAX_VALUE)
-        );
-        jPanelAccountActivityLayout.setVerticalGroup(
-            jPanelAccountActivityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPaneAccountActivity, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
-        );
-
-        jTabbedPaneAcountValid.addTab("Activity", jPanelAccountActivity);
 
         jPanelAccount.add(jTabbedPaneAcountValid, "valid");
 
@@ -1197,13 +1170,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
             }
         });
 
-        yourGroupsCardButton.setText("Your Groups");
-        yourGroupsCardButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                yourGroupsCardButtonMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanelAllGroupsLayout = new javax.swing.GroupLayout(jPanelAllGroups);
         jPanelAllGroups.setLayout(jPanelAllGroupsLayout);
         jPanelAllGroupsLayout.setHorizontalGroup(
@@ -1217,8 +1183,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 .addComponent(groupSearchButton)
                 .addGap(38, 38, 38)
                 .addComponent(createAGroupCardButton)
-                .addGap(29, 29, 29)
-                .addComponent(yourGroupsCardButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanelAllGroupsLayout.createSequentialGroup()
                 .addContainerGap()
@@ -1233,8 +1197,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                     .addComponent(groupSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(groupSearchButton)
-                    .addComponent(createAGroupCardButton)
-                    .addComponent(yourGroupsCardButton))
+                    .addComponent(createAGroupCardButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(browseGroupsPane, javax.swing.GroupLayout.DEFAULT_SIZE, 826, Short.MAX_VALUE)
                 .addContainerGap())
@@ -1461,13 +1424,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
             }
         });
 
-        feedButtonGroupPage.setText("Feed");
-        feedButtonGroupPage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                feedButtonGroupPageActionPerformed(evt);
-            }
-        });
-
         leaveGroupButton.setText("Leave Group");
         leaveGroupButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1491,24 +1447,19 @@ public class GUIFrameMain extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(groupWindowJoinGroupButton)
                                 .addGap(18, 18, 18)
-                                .addComponent(browseGroupsButtonGroupPage))
+                                .addComponent(browseGroupsButtonGroupPage)
+                                .addGap(18, 18, 18)
+                                .addComponent(leaveGroupButton))
                             .addGroup(groupWindowPanelLayout.createSequentialGroup()
                                 .addComponent(groupNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(groupWindowPanelLayout.createSequentialGroup()
-                                        .addGap(55, 55, 55)
-                                        .addComponent(feedButtonGroupPage)
-                                        .addGap(28, 28, 28)
-                                        .addComponent(leaveGroupButton))
-                                    .addGroup(groupWindowPanelLayout.createSequentialGroup()
-                                        .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel6))
-                                        .addGap(104, 104, 104)
-                                        .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(groupTagsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                                            .addComponent(groupCategoriesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel6))
+                                .addGap(104, 104, 104)
+                                .addGroup(groupWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(groupTagsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                                    .addComponent(groupCategoriesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, groupWindowPanelLayout.createSequentialGroup()
                         .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 843, Short.MAX_VALUE)
@@ -1543,7 +1494,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
                     .addComponent(showCreatePostDialogButton)
                     .addComponent(groupWindowJoinGroupButton)
                     .addComponent(browseGroupsButtonGroupPage)
-                    .addComponent(feedButtonGroupPage)
                     .addComponent(jLabel8)
                     .addComponent(leaveGroupButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1625,13 +1575,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel16.setText("Title");
 
-        deletePostButton.setText("Delete Post");
-        deletePostButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                deletePostButtonMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout viewPostWindowPanelLayout = new javax.swing.GroupLayout(viewPostWindowPanel);
         viewPostWindowPanel.setLayout(viewPostWindowPanelLayout);
         viewPostWindowPanelLayout.setHorizontalGroup(
@@ -1648,8 +1591,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
                         .addComponent(jLabel11)
                         .addGap(72, 72, 72)
                         .addComponent(viewPostTitleLabel)
-                        .addGap(155, 155, 155)
-                        .addComponent(deletePostButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel13)
                         .addGap(18, 18, 18)
@@ -1691,8 +1632,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                     .addComponent(jLabel13)
                     .addComponent(PostUpvoteButton)
                     .addComponent(viewPostNumOfPoints)
-                    .addComponent(PostDownvoteButton)
-                    .addComponent(deletePostButton))
+                    .addComponent(PostDownvoteButton))
                 .addGap(68, 68, 68)
                 .addGroup(viewPostWindowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
@@ -1740,20 +1680,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
             }
         });
 
-        jButtonDump.setText("Save");
-        jButtonDump.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonDumpMouseClicked(evt);
-            }
-        });
-
-        jButtonRestore.setText("Load");
-        jButtonRestore.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonRestoreMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1761,9 +1687,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
             .addComponent(jTabbedPaneMain)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonDump)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonRestore)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelMainSessionUserStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1775,8 +1699,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelMainSessionUserStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButtonDump)
-                        .addComponent(jButtonRestore)))
+                ))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPaneMain))
         );
@@ -2252,49 +2175,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         updateGroupTable(browseTable, "browse", sessionServer.getGroupList());
     }//GEN-LAST:event_formWindowGainedFocus
 
-        private void jTableAccountActivityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAccountActivityMouseClicked
-                
-		// Fetch appropriate post and display it.
-		//String postName = getPostNameFromTable(this.jTableAccountActivity, evt, 1);
-		//goToPostPage(sessionServer.getActiveUser().getPostByTitle(postName));
-        }//GEN-LAST:event_jTableAccountActivityMouseClicked
-
-        @SuppressWarnings("deprecation")
-		private void jButtonAccountUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAccountUpdateMouseClicked
-                
-			// Get active session user.
-			User curUser = sessionServer.getActiveUser();
-
-			// Check for valid user.
-			if (curUser != null) {
-
-				// Update account details.
-				curUser.setEmail(this.jTextFieldAccountEmailEdit.getText().trim());
-				curUser.setPhoneNum(this.jTextFieldAccountPhoneNumberEdit.getText().trim());
-				curUser.setPassword(this.jPasswordFieldAccountPasswordEdit.getText().trim());
-				curUser.setBio(this.jTextAreaAccountBioEdit.getText());
-				curUser.setAge(Integer.parseInt(this.jTextAreaAccountAgeEdit.getText()));
-				curUser.setMajor(this.jTextAreaAccountMajorEdit.getSelectedItem().toString());
-				curUser.setYear(this.jTextAreaAccountYearEdit.getSelectedItem().toString());
-				curUser.setLocation(this.jTextAreaAccountLocationEdit.getSelectedItem().toString());
-				curUser.setInterest(this.jComboBoxInterest0.getSelectedItem().toString(), 0);
-				curUser.setInterest(this.jComboBoxInterest1.getSelectedItem().toString(), 1);
-				curUser.setInterest(this.jComboBoxInterest2.getSelectedItem().toString(), 2);
-				curUser.setEthnicity(this.jTextAreaAccountEthnicityEdit.getSelectedItem().toString());
-				curUser.setGender(this.jTextAreaAccountGenderEdit.getSelectedItem().toString());
-				if(this.jTextAreaAccountGenderEdit.getSelectedIndex() == 0) {
-					curUser.setMaritalStatus(false);
-				}else {
-					curUser.setMaritalStatus(true);
-				}
-
-				// Refresh display.
-				this.refreshAccountTab();
-				client.DeleteUser(curUser);
-				client.PutUser(curUser);
-			}
-        }//GEN-LAST:event_jButtonAccountUpdateMouseClicked
-
         private void jButtonAccountMustLogInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAccountMustLogInMouseClicked
                 
 		// Log user in.
@@ -2328,12 +2208,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         layout.show(jPanelGroups, "createGroupCard");// I got this card # from the properties. I cant change it
     }//GEN-LAST:event_createAGroupCardButtonMouseClicked
 
-    private void yourGroupsCardButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_yourGroupsCardButtonMouseClicked
-        // view your "feed"
-        CardLayout layout = (CardLayout) jPanelGroups.getLayout();
-        layout.show(jPanelGroups, "feedCard");// I got this card # from the properties. I cant change it
-    }//GEN-LAST:event_yourGroupsCardButtonMouseClicked
-
     private void backToBrowseCardButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backToBrowseCardButtonMouseClicked
         // go back to "browse groups"
         CardLayout layout = (CardLayout) jPanelGroups.getLayout();
@@ -2352,12 +2226,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         layout.show(jPanelGroups, "browseAllCard");// I got this card # from the properties. I cant change it
     }//GEN-LAST:event_browseGroupsButtonGroupPageActionPerformed
 
-    private void feedButtonGroupPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_feedButtonGroupPageActionPerformed
-        // go back to your feed
-        CardLayout layout = (CardLayout) jPanelGroups.getLayout();
-        layout.show(jPanelGroups, "feedCard");
-    }//GEN-LAST:event_feedButtonGroupPageActionPerformed
-
     private void postCardBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postCardBackButtonActionPerformed
         
         // go back to the active group from the post
@@ -2374,11 +2242,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
         goToPostPage(post);
         
     }//GEN-LAST:event_jButton1MouseClicked
-
-    private void jComboBoxRelationsContextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxRelationsContextItemStateChanged
-        
-		this.refreshAccountTab();
-    }//GEN-LAST:event_jComboBoxRelationsContextItemStateChanged
 
     private void jButtonDumpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDumpMouseClicked
         /*
@@ -2439,18 +2302,58 @@ public class GUIFrameMain extends javax.swing.JFrame {
         goToGroupPage(sessionServer.getActiveGroup());
     }//GEN-LAST:event_leaveGroupButtonMouseClicked
     
-    private void deletePostButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletePostButtonMouseClicked
-        // remove the post
-        if(sessionServer.getActivePost().getOwner().equals(sessionServer.getActiveUser().getUsername())){
-        	
-            client.DeletePost(sessionServer.getActivePost());
-        } else {
-            JOptionPane.showMessageDialog(null, "You don't own this post");
+    private void jButtonRelationsRemoveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRelationsRemoveMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonRelationsRemoveMouseClicked
+
+    private void jButtonRelationsAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRelationsAddMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonRelationsAddMouseClicked
+
+    private void jComboBoxRelationsContextItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxRelationsContextItemStateChanged
+
+        this.refreshAccountTab();
+    }//GEN-LAST:event_jComboBoxRelationsContextItemStateChanged
+
+    private void jButtonAccountUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAccountUpdateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAccountUpdateActionPerformed
+
+        @SuppressWarnings("deprecation")
+    private void jButtonAccountUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAccountUpdateMouseClicked
+
+        // Get active session user.
+        User curUser = sessionServer.getActiveUser();
+
+        // Check for valid user.
+        if (curUser != null) {
+
+            // Update account details.
+            curUser.setEmail(this.jTextFieldAccountEmailEdit.getText().trim());
+            curUser.setPhoneNum(this.jTextFieldAccountPhoneNumberEdit.getText().trim());
+            curUser.setPassword(this.jPasswordFieldAccountPasswordEdit.getText().trim());
+            curUser.setBio(this.jTextAreaAccountBioEdit.getText());
+            curUser.setAge(Integer.parseInt(this.jTextAreaAccountAgeEdit.getText()));
+            curUser.setMajor(this.jTextAreaAccountMajorEdit.getSelectedItem().toString());
+            curUser.setYear(this.jTextAreaAccountYearEdit.getSelectedItem().toString());
+            curUser.setLocation(this.jTextAreaAccountLocationEdit.getSelectedItem().toString());
+            curUser.setInterest(this.jComboBoxInterest0.getSelectedItem().toString(), 0);
+            curUser.setInterest(this.jComboBoxInterest1.getSelectedItem().toString(), 1);
+            curUser.setInterest(this.jComboBoxInterest2.getSelectedItem().toString(), 2);
+            curUser.setEthnicity(this.jTextAreaAccountEthnicityEdit.getSelectedItem().toString());
+            curUser.setGender(this.jTextAreaAccountGenderEdit.getSelectedItem().toString());
+            if(this.jTextAreaAccountGenderEdit.getSelectedIndex() == 0) {
+                curUser.setMaritalStatus(false);
+            }else {
+                curUser.setMaritalStatus(true);
+            }
+
+            // Refresh display.
+            this.refreshAccountTab();
+            client.DeleteUser(curUser);
+            client.PutUser(curUser);
         }
-        
-        client.UpdateGroupPosts(sessionServer.getActiveGroup());
-        goToGroupPage(sessionServer.getActiveGroup());
-    }//GEN-LAST:event_deletePostButtonMouseClicked
+    }//GEN-LAST:event_jButtonAccountUpdateMouseClicked
     
     public void goToPostPage(Post post) {
         // CONFIGURE THE VIEW POST PAGE
@@ -2882,8 +2785,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JButton createGroupCancelButton;
     private javax.swing.JButton createPostButton;
     private javax.swing.JFrame createPostDialog;
-    private javax.swing.JButton deletePostButton;
-    private javax.swing.JButton feedButtonGroupPage;
     private javax.swing.JTable feedTable;
     private javax.swing.Box.Filler fillerAccount;
     private javax.swing.JTextField groupCategoriesField;
@@ -2902,10 +2803,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAccountMustLogIn;
     private javax.swing.JButton jButtonAccountUpdate;
-    private javax.swing.JButton jButtonDump;
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JButton jButtonLoginCancel;
-    private javax.swing.JButton jButtonRestore;
     private javax.swing.JButton jButtonSignup;
     private javax.swing.JButton jButtonSignupCancel;
     private javax.swing.JButton jButtonSwitchLogin;
@@ -2953,7 +2852,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelAccount;
-    private javax.swing.JPanel jPanelAccountActivity;
     private javax.swing.JPanel jPanelAccountDetails;
     private javax.swing.JPanel jPanelAccountNull;
     private javax.swing.JPanel jPanelAllGroups;
@@ -2974,7 +2872,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPaneAccountActivity;
     private javax.swing.JScrollPane jScrollPaneAccountBio;
     private javax.swing.JScrollPane jScrollPaneAccountBioEdit;
     private javax.swing.JSeparator jSeparator1;
@@ -3017,6 +2914,5 @@ public class GUIFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel viewPostNumOfPoints;
     private javax.swing.JLabel viewPostTitleLabel;
     private javax.swing.JPanel viewPostWindowPanel;
-    private javax.swing.JButton yourGroupsCardButton;
     // End of variables declaration//GEN-END:variables
 }
