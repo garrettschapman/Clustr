@@ -162,6 +162,9 @@ public class DynamoDBClient {
 				location = item.get("Location").getS();
 				
 				user = new User(username, password, email, phone, bio, age, gender, ethnicity, married, major, year, location);
+				user.setInterest(item.get("Interest1").getS(), 0);
+				user.setInterest(item.get("Interest2").getS(), 1);
+				user.setInterest(item.get("Interest3").getS(), 2);
 				return user;
 			}
 		}

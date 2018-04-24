@@ -2589,19 +2589,58 @@ public class GUIFrameMain extends javax.swing.JFrame {
 			this.jTextAreaAccountBio.setText(curUser.getBio());
 			this.jTextAreaAccountBioEdit.setText(curUser.getBio());
 			this.jTextAreaAccountAge.setText(Integer.toString(curUser.getAge()));
+			this.jTextAreaAccountAgeEdit.setText(Integer.toString(curUser.getAge()));
+			
 			this.jTextAreaAccountMajor.setText(curUser.getMajor());
+			
 			this.jTextAreaAccountYear.setText(curUser.getYear());
+			
 			this.jTextAreaAccountLocation.setText(curUser.getLocation());
+			
 			this.jInterest0Text.setText(curUser.getInterest(0));
+			if(curUser.getInterest(0).equals("Baseball")) {
+				this.jComboBoxInterest0.setSelectedIndex(0);
+			}else if(curUser.getInterest(0).equals("Basketball")) {
+				this.jComboBoxInterest0.setSelectedIndex(1);
+			}else if(curUser.getInterest(0).equals("Football")) {
+				this.jComboBoxInterest0.setSelectedIndex(2);
+			}else {
+				this.jComboBoxInterest0.setSelectedIndex(3);
+			}
+			
 			this.jInterest1Text.setText(curUser.getInterest(1));
+			if(curUser.getInterest(1).equals("Drawing")) {
+				this.jComboBoxInterest1.setSelectedIndex(0);
+			}else if(curUser.getInterest(1).equals("Painting")) {
+				this.jComboBoxInterest1.setSelectedIndex(1);
+			}else if(curUser.getInterest(1).equals("Photography")) {
+				this.jComboBoxInterest1.setSelectedIndex(2);
+			}else {
+				this.jComboBoxInterest1.setSelectedIndex(3);
+			}
+			
 			this.jInterest2Text.setText(curUser.getInterest(2));
+			if(curUser.getInterest(2).equals("Video Games")) {
+				this.jComboBoxInterest2.setSelectedIndex(0);
+			}else if(curUser.getInterest(2).equals("Television")) {
+				this.jComboBoxInterest2.setSelectedIndex(1);
+			}else if(curUser.getInterest(2).equals("Movies")) {
+				this.jComboBoxInterest2.setSelectedIndex(2);
+			}else {
+				this.jComboBoxInterest2.setSelectedIndex(3);
+			}
+			
 			this.jTextAreaAccountEthnicity.setText(curUser.getEthnicity());
+			
 			this.jTextAreaAccountGender.setText(curUser.getGender());
+			
 			if(curUser.getMaritalStatus()) {
 				this.jTextAreaAccountMarital.setText("Married");
+				this.jTextAreaAccountMaritalEdit.setSelectedIndex(1);
 			}
 			else {
 				this.jTextAreaAccountMarital.setText("Unmarried");
+				this.jTextAreaAccountMaritalEdit.setSelectedIndex(0);
 			}
 			
 			// Update account activity display.
