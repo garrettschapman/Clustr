@@ -44,8 +44,8 @@ import com.teamclustr.clustrapp.representation.User;
 
 public class DynamoDBClient {
 	private AmazonDynamoDBClient client = null;
-	private static final String AWS_KEY = "AKIAJV5RK7DS4BWKTPLA";
-	private static final String AWS_SECRET = "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";
+	private static final String AWS_KEY = "AKIAJLAT7N3VLFSIS6JA";
+	private static final String AWS_SECRET = "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";
 	
 	public DynamoDBClient() {
 		AWSCredentials credentials = new BasicAWSCredentials(AWS_KEY, AWS_SECRET);
@@ -110,10 +110,68 @@ public class DynamoDBClient {
 		} while (lastEvaluatedTableName != null);
 	}
 	
+	public Boolean CheckLogin(String username, String password) {
+		String tableName = "ClusterUser";
+		
+		username = "{S: " + username + ",}";
+		password = "{S: " + password + ",}";
+		
+		ScanRequest scanRequest = new ScanRequest().withTableName(tableName);
+		ScanResult result = client.scan(scanRequest);
+		for (Map<String, AttributeValue> item : result.getItems()) {
+			AttributeValue userName = item.get("UserName");
+			AttributeValue passWord = item.get("Password");
+			
+			String userNameString = userName.toString();
+			String passWordString = passWord.toString();
+			
+			if(username.equals(userNameString) && password.equals(passWordString)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public User getUserData(String username) {
+		String tableName = "ClusterUser";
+		User user = new User(username, "password", "example@example.com", "1234567890", "This is a bio.", 0, "Male", "Caucasian", false, "Accounting", "Freshman", "SoVi");
+		
+		String USERNAME = "{S: " + username + ",}";
+		String password, email, phone, bio, gender, ethnicity, major, year, location;
+		int age;
+		Boolean married;
+		
+		ScanRequest scanRequest = new ScanRequest().withTableName(tableName);
+		ScanResult result = client.scan(scanRequest);
+		for (Map<String, AttributeValue> item : result.getItems()) {
+			AttributeValue userName = item.get("UserName");
+			String userNameString = userName.toString();
+			
+			if(USERNAME.equals(userNameString)) {
+				password = item.get("Password").getS();
+				email = item.get("Email").getS();
+				phone = item.get("PhoneNum").getS();
+				bio = item.get("Bio").getS();
+				age = Integer.parseInt((item.get("Age").getN()));
+				gender = item.get("Gender").getS();
+				ethnicity = item.get("Ethnicity").getS();
+				married = item.get("Married").getBOOL();
+				major = item.get("Major").getS();
+				year = item.get("Year").getS();
+				location = item.get("Location").getS();
+				
+				user = new User(username, password, email, phone, bio, age, gender, ethnicity, married, major, year, location);
+				return user;
+			}
+		}
+		
+		return user;
+	}
+	
 	public void PutUser(User user) {
 		String tableName = "ClusterUser";
 		
-		logMessage("Putting items into table " + tableName);
 		Map<String, AttributeValue> item = new HashMap<String, AttributeValue>();
 		
 		item.put("UserName", new AttributeValue().withS(user.getUsername()));
@@ -131,12 +189,13 @@ public class DynamoDBClient {
 		item.put("Married", new AttributeValue().withBOOL(user.getMaritalStatus()));
 		item.put("Password", new AttributeValue().withS(user.getPassword()));
 		item.put("PhoneNum", new AttributeValue().withS(user.getPhoneNum()));
+		item.put("Year", new AttributeValue().withS(user.getYear()));
 		
 		PutItemRequest itemRequest = new PutItemRequest().withTableName(tableName).withItem(item);
 		client.putItem(itemRequest);
 	}
 	
-	private void DeleteUser(User user) {
+	public void DeleteUser(User user) {
 		String tableName = "ClusterUser";
 		
 		Map<String, ExpectedAttributeValue> expectedValues = new HashMap<String, ExpectedAttributeValue>();
@@ -149,36 +208,7 @@ public class DynamoDBClient {
 		
 		DeleteItemRequest deleteItemRequest = new DeleteItemRequest().withTableName(tableName).withKey(key).withExpected(expectedValues).withReturnValues(returnValues);
 		
+		@SuppressWarnings("unused")
 		DeleteItemResult result = client.deleteItem(deleteItemRequest);
-		
-		logMessage("Printing item that was deleted...");
-		printItem(result.getAttributes());
-	}
-	
-	public void UpdateUser(User user) {
-		DeleteUser(user);
-		this.PutUser(user);
-	}
-	
-	private void printItem(Map<String, AttributeValue> attributeList) {
-		String itemString = new String();
-		for (Map.Entry<String, AttributeValue> item : attributeList.entrySet()) {
-			if (!itemString.equals(""))
-				itemString += ", ";
-			String attributeName = item.getKey();
-			AttributeValue value = item.getValue();
-			itemString += attributeName
-					+ ""
-					+ (value.getS() == null ? "" : "=\"" + value.getS() + "\"")
-					+ (value.getN() == null ? "" : "=\"" + value.getN() + "\"")
-					+ (value.getB() == null ? "" : "=\"" + value.getB() + "\"")
-					+ (value.getSS() == null ? "" : "=\"" + value.getSS()
-							+ "\"")
-					+ (value.getNS() == null ? "" : "=\"" + value.getNS()
-							+ "\"")
-					+ (value.getBS() == null ? "" : "=\"" + value.getBS()
-							+ "\" \n");
-		}
-		logMessage(itemString);
 	}
 }

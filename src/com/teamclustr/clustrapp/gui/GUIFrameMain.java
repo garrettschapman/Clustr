@@ -2121,10 +2121,13 @@ public class GUIFrameMain extends javax.swing.JFrame {
 		// Get user.
 		User curUser = sessionServer.getUserFromUsername(this.jTextFieldLoginUsername.getText().trim());
 		
-		// Check if user was found and password matches.
-		if (curUser != null && 
-			curUser.getPassword().equals(this.jPasswordFieldLoginPassword.getText().trim())) {
+		Boolean login = client.CheckLogin(this.jTextFieldLoginUsername.getText().trim(), this.jPasswordFieldLoginPassword.getText().trim());
 		
+		// Check if user was found and password matches.
+		if (login) {
+		
+			curUser = client.getUserData(this.jTextFieldLoginUsername.getText().trim());
+			
 			// Set result.
 			this.lsDialogResult = curUser;
 			
@@ -2297,7 +2300,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
 				// Refresh display.
 				this.refreshAccountTab();
-				client.UpdateUser(curUser);
+				client.DeleteUser(curUser);
+				client.PutUser(curUser);
 			}
         }//GEN-LAST:event_jButtonAccountUpdateMouseClicked
 
