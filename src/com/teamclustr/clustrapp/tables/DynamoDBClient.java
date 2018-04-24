@@ -44,8 +44,8 @@ import com.teamclustr.clustrapp.representation.User;
 
 public class DynamoDBClient {
 	private AmazonDynamoDBClient client = null;
-	private static final String AWS_KEY = "AKIAJ3BL4X6VCWDW2KAQ";
-	private static final String AWS_SECRET = "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";
+	private static final String AWS_KEY = "AKIAJV5RK7DS4BWKTPLA";
+	private static final String AWS_SECRET = "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";
 	
 	public DynamoDBClient() {
 		AWSCredentials credentials = new BasicAWSCredentials(AWS_KEY, AWS_SECRET);
@@ -134,5 +134,51 @@ public class DynamoDBClient {
 		
 		PutItemRequest itemRequest = new PutItemRequest().withTableName(tableName).withItem(item);
 		client.putItem(itemRequest);
+	}
+	
+	private void DeleteUser(User user) {
+		String tableName = "ClusterUser";
+		
+		Map<String, ExpectedAttributeValue> expectedValues = new HashMap<String, ExpectedAttributeValue>();
+		HashMap<String, AttributeValue> key = new HashMap<String, AttributeValue>();
+		key.put("UserName", new AttributeValue().withS(user.getUsername()));
+		
+		expectedValues.put("UserName", new ExpectedAttributeValue().withValue(new AttributeValue().withS(user.getUsername())));
+		
+		ReturnValue returnValues = ReturnValue.ALL_OLD;
+		
+		DeleteItemRequest deleteItemRequest = new DeleteItemRequest().withTableName(tableName).withKey(key).withExpected(expectedValues).withReturnValues(returnValues);
+		
+		DeleteItemResult result = client.deleteItem(deleteItemRequest);
+		
+		logMessage("Printing item that was deleted...");
+		printItem(result.getAttributes());
+	}
+	
+	public void UpdateUser(User user) {
+		DeleteUser(user);
+		this.PutUser(user);
+	}
+	
+	private void printItem(Map<String, AttributeValue> attributeList) {
+		String itemString = new String();
+		for (Map.Entry<String, AttributeValue> item : attributeList.entrySet()) {
+			if (!itemString.equals(""))
+				itemString += ", ";
+			String attributeName = item.getKey();
+			AttributeValue value = item.getValue();
+			itemString += attributeName
+					+ ""
+					+ (value.getS() == null ? "" : "=\"" + value.getS() + "\"")
+					+ (value.getN() == null ? "" : "=\"" + value.getN() + "\"")
+					+ (value.getB() == null ? "" : "=\"" + value.getB() + "\"")
+					+ (value.getSS() == null ? "" : "=\"" + value.getSS()
+							+ "\"")
+					+ (value.getNS() == null ? "" : "=\"" + value.getNS()
+							+ "\"")
+					+ (value.getBS() == null ? "" : "=\"" + value.getBS()
+							+ "\" \n");
+		}
+		logMessage(itemString);
 	}
 }

@@ -2232,6 +2232,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
 			// Create user.
 			curUser = sessionServer.createUser(username, password);
 			
+			client.PutUser(curUser);
+			
 			// Set result.
 			this.lsDialogResult = curUser;
 			
@@ -2295,6 +2297,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
 				// Refresh display.
 				this.refreshAccountTab();
+				client.UpdateUser(curUser);
 			}
         }//GEN-LAST:event_jButtonAccountUpdateMouseClicked
 
@@ -2424,7 +2427,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 			this.restoreSession(filepath);
 		} */
     	
-    	client.listTables();
+    	//client.listTables();
 
 		// Refresh displays.
 		this.refreshAccountTab();

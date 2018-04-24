@@ -51,6 +51,9 @@ public class User implements Serializable {
         this.setMajor(Major);
         this.setYear(Year);
         this.setLocation(Location);
+        this.Interests[0] = "Drawing";
+        this.Interests[1] = "Video Games";
+        this.Interests[2] = "Baseball";
 
 		GroupList = new ArrayList<Group>();
 		Posts = new ArrayList<Post>();
