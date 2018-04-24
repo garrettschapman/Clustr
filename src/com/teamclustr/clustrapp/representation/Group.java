@@ -16,6 +16,7 @@ public class Group implements Serializable {
 
 //variables for group
 //test for push
+	private User owner;
     private ArrayList<User> members = new ArrayList<User>();
     private ArrayList<Post> posts = new ArrayList<Post>();
     private ArrayList<String> categories = new ArrayList<String>();
@@ -25,6 +26,7 @@ public class Group implements Serializable {
 
     public Group(User owner, String name, String categories, String tags) {
     	groupName = name;
+    	this.owner = owner;
         members.add(owner);
 
         //deal with the tags and categories
@@ -58,6 +60,14 @@ public class Group implements Serializable {
         return this.members;
     }
     
+    public User getOwner() {
+    	return this.owner;
+    }
+    
+    public void setOwner(User owner) {
+    	this.owner = owner;
+    }
+    
     public ArrayList<String> getMemberNames() {
     	ArrayList<User> members = this.getMembers();
     	ArrayList<String> memberNames = new ArrayList<String>(0);
@@ -71,6 +81,14 @@ public class Group implements Serializable {
 
     public String getTags() {
         return this.tags.toString();
+    }
+    
+    public void setTagList(ArrayList<String> tags) {
+    	this.tags = tags;
+    }
+    
+    public void setCatList(ArrayList<String> categories) {
+    	this.categories = categories;
     }
 
     public String getName() {

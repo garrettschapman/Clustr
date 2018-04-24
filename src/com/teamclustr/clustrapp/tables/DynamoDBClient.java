@@ -45,8 +45,8 @@ import com.teamclustr.clustrapp.representation.User;
 
 public class DynamoDBClient {
 	private AmazonDynamoDBClient client = null;
-	private static final String AWS_KEY = "AKIAJA3FHY5P6IDUC6QQ";
-	private static final String AWS_SECRET = "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";
+	private static final String AWS_KEY = "AKIAJ756GTQLD75GLMMQ";
+	private static final String AWS_SECRET = "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";
 	
 	public DynamoDBClient() {
 		AWSCredentials credentials = new BasicAWSCredentials(AWS_KEY, AWS_SECRET);
@@ -242,12 +242,73 @@ public class DynamoDBClient {
 		
 		item.put("GroupName", new AttributeValue().withS(group.getName()));
 		
+		item.put("Owner", new AttributeValue().withS(group.getOwner().getUsername()));
 		item.put("Categories", new AttributeValue().withSS(group.getCatList()));
 		item.put("Tags", new AttributeValue().withSS(group.getTagList()));
 		item.put("Members", new AttributeValue().withSS(group.getMemberNames()));
 		
+		
 		PutItemRequest itemRequest = new PutItemRequest().withTableName(tableName).withItem(item);
 		client.putItem(itemRequest);
+	}
+	
+	public void DeleteGroup(Group group) {
+		
+	}
+	
+	public Group GetGroupData(String groupname) {
+		String tableName = "ClusterGroup";
+		Group group = new Group(null, groupname, "", "");
+		
+		String GROUPNAME = "{S: " + groupname + ",}";
+		User owner;
+		ArrayList<String> categories = new ArrayList<String>(0);
+		ArrayList<String> tags = new ArrayList<String>(0);
+		ArrayList<String> memberNames = new ArrayList<String>(0);
+		
+		ScanRequest scanRequest = new ScanRequest().withTableName(tableName);
+		ScanResult result = client.scan(scanRequest);
+		for (Map<String, AttributeValue> item : result.getItems()) {
+			AttributeValue groupName = item.get("GroupName");
+			String groupNameString = groupName.toString();
+			
+			if(GROUPNAME.equals(groupNameString)) {
+				owner = this.getUserData(item.get("Owner").getS());
+				categories = (ArrayList<String>) item.get("Categories").getSS();
+				tags = (ArrayList<String>) item.get("Tags").getSS();
+				memberNames = (ArrayList<String>) item.get("Members").getSS();
+				
+				group.setOwner(owner);
+				group.setCatList(categories);
+				group.setTagList(tags);
+				
+				for(String memberName : memberNames) {
+					if(!(memberName.equals(group.getOwner().getUsername()))) {
+						User user = this.getUserData(memberName);
+						group.addMember(user);
+					}
+				}
+				System.out.println(group.getName());
+				return group;
+			}
+		}
+		
+		return group;
+	}
+	
+	public ArrayList<Group> GetAllGroups() {
+		String tableName = "ClusterGroup";
+		ArrayList<Group> groupList = new ArrayList<Group>(0);
+		
+		ScanRequest scanRequest = new ScanRequest().withTableName(tableName);
+		ScanResult result = client.scan(scanRequest);
+		for (Map<String, AttributeValue> item : result.getItems()) {
+			String groupname = item.get("GroupName").getS();
+			Group group = this.GetGroupData(groupname);
+			groupList.add(group);
+		}
+		
+		return groupList;
 	}
 	/*
 	 * End of methods for groups

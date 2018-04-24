@@ -1936,7 +1936,8 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
 
 	private void jTabbedPaneGroupsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneGroupsMouseClicked
-        
+        sessionServer.setGroupList(client.GetAllGroups());
+		
         // list all groups that exist into the table
         updateGroupTable(browseTable, "browse", sessionServer.getGroupList());
         updateGroupTable(feedTable, "feed", sessionServer.getGroupList());
@@ -1950,9 +1951,11 @@ public class GUIFrameMain extends javax.swing.JFrame {
             String searchText = groupSearchField.getText();
             
             // get the searched array and add the elements to the table
+            sessionServer.setGroupList(client.GetAllGroups());
             updateGroupTable(browseTable, "browse", sessionServer.searchedGroups(searchText));
             
         } else {
+        	sessionServer.setGroupList(client.GetAllGroups());
             updateGroupTable(browseTable, "browse", sessionServer.getGroupList());
         }
 
@@ -2028,7 +2031,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
 
     private void jTabbedPaneMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneMainMouseClicked
-        
+    	sessionServer.setGroupList(client.GetAllGroups());
         updateGroupTable(feedTable, "feed", sessionServer.getGroupList());
     }//GEN-LAST:event_jTabbedPaneMainMouseClicked
 
@@ -2260,6 +2263,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         // UPDATE WINDOW
+    	sessionServer.setGroupList(client.GetAllGroups());
         updateGroupTable(feedTable, "feed", sessionServer.getGroupList());
         updateGroupTable(browseTable, "browse", sessionServer.getGroupList());
     }//GEN-LAST:event_formWindowGainedFocus

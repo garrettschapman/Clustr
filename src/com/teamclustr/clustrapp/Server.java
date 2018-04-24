@@ -108,6 +108,10 @@ public class Server implements Serializable {
     	}
         
     }
+    
+    public void setGroupList(ArrayList<Group> groupList) {
+    	this.groups = groupList;
+    }
 
     public ArrayList<User> getUserList() {
         return this.users;
