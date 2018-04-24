@@ -2242,8 +2242,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
             sessionServer.getActiveGroup().addMember(sessionServer.getActiveUser());
 
             // refresh the page
-            client.DeleteGroup(sessionServer.getActiveGroup());
-            client.PutGroup(sessionServer.getActiveGroup());
+            client.UpdateGroup(sessionServer.getActiveGroup());
             goToGroupPage(sessionServer.getActiveGroup());
         } else {
             JOptionPane.showMessageDialog(null, "Please Sign In", "Could Not Join Group", 0);
@@ -2440,8 +2439,7 @@ public class GUIFrameMain extends javax.swing.JFrame {
         sessionServer.getActiveGroup().leaveGroup(sessionServer.getActiveUser());
         
         // refresh the page
-        client.DeleteGroup(sessionServer.getActiveGroup());
-        client.PutGroup(sessionServer.getActiveGroup());
+        client.UpdateGroup(sessionServer.getActiveGroup());
         goToGroupPage(sessionServer.getActiveGroup());
     }//GEN-LAST:event_leaveGroupButtonMouseClicked
     

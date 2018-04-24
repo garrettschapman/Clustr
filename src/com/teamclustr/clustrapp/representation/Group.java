@@ -177,6 +177,15 @@ public class Group implements Serializable {
     }
     
     public ArrayList<String> getPostNames(){
+    	ArrayList<String> updatedPostNames = new ArrayList<String>(0);
+    	
+    	for(String name : this.postNames) {
+    		if(!(updatedPostNames.contains(name))) {
+    			updatedPostNames.add(name);
+    		}
+    	}
+    	this.postNames = updatedPostNames;
+    	
     	return this.postNames;
     }
     

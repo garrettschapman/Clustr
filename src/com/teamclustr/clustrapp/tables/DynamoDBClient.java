@@ -46,8 +46,8 @@ import com.teamclustr.clustrapp.representation.User;
 
 public class DynamoDBClient {
 	private AmazonDynamoDBClient client = null;
-	private static final String AWS_KEY = "AKIAJAPZM2WHCNIWKAXQ";
-	private static final String AWS_SECRET = "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";
+	private static final String AWS_KEY = "AKIAJJWY5DC3K7PBAXNA";
+	private static final String AWS_SECRET = "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";
 	
 	public DynamoDBClient() {
 		AWSCredentials credentials = new BasicAWSCredentials(AWS_KEY, AWS_SECRET);
@@ -276,7 +276,7 @@ public class DynamoDBClient {
 		client.putItem(itemRequest);
 	}
 	
-	public void DeleteGroup(Group group) {
+	private void DeleteGroup(Group group) {
 		String tableName = "ClusterGroup";
 		
 		Map<String, ExpectedAttributeValue> expectedValues = new HashMap<String, ExpectedAttributeValue>();
@@ -291,6 +291,11 @@ public class DynamoDBClient {
 		
 		@SuppressWarnings("unused")
 		DeleteItemResult result = client.deleteItem(deleteItemRequest);
+	}
+	
+	public void UpdateGroup(Group group) {
+		this.DeleteGroup(group);
+		this.PutGroup(group);
 	}
 	
 	public Group GetGroupData(String groupname) {
