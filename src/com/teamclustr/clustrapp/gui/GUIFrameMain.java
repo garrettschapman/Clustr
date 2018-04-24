@@ -2527,10 +2527,6 @@ public class GUIFrameMain extends javax.swing.JFrame {
             //updatePostTable(group);
 
             // populate the members
-            
-            /**
-             * TODO Fix this thing so it doesn't give a NullPointerException
-             */
             Vector<String> users = new Vector();
 
             for (String username : group.getMemberList()) {
